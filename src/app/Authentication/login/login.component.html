@@ -1,0 +1,44 @@
+<div class="authForm">
+    
+    <div class="shadowBox">
+        <div class="left-container">
+            <div class="logoHeader">
+                <img src="/assets/images/SL-logo.svg" alt="Monitor">
+            </div>
+            <div class="video-wrapper">
+                    <div class="monitor">
+                        <img src="/assets/images/video-thumb.png" alt="Monitor">
+                    </div>
+            </div>
+            
+        </div>
+        <div class="right-container">
+            <ul class="headings">
+                <li>
+                  <a>Sign In</a>
+                </li>
+              </ul>
+              <form  novalidate autocomplete="off">
+                <ul class="formFieldsList">
+                  <li>
+                    <label class="labels newFormatting">Email</label>
+                    <input type="email" class="fields newFormatting" formControlName="username" />
+                  </li>
+                  <li>
+                    <label class="labels newFormatting">Password</label>
+                    <input type="password" class="fields newFormatting" formControlName="password"/>
+                   
+                  </li>
+                  <li class="buttonWrap">
+                    <button type="submit" class="btn btn-solid login"><i class="icon-register"></i>Log In</button>
+                  </li>
+                  <li class="buttonWrap">
+                      <button type="submit" class="btn btn-solid create-account"><a [routerLink]="['/signup']">Create Account</a></button>
+                  </li>
+                </ul>
+              </form>
+        </div>
+      
+    </div>
+  
+  </div>  

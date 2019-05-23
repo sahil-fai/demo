@@ -1,0 +1,70 @@
+<div class="sign-up">
+    <div class="authForm">
+    
+        <div class="shadowBox">
+            <div class="left-container">
+                <div class="logoHeader">
+                    <img src="/assets/images/SL-logo.svg" alt="Monitor">
+                </div>
+                <div class="video-wrapper">
+                        <div class="monitor">
+                            <img src="/assets/images/video-thumb.png" alt="Monitor">
+                        </div>
+                </div>  
+            </div>
+            <div class="right-container">
+                <ul class="headings">
+                    <li>
+                      <a>Sign Up</a>
+                    </li>
+                  </ul>
+                  <form  novalidate autocomplete="off">
+                    <ul class="formFieldsList register-signup">
+                      <li>
+                        <label class="labels newFormatting">Register as</label>
+                        <input type="email" class="fields newFormatting" formControlName="username" />
+                      </li>
+                      <li>
+                        <label class="labels newFormatting">Last Name</label>
+                        <input type="password" class="fields newFormatting" formControlName="password"/>
+                       
+                      </li>
+                      <li>
+                          <label class="labels newFormatting">Password</label>
+                          <input type="password" class="fields newFormatting" formControlName="password"/>
+                      </li>
+                      <li class="recaptchaHolder">
+                          <!-- <re-captcha required siteKey="6LcXSkMUAAAAAEmYkp1eSbIbT-vcMkxEnxmoryxd" formControlName="recaptcha"></re-captcha> -->
+                      </li>
+                    </ul>
+                    <ul class="formFieldsList details-signup">
+                        <li>
+                          <label class="labels newFormatting">First Name</label>
+                          <input type="email" class="fields newFormatting" formControlName="username" />
+                        </li>
+                        <li>
+                          <label class="labels newFormatting">Email Address</label>
+                          <input type="password" class="fields newFormatting" formControlName="password"/>
+                         
+                        </li>
+                        <li>
+                            <label class="labels newFormatting"> Confirm Password</label>
+                            <input type="password" class="fields newFormatting" formControlName="password"/>
+                           
+                        </li>
+                        <li>
+                            <mat-checkbox [required]="true" formControlName="isAgree"><span>I agree to the SingleLedger Terms &amp; Conditions <br> and Privacy Policy</span></mat-checkbox>
+                        </li>
+                    </ul>
+                    <div class="buttonWrap">
+                        <button type="submit" class="btn btn-solid submit"><i class="Submit"></i>Submit</button>
+                    </div>
+                  <div class="have-an-account">Already have an acoount ? <span class="link-color"><a [routerLink]="['/login']">Sign In</a></span></div>
+                  </form>
+            </div>
+          
+        </div>
+      
+    </div>
+</div>
+  
