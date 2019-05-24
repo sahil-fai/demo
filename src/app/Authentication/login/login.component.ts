@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     this.createForm();
     this._subscribeFormControls = this.formLogin.controls['username'].valueChanges.subscribe(val => {
       if (val.indexOf(' ') >= 0) {
-        this.formLogin.controls['username'].setValue(this._helper.removeEmptySpaces(val));
+       // this.formLogin.controls['username'].setValue(this.helper.removeEmptySpaces(val));
       }
     });
   }
