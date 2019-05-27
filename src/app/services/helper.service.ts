@@ -6,7 +6,12 @@ const TOKEN = 'TOKEN';
   providedIn: 'root'
 })
 export class HelperService {
-
+   // Session related methods
+   public session = {
+    'get': function() {return JSON.parse(localStorage.getItem('session'));},
+    'set': function(session) {localStorage.setItem('session', JSON.stringify(session)); },
+    'remove': function() {localStorage.removeItem('session'); }
+  };
   set(token: string): void {
     localStorage.setItem(TOKEN, token);
   }

@@ -19,7 +19,7 @@ export class SignupComponent implements OnInit {
     this.formRegister = this._fb.group({
       firstName: ['', [ Validators.required ]],
       lastName: ['', [ Validators.required ]],
-      username: [this._userEmail, [ Validators.required, Validators.email ]],
+      username: ['', [ Validators.required, Validators.email ]],
       password: ['', [ Validators.required, Validators.minLength(6)]],
       isAgree: ['', [ Validators.requiredTrue ]],
       role: [null, [Validators.required]]
@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
     if(this.formRegister.invalid){return;}
     this.authService.enroll(this.formRegister.value).subscribe(res => {
       console.log(res);
-      this.isRegistered = true; 
+     // this.isRegistered = true; 
       this.router.navigate(['/dashboard']);
     }, err =>{
 
