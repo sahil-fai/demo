@@ -1,5 +1,8 @@
 <div class="wrapper">
   <div class="header">
+      <div class="progressBar">
+          <app-loader></app-loader>
+      </div>
     <div class="logoText">
       <app-logo></app-logo>
     </div>
@@ -34,7 +37,7 @@
             </a>
           </li>
           <li class="active">
-            <a href="">
+            <a (click)="onConnect()">
                 <img mat-card-image src="assets/images/qb-logo.png" alt="">
             </a>
           </li>

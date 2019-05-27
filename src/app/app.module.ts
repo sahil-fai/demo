@@ -1,10 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule, MatNativeDateModule, MatPaginatorModule, MatSlideToggleModule, MatProgressBarModule, MatCheckboxModule, MatRadioModule, MatDialogModule, MatListModule } from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule  } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 import { AuthService } from './services/auth.service'
+import { LoaderService } from './services/loader.service'
 
 // Interceptors
 import { TokenInterceptor } from './Interceptors/auth.interceptor';
@@ -18,6 +21,8 @@ import { LogoutComponent } from './Dashboard/logout/logout.component';
 import { UserinfoComponent } from './Dashboard/userinfo/userinfo.component';
 import { AccountingComponent } from './Dashboard/accounting/accounting.component';
 import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
+import { LoaderComponent } from './Shared/loader/loader.component';
+import { ErrorHandlerComponent } from './Shared/ErrorHandler/error-handler/error-handler.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +33,14 @@ import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
     LogoutComponent,
     UserinfoComponent,
     AccountingComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoaderComponent,
+    ErrorHandlerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     MatCardModule,
     HttpClientModule,
     FormsModule,
@@ -45,8 +53,16 @@ import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
     MatCheckboxModule,
     MatRadioModule,
     MatDialogModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+      extendedTimeOut : 0,
+      closeButton: true,
+      tapToDismiss: false
+    }),
   ],
-  providers: [AuthService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
+  providers: [AuthService, LoaderService,{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
 
   bootstrap: [AppComponent]
 })

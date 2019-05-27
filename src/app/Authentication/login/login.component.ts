@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (this.formLogin.invalid) {return; }
     this.authService.login(this.formLogin.value).subscribe(res => {
+      console.log(res);
         this.helper.set(res.token);
         this.router.navigate(['/dashboard']);
         if (res['Role'] === 0) {

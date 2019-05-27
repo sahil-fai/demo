@@ -11,7 +11,7 @@ export class AuthService {
   
   enroll(data): Observable<any> {
     let env = environment;
-    return this.http.post<any>('http://localhost:3000/users', {
+    return this.http.post<any>('users', {
       "email": data.username,
       "lastname": data.lastName,
       "password": data.password,
@@ -25,7 +25,7 @@ export class AuthService {
 
   login(data): Observable<any> {
     let env = environment;
-    return this.http.post<any>('http://localhost:3000/users/login', {
+    return this.http.post<any>('users/login', {
       "email": data.username,
       "password": data.password,
     });
