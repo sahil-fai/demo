@@ -3,6 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { HelperService } from '../../services/helper.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import {MatDialog} from '@angular/material/dialog';
+import { DialogOverviewExampleDialogComponent } from '../../Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component'
 
 @Component({
   selector: 'app-login',
@@ -10,11 +13,11 @@ import { HelperService } from '../../services/helper.service';
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
-
+  safeSrc: SafeResourceUrl;
   private _subscribeFormControls: any;
   public submitted = false;
 
-  constructor(private router: Router, private _fb: FormBuilder,private authService:AuthService, private helper: HelperService) { }
+  constructor(private router: Router, private _fb: FormBuilder,private authService:AuthService, private helper: HelperService, private sanitizer: DomSanitizer,public dialog: MatDialog) { }
 
   formLogin: FormGroup;
 
@@ -49,6 +52,16 @@ export class LoginComponent implements OnInit {
     );
   }
   get f() { return this.formLogin.controls; 
+  }
+  openDialog(data: string): void {
+    this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(data);
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialogComponent, {
+      data: {safeSrc: this.safeSrc}
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }

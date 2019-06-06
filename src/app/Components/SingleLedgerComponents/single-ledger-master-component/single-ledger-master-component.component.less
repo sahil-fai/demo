@@ -1,0 +1,47 @@
+@mobilesMax: 519px;
+
+.blueHeading.modalBlock{
+    .modal{
+        left: 0;
+
+        > ul > li a i {
+            font-size: 1.1em;
+            margin-top: -0.2em;
+        }
+
+        .linkButton{
+            padding-top: 0.7em;
+
+            a{
+                font-weight: 700;
+                text-transform: uppercase;
+                font-size: 0.7em;
+            }
+        }
+    }
+}
+
+.btn{
+    color: #93aeae;
+    font-size: 0.6em;
+    font-weight: 700;
+    background-color: #ffffff;
+    box-shadow: inset 0 0 0 2px #dbdbdb;
+    padding: 0.6em 1em;
+    border-radius: 0.5em;
+    margin-left: 1.5em;
+
+    &:hover{
+        background-color: #93aeae;
+        color: #ffffff;
+        box-shadow: none;
+    }
+
+    @media screen and (max-width: @mobilesMax){
+        display: none;
+    }
+}
+.error
+{
+  background-color:#efc6c6;
+}
