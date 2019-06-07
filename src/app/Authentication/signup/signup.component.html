@@ -6,7 +6,7 @@
                 <div class="logoHeader">
                     <img src="/assets/images/SL-logo.svg" alt="Monitor">
                 </div>
-                <div class="video-wrapper">
+                <div class="video-wrapper" (click)="openDialog('https://www.youtube.com/embed/J5tWbmD7alE')">
                         <div class="monitor">
                             <img src="/assets/images/video-thumb.png" alt="Monitor">
                         </div>
@@ -22,7 +22,19 @@
                     <ul class="formFieldsList register-signup">
                       <li>
                         <label class="labels newFormatting">Register as</label>
-                        <input type="email" class="fields newFormatting" formControlName="role" />
+                        <div class="register">
+                            <!-- <input type="text" class="fields newFormatting" formControlName="role" /> -->
+                          
+                            <mat-form-field class="fields newFormatting">
+                                <mat-select>
+                                    <mat-option *ngFor="let role of roles" [value]="role.value">
+                                      {{role.viewValue}}
+                                    </mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                                <!-- <button  type="button" class="icon-arrow-down"></button> -->
+                        </div>
+                       
                       </li>
                       <li>
                         <label class="labels newFormatting">First Name</label>
@@ -39,12 +51,18 @@
                       </li>
                       <li>
                           <label class="labels newFormatting">Password</label>
-                          <input type="password" class="fields newFormatting" formControlName="password"/>
+                          <div class="password">
+                              <input type="password" class="fields newFormatting" formControlName="password"/>
+                              <button  type="button" class="icon-eye-hide"></button>
+                          </div>
+                          
                       </li>
                       <li>
                         <label class="labels newFormatting"> Confirm Password</label>
-                        <input type="password" class="fields newFormatting" formControlName="password"/>
-                       
+                        <div class="password">
+                            <input type="password" class="fields newFormatting" formControlName="password"/>
+                            <button  type="button" class="icon-eye-hide"></button>
+                        </div>  
                     </li>
                       <li class="recaptchaHolder">
                           <!-- <re-captcha required siteKey="6LcXSkMUAAAAAEmYkp1eSbIbT-vcMkxEnxmoryxd" formControlName="recaptcha"></re-captcha> -->
@@ -54,7 +72,7 @@
                     </li>
                     </ul>
                     <div class="buttonWrap">
-                        <button type="submit" class="btn btn-solid submit"><i class="Submit"></i>Submit</button>
+                        <button type="submit" class="btn btn-solid submit"><i class="icon-submit"></i>Submit</button>
                     </div>
                   <div class="have-an-account">Already have an acoount ? <span class="link-color"><a [routerLink]="['/login']">Sign In</a></span></div>
                   </form>

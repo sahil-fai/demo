@@ -24,13 +24,15 @@
                     <label class="labels newFormatting">Email</label>
                     <input type="email" class="fields newFormatting" formControlName="username" />
                   </li>
-                  <li>
+                  <li > 
                     <label class="labels newFormatting">Password</label>
-                    <input type="password" class="fields newFormatting" formControlName="password"/>
-                   
+                    <div class="password">
+                        <input type="password" class="fields newFormatting" formControlName="password"/>
+                        <button  type="button" class="icon-eye-hide"></button>
+                    </div> 
                   </li>
                   <li class="buttonWrap">
-                    <button type="submit" class="btn btn-solid login"><i class="icon-register"></i>Log In</button>
+                    <button type="submit" class="btn btn-solid login"><i class="icon-submit"></i>Submit</button>
                   </li>
                   <li class="buttonWrap">
                       <button type="submit" class="btn btn-solid create-account"><a [routerLink]="['/signup']">Create Account</a></button>

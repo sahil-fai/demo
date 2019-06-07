@@ -126,7 +126,7 @@
 }
 
 .mat-form-field-infix {
-    background: #dde4e4;
+   // background: #dde4e4;
     border: none;
     padding: 7px 5px 6px 7px;
     border-radius: 3px;
@@ -153,19 +153,31 @@
 }
 
 .mat-select-value {
-    color: rgb(49, 129, 130);
+    //color:#64cde7;
+    
 }
 
 .mat-select-arrow {
-    color: rgb(67, 123, 123);
+    color:#64cde7;
+    font-family: 'icomoon' !important;
+    padding-right: 0.3em;
+    font-size: 1em;
+    -webkit-font-smoothing: antialiased;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-top: 0 !important; 
+    &:after{
+        content: "\109";
+    }
+
 }
 
 .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
-    color: #115f5f;
+    color:#64cde7;
 }
 
 .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
-    color: #115f5f;
+    color:#64cde7;
 }
 
 .mat-paginator-decrement, .mat-paginator-increment {
@@ -384,4 +396,7 @@
         background: none !important;
         text-transform: uppercase;
     }
+}
+.mat-card {
+    margin-bottom: 20px;
 }

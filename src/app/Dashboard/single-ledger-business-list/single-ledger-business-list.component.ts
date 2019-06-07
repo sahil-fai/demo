@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//var json = require('./res.json');
+import json from './res.json';
 
 @Component({
   selector: 'app-single-ledger-business-list',
@@ -8,13 +8,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SingleLedgerBusinessListComponent implements OnInit {
   title="Business(s) List";
-  companylist: any;
+  companylist: Array<any>;
+  totalRec : number;
+  page: number = 1;
+  public maxSize: number = 7;
+  public directionLinks: boolean = true;
+  public autoHide: boolean = true;
+  public responsive: boolean = true;
+  public selectedValue = 3;
+  public labels: any = {
+      previousLabel: 'Prev',
+      nextLabel: 'Next',
+      screenReaderPaginationLabel: 'Pagination',
+      screenReaderPageLabel: 'page',
+      screenReaderCurrentLabel: `You're on page`
+  };
+
+  public config = {
+    itemsPerPage: this.selectedValue,
+    currentPage: 1,
+    totalItems: this.totalRec
+  };
+
+  public pageNumber = 1;
+  public pageSizeOptions: number[] = [3,15,25];
+  public numberOfpages: number[];
   
   constructor() { 
-    this.companylist=[];
+    this.companylist=json;
+    this.totalRec = this.companylist.length;
+    console.log(this.companylist.length);
+    console.log(this.page);
   }
  
   ngOnInit() {
+    
   }
 
 }
