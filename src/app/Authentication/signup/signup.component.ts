@@ -18,8 +18,7 @@ export class SignupComponent implements OnInit {
   formRegister: FormGroup;
   roles = [
     {value: 'CPA', viewValue: 'CPA'},
-    {value: 'Business Owner', viewValue: 'Business Owner'},
-    {value: 'Others', viewValue: 'TOthers'}
+    {value: 'Business Owner', viewValue: 'Business Owner'}
   ];
   ngOnInit() {
     this.createForm();

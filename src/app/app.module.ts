@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule, MatNativeDateModule, MatPaginatorModule, MatSlideToggleModule, MatProgressBarModule, MatCheckboxModule, MatRadioModule, MatDialogModule, MatListModule } from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule  } from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -37,6 +38,7 @@ import { InvoicesComponentComponent } from './Components/SingleLedgerComponents/
 import { BillsComponentComponent } from './Components/SingleLedgerComponents/bills-component/bills-component.component';
 import { CompanyInfoComponentComponent } from './Components/SingleLedgerComponents/company-info-component/company-info-component.component';
 import { SingleLedgerMasterComponentComponent } from './Components/SingleLedgerComponents/single-ledger-master-component/single-ledger-master-component.component';
+import { StylePaginatorDirective } from './Directives/style-paginator.directive';
 
 @NgModule({
   declarations: [
@@ -59,13 +61,15 @@ import { SingleLedgerMasterComponentComponent } from './Components/SingleLedgerC
     InvoicesComponentComponent,
     BillsComponentComponent,
     CompanyInfoComponentComponent,
-    SingleLedgerMasterComponentComponent
+    SingleLedgerMasterComponentComponent,
+    StylePaginatorDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
+    MatTableModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
