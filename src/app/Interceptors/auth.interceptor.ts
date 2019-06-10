@@ -1,14 +1,7 @@
 
 import {tap,  map, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import {
-    HttpInterceptor,
-    HttpRequest,
-    HttpResponse,
-    HttpHandler,
-    HttpEvent,
-    HttpErrorResponse
-} from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 
 import { throwError ,  Observable } from 'rxjs';
 import { HelperService } from '../services/helper.service';

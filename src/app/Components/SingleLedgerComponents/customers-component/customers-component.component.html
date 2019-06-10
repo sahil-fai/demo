@@ -1,0 +1,188 @@
+<div class="title">
+  <h2>{{title}}</h2>
+</div>
+<div class="searchPanel clearfix">
+  <form (ngSubmit)="onFilter()" novalidate autocomplete="off">
+    <ul class="floatingList searchBlock">
+      <li>
+        <label class="labels">Filter For</label>
+        <input type="text" class="fields" placeholder="Customer Name, Email" />
+      </li>
+      <li class="smallFields">
+        <label class="labels">From</label>
+        <input type="text" class="fields calendar" />
+      </li>
+      <li class="smallFields">
+        <label class="labels">To</label>
+        <input type="text" class="fields calendar" />
+      </li>
+      <li class="smallFields">
+        <label class="labels">status</label>
+        <select class="fields">
+          <option disabled value style="display:none"></option>
+          <option *ngFor="let status of status" [value]="status.value">
+            {{status.viewValue}}
+          </option>
+        </select>
+      </li>
+      <li>
+        <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
+      </li>
+      <li>
+        <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" (click)="onReset()" />
+      </li>
+    </ul>
+  </form>
+</div>
+<div class="customers">
+    <div class="select-box">
+            <mat-checkbox></mat-checkbox><span class="text-label">Select all as Invite</span>
+    </div>
+    <div class="customer-list">
+    <ul class="ul">
+    <li class="tick-checkbox">
+
+    <div class="customer-name">
+        <mat-checkbox></mat-checkbox>
+        <ul>
+        <li class="secondary-text">Customer Name</li>
+        <li class="primary-text">Angle Garden</li>
+        </ul>
+    </div>
+    </li>
+    <div class="headerDivider"></div>
+    <li class="Contact-email">
+    <ul>
+        <li class="secondary-text">Contact Email</li>
+        <li class="primary-text">User@gmail.com</li>
+    </ul>
+    </li>
+    <div class="headerDivider"></div>
+    <li class="date">
+    <ul>
+        <li class="secondary-text">Date</li>
+        <li class="primary-text">04/01/2019</li>
+    </ul>
+    </li>
+    <div class="headerDivider"></div>
+    <li class="Customer-software">
+    <ul>
+        <li class="secondary-text">Customer Software</li>
+        <li class="primary-text">Signle ledger</li>
+    </ul>
+    </li>
+    <div class="headerDivider"></div>
+    <li class="satus">
+    <ul>
+        <li class="secondary-text">Status</li>
+        <li class="primary-text">Not Connected</li>
+    </ul>
+    </li>
+    <div class="headerDivider"></div>
+    <li class="invite">
+        <ul>
+            <li><button class="btn btn-small uppercase btn-solid btn-deepblue">INVITE</button></li>
+        </ul>
+    </li>
+
+    </ul>
+    </div>
+    <div class="customer-list">
+    <ul class="ul">
+    <li class="tick-checkbox">
+
+    <div class="customer-name">
+        <mat-checkbox></mat-checkbox>
+        <ul>
+        <li class="secondary-text">Customer Name</li>
+        <li class="primary-text">Angle Garden</li>
+        </ul>
+    </div>
+    </li>
+    <div class="headerDivider"></div>
+    <li class="Contact-email">
+    <ul>
+        <li class="secondary-text">Contact Email</li>
+        <li class="primary-text">User@gmail.com</li>
+    </ul>
+    </li>
+    <div class="headerDivider"></div>
+    <li class="date">
+    <ul>
+        <li class="secondary-text">Date</li>
+        <li class="primary-text">04/01/2019</li>
+    </ul>
+    </li>
+    <div class="headerDivider"></div>
+    <li class="Customer-software">
+    <ul>
+        <li class="secondary-text">Customer Software</li>
+        <li class="primary-text">Signle ledger</li>
+    </ul>
+    </li>
+    <div class="headerDivider"></div>
+    <li class="satus">
+    <ul>
+        <li class="secondary-text">Status</li>
+        <li class="primary-text">Not Connected</li>
+    </ul>
+    </li>
+    <div class="headerDivider"></div>
+    <li class="invite">
+        <ul>
+            <li><button class="btn btn-small uppercase btn-solid btn-navyblue">RE-SEND MAIL</button></li>
+        </ul>
+    </li>
+
+    </ul>
+    </div>
+    <div class="customer-list">
+            <ul class="ul">
+            <li class="tick-checkbox">
+        
+            <div class="customer-name">
+                <mat-checkbox></mat-checkbox>
+                <ul>
+                <li class="secondary-text">Customer Name</li>
+                <li class="primary-text">Angle Garden</li>
+                </ul>
+            </div>
+            </li>
+            <div class="headerDivider"></div>
+            <li class="Contact-email">
+            <ul>
+                <li class="secondary-text">Contact Email</li>
+                <li class="primary-text">User@gmail.com</li>
+            </ul>
+            </li>
+            <div class="headerDivider"></div>
+            <li class="date">
+            <ul>
+                <li class="secondary-text">Date</li>
+                <li class="primary-text">04/01/2019</li>
+            </ul>
+            </li>
+            <div class="headerDivider"></div>
+            <li class="Customer-software">
+            <ul>
+                <li class="secondary-text">Customer Software</li>
+                <li class="primary-text">Signle ledger</li>
+            </ul>
+            </li>
+            <div class="headerDivider"></div>
+            <li class="satus">
+            <ul>
+                <li class="secondary-text">Status</li>
+                <li class="primary-text">Not Connected</li>
+            </ul>
+            </li>
+            <div class="headerDivider"></div>
+            <li class="invite">
+                <ul>
+                    <li><button class="btn btn-small uppercase btn-solid btn-deepblue">INVITE</button></li>
+                </ul>
+            </li>
+        
+            </ul>
+    </div>
+</div>

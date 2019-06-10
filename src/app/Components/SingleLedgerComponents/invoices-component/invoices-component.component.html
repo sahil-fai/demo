@@ -1,0 +1,163 @@
+<div class="title">
+        <h2>{{title}}</h2>
+</div>
+<mat-card class="example-card">  
+    <mat-card-content>
+        <div>
+                <ul class="bill-status">
+                <li class="overdue">
+                    <div>Overdue</div>
+                    <div>($645.33)</div>
+                </li>
+                <li class="due">
+                    <div>Due</div>
+                    <div>($645.33)</div>
+                </li>
+                <li class="paid">
+                    <div>Paid</div>
+                    <div>($645.33)</div>
+                </li>
+                <li class="total">
+                    <div>Total</div>
+                    <div>($645.33)</div>
+                </li>
+                </ul>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="example-card">  
+        <mat-card-content>
+                <div class="Invoice-content">
+                        <div class="searchPanel clearfix">
+                        <form (ngSubmit)="onFilter()" novalidate autocomplete="off">
+                            <ul class="floatingList searchBlock">
+                            <li class="smallFields fliter-for">
+                                <label class="labels">Filter For</label>
+                                <input type="text" class="fields" placeholder="Invoices, Number or Total" />
+                            </li>
+                            <li class="smallFields">
+                                <label class="labels">From</label>
+                                <input type="text" class="fields calendar" />
+                            </li>
+                            <li class="smallFields">
+                                <label class="labels">To</label>
+                                <input type="text" class="fields calendar" />
+                            </li>
+                            <li class="smallFields">
+                                <label class="labels">status</label>
+                                <select class="fields">
+                                <option value="all" >ALL</option>
+                                <option *ngFor="let status of status" [value]="status.value">
+                                    {{status.viewValue}}
+                                </option>
+                                </select>
+                            </li>
+                            <li>
+                                <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
+                            </li>
+                            <li>
+                                <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" (click)="onReset()" />
+                            </li>
+                            </ul>
+                        </form>
+                        </div>
+                        <div class="defaultTable">
+                                <table class="dataTable smallFontTable" >
+                                <thead>
+                                    <tr>
+                                    <th class="tick-checkbox"><mat-checkbox ></mat-checkbox></th>
+                                    <th class="sort ">Number</th>
+                                    <th class="sort ">Date </th>
+                                    <th class="sort" >Due Date </th>         
+                                    <th class="sort ">Vendor</th>
+                                    <th class="sort ">Total </th>
+                                    <th class="sort ">Balance</th>          
+                                    <th class="sort ">Status </th>
+                                    <th class="sort">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr>
+                                    <th class="tick-checkbox"><mat-checkbox ></mat-checkbox></th>
+                                    <td class=""><a>Bill-1021</a></td>
+                                    <td class="">02/24/2019</td>
+                                    <td class="duedate">02/24/2019</td>
+                                    <td class="">Smith</td>
+                                    <td class="">$20000.00</td>
+                                    <td class="">$4.00</td>
+                                    <td class="">Partialy Paid</td>
+                                    <td class="">Make Payment</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="tick-checkbox"><mat-checkbox ></mat-checkbox></th>
+                                        <td class=""><a>Bill-1021</a></td>
+                                        <td class="">02/24/2019</td>
+                                        <td class="duedate">02/24/2019</td>
+                                        <td class="">Smith</td>
+                                        <td class="">$20000.00</td>
+                                        <td class="">$4.00</td>
+                                        <td class="">Partialy Paid</td>
+                                        <td class="">Make Payment</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="tick-checkbox"><mat-checkbox ></mat-checkbox></th>
+                                        <td class=""><a>Bill-1021</a></td>
+                                        <td class="">02/24/2019</td>
+                                        <td class="duedate">02/24/2019</td>
+                                        <td class="">Smith</td>
+                                        <td class="">$20000.00</td>
+                                        <td class="">$4.00</td>
+                                        <td class="">Partialy Paid</td>
+                                        <td class="">Make Payment</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="tick-checkbox"><mat-checkbox ></mat-checkbox></th>
+                                            <td class=""><a>Bill-1021</a></td>
+                                            <td class="">02/24/2019</td>
+                                            <td class="duedate">02/24/2019</td>
+                                            <td class="">Smith</td>
+                                            <td class="">$20000.00</td>
+                                            <td class="">$4.00</td>
+                                            <td class="">Partialy Paid</td>
+                                            <td class="">Make Payment</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="tick-checkbox"><mat-checkbox ></mat-checkbox></th>
+                                            <td class=""><a>Bill-1021</a></td>
+                                            <td class="">02/24/2019</td>
+                                            <td class="duedate">02/24/2019</td>
+                                            <td class="">Smith</td>
+                                            <td class="">$20000.00</td>
+                                            <td class="">$4.00</td>
+                                            <td class="">Partialy Paid</td>
+                                            <td class="">Make Payment</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="tick-checkbox"><mat-checkbox ></mat-checkbox></th>
+                                                <td class=""><a>Bill-1021</a></td>
+                                                <td class="">02/24/2019</td>
+                                                <td class="duedate">02/24/2019</td>
+                                                <td class="">Smith</td>
+                                                <td class="">$20000.00</td>
+                                                <td class="">$4.00</td>
+                                                <td class="">Partialy Paid</td>
+                                                <td class="">Make Payment</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="tick-checkbox"><mat-checkbox ></mat-checkbox></th>
+                                                <td class=""><a>Bill-1021</a></td>
+                                                <td class="">02/24/2019</td>
+                                                <td class="duedate">02/24/2019</td>
+                                                <td class="">Smith</td>
+                                                <td class="">$20000.00</td>
+                                                <td class="">$4.00</td>
+                                                <td class="">Partialy Paid</td>
+                                                <td class="">Make Payment</td>
+                                                </tr>                
+                                </tbody>
+                              </table>                                              
+                        </div>
+                </div>
+        </mat-card-content>
+</mat-card>
