@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth-service/auth.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogOverviewExampleDialogComponent } from '../../Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component'
@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit {
     if(this.formRegister.invalid){return;}
     this.authService.enroll(this.formRegister.value).subscribe(res => {
       console.log(res);
-     // this.isRegistered = true; 
+     // this.isRegistered = true;
       this.router.navigate(['/dashboard']);
     }, err =>{
 
@@ -49,7 +49,7 @@ export class SignupComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialogComponent, {
       data: {safeSrc: this.safeSrc}
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
      // console.log('The dialog was closed');
     });

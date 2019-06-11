@@ -11,6 +11,7 @@ export class LoaderService {
   private loaderSubject = new Subject<any>();
 
   loaderState = this.loaderSubject.asObservable();
+
   showLoader() {
     this.numberOfRequests++;
     this.loaderSubject.next(this.numberOfRequests);
