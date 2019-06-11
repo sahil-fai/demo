@@ -49,11 +49,21 @@
                         <input type="email" class="fields newFormatting" formControlName="username" />
 
                       </li>
-                      <li>
+                      <li class="password">
                           <label class="labels newFormatting">Password</label>
                           <div class="password">
                               <input type="password" class="fields newFormatting" formControlName="password"/>
                               <button  type="button" class="icon-eye-hide"></button>
+                          </div>
+                          <div class="condition">
+                            <!-- <span class="top-arrow"></span> -->
+                            <ul class="conditionList">
+                              <li><mat-icon style="color:rgb(23, 208, 214); font-size: 12px;">radio_button_checked</mat-icon>Contains minimum of 6 characters.</li>
+                              <li><mat-icon style="color:rgb(247, 132, 142); font-size: 12px;">radio_button_checked</mat-icon>Contains a number.</li>
+                              <li><mat-icon style="color:rgb(23, 208, 214); font-size: 12px;">radio_button_checked</mat-icon>Contains an upper case letter.</li>
+                              <li><mat-icon style="color:rgb(23, 208, 214); font-size: 12px;">radio_button_checked</mat-icon>Contains a lower case letter.</li>
+                              <li><mat-icon style="color:rgb(247, 132, 142); font-size: 12px;">radio_button_checked</mat-icon>Contains a special character.</li>
+                            </ul>
                           </div>
                           
                       </li>
@@ -63,7 +73,7 @@
                             <input type="password" class="fields newFormatting" formControlName="password"/>
                             <button  type="button" class="icon-eye-hide"></button>
                         </div>  
-                    </li>
+                      </li>
                       <li class="recaptchaHolder">
                           <!-- <re-captcha required siteKey="6LcXSkMUAAAAAEmYkp1eSbIbT-vcMkxEnxmoryxd" formControlName="recaptcha"></re-captcha> -->
                       </li>
@@ -71,6 +81,7 @@
                         <mat-checkbox [required]="true" formControlName="isAgree"><span>I agree to the SingleLedger Terms &amp; Conditions <br> and Privacy Policy</span></mat-checkbox>
                     </li>
                     </ul>
+                  
                     <div class="buttonWrap">
                         <button type="submit" class="btn btn-solid submit"><i class="icon-submit"></i>Submit</button>
                     </div>

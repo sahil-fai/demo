@@ -2323,14 +2323,20 @@ textarea.fields.newFormatting{
 }
 
 .conditionList{
-    background-color: #ededed;
-
+   
+   display: flex;
+   align-content: space-between;
+   flex-wrap: wrap;
+   align-items: center;
+   padding: 5px;
     li{
+        padding: 0px !important;
+        flex-basis: 100%;
         font-size: 0.87em;
         color: #8d8d8d;
         font-weight: 600;
-        padding: 0.1em 1em;
         float: none;
+        display: flex!important;
 
         &:first-child{
             padding-top: 0.6em;

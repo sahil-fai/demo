@@ -17,10 +17,29 @@ export class StylePaginatorDirective {
   ) {
       setTimeout(() => {
           this.initPageRange();
+          const Left = this.ren.createElement('i');
+          this.ren.addClass(Left, 'icon-arrow-left');
+          this.ren.appendChild(document.querySelector(".mat-paginator-navigation-previous .mat-button-wrapper"),Left);
+          const Previous = this.ren.createElement('span');
+          this.ren.addClass(Previous, 'Previous');
+          const Ptext = this.ren.createText('Previous');
+          this.ren.appendChild(Previous, Ptext);
+          this.ren.appendChild(document.querySelector(".mat-paginator-navigation-previous .mat-button-wrapper"),Previous);
+         
+          const Next = this.ren.createElement('span');
+          this.ren.addClass(Next, 'Next');
+          const text = this.ren.createText('Next');
+          this.ren.appendChild(Next, text);
+          this.ren.appendChild(document.querySelector(".mat-paginator-navigation-next .mat-button-wrapper"),Next);
+          const Right = this.ren.createElement('i');
+          this.ren.addClass(Right, 'icon-arrow-right');
+          this.ren.appendChild(document.querySelector(".mat-paginator-navigation-next .mat-button-wrapper"),Right);
       }, 0);
+     
   }
 
   private initPageRange(): void {
+    
       const pageRange = this.vr.element.nativeElement.querySelector(
           'div.mat-paginator-range-actions > div.mat-paginator-range-label'
       );
@@ -39,6 +58,8 @@ export class StylePaginatorDirective {
         referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
     }
     insertAfter(pageRange, document.querySelector(".mat-paginator-navigation-previous"));
+    
+   // document.querySelector(".mat-paginator-navigation-next .mat-button-wrapper").appendChild('<i class="icon-arrow-right"></i>');
      
   }
 
@@ -65,5 +86,6 @@ export class StylePaginatorDirective {
      
       this.matPag._changePageSize(this.matPag.pageSize); 
   }
+  
 }
 

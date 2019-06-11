@@ -40,6 +40,9 @@ import { CompanyInfoComponentComponent } from './Components/SingleLedgerComponen
 import { SingleLedgerMasterComponentComponent } from './Components/SingleLedgerComponents/single-ledger-master-component/single-ledger-master-component.component';
 import { StylePaginatorDirective } from './Directives/style-paginator.directive';
 
+//unnecessery
+import {MatIconModule} from '@angular/material/icon'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,7 +94,8 @@ import { StylePaginatorDirective } from './Directives/style-paginator.directive'
       closeButton: true,
       tapToDismiss: false
     }),
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatIconModule
   ],
   providers: [AuthService, LoaderService,{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent],

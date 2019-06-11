@@ -14,7 +14,7 @@ export interface PeriodicElement {
   Action: string;
   position: number;
 }
-const bills: PeriodicElement[]=json;
+
 @Component({
   selector: 'app-bills-component',
   templateUrl: './bills-component.component.html',
@@ -22,15 +22,23 @@ const bills: PeriodicElement[]=json;
 })
 export class BillsComponentComponent implements OnInit {
   title="Bills";
-  constructor() { }
+  public dataSource: MatTableDataSource<PeriodicElement>;
+  constructor() { 
+    
+  }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+    
+    this.handlePage({pageSize:"4",pageIndex:"0"});
    
+   //this.dataSource.paginator = this.paginator;
   }
+  
   @ViewChild(MatPaginator, {}) paginator: MatPaginator;
   displayedColumns: string[] = ['select',"Number","Date","DueDate","Vendor","Total", "Balance","Status","Action", 'star'];
-  dataSource = new MatTableDataSource<PeriodicElement>(bills); 
+  //bills: PeriodicElement[]=this.Paginator(json,1,4).data;
+  //dataSource = new MatTableDataSource<PeriodicElement>(this.bills); 
+  
   selection = new SelectionModel<PeriodicElement>(true, []);
  
   /** Whether the number of selected elements matches the total number of rows. */
@@ -55,4 +63,30 @@ export class BillsComponentComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
+  Paginator(items, page, per_page) { 
+    var page = page || 1,
+    per_page = per_page || 10,
+    offset = (page - 1) * per_page,
+   
+    paginatedItems = items.slice(offset).slice(0, per_page),
+    total_pages = Math.ceil(items.length / per_page);
+    return {
+    page: page,
+    per_page: per_page,
+    pre_page: page - 1 ? page - 1 : null,
+    next_page: (total_pages > page) ? page + 1 : null,
+    total: items.length,
+    total_pages: total_pages,
+    data: paginatedItems
+    };
+  }
+
+  public handlePage(e: any) {
+    let pagesize = e.pageSize;
+    let pagenumber = e.pageIndex + 1;
+    let data = this.Paginator(json,pagenumber,pagesize);
+    this.dataSource = new MatTableDataSource<PeriodicElement>(data.data);
+    
+    console.log(JSON.stringify(data));
+  }
 }

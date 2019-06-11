@@ -50,7 +50,8 @@
                   </ul>
                 </form>
             </div>
-            <div class="example-container mat-elevation-z8">
+            <div class="bills-content">
+            <div class="example-container">
               <table mat-table [dataSource]="dataSource" class="">
 
                 <!-- Checkbox Column -->
@@ -120,12 +121,12 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"
                     (click)="selection.toggle(row)" [class.selected]="selection.isSelected(row)">
                 </tr>
+
               </table>
-              <mat-paginator appStylePaginator hidePageSize
-              [pageSize]="20"
-              [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
             </div>
-            
+            <mat-paginator appStylePaginator hidePageSize [length]="15"
+              [pageSize]="4" (page)="handlePage($event)"></mat-paginator>
+          </div>
         </div>
     </mat-card-content>
 </mat-card>
