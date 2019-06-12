@@ -3053,17 +3053,17 @@ mat-accordion{
     mat-expansion-panel.mat-expansion-panel{
        // border-top: 1px solid #00363e;
        // border-bottom: 1px solid #416b71;
-        background: transparent;
+        background: rgba(109, 223, 251, 0.4);
         color: #fff;
         border-radius: 30px !important;
         margin: 10px 0;
         &.mat-expanded{
             .mat-expansion-panel-header{
-                height: 53px !important;
+                height: 48px !important;
                 pointer-events: none;
             }
         }
-        &:hover{
+        &:hover, &.active{
             background-color: #fff;
             color: #00add8;
             .mat-content{

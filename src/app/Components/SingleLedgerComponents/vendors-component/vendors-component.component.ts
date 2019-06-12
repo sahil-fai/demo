@@ -7,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VendorsComponentComponent implements OnInit {
 title="Vendors";
+selected = ['Active'];
+StatusList= ['Active','Inactive'];
 status= [
   {value: 'Pendind', viewValue: 'Pendind'},
-  {value: 'Not Connected', viewValue: 'Not Connected'}
+  {value: 'Not Connected', viewValue: 'Not Connected'},
+  {value: 'Connected', viewValue: 'Connected'}
 ];
+
   constructor() { }
 
   ngOnInit() {

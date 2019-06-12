@@ -57,3 +57,124 @@
     box-shadow: 1px 1px 9px -2px #9a9292;
     border-radius: 0 0 7px 7px;
 }
+.bill-status{
+    //margin-bottom: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    li{
+        background: aliceblue;
+        height: 80px;
+        padding-left: 15px;
+        font-size: 16px;
+        margin-right: 2px;
+        flex-grow: 1;
+        padding-top: 5px;
+    }
+    .overdue{
+        color: #f44336;
+        border-bottom: 15px solid #f1746a;
+    }
+    .due{
+        color: #ef891c;
+        border-bottom: 15px solid #ecba75;
+    }
+    .paid{
+        color: #9fec28;
+        border-bottom: 15px solid #c8ef8d;
+    }
+    .total{
+        color: #47b4ea;
+        border-bottom: 15px solid #94ddf1;
+    }
+}
+
+.defaultTable .dataTable th.tick-checkbox {
+    text-align: center; 
+}
+
+.defaultTable .dataTable td{
+    &.duedate{
+        color:#ef7070;
+    }
+}
+// .bill-content{
+//     border: 1px solid #c5c0c0;
+//    // box-shadow: 6px 9px 7px -7px rgba(117,115,117,1);
+//     box-shadow: 3px 4px 10px 0px rgba(106, 119, 120, 0.8);
+//     //box-shadow: 1px 1px 9px -2px #9a9292;
+//     border-radius: 0 0 7px 7px;
+// }
+.filter-for{
+    width: 230px;
+}
+.example-container {
+    width: auto;
+    overflow: auto;
+  }
+  
+  table {
+   width: 1106px;
+   font-weight: 500;
+  // width: 1037px;
+  }
+  
+  td.mat-column-star {
+    width: 20px;
+    padding-right: 8px;
+  }
+  
+  th.mat-column-position, td.mat-column-position {
+    padding-left: 8px;
+  }
+  
+  .mat-table-sticky:first-child {
+    border-right: 1px solid #e0e0e0;
+  }
+  
+  .mat-table-sticky:last-child {
+        /* border-left: 1px solid #e0e0e0; */
+        text-align: right;
+        padding-right: 10px;
+  }
+  tr.mat-row.selected td {
+    border-bottom-color: #00add8;
+    border-top-color: #00add8;
+}
+tr.mat-row.selected{
+    border-bottom-color: #00add8;
+    border-top-color: #00add8;
+}
+td.mat-column-Number {
+    color: #00add8;
+}
+td.mat-column-DueDate {
+    color: #f1746a;
+}
+td.mat-column-Status.partialy-paid,.paid {
+    color: #c8ef8d;
+}
+td.mat-column-Status.open {
+    color: #00add8;
+}
+tr.mat-header-row {
+    height: 35px!important;
+    background: #e1f1f5;
+}
+th.mat-header-cell {
+     font-weight: 500;
+    font-size: 14px;
+}
+.mat-paginator-range-label span {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    border: 1px solid;
+    text-align: center;
+    background: #00add8;
+    border-radius: 5px;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+}

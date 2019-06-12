@@ -422,10 +422,14 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
               background: #00add8;
               color: #fff;
             }
+            &:hover{
+                background: #e7ecec;
+                
+            }
         }
     }
 }
-.bill-content{
+.bill-content, .Invoice-content{
     .mat-paginator-range-label {
         margin: 0 24px 0 24px;
     }
@@ -446,6 +450,7 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
             height: 32px;
             &:disabled{
                 color: #ced4d4; 
+                pointer-events: none;
             }
         }
     } 
@@ -464,4 +469,10 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
     min-width: calc(100% )!important;
     margin-top: 35px;
     margin-left: 15px;
+}
+.customers{
+    .mat-icon {
+        font-size: 16px !important;
+        height: 16px !important;
+    }
 }

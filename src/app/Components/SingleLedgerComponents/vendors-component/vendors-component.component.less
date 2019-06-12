@@ -26,10 +26,21 @@
                 align-items: center;
                 padding-left: 10px;
             }
-            li{   
-               // height: 56px;
-               // font-size: 14px;
+            li{
                 flex-grow: 1;
+                text-align: center;
+                &.status{
+                    &.active{
+                        mat-icon {
+                            color: #28a745;
+                        }
+                    } 
+                    &.inactive{
+                        mat-icon {
+                            color: #dc3545;
+                        }
+                    } 
+                }
             }
             ul{
                 display: inline-block;
@@ -60,4 +71,7 @@
         margin-right: 10px;
         margin-left: 10px
     }
+}
+::ng-deep .mat-select-value {
+    display: table !important;
 }

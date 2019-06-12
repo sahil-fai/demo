@@ -43,6 +43,11 @@
                     <i class="icon-bill"></i><a [routerLink]="['/businesslist']" >Business List</a> 
                 </mat-expansion-panel-header>                        
             </mat-expansion-panel>
+            <mat-expansion-panel routerLinkActive="active" [@.disabled]="true" >
+                <mat-expansion-panel-header>
+                    <i class="icon-bill"></i><a [routerLink]="['/dashboard']" >Connect Business</a> 
+                </mat-expansion-panel-header>                        
+            </mat-expansion-panel>
            
             </mat-accordion>
     </div>
@@ -64,7 +69,7 @@
                   <tr>
                     <td><i class="icon-list"></i></td>
                     <td>Business(s) List</td>
-                    <td><a [routerLink]="['/' + role + '/user']">View All</a></td>
+                    <td><a [routerLink]="['/businesslist']">View All</a></td>
                   </tr>
                 </table>
                 <ul>

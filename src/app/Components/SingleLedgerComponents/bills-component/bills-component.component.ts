@@ -29,13 +29,13 @@ export class BillsComponentComponent implements OnInit {
 
   ngOnInit() {
     
-    this.handlePage({pageSize:"4",pageIndex:"0"});
+    this.handlePage({pageSize:"10",pageIndex:"0"});
    
    //this.dataSource.paginator = this.paginator;
   }
   
   @ViewChild(MatPaginator, {}) paginator: MatPaginator;
-  displayedColumns: string[] = ['select',"Number","Date","DueDate","Vendor","Total", "Balance","Status","Action", 'star'];
+  displayedColumns: string[] = ['select',"Number","BlockchainTransactionID","Date","DueDate","Vendor","Total", "Balance", 'star'];
   //bills: PeriodicElement[]=this.Paginator(json,1,4).data;
   //dataSource = new MatTableDataSource<PeriodicElement>(this.bills); 
   
@@ -86,7 +86,5 @@ export class BillsComponentComponent implements OnInit {
     let pagenumber = e.pageIndex + 1;
     let data = this.Paginator(json,pagenumber,pagesize);
     this.dataSource = new MatTableDataSource<PeriodicElement>(data.data);
-    
-    console.log(JSON.stringify(data));
   }
 }
