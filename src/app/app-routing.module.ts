@@ -27,7 +27,7 @@ const routes: Routes = [
   {
     path: 'businesslist', component: SingleLedgerBusinessListComponent
   },
-  { 
+  {
     path: 'business', component: SingleLedgerMasterComponentComponent, children: [
           {
             path: 'dashboard', component: DashboardComponetComponent
@@ -50,6 +50,9 @@ const routes: Routes = [
         ]
   },
   {
+    path: '', redirectTo: 'login', pathMatch: 'full'
+  },
+  {
     path: '**', redirectTo: 'login'
   }
 ];
@@ -58,6 +61,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { 
- 
+export class AppRoutingModule {
+
 }

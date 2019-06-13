@@ -18,6 +18,6 @@ export class LogoutComponent implements OnInit {
   }
   public onLogout() {
       this.helper.clearToken();
-      this._router.navigate([""]);
+      this._router.navigate(['/login']);
   }
 };

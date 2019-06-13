@@ -41,9 +41,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.formLogin.value).subscribe(res => {
       console.log(res);
         this.helper.set(res.token);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/business/dashboard']);
         if (res['Role'] === 0) {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/business/dashboard']);
         }
     },
     err =>  {
