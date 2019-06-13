@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BusinessService } from '../../../services/business-service/business.service';
+import { UserprofileService } from '../../../services/user-service/userprofile.service';
 
 @Component({
   selector: 'app-dashboard-componet',
@@ -9,7 +10,8 @@ import { BusinessService } from '../../../services/business-service/business.ser
 export class DashboardComponetComponent implements OnInit {
   public title = 'DashBoard';
   public value = '';
-  constructor(public businessService: BusinessService) { }
+  constructor(public businessService: BusinessService,
+              public userService: UserprofileService) { }
   ngOnInit() {
   }
 
@@ -57,5 +59,17 @@ export class DashboardComponetComponent implements OnInit {
       }
       , err => {
       });
+  }
+
+  private getUserProfileInformation()
+  {
+    this.userService.getUserProfile().subscribe(
+      (res) => {
+        this.value = JSON.stringify(res);
+      },
+      (err)=>{
+
+      }
+    )
   }
 }
