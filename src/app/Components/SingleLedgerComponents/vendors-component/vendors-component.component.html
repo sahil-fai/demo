@@ -1,219 +1,146 @@
 <div class="title">
-  <h2>{{title}}</h2>
-</div>
-<div class="searchPanel clearfix">
-  <form (ngSubmit)="onFilter()" novalidate autocomplete="off">
-    <ul class="floatingList searchBlock">
-      <li>
-        <label class="labels">Filter For</label>
-        <input type="text" class="fields" placeholder="Customer Name, Email" />
-      </li>
-      <li class="smallFields">
-        <label class="labels">From</label>
-        <input type="text" class="fields calendar" />
-      </li>
-      <li class="smallFields">
-        <label class="labels">To</label>
-        <input type="text" class="fields calendar" />
-      </li>
-      <li class="smallFields">
-        <label class="labels">status</label>
-        <select class="fields">
-          <option disabled value style="display:none"></option>
-          <option *ngFor="let status of status" [value]="status.value">
-            {{status.viewValue}}
-          </option>
-        </select>
-      </li>
-      <li>
-        <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
-      </li>
-      <li>
-        <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" (click)="onReset()" />
-      </li>
-    </ul>
-  </form>
-</div>
-<div class="customers">
-    <div class="select-box">
-            <mat-checkbox></mat-checkbox>
-            <span class="text-label">Select all as
-                  <mat-form-field>
-                      <mat-select [(value)]="selected"  multiple>
-                        <mat-option *ngFor="let status of StatusList" [value]="status">{{status}}</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-              </span>
-    </div>
-      <div class="customer-list">
-      <ul class="ul">
-      <li class="tick-checkbox">
-
-      <div class="customer-name">
-          <mat-checkbox></mat-checkbox>
-          <ul>
-          <li class="secondary-text">Customer Name</li>
-          <li class="primary-text">Angle Garden</li>
-          </ul>
+    <h2>{{title}}</h2>
+  </div>
+  <div class="searchPanel clearfix">
+    <form  novalidate autocomplete="off">
+      <ul class="floatingList searchBlock">
+        <li>
+          <label class="labels">Filter For</label>
+          <input type="text" class="fields" placeholder="Customer Name, Email" />
+        </li>
+        <li class="smallFields">
+          <label class="labels">From</label>
+          <input type="text" class="fields calendar" />
+        </li>
+        <li class="smallFields">
+          <label class="labels">To</label>
+          <input type="text" class="fields calendar" />
+        </li>
+        <li class="smallFields">
+          <label class="labels">status</label>
+          <select class="fields">
+            <option disabled value style="display:none"></option>
+            <option *ngFor="let status of status" [value]="status.value">
+              {{status.viewValue}}
+            </option>
+          </select>
+        </li>
+        <li>
+          <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
+        </li>
+        <li>
+          <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" />
+        </li>
+      </ul>
+    </form>
+  </div>
+  <div class="customers">
+      <div class="select-box">
+              
+              <span class="text-label">Select as all<i class="icon-arrow-down"></i>
+                    <!-- <mat-form-field>
+                        <mat-select [(value)]="selected"  multiple>
+                          <mat-option *ngFor="let status of StatusList" [value]="status">{{status}}</mat-option>
+                        </mat-select>
+                      </mat-form-field> -->
+                      <div class="status-modal">
+                          <mat-radio-group
+                          class="example-radio-group"
+                          >
+                          <mat-radio-button class="example-radio-button" *ngFor="let status of StatusList" [value]="status">
+                            {{status}}
+                          </mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                     
+                </span>   
       </div>
-      </li>
-      <div class="headerDivider"></div>
-      <li class="Contact-email">
-      <ul>
-          <li class="secondary-text">Contact Email</li>
-          <li class="primary-text">User@gmail.com</li>
-      </ul>
-      </li>
-      <div class="headerDivider"></div>
-      <li class="date">
-      <ul>
-          <li class="secondary-text">Date</li>
-          <li class="primary-text">04/01/2019</li>
-      </ul>
-      </li>
-      <div class="headerDivider"></div>
-      <li class="organization">
-      <ul>
-          <li class="secondary-text">Organization</li>
-          <li class="primary-text">Signle ledger</li>
-      </ul>
-      </li>
-      <div class="headerDivider"></div>
-      <li class="status inactive">
-      <ul>
-        <li class="secondary-text">Inactive</li>
-        <li class="primary-text"><mat-icon>radio_button_unchecked</mat-icon></li>
-      </ul>
-      </li>
-      <div class="headerDivider"></div>
-      <li class="blockchainid">
-        <ul>
-            <li class="secondary-text">Blockchain ID</li>
-            <li class="primary-text">N/A</li>
-        </ul>
-      </li>
-      <div class="headerDivider"></div>
-      <li class="invite">
-          <ul>
-              <li><button class="btn btn-small uppercase btn-solid btn-deepblue"><i class="icon-arrow-curve-right"></i>INVITE</button></li>
-          </ul>
-      </li>
-
-      </ul>
+      <div class="bills-content mat-elevation-z8">
+        <div class="example-container">
+          <table mat-table [dataSource]="dataSource" class="">
+  
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select" >
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                              [checked]="selection.hasValue() && isAllSelected()"
+                              [indeterminate]="selection.hasValue() && !isAllSelected()"
+                              [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)"
+                              [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>         
+          
+            <!-- Number Column -->
+            <ng-container matColumnDef="CustomerName" sticky>
+              <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.CustomerName}} </td>
+            </ng-container>
+            <!-- Block chain Id Column -->
+            <ng-container matColumnDef="ContactEmail">
+              <th mat-header-cell *matHeaderCellDef> Contact Email</th>
+              <td mat-cell *matCellDef="let element"> {{element.ContactEmail}} </td>
+            </ng-container>
+            <!-- Date Column -->
+            <ng-container matColumnDef="RegisterDate">
+              <th mat-header-cell *matHeaderCellDef> Register Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.RegisterDate}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Organizaton">
+                <th mat-header-cell *matHeaderCellDef> Organizaton </th>
+                <td mat-cell *matCellDef="let element"> {{element.Organizaton}} </td>
+              </ng-container>
+          
+            <!-- Due Date Column -->
+            <ng-container matColumnDef="Status">
+              <th mat-header-cell *matHeaderCellDef> Status</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon *ngIf="element.Status=='Inactive'" [ngClass]="{'inactive':element.Status === 'Inactive'}">radio_button_unchecked</mat-icon>
+                <mat-icon *ngIf="element.Status=='Active'" [ngClass]="{'active':element.Status === 'Active'}">radio_button_checked</mat-icon>
+              </td>
+            </ng-container>
+          
+            <!-- Vendor Column -->
+            <ng-container matColumnDef="BlockChainID">
+              <th mat-header-cell *matHeaderCellDef> BlockChain ID </th>
+              <td mat-cell *matCellDef="let element"> {{element.BlockChainID}} </td>
+            </ng-container>
+            <!-- Total Column -->
+            <ng-container matColumnDef="Invite">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element"> 
+                  <button class="btn btn-small uppercase btn-solid btn-deepblue" *ngIf="element.Status=='Active'" [disabled]="{'disable':element.Status === 'Active'}"><i class="icon-arrow-curve-right"></i>INVITED</button>
+                <button class="btn btn-small uppercase btn-solid btn-deepblue" *ngIf="element.Status=='Inactive' && element.Reinviteflag!=='true'"><i class="icon-arrow-curve-right"></i>INVITE</button> 
+                <button class="btn btn-small uppercase btn-solid btn-navyblue" *ngIf="element.Status=='Inactive' && element.Reinviteflag=='true'"><i class="icon-arrow-curve-left"></i>RE-SEND MAIL</button>
+              </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="star" stickyEnd>
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <span><i  class="icon-arrow-right"></i></span>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                (click)="selection.toggle(row)" [class.selected]="selection.isSelected(row)">
+            </tr>
+  
+          </table>
+        </div>
+        <div class="paginator-container">
+            <button class="btn btn-small uppercase btn-solid btn-deepblue invite"><i class="icon-arrow-curve-right"></i>INVITE</button>
+            <mat-paginator appStylePaginator hidePageSize [length]="15"
+            [pageSize]="10" (page)="handlePage($event)"></mat-paginator>
+        </div>
+           
       </div>
-      <div class="customer-list">
-      <ul class="ul">
-      <li class="tick-checkbox">
-
-      <div class="customer-name">
-          <mat-checkbox></mat-checkbox>
-          <ul>
-          <li class="secondary-text">Customer Name</li>
-          <li class="primary-text">Angle Garden</li>
-          </ul>
-      </div>
-      </li>
-      <div class="headerDivider"></div>
-      <li class="Contact-email">
-      <ul>
-          <li class="secondary-text">Contact Email</li>
-          <li class="primary-text">User@gmail.com</li>
-      </ul>
-      </li>
-      <div class="headerDivider"></div>
-      <li class="date">
-      <ul>
-          <li class="secondary-text">Date</li>
-          <li class="primary-text">04/01/2019</li>
-      </ul>
-      </li>
-      <div class="headerDivider"></div>
-      <li class="organization">
-      <ul>
-          <li class="secondary-text">Organization</li>
-          <li class="primary-text">Signle ledger</li>
-      </ul>
-      </li>
-      <div class="headerDivider"></div>
-      <li class="status inactive">
-      <ul>
-          <li class="secondary-text">Inactive</li>
-          <li class="primary-text"><mat-icon>radio_button_unchecked</mat-icon></li>
-      </ul>
-      </li>
-      <div class="headerDivider"></div>
-      <li class="blockchainid">
-        <ul>
-            <li class="secondary-text">Blockchain ID</li>
-            <li class="primary-text">N/A</li>
-        </ul>
-      </li>
-      <div class="headerDivider"></div>
-      <li class="invite">
-          <ul>
-              <li><button class="btn btn-small uppercase btn-solid btn-navyblue"><i class="icon-arrow-curve-left"></i>RE-SEND MAIL</button></li>
-          </ul>
-      </li>
-
-      </ul>
-      </div>
-      <div class="customer-list">
-            <ul class="ul">
-            <li class="tick-checkbox">
-        
-            <div class="customer-name">
-                <mat-checkbox></mat-checkbox>
-                <ul>
-                <li class="secondary-text">Customer Name</li>
-                <li class="primary-text">Angle Garden</li>
-                </ul>
-            </div>
-            </li>
-            <div class="headerDivider"></div>
-            <li class="Contact-email">
-            <ul>
-                <li class="secondary-text">Contact Email</li>
-                <li class="primary-text">User@gmail.com</li>
-            </ul>
-            </li>
-            <div class="headerDivider"></div>
-            <li class="date">
-            <ul>
-                <li class="secondary-text">Date</li>
-                <li class="primary-text">04/01/2019</li>
-            </ul>
-            </li>
-            <div class="headerDivider"></div>
-            <li class="organization">
-            <ul>
-                <li class="secondary-text">Organization</li>
-                <li class="primary-text">Signle ledger</li>
-            </ul>
-            </li>
-            <div class="headerDivider"></div>
-            <li class="status active">
-            <ul>
-                <li class="secondary-text">Active</li>
-                <li class="primary-text"><mat-icon>radio_button_checked</mat-icon></li>
-            </ul>
-            </li>
-            <div class="headerDivider"></div>
-            <li class="blockchainid">
-              <ul>
-                  <li class="secondary-text">Blockchain ID</li>
-                  <li class="primary-text">154654ewer3445454</li>
-              </ul>
-            </li>
-            <!-- <div class="headerDivider"></div>
-            <li class="invite">
-                <ul>
-                    <li><button class="btn btn-small uppercase btn-solid btn-deepblue">INVITE</button></li>
-                </ul>
-            </li> -->
-        
-            </ul>
-    </div>
-</div>
-<div class="invitebutton">
-    <button class="btn btn-small uppercase btn-solid btn-deepblue"><i class="icon-arrow-curve-right"></i>INVITE</button>
-</div>
+  </div>
+  
+  

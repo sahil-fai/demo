@@ -11,6 +11,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   companylist: Array<any>;
   totalRec : number;
   page: number = 1;
+  length:number;
   public maxSize: number = 7;
   public directionLinks: boolean = true;
   public autoHide: boolean = true;
@@ -27,7 +28,8 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   public config = {
     itemsPerPage: this.selectedValue,
     currentPage: 1,
-    totalItems: this.totalRec
+    totalItems: this.totalRec,
+    id:"companylis"
   };
 
   public pageNumber = 1;

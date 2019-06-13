@@ -18,7 +18,7 @@
     <h2>{{title}}</h2>
 
     <div class="searchPanel clearfix">
-      <form  (ngSubmit)="onFilter()" novalidate autocomplete="off">
+      <form   novalidate autocomplete="off">
         <ul class="floatingList searchBlock">
           <li>
             <label class="labels">Filter For</label>
@@ -28,7 +28,7 @@
             <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter"/>
           </li>
           <li>
-            <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" (click)="onReset()"/>
+            <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" />
           </li>
         </ul>
       </form>

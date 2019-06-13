@@ -23,21 +23,23 @@ export interface PeriodicElement {
 export class InvoicesComponentComponent implements OnInit {
   title="Invoices";
   status= [
-    {value: 'Pendind', viewValue: 'Pendind'},
-    {value: 'Not Connected', viewValue: 'Not Connected'}
+    {value: 'Transfered', viewValue: 'transfered'},
+    {value: 'Submitted', viewValue: 'Submitted'},
+    {value: 'Accepted', viewValue: 'Accepted'},
+    {value: 'Declined', viewValue: 'Declined'}
   ];
   public dataSource: MatTableDataSource<PeriodicElement>;
   constructor() { }
 
   ngOnInit() {
     
-    this.handlePage({pageSize:"4",pageIndex:"0"});
+    this.handlePage({pageSize:"10",pageIndex:"0"});
    
    //this.dataSource.paginator = this.paginator;
   }
   
   @ViewChild(MatPaginator, {}) paginator: MatPaginator;
-  displayedColumns: string[] = ['select',"Number","BlockchainTransactionID","Date","DueDate","Vendor","Total", "Balance", 'star'];
+  displayedColumns: string[] = ["Number","BlockchainTransactionID","Date","DueDate","Customer","Total", "Balance", 'BlockchainStatus','star'];
   //bills: PeriodicElement[]=this.Paginator(json,1,4).data;
   //dataSource = new MatTableDataSource<PeriodicElement>(this.bills); 
   

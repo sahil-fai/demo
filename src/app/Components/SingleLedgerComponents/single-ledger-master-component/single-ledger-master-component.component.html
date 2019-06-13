@@ -1,11 +1,11 @@
 <div class="wrapper">
-    <div class="navigation" [class.open]="isNavOpen">
+    <div class="navigation">
         <div class="head">
           <!-- <app-logo-light></app-logo-light> -->
           <div class="logoText">
               <app-logo></app-logo>
             </div>
-          <i class="icon-cross" class="closeBtn icon-cross" (click)="closeNav()"></i>
+          <i class="icon-cross" class="closeBtn icon-cross"></i>
         </div>
         <mat-accordion>
                 <mat-expansion-panel routerLinkActive="active" [@.disabled]="true">
@@ -45,7 +45,7 @@
             </mat-expansion-panel>
             <mat-expansion-panel routerLinkActive="active" [@.disabled]="true" >
                 <mat-expansion-panel-header>
-                    <i class="icon-bill"></i><a [routerLink]="['/dashboard']" >Connect Business</a> 
+                    <i class="icon-bill"></i><a [routerLink]="['/connectbusiness']" >Connect Business</a> 
                 </mat-expansion-panel-header>                        
             </mat-expansion-panel>
            
@@ -53,7 +53,7 @@
     </div>
   <!-- NAVIGATION ENDS HERE -->
 
-  <div class="navigationOverlay" *ngIf="isNavOpen" (click)="closeNav()"></div>
+  <div class="navigationOverlay"></div>
 
 
   <div class="mainContainer">
