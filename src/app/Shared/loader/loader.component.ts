@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoaderService } from 'src/app/services/loader-service/loader.service';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-loader',
@@ -18,7 +18,7 @@ export class LoaderComponent implements OnInit {
       if (loader > 0) {
         this.showLoader = true;
 
-        // To disable all the inputs and buttons till request is under process.
+        // // To disable all the inputs and buttons till request is under process.
         // var inputs = document.getElementsByTagName("Input");
         // var buttons = document.getElementsByTagName("Button");
         // for (var i = 0; i < inputs.length; i++) {

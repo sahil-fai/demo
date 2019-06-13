@@ -117,8 +117,9 @@
 // Pagination Styles
 .mat-paginator, .mat-paginator-page-size .mat-select-trigger {
     background:transparent;
-    color: #318182;
+    // color: #318182;
     font-size: 13px;
+    margin-top: 15px;
 }
 
 .mat-form-field-wrapper {
@@ -406,16 +407,72 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
 
 .mat-paginator-container {
     justify-content: center!important;
-    .mat-paginator-range-label span {
-        width: 30px;
-        height: 30px;
-        display: inline-flex;
-        border: 1px solid;
-        text-align: center;
-        background: #00add8;
-        border-radius: 5px;
-        color: #fff;
-        justify-content: center;
-        align-items: center;
+    .mat-paginator-range-label {
+        span {
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            text-align: center;
+            border-radius: 5px;
+            color: #06596d;
+            justify-content: center;
+            align-items: center;
+            margin: 0 3px;
+            &.selected{
+              background: #00add8;
+              color: #fff;
+            }
+            &:hover{
+                background: #e7ecec;
+                
+            }
+        }
+    }
+}
+.bill-content, .Invoice-content{
+    .mat-paginator-range-label {
+        margin: 0 24px 0 24px;
+    }
+    .mat-paginator-navigation-next, .mat-paginator-navigation-previous{
+        &.mat-icon-button{
+            display: inline-block;
+            background: #e7ecec;
+            margin: 1px 4px;
+            border-radius: 8px;
+            text-align: center;
+            color: #00add8;
+            font-weight: 700;
+            padding: 0.1em 0.8em;
+            cursor: pointer;
+            line-height: 1.8;
+            vertical-align: middle;
+            width: auto;
+            height: 32px;
+            &:disabled{
+                color: #ced4d4; 
+                pointer-events: none;
+            }
+        }
+    } 
+    .mat-button-wrapper{
+        .mat-paginator-icon {
+            display: none;
+        }
+        .Next, .Previous{
+            margin-right: 5px;
+            font-size: 12px;
+        }
+    }
+    
+}
+.ng-trigger-transformPanel.mat-select-panel.mat-primary {
+    min-width: calc(100% )!important;
+    margin-top: 35px;
+    margin-left: 15px;
+}
+.customers{
+    .mat-icon {
+        font-size: 16px !important;
+        height: 16px !important;
     }
 }
