@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../services/auth.service';
-import { HelperService } from '../../services/helper.service';
+import { AuthService } from '../../services/auth-service/auth.service';
+import { HelperService } from '../../services/helper-service/helper.service';
 
 @Component({
   selector: 'app-logout',
@@ -18,6 +18,6 @@ export class LogoutComponent implements OnInit {
   }
   public onLogout() {
       this.helper.clearToken();
-      this._router.navigate([""]);
+      this._router.navigate(['/login']);
   }
 };

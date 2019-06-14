@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuickBookConnectService } from '../../services/quick-book-connect.service'
+import { QuickBookConnectService } from '../../services/quickbook-service/quick-book-connect.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
   }
-  public onConnect() {     
+  public onConnect() {
     const _self = this;
     var LeftPosition = (screen.width) ? (screen.width-600)/2 : 0;
     var TopPosition = (screen.height) ? (screen.height-700)/2 : 0;

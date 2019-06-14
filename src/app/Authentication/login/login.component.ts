@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { HelperService } from '../../services/helper.service';
+import { AuthService } from '../../services/auth-service/auth.service';
+import { HelperService } from '../../services/helper-service/helper.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogOverviewExampleDialogComponent } from '../../Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component'
@@ -41,9 +41,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.formLogin.value).subscribe(res => {
       console.log(res);
         this.helper.set(res.token);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/business/dashboard']);
         if (res['Role'] === 0) {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/business/dashboard']);
         }
     },
     err =>  {
@@ -51,14 +51,14 @@ export class LoginComponent implements OnInit {
     }
     );
   }
-  get f() { return this.formLogin.controls; 
+  get f() { return this.formLogin.controls;
   }
   openDialog(data: string): void {
     this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(data);
     const dialogRef = this.dialog.open(DialogOverviewExampleDialogComponent, {
       data: {safeSrc: this.safeSrc}
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
      // console.log('The dialog was closed');
     });

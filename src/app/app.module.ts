@@ -10,8 +10,8 @@ import { ReactiveFormsModule, FormsModule  } from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
 import { ToastrModule } from 'ngx-toastr';
-import { AuthService } from './services/auth.service';
-import { LoaderService } from './services/loader.service';
+import { AuthService } from './services/auth-service/auth.service';
+import { LoaderService } from './services/loader-service/loader.service';
 
 //ngx-pagination
 import {NgxPaginationModule} from 'ngx-pagination';
