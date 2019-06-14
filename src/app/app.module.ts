@@ -8,10 +8,15 @@ import {MatDividerModule} from '@angular/material/divider';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule  } from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatSelectModule} from '@angular/material/select';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthService } from './services/auth-service/auth.service';
 import { LoaderService } from './services/loader-service/loader.service';
+
+//recaptcha
+import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 
 //ngx-pagination
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -42,7 +47,8 @@ import { SingleLedgerMasterComponentComponent } from './Components/SingleLedgerC
 import { StylePaginatorDirective } from './Directives/style-paginator.directive';
 
 //unnecessery
-import {MatIconModule} from '@angular/material/icon'
+import {MatIconModule} from '@angular/material/icon';
+import { BottomSheetOverviewExampleSheetComponent } from './Shared/bottom-sheet-overview-example-sheet/bottom-sheet-overview-example-sheet.component'
 
 @NgModule({
   declarations: [
@@ -66,7 +72,8 @@ import {MatIconModule} from '@angular/material/icon'
     BillsComponentComponent,
     CompanyInfoComponentComponent,
     SingleLedgerMasterComponentComponent,
-    StylePaginatorDirective
+    StylePaginatorDirective,
+    BottomSheetOverviewExampleSheetComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +95,7 @@ import {MatIconModule} from '@angular/material/icon'
     MatExpansionModule,
     MatSelectModule,
     MatDividerModule,
+    MatBottomSheetModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-center',
@@ -97,10 +105,12 @@ import {MatIconModule} from '@angular/material/icon'
       tapToDismiss: false
     }),
     NgxPaginationModule,
-    MatIconModule
+    MatIconModule,
+    RecaptchaModule.forRoot(),
+    RecaptchaFormsModule
   ],
   providers: [AuthService, LoaderService,{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent],
-  entryComponents: [DialogOverviewExampleDialogComponent]
+  entryComponents: [DialogOverviewExampleDialogComponent, BottomSheetOverviewExampleSheetComponent]
 })
 export class AppModule { }

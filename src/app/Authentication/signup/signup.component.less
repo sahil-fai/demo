@@ -40,6 +40,54 @@
                             width: 50%;
                             display: inline-block;
                             padding: 10px;
+                            &.agreement{
+                                float:right;
+                            }
+                            &.password{
+                                .condition{
+                                    background-color: #fff;
+                                    width: 95.1%;
+                                    height: auto;
+                                    position: absolute;
+                                    border-radius: 0 0 6px 6px;
+                                    box-shadow: 0 5px 5px -3px rgba(58, 128, 144, 0.2), 0 8px 10px 1px rgba(125, 197, 224, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+                                    display: none;
+                                    padding-left: 3px;
+                                    z-index: 1;
+                                   
+                                    // .top-arrow{
+                                    //     content: "";
+                                    //     position: absolute;
+                                    //     left: 50%;
+                                    //     top: -12px;
+                                    //     margin-left: -15px;
+                                    //     border-left: 11px solid transparent;
+                                    //     border-bottom: 11px solid rgba(110, 226, 241, 0.6);
+                                    //     border-right: 11px solid transparent;
+                                      
+                                    // }
+                                    .conditionList{
+                                            li{
+                                                color: rgb(23, 208, 214);
+                                                &.notValidated{
+                                                    color: rgb(247, 132, 142);
+                                                }
+                                            }
+                                    }
+                                   
+                                }
+                                &:hover, &.error{
+                                    .condition{
+                                        display: block;
+                                    }
+                                    // &:not(:hover) {
+                                    //     .condition{
+                                    //         display: none;
+                                    //     }
+                                    // }
+                                }
+                                
+                            }
                         }
                       
                       
@@ -76,6 +124,10 @@
             .icon-submit{
                 font-size: 25px;
             }
+            &:disabled{
+                opacity: 0.2;
+                cursor: not-allowed; 
+            }
         }
     }
     
@@ -87,39 +139,24 @@
     font-size: 14px;
     color: #648083;
 }
-.password{
-    .condition{
-        background-color: #e9f4f7;
-        width: 95.1%;
-        height: auto;
-        position: absolute;
-       // background: #ffffff;
-        border-radius: 0 0 6px 6px;
-        box-shadow: 0 5px 5px -3px rgba(58, 128, 144, 0.2), 0 8px 10px 1px rgba(125, 197, 224, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
-        display: none;
-        padding-left: 3px;
-       
-        // .top-arrow{
-        //     content: "";
-        //     position: absolute;
-        //     left: 50%;
-        //     top: -12px;
-        //     margin-left: -15px;
-        //     border-left: 11px solid transparent;
-        //     border-bottom: 11px solid rgba(110, 226, 241, 0.6);
-        //     border-right: 11px solid transparent;
-          
-        // }
-       
-    }
-    &:focus, &:hover{
-        .condition{
-            display: block;
-        }
-    }
-}
+
 .ng-trigger-transformPanel.mat-select-panel.mat-primary {
     min-width: calc(100% )!important;
     margin-top: 35px;
     margin-left: 15px;
 }
+
+@media screen and (max-width: 930px){
+    .g-recaptcha {
+        transform:scale(0.77);
+        -webkit-transform:scale(0.77);
+        transform-origin:0 0;
+        -webkit-transform-origin:0 0;
+    }
+}
+    // .recaptchaHolder{
+    //     transform:scale(0.77);
+    //     -webkit-transform:scale(0.77);
+    //     transform-origin:0 0;
+    //     -webkit-transform-origin:0 0;
+    // }

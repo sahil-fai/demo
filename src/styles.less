@@ -99,7 +99,6 @@ textarea{
     @media screen and (max-width: @tabletsPortraitMax){
         margin: 0 -1em;
     }
-
     @media screen and (max-width: @mobilesMax){
         margin: 0 -0.5em;
     }
@@ -648,7 +647,6 @@ textarea.fields.newFormatting{
     font-size: 0.74rem;
     font-weight: 400;
     position: absolute;
-    left: 0;
     bottom: -0.37em;
 }
 
@@ -1220,7 +1218,7 @@ textarea.fields.newFormatting{
     position: relative;
     z-index: 1;
     transition: all 0.3s ease 0s;
-    padding: 0 10px;
+    padding: 0 2px;
 
     .connect{
         position: absolute;
@@ -2650,7 +2648,7 @@ textarea.fields.newFormatting{
 .mat-dialog-container{
     border-radius: 0.3em !important;
     position: relative;
-    padding: 1.8em 2.5em 2.2em !important;
+  ///  padding: 1.8em 2.5em 2.2em !important;
 
     h2{
         text-align: center;
@@ -3053,14 +3051,15 @@ mat-accordion{
     mat-expansion-panel.mat-expansion-panel{
        // border-top: 1px solid #00363e;
        // border-bottom: 1px solid #416b71;
-        background: rgba(109, 223, 251, 0.4);
+       // background: rgba(109, 223, 251, 0.4);
+       background: transparent;
         color: #fff;
-        border-radius: 30px !important;
-        margin: 10px 0;
+        border-radius: 2px !important;
+        margin: 2px 0;
+        box-shadow: none !important;
         &.mat-expanded{
             .mat-expansion-panel-header{
                 height: 48px !important;
-                pointer-events: none;
             }
         }
         &:hover, &.active{
@@ -3152,36 +3151,47 @@ mat-accordion{
   .link-color{
     color: #00add8;
 }
-
+//youtube customization
 mat-dialog-container{
     &.mat-dialog-container{
         border: 5px solid;
         background: #e4efe9;
         padding:8px;
         position: relative;
+        .youtube{
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            padding-top: 25px;
+            height: 0;
+            iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
     }
 }
-.youtube{
-    display: block;
-    margin: 0 auto;
-	padding-bottom: 56.25%; /* 16:9 */
-    iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        padding: 10px;
-    }
-}
+
 .cdk-overlay-container{
     .cdk-global-overlay-wrapper{
         .cdk-overlay-pane{
-            width: 60%;
+           width: 100%;
         }
        
     }
 }
 .title{
     padding-bottom: 25px;
+}
+.mat-bottom-sheet-container{
+        position: relative !important; 
+        left: calc(50% - 14.3rem);
+}
+@media screen and (max-width: @tabletsLandscapeMax){
+    .mat-bottom-sheet-container{
+        margin: 0 auto;
+        left: auto;
+  }  
 }
