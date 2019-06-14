@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-customers-component',
@@ -7,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomersComponentComponent implements OnInit {
   title="Customers";
+  selected = ['Active'];
+
   status= [
-    {value: 'Pendind', viewValue: 'Pendind'},
-    {value: 'Not Connected', viewValue: 'Not Connected'}
+    {value: 'Active', viewValue: 'Active'},
+    {value: 'Inactive', viewValue: 'Inactive'}
   ];
+  StatusList= ['Active','Inactive'];
   constructor() { }
   
   ngOnInit() {

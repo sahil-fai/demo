@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule, MatNativeDateModule, MatPaginatorModule, MatSlideToggleModule, MatProgressBarModule, MatCheckboxModule, MatRadioModule, MatDialogModule, MatListModule } from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
+import {MatDividerModule} from '@angular/material/divider';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule  } from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -39,6 +40,9 @@ import { BillsComponentComponent } from './Components/SingleLedgerComponents/bil
 import { CompanyInfoComponentComponent } from './Components/SingleLedgerComponents/company-info-component/company-info-component.component';
 import { SingleLedgerMasterComponentComponent } from './Components/SingleLedgerComponents/single-ledger-master-component/single-ledger-master-component.component';
 import { StylePaginatorDirective } from './Directives/style-paginator.directive';
+
+//unnecessery
+import {MatIconModule} from '@angular/material/icon'
 
 @NgModule({
   declarations: [
@@ -83,6 +87,7 @@ import { StylePaginatorDirective } from './Directives/style-paginator.directive'
     MatDialogModule,
     MatExpansionModule,
     MatSelectModule,
+    MatDividerModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-center',
@@ -91,7 +96,8 @@ import { StylePaginatorDirective } from './Directives/style-paginator.directive'
       closeButton: true,
       tapToDismiss: false
     }),
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatIconModule
   ],
   providers: [AuthService, LoaderService,{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent],
