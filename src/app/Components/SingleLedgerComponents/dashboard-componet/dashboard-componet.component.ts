@@ -15,7 +15,7 @@ export class DashboardComponetComponent implements OnInit {
   ngOnInit() {
   }
 
-  private getCustomers() {
+  public getCustomers() {
     this.businessService.getAllCustomers().subscribe(
       res => {
         this.value = JSON.stringify(res);
@@ -24,7 +24,7 @@ export class DashboardComponetComponent implements OnInit {
       });
   }
 
-  private getVendors() {
+  public getVendors() {
     this.businessService.getAllVendors().subscribe(
       res => {
         this.value = JSON.stringify(res);
@@ -33,7 +33,7 @@ export class DashboardComponetComponent implements OnInit {
       });
   }
 
-  private getBills() {
+  public getBills() {
     this.businessService.getAllBills().subscribe(
       res => {
         this.value = JSON.stringify(res);
@@ -42,7 +42,7 @@ export class DashboardComponetComponent implements OnInit {
       });
   }
 
-  private getinvoices() {
+  public getinvoices() {
     this.businessService.getAllInvoices().subscribe(
       res => {
         this.value = JSON.stringify(res);
@@ -51,7 +51,7 @@ export class DashboardComponetComponent implements OnInit {
       });
   }
 
-  private getCompanyInformation()
+  public getCompanyInformation()
   {
     this.businessService.getCompanyInformation().subscribe(
       res => {
@@ -61,7 +61,7 @@ export class DashboardComponetComponent implements OnInit {
       });
   }
 
-  private getUserProfileInformation()
+  public getUserProfileInformation()
   {
     this.userService.getUserProfile().subscribe(
       (res) => {
