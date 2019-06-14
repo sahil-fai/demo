@@ -1,151 +1,166 @@
 [
     {
       "position":1,
-      "Number": "Bill-1",
+      "Number": "Invoice-1",
       "Date": "02/12/2019",
       "DueDate": "02/12/2019",
-      "Vendor": "Smith",
+      "Customer": "Smith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Accepted" 
     },
     {
       "position":2,
-      "Number": "Bill-2",
+      "Number": "Invoice-2",
       "Date": "02/12/2019",
       "DueDate": "02/12/2019",
-      "Vendor": "Smith",
+      "Customer": "Smith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Accepted"  
     },
     {
       "position":3,
-      "Number": "Bill-3",
+      "Number": "Invoice-3",
       "Date": "02/12/2019",
       "DueDate": "02/12/2019",
-      "Vendor": "Smith",
+      "Customer": "Smith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Submitted"  
     },
     {
       "position":4,
-      "Number": "Bill-4",
+      "Number": "Invoice-4",
       "Date": "02/12/2019",
       "DueDate": "02/12/2019",
-      "Vendor": "Umith",
+      "Customer": "Umith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Submitted"  
     },
     {
       "position":5,
-      "Number": "Bill-5",
+      "Number": "Invoice-5",
       "Date": "02/12/2019",
       "DueDate": "02/12/2019",
-      "Vendor": "Smith",
+      "Customer": "Smith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Declined"  
     },
     {
       "position":6,
-      "Number": "Bill-6",
+      "Number": "Invoice-6",
       "Date": "02/12/2019",
       "DueDate": "02/12/2019",
-      "Vendor": "Smith",
+      "Customer": "Smith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Accepted"  
     },
     {
       "position":7,
-      "Number": "Bill-7",
+      "Number": "Invoice-7",
       "Date": "02/12/2019",
       "DueDate": "02/12/2019",
-      "Vendor": "Smith",
+      "Customer": "Smith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Accepted"  
     },
     {
       "position":8,
-      "Number": "Bill-8",
+      "Number": "Invoice-8",
       "Date": "02/12/2019",
       "DueDate": "02/12/2019",
-      "Vendor": "Smith",
+      "Customer": "Smith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Declined"  
     },{
       "position":9,
-      "Number": "Bill-9",
+      "Number": "Invoice-9",
       "Date": "02/12/2019",
       "DueDate": "02/12/2019",
-      "Vendor": "Smith",
+      "Customer": "Smith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Accepted"  
     },
     {
       "position":10,
-      "Number": "Bill-10",
+      "Number": "Invoice-10",
       "Date": "02/12/2019",
       "DueDate": "02/12/2019",
-      "Vendor": "Smith",
+      "Customer": "Smith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Transfered"  
     },
     {
       "position":11,
-      "Number": "Bill-11",
+      "Number": "Invoice-11",
       "Date": "02/12/2019",
       "DueDate": "02/12/2019",
-      "Vendor": "Smith",
+      "Customer": "Smith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Transfered"  
     },
     {
       "position":12,
-      "Number": "Bill-12",
+      "Number": "Invoice-12",
       "Date": "02/12/2019",
       "Due Date": "02/12/2019",
-      "Vendor": "Smith",
+      "Customer": "Smith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Transfered"  
     },
     {
       "position":13,
-      "Number": "Bill-13",
+      "Number": "Invoice-13",
       "Date": "02/12/2019",
       "DueDate": "02/12/2019",
-      "Vendor": "Smith",
+      "Customer": "Smith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Accepted"  
     },
     {
       "position":14,
-      "Number": "Bill-14",
+      "Number": "Invoice-14",
       "Date": "02/12/2019",
       "DueDate": "02/12/2019",
-      "Vendor": "Smith",
+      "Customer": "Smith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Accepted"  
     },
     {
       "position":15,
-      "Number": "Bill-15",
+      "Number": "Invoice-15",
       "Date": "02/12/2019",
       "DueDate": "02/12/2019",
-      "Vendor": "Smith",
+      "Customer": "Smith",
       "Total": "$20000.00",
       "Balance": "$2.40",
-      "BlockchainTransactionID": "12235487454"  
+      "BlockchainTransactionID": "12235487454",
+      "BlockchainStatus":"Accepted"  
     }
   ]

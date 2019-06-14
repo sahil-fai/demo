@@ -46,9 +46,9 @@
 }
 .sign-up,.customers{
     .mat-checkbox-inner-container {
-        height: 1.55rem !important;
+        height: 1.2rem !important;
         margin-right: 0.8rem !important;
-        width: 1.55rem !important;
+        width: 1.2rem !important;
     }
 }
 .defaultTable{
@@ -220,31 +220,26 @@
     margin: 0 1.6em 0 0 !important;
 }
 
-.floatedBlocks{
-    .mat-radio-label{
-        margin: 0 !important;
-    }
-
-    .mat-radio-label-content{
-        padding-left: 0 !important;
-    }
-
+.status-modal{
     .mat-radio-inner-circle{
         background-color: #00a3b8 !important;
     }
-
     .mat-radio-outer-circle{
         border-width: 2px !important;
         border-color: #9f9f9f !important;
     }
 
-    .mat-radio-button.mat-radio-checked .mat-radio-outer-circle{
-        border-color: #00a3b8 !important;
+    .mat-radio-button.mat-radio-checked {
+        color: #00add8;
+        .mat-radio-outer-circle{
+            border-color: #00a3b8 !important;
+            
+        }
     }
 
     .mat-radio-container, .mat-radio-outer-circle, .mat-radio-inner-circle{
-        height: 22px !important;
-        width: 22px !important;
+        height: 18px !important;
+        width: 18px !important;
     }
 }
 
@@ -429,7 +424,7 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
         }
     }
 }
-.bill-content, .Invoice-content{
+.bill-content, .Invoice-content,.customers, .vendors {
     .mat-paginator-range-label {
         margin: 0 24px 0 24px;
     }

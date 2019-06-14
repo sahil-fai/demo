@@ -22,7 +22,7 @@ const routes: Routes = [
   },
   {
    // path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]
-    path: 'dashboard', component: DashboardComponent
+    path: 'connectbusiness', component: DashboardComponent
   },
   {
     path: 'businesslist', component: SingleLedgerBusinessListComponent

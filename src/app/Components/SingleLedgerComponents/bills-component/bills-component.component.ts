@@ -35,7 +35,7 @@ export class BillsComponentComponent implements OnInit {
   }
   
   @ViewChild(MatPaginator, {}) paginator: MatPaginator;
-  displayedColumns: string[] = ['select',"Number","BlockchainTransactionID","Date","DueDate","Vendor","Total", "Balance", 'star'];
+  displayedColumns: string[] = ["Number","BlockchainTransactionID","Date","DueDate","Vendor","Total", "Balance", 'star'];
   //bills: PeriodicElement[]=this.Paginator(json,1,4).data;
   //dataSource = new MatTableDataSource<PeriodicElement>(this.bills); 
   

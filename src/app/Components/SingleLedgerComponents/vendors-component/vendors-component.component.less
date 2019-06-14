@@ -1,65 +1,45 @@
 .customers{
     line-height: 10px;
-    .text-label{
-        font-size: 0.93rem;
-        color: #3c3c3c;
-        font-weight: 700;
-        padding-bottom: 0.5em;
-    }
+    
     .select-box{
         padding-left: 10px;
-    }
-    .customer-list{
-        border: 1px solid #00add8;
-        border-radius: 5px;
-        margin: 10px 0;
-        background: #e8f4f7;
-        .ul{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            .customer-name{
-
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                padding-left: 10px;
-            }
-            li{
-                flex-grow: 1;
-                text-align: center;
-                &.status{
-                    &.active{
-                        mat-icon {
-                            color: #28a745;
-                        }
-                    } 
-                    &.inactive{
-                        mat-icon {
-                            color: #dc3545;
-                        }
-                    } 
-                }
-            }
-            ul{
-                display: inline-block;
-                li{
-                    margin: 15px 0;
-                }
-            }
-        }
-        .primary-text{
+        margin-bottom: 20px;
+        .text-label{
             font-size: 0.93rem;
             color: #3c3c3c;
             font-weight: 700;
+            padding-bottom: 0.5em;
+            .icon-arrow-down{
+                margin-left: 5px;
+                font-size: 16px;
+            color: #00add8;
+            }
+            &:hover{
+                .status-modal{
+                    display: block;
+                }
+            }
         }
-        .secondary-text{
-            color: #7a9298;
-            font-size: 0.9em;
-            font-weight: 500;
-        }
-      
+        .status-modal {
+            position: absolute;
+            border: 2px solid #00add8;
+            border-radius: 0.3em;
+            background-color: #ffffff;
+            box-shadow: 0px 5px 20px 0px rgba(106, 119, 120, 0.8);
+            width: 137px;
+            padding: 0.6em;
+            z-index: 9;
+            left: 87px;
+            display: none;
+        .example-radio-group {
+            display: flex;
+            flex-direction: column;
+          }
+          
+          .example-radio-button {
+            margin: 5px;
+          }
+    }
     }
     .invite{
         text-align: right;
@@ -75,3 +55,82 @@
 ::ng-deep .mat-select-value {
     display: table !important;
 }
+::ng-deep mat-icon{
+    &.active{
+            color: #28a745;
+            font-size: 16px !important;
+            height: 16px !important;
+    } 
+    &.inactive{
+            color: #dc3545;
+            font-size: 16px;
+            height: 16px;
+    }
+}
+button:disabled{
+    opacity: 0.3;
+}
+.example-container {
+    width: auto;
+    overflow: auto;
+  }
+  
+  table {
+   width: 1106px;
+   font-weight: 500;
+
+  }
+  
+  td.mat-column-star {
+    width: 20px;
+    padding-right: 8px;
+  }
+  
+  th.mat-column-position, td.mat-column-position {
+    padding-left: 8px;
+  }
+  
+  .mat-table-sticky{
+        &:first-child {
+            border-right: 1px solid #e0e0e0;
+        }
+        &:last-child {
+            text-align: right;
+            padding-right: 10px;
+      }
+  }
+  
+  tr.mat-row{
+      &:hover{
+          .mat-cell{
+            border-bottom:2px solid #00add8;
+            border-top: 2px solid #00add8;
+          }
+      }
+      &.selected {
+        border-bottom:2px solid #00add8;
+        border-top: 2px solid #00add8;
+        td.mat-cell.mat-table-sticky {
+            border-top: 2px solid #00add8;
+        }
+    }
+  }
+tr.mat-header-row {
+    height: 35px!important;
+    background: #e1f1f5;
+}
+th.mat-header-cell {
+     font-weight: 500;
+    font-size: 14px;
+}
+
+ .paginator-container{
+     position: relative;
+     button{
+         &.invite{
+            position: absolute;
+            top: 15px;
+            left: 25px;
+         }
+    }
+ }
