@@ -87,7 +87,7 @@
                     </ul>
                   
                     <div class="buttonWrap">
-                        <button type="submit" class="btn btn-solid submit" [disabled]="{'disable':isRegistered}"  matRipple><i class="icon-submit"></i>Submit</button>
+                        <button type="submit" class="btn btn-solid submit" [disabled]="formRegister.invalid"  matRipple><i class="icon-submit"></i>Submit</button>
                     </div>
                   <div class="have-an-account">Already have an acoount ? <span class="link-color"><a [routerLink]="['/login']">Sign In</a></span></div>
                   </form>

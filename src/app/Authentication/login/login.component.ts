@@ -41,9 +41,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.formLogin.value).subscribe(res => {
       console.log(res);
         this.helper.set(res.token);
-        this.router.navigate(['/business/dashboard']);
+        this.router.navigate(['/business/company-info']);
         if (res['Role'] === 0) {
-          this.router.navigate(['/business/dashboard']);
+          this.router.navigate(['/business/company-info']);
         }
     },
     err =>  {
@@ -51,7 +51,8 @@ export class LoginComponent implements OnInit {
     }
     );
   }
-  get f() { return this.formLogin.controls;
+  get f() { 
+    return this.formLogin.controls;
   }
   openDialog(data: string): void {
     this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(data);
@@ -62,6 +63,9 @@ export class LoginComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
      // console.log('The dialog was closed');
     });
+  }
+  ngOnChanges(): void {
+    console.log(this.formLogin);
   }
 
 }
