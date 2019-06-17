@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule, MatNativeDateModule, MatPaginatorModule, MatSlideToggleModule, MatProgressBarModule, MatCheckboxModule, MatRadioModule, MatDialogModule, MatListModule } from '@angular/material';
+import {MatBadgeModule} from '@angular/material/badge';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatDividerModule} from '@angular/material/divider';
@@ -46,9 +47,11 @@ import { CompanyInfoComponentComponent } from './Components/SingleLedgerComponen
 import { SingleLedgerMasterComponentComponent } from './Components/SingleLedgerComponents/single-ledger-master-component/single-ledger-master-component.component';
 import { StylePaginatorDirective } from './Directives/style-paginator.directive';
 
+
 //unnecessery
 import {MatIconModule} from '@angular/material/icon';
-import { BottomSheetOverviewExampleSheetComponent } from './Shared/bottom-sheet-overview-example-sheet/bottom-sheet-overview-example-sheet.component'
+import { BottomSheetOverviewExampleSheetComponent } from './Shared/bottom-sheet-overview-example-sheet/bottom-sheet-overview-example-sheet.component';
+import { TermsConditionsComponent } from './Shared/terms-conditions/terms-conditions.component'
 
 @NgModule({
   declarations: [
@@ -73,7 +76,8 @@ import { BottomSheetOverviewExampleSheetComponent } from './Shared/bottom-sheet-
     CompanyInfoComponentComponent,
     SingleLedgerMasterComponentComponent,
     StylePaginatorDirective,
-    BottomSheetOverviewExampleSheetComponent
+    BottomSheetOverviewExampleSheetComponent,
+    TermsConditionsComponent
   ],
   imports: [
     BrowserModule,
@@ -96,6 +100,7 @@ import { BottomSheetOverviewExampleSheetComponent } from './Shared/bottom-sheet-
     MatSelectModule,
     MatDividerModule,
     MatBottomSheetModule,
+    MatBadgeModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-center',
@@ -107,10 +112,11 @@ import { BottomSheetOverviewExampleSheetComponent } from './Shared/bottom-sheet-
     NgxPaginationModule,
     MatIconModule,
     RecaptchaModule.forRoot(),
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
   providers: [AuthService, LoaderService,{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent],
-  entryComponents: [DialogOverviewExampleDialogComponent, BottomSheetOverviewExampleSheetComponent]
+  entryComponents: [DialogOverviewExampleDialogComponent, BottomSheetOverviewExampleSheetComponent, TermsConditionsComponent]
 })
 export class AppModule { }

@@ -6,7 +6,7 @@
                 <div class="logoHeader">
                     <img src="/assets/images/SL-logo.svg" alt="Monitor">
                 </div>
-                <div class="video-wrapper" (click)="openDialog('https://www.youtube.com/embed/J5tWbmD7alE')">
+                <div class="video-wrapper" (click)="openVideo('https://www.youtube.com/embed/J5tWbmD7alE')">
                         <div class="monitor">
                             <img src="/assets/images/video-thumb.png" alt="Monitor">
                         </div>
@@ -73,7 +73,7 @@
                       <li>
                         <label class="labels newFormatting"> Confirm Password</label>
                         <div class="password">
-                            <input type="password" class="fields newFormatting" formControlName="password"/>
+                            <input type="text" class="fields newFormatting" formControlName="confirmpassword"/>
                             <button  type="button" class="icon-eye-hide"></button>
                         </div>  
                       </li>
@@ -81,9 +81,9 @@
                         <re-captcha required siteKey="6LcXSkMUAAAAAEmYkp1eSbIbT-vcMkxEnxmoryxd" formControlName="recaptcha" ></re-captcha>
                         
                       </li>
-                      <li class="agreement">
-                           <mat-checkbox [required]="true" formControlName="isAgree"><span>I agree to the SingleLedger Terms &amp; Conditions <br> and Privacy Policy</span></mat-checkbox>
-                    </li>
+                      <li class="agreement" (mousedown)="openTermsConditions()">
+                           <mat-checkbox [required]="true" formControlName="isAgree" [(ngModel)]="checked" ><span>I agree to the SingleLedger Terms &amp; Conditions <br> and Privacy Policy</span></mat-checkbox>
+                      </li>
                     </ul>
                   
                     <div class="buttonWrap">

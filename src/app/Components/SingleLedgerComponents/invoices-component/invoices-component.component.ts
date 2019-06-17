@@ -3,7 +3,7 @@ import {Component, OnInit, ViewChild, } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import json from './res.json';
 import { MatPaginator } from '@angular/material/paginator';
-import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import {MatBottomSheet, MatBottomSheetRef, MatBottomSheetConfig} from '@angular/material/bottom-sheet';
 import { BottomSheetOverviewExampleSheetComponent } from 'src/app/Shared/bottom-sheet-overview-example-sheet/bottom-sheet-overview-example-sheet.component';
 export interface PeriodicElement {
   Number: string;
@@ -94,7 +94,11 @@ export class InvoicesComponentComponent implements OnInit {
     this.dataSource = new MatTableDataSource<PeriodicElement>(data.data);
   }
   openBottomSheet(): void {
-    this._bottomSheet.open(BottomSheetOverviewExampleSheetComponent);
+    
+    const sheetConfig = new MatBottomSheetConfig();
+    sheetConfig.panelClass="invoicebottomsheet";
+
+    this._bottomSheet.open(BottomSheetOverviewExampleSheetComponent,sheetConfig);
   }
 
 }

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MediaMatcher} from '@angular/cdk/layout';
 import { DialogOverviewExampleDialogComponent } from '../../Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component'
+import { TermsConditionsComponent }  from '../../Shared/terms-conditions/terms-conditions.component'
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +19,18 @@ export class SignupComponent implements OnInit {
   private _userEmail: string = '';
   public showPassword: boolean = false;
   isRegistered: boolean=false;
-  constructor(private router: Router, private _fb: FormBuilder,private authService:AuthService,  private sanitizer: DomSanitizer,public dialog: MatDialog) { }
+  checked = false;
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
+  width: string;
+
+
+  constructor(private router: Router, private _fb: FormBuilder,private authService:AuthService,  private sanitizer: DomSanitizer,public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) { 
+    this.mobileQuery = media.matchMedia('(max-width: 767px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
+  
   formRegister: FormGroup;
   roles = [
     {value: 'CPA', viewValue: 'CPA'},
@@ -33,6 +46,7 @@ export class SignupComponent implements OnInit {
       lastName: ['', [ Validators.required ]],
       username: [this._userEmail, [ Validators.required, Validators.email ]],
       password: ['', [ Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter ]],
+      confirmpassword:['',''],
       isAgree: ['', [ Validators.requiredTrue ]],
       recaptcha: [null, [ Validators.required]],
       role: [null, [Validators.required]]
@@ -76,7 +90,6 @@ export class SignupComponent implements OnInit {
       return;
       }
     this.authService.enroll(this.formRegister.value).subscribe(res => {
-      console.log(res);
       this.isRegistered = true;
       this.router.navigate(['/dashboard']);
     }, err =>{
@@ -89,15 +102,43 @@ export class SignupComponent implements OnInit {
    /* Login form validations */
   get f() { return this.formRegister.controls; }
 
-  openDialog(data: string): void {
+  openVideo(data: string): void {
     this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(data);
     const dialogRef = this.dialog.open(DialogOverviewExampleDialogComponent, {
-      data: {safeSrc: this.safeSrc}
+      data: {safeSrc: this.safeSrc},
+      width: '70%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
      // console.log('The dialog was closed');
     });
+  }
+  openTermsConditions(){
+    this.width=(this.mobileQuery.matches) ? '80vw' : '50vw';
+
+    const dialogConfig = new MatDialogConfig();
+       // dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width=this.width;
+        dialogConfig.height='90%';
+        dialogConfig.maxWidth="600px";
+        dialogConfig.position = {
+          'top': '50px'
+        };
+        dialogConfig.hasBackdrop=true;
+        dialogConfig.panelClass="terms-conditions";
+        dialogConfig.closeOnNavigation=true;
+
+    const dialogRef = this.dialog.open(TermsConditionsComponent, dialogConfig);
+
+ 
+    dialogRef.afterClosed().subscribe(
+      data => this.checked=data
+    );  
+
+  }
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
 }

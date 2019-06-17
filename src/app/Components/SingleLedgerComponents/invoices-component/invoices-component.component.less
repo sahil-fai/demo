@@ -26,38 +26,6 @@
     box-shadow: 1px 1px 9px -2px #9a9292;
     border-radius: 0 0 7px 7px;
 }
-.bill-status{
-    //margin-bottom: 25px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    li{
-        background: aliceblue;
-        height: 80px;
-        padding-left: 15px;
-        font-size: 16px;
-        margin-right: 2px;
-        flex-grow: 1;
-        padding-top: 5px;
-    }
-    .overdue{
-        color: #f44336;
-        border-bottom: 15px solid #f1746a;
-    }
-    .due{
-        color: #ef891c;
-        border-bottom: 15px solid #ecba75;
-    }
-    .paid{
-        color: #9fec28;
-        border-bottom: 15px solid #c8ef8d;
-    }
-    .total{
-        color: #47b4ea;
-        border-bottom: 15px solid #94ddf1;
-    }
-}
 
 .defaultTable .dataTable th.tick-checkbox {
     text-align: center; 
@@ -87,26 +55,34 @@
     padding-right: 8px;
   }
   
-  th.mat-column-position, td.mat-column-position {
-    padding-left: 8px;
+  th, td{
+      &.mat-column-position{
+        padding-left: 8px;
+      }
   }
-  
-  .mat-table-sticky:first-child {
-    border-right: 1px solid #e0e0e0;
-  }
-  
-  .mat-table-sticky:last-child {
-        /* border-left: 1px solid #e0e0e0; */
+  .mat-table-sticky{
+      &:first-child {
+        border-right: 1px solid #e0e0e0;
+      }
+      &:last-child {
         text-align: right;
         padding-right: 10px;
+      }
   }
-  tr.mat-row.selected td {
-    border-bottom-color: #00add8;
-    border-top-color: #00add8;
-}
-tr.mat-row.selected{
-    border-bottom-color: #00add8;
-    border-top-color: #00add8;
+
+
+tr{
+    &.mat-row{
+        &.selected, &:hover{
+            border-bottom-color: #00add8;
+            border-top-color: #00add8;
+            background: #a7d7ec;
+            td {
+                border-bottom-color: #00add8;
+                border-top-color: #00add8;
+            }
+        }
+    }
 }
 td.mat-column-Number {
     color: #00add8;
@@ -146,4 +122,19 @@ th.mat-header-cell {
 }
 tr td button{
     margin-left: 5px;
+    padding: 1.2px;
+    background: #ffffff;
+   
+    border: 1px solid #00add8;
+}
+.trasactions{
+    display: inline-block;
+    span{
+        height: 5px;
+        width: 5px;
+        background-color: #00add8;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0 1px;
+    }
 }

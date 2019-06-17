@@ -92,7 +92,19 @@
                                 <!-- Block chain Id Column -->
                                 <ng-container matColumnDef="BlockchainTransactionID">
                                   <th mat-header-cell *matHeaderCellDef> Blockchain Trasaction ID </th>
-                                  <td mat-cell *matCellDef="let element"> {{element.BlockchainTransactionID}} <button class="btn btn-small btn-solid btn-deepblue"  (click)="openBottomSheet()">...</button></td>
+                                  <td mat-cell *matCellDef="let element"> {{element.BlockchainTransactionID}} 
+                                    <!-- <button class="btn btn-solid btn-deepblue"  (click)="openBottomSheet()">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                  </button> -->
+                                  <button  class="trasactions" (click)="openBottomSheet()">
+                                      <span class="dot"></span>
+                                      <span class="dot"></span>
+                                      <span class="dot"></span>
+                                  </button>
+                                 </td>
                                 </ng-container>
                                 <!-- Date Column -->
                                 <ng-container matColumnDef="Date">
@@ -137,7 +149,7 @@
                                 </ng-container>
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-                                    (click)="selection.toggle(row)" [class.selected]="selection.isSelected(row)">
+                                     [class.selected]="selection.isSelected(row)">
                                 </tr>
                 
                               </table>
