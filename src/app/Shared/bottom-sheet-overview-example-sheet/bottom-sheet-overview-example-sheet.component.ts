@@ -11,5 +11,7 @@ export class BottomSheetOverviewExampleSheetComponent implements OnInit {
   
   }
   constructor(private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheetComponent>) {}
-
+    close() {
+      this._bottomSheetRef.dismiss();
+    }
 }

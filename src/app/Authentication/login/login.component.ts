@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { HelperService } from '../../services/helper-service/helper.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogOverviewExampleDialogComponent } from '../../Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component'
 
 @Component({

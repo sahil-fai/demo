@@ -2,6 +2,9 @@
     <div class="authForm">
     
         <div class="shadowBox">
+            <div class="progressBar">
+                <app-loader></app-loader>
+            </div>
             <div class="left-container">
                 <div class="logoHeader">
                     <img src="/assets/images/SL-logo.svg" alt="Monitor">
@@ -73,8 +76,8 @@
                       <li>
                         <label class="labels newFormatting"> Confirm Password</label>
                         <div class="password">
-                            <input type="text" class="fields newFormatting" formControlName="confirmpassword"/>
-                            <button  type="button" class="icon-eye-hide"></button>
+                            <input [type]="showConfirmPassword?'text':'password'" class="fields newFormatting" formControlName="confirmpassword"/>
+                            <button  type="button" class="icon-eye-hide" (click)="toggleConfirmPasswordVisibility()"></button>
                         </div>  
                       </li>
                       <li class="recaptchaHolder g-recaptcha">

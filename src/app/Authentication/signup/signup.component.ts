@@ -18,6 +18,7 @@ export class SignupComponent implements OnInit {
   safeSrc: SafeResourceUrl;
   private _userEmail: string = '';
   public showPassword: boolean = false;
+  public showConfirmPassword: boolean = false;
   isRegistered: boolean=false;
   checked = false;
   mobileQuery: MediaQueryList;
@@ -98,6 +99,9 @@ export class SignupComponent implements OnInit {
   }
    public togglePasswordVisibility(){
     this.showPassword = !this.showPassword;
+  }
+   public toggleConfirmPasswordVisibility(){
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
    /* Login form validations */
   get f() { return this.formRegister.controls; }

@@ -47,7 +47,7 @@
                           <mat-radio-group
                           class="example-radio-group"
                           >
-                          <mat-radio-button class="example-radio-button" *ngFor="let status of StatusList" [value]="status">
+                          <mat-radio-button class="example-radio-button" *ngFor="let status of StatusList" [value]="status" (click)=checkStatus(status)>
                             {{status}}
                           </mat-radio-button>
                         </mat-radio-group>
@@ -57,7 +57,7 @@
       </div>
       <div class="bills-content mat-elevation-z8">
         <div class="example-container">
-          <table mat-table [dataSource]="dataSource" class="">
+          <table mat-table [dataSource]="dataSource">
   
             <!-- Checkbox Column -->
             <ng-container matColumnDef="select" >
@@ -72,7 +72,8 @@
                 <mat-checkbox (click)="$event.stopPropagation()"
                               (change)="$event ? selection.toggle(row) : null"
                               [checked]="selection.isSelected(row)"
-                              [aria-label]="checkboxLabel(row)">
+                              [aria-label]="checkboxLabel(row)"
+                              [disabled]="row.Status=='Active'">
                 </mat-checkbox>
               </td>
             </ng-container>         
@@ -129,7 +130,7 @@
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-                (click)="selection.toggle(row)" [class.selected]="selection.isSelected(row)">
+                (click)="row.Status!=='Active' && selection.toggle(row)" [class.selected]="selection.isSelected(row)">
             </tr>
   
           </table>
