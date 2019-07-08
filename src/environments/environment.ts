@@ -3,6 +3,6 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  host: 'http://qapaypie.singleledger.org:8083/',
+  host: 'http://localhost:3000/',
   production: false
 };

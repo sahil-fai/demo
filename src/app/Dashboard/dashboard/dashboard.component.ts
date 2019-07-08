@@ -28,12 +28,11 @@ export class DashboardComponent implements OnInit {
           if (true) {
             data = JSON.parse(event["data"]);
             if (true) {
-            // _self._getBusiness(data["BusinessID"]);
               window.removeEventListener("message", message, false);
             }
           }
         };
-
+        window.addEventListener("message", message, false);
         // For IE browser
         const myTimer = setInterval(function () {
           if (windowObjectReference.closed) {
