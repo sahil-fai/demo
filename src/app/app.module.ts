@@ -45,6 +45,7 @@ import { InvoicesComponentComponent } from './Components/SingleLedgerComponents/
 import { BillsComponentComponent } from './Components/SingleLedgerComponents/bills-component/bills-component.component';
 import { CompanyInfoComponentComponent } from './Components/SingleLedgerComponents/company-info-component/company-info-component.component';
 import { SingleLedgerMasterComponentComponent } from './Components/SingleLedgerComponents/single-ledger-master-component/single-ledger-master-component.component';
+import { BusinessReloadComponent } from './Shared/business-reload/business-reload.component'
 import { StylePaginatorDirective } from './Directives/style-paginator.directive';
 
 
@@ -77,7 +78,8 @@ import { TermsConditionsComponent } from './Shared/terms-conditions/terms-condit
     SingleLedgerMasterComponentComponent,
     StylePaginatorDirective,
     BottomSheetOverviewExampleSheetComponent,
-    TermsConditionsComponent
+    TermsConditionsComponent,
+    BusinessReloadComponent
   ],
   imports: [
     BrowserModule,
@@ -117,6 +119,6 @@ import { TermsConditionsComponent } from './Shared/terms-conditions/terms-condit
   ],
   providers: [AuthService, LoaderService,{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent],
-  entryComponents: [DialogOverviewExampleDialogComponent, BottomSheetOverviewExampleSheetComponent, TermsConditionsComponent]
+  entryComponents: [DialogOverviewExampleDialogComponent, BottomSheetOverviewExampleSheetComponent, TermsConditionsComponent, BusinessReloadComponent]
 })
 export class AppModule { }

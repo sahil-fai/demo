@@ -49,7 +49,8 @@ export class SignupComponent implements OnInit {
       password: ['', [ Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter ]],
       confirmpassword:['',''],
       isAgree: ['', [ Validators.requiredTrue ]],
-      recaptcha: [null, [ Validators.required]],
+      //recaptcha: [null, [ Validators.required]],
+    //  recaptcha: ['', '',],
       role: [null, [Validators.required]]
     });
   }
@@ -86,13 +87,12 @@ export class SignupComponent implements OnInit {
   }
   public onRegister(){
     this.submitted = true;
-    console.log(this.formRegister);
     if(this.formRegister.invalid){
       return;
       }
     this.authService.enroll(this.formRegister.value).subscribe(res => {
       this.isRegistered = true;
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/business/company-info']);
     }, err =>{
 
     });

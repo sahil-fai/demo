@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   safeSrc: SafeResourceUrl;
   private _subscribeFormControls: any;
   public submitted = false;
+  public showPassword:boolean = false;
 
   constructor(private router: Router, private _fb: FormBuilder,private authService:AuthService, private helper: HelperService, private sanitizer: DomSanitizer,public dialog: MatDialog) { }
 
@@ -39,7 +40,6 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (this.formLogin.invalid) {return; }
     this.authService.login(this.formLogin.value).subscribe(res => {
-      console.log(res);
         this.helper.set(res.token);
         this.router.navigate(['/business/company-info']);
         if (res['Role'] === 0) {
@@ -67,6 +67,8 @@ export class LoginComponent implements OnInit {
   ngOnChanges(): void {
     console.log(this.formLogin);
   }
-
+  public togglePasswordVisibility(){
+    this.showPassword = !this.showPassword;
+  }
 }
 

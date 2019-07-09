@@ -80,10 +80,10 @@
                             <button  type="button" class="icon-eye-hide" (click)="toggleConfirmPasswordVisibility()"></button>
                         </div>  
                       </li>
-                      <li class="recaptchaHolder g-recaptcha">
+                      <!-- <li class="recaptchaHolder g-recaptcha">
                         <re-captcha required siteKey="6LcXSkMUAAAAAEmYkp1eSbIbT-vcMkxEnxmoryxd" formControlName="recaptcha" ></re-captcha>
                         
-                      </li>
+                      </li> -->
                       <li class="agreement" (mousedown)="openTermsConditions()">
                            <mat-checkbox [required]="true" formControlName="isAgree" [(ngModel)]="checked" ><span>I agree to the SingleLedger Terms &amp; Conditions <br> and Privacy Policy</span></mat-checkbox>
                       </li>

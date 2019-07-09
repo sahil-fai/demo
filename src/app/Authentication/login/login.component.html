@@ -32,8 +32,8 @@
                   <li>
                     <label class="labels newFormatting">Password</label>
                     <div class="password">
-                        <input type="password" class="fields newFormatting"  [ngClass]="{error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid)}" formControlName="password" />
-                        <button  type="button" class="icon-eye-hide"></button>
+                        <input [type]="showPassword?'text':'password'" class="fields newFormatting"  [ngClass]="{error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid)}" formControlName="password" />
+                        <button  type="button" class="icon-eye-hide"  (click)="togglePasswordVisibility()"></button>
                     </div>
                     <div class="errorMessage" *ngIf="(f.password.invalid && f.password.dirty && f.password.errors.minlength) || (submitted && f.password.invalid && f.password.errors.minlength)">Minimum 6 characters needed.</div>
                   </li>
