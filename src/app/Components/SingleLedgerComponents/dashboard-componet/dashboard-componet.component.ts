@@ -51,15 +51,15 @@ export class DashboardComponetComponent implements OnInit {
       });
   }
 
-  public getCompanyInformation()
-  {
-    this.businessService.getCompanyInformation().subscribe(
-      res => {
-        this.value = JSON.stringify(res);
-      }
-      , err => {
-      });
-  }
+  // public getCompanyInformation()
+  // {
+  //   this.businessService.getCompanyInformation().subscribe(
+  //     res => {
+  //       this.value = JSON.stringify(res);
+  //     }
+  //     , err => {
+  //     });
+  // }
   public getCompanies()
   {
     this.businessService.getListOfbusinesses(28).subscribe(
