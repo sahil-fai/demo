@@ -30,7 +30,6 @@ export class DashboardComponent implements OnInit {
         const message = function receiveMessage(event) {
           let data;
           if (true) {
-           
             data = JSON.parse(event["data"]);
             _self.reloadBusiness();
             if (true) {

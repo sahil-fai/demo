@@ -48,7 +48,7 @@
               <ul class="dataList">
                 <li>
                   <div>Company Name</div>
-                  <div> <h6>{{company.CompanyName}}<span>-{{company.Country}}</span></h6></div>
+                  <div> <h6>{{company?.company?.LegalName}}</h6></div>
                 </li>
                 <li>
                   <div class="dataLabel">Connected To</div>
@@ -56,21 +56,21 @@
                 </li>
                 <li>
                   <div class="dataLabel">Last Accessed</div>
-                  <div class="dataValues">{{company.LastConnectedDate | date}}</div>
+                  <div class="dataValues">{{company?.company?.RegisterDate | date}}</div>
                 </li>
                 <li>
                   <div class="dataLabel">Last Updated</div>
-                  <div class="dataValues">{{company.LastDownloadedDate | date}}</div>
+                  <div class="dataValues">{{company?.company?.RegisterDate | date}}</div>
                 </li>
               </ul>
               <ul class="buttonList">
                 <li>
-                  <button type="button" class="btn btn-outline btn-icon uppercase redBtn" (click)="openDialog(company.ID)"><i
+                  <button type="button" class="btn btn-outline btn-icon uppercase redBtn" (click)="openDialog(company.companyId)"><i
                       class="icon-cross"></i>disconnect</button>
                 </li>
                 <li>
-                  <button type="button" class="btn btn-outline btn-icon uppercase blueBtn" (click)="viewBusiness(company.ID)"><i
-                      class="icon-arrow-right"></i><a [routerLink]="['/business/company-info']">Company Info</a></button>
+                  <button type="button" class="btn btn-outline btn-icon uppercase blueBtn" (click)="viewBusiness(company.companyId)"><i
+                      class="icon-arrow-right"></i><a >Company Info</a></button>
                 </li>
               </ul>
             </div>
@@ -78,7 +78,7 @@
         </div>
       </li>
     </ul>
-    <div class="pagination">
+    <div class="pagination" *ngIf="companylist">
       
       <pagination-template  #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event" [class.disabled]= "length < config.itemsPerPage" >
 

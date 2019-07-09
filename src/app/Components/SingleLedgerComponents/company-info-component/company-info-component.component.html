@@ -5,57 +5,56 @@
     <div class="profile-name">
         <h1>Apple Venture</h1>
     </div>
-    <div class="company-info">
+    <div class="company-info" *ngIf="companyinfo">
         <ul>
-            <li>Source Reference:</li>
-            <li>124855782788875</li>
+            <!-- <li>Source Reference:</li>
+            <li>124855782788875</li> -->
             <li>Name:</li>
-            <li>Sandbox_company_US_2</li>
+            <li>{{companyinfo.Contact.Name}}</li>
             <li>Legal Name:</li>
-            <li>Sandbox_company_US_2</li>
+            <li>{{companyinfo.Contact.Name}}</li>
             <li>Base Currency:</li>
-            <li>USD</li>
-            <li>Financial Year Start:</li>
-            <li>12/08/1991</li>
+            <li>{{companyinfo.BaseCurrency.CurrencyName}}</li>
             <li>Phone:</li>
-            <li>7377647878</li>
+            <li>{{companyinfo.Contact.Telephone}}</li>
             <li>Email:</li>
-            <li>User@gmail.com</li>
-            <li>Web Links:</li>
-            <li>user.com</li>
+            <li>{{companyinfo.Contact.Email}}</li>
+            <!-- <li>Web Links:</li>
+            <li>user.com</li> -->
         </ul>
     </div>
 </div>
-<div class="addresses">
+<div class="addresses" *ngIf="companyinfo">
         <div class="address">
             <div class="address-icon-container"> <mat-icon>location_city</mat-icon></div>
                <div class="address-content"> 
                     <h4>Address(Office)</h4>
-                    <p>123 Seira Way</p>
-                    <p>San Pablo</p>
-                    <p>CA</p>
-                    <p>87999</p>
+                    <p>{{companyinfo.Address.AddressLine1}}</p>
+                    <p>{{companyinfo.Address.CityName}}</p>
+                    <p>{{companyinfo.Address.State}}</p>
+                    <p>{{companyinfo.Address.Country}}</p>
+                    <!-- <p>{{companyinfo.Address.PostalZone}}</p> -->
                 </div>
                
             </div>
         <div class="address">
                <div class="address-icon-container"> <mat-icon>location_city</mat-icon></div>
                <div class="address-content">
-                <h4>Address(Legal)</h4>
-                <p>123 Seira Way</p>
-                <p>San Pablo</p>
-                <p>CA</p>
-                <p>87999</p>
+                <h4>Customer Face Address</h4>
+                <p>{{companyinfo.CustomerFaceAddress.AddressLine1}}</p>
+                <p>{{companyinfo.CustomerFaceAddress.CityName}}</p>
+                <p>{{companyinfo.CustomerFaceAddress.State}}</p>
+                <p>{{companyinfo.CustomerFaceAddress.Country}}</p>
                 </div>
             </div>
         <div class="address">
                <div class="address-icon-container"> <mat-icon>location_city</mat-icon></div>
                <div class="address-content">
-                    <h4>Address(Customer Service)</h4>
-                    <p>123 Seira Way</p>
-                    <p>San Pablo</p>
-                    <p>CA</p>
-                    <p>87999</p>
+                    <h4>Legal Address</h4>
+                    <p>{{companyinfo.LegalAddress.AddressLine1}}</p>
+                    <p>{{companyinfo.LegalAddress.CityName}}</p>
+                    <p>{{companyinfo.LegalAddress.State}}</p>
+                    <p>{{companyinfo.LegalAddress.Country}}</p>
                 </div>
             </div>
 </div>

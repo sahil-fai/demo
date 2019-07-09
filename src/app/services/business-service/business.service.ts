@@ -33,7 +33,7 @@ export class BusinessService {
    });
   }
 
-  getCompanyInformation(): Observable<any> {
-    return this.http.get<any>('business'+ '?id=111');
+  getCompanyInformation(id:number): Observable<any> {
+    return this.http.get<any>('business?id='+id);
   }
 }

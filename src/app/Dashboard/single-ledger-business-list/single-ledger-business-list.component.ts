@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import json from './res.json';
+import { BusinessService } from '../../services/business-service/business.service'
+import { from } from 'rxjs';
+import { HelperService } from '../../services/helper-service/helper.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-single-ledger-business-list',
@@ -16,7 +19,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   public directionLinks: boolean = true;
   public autoHide: boolean = true;
   public responsive: boolean = true;
-  public selectedValue = 3;
+  public selectedValue = 5;
   public labels: any = {
       previousLabel: 'Prev',
       nextLabel: 'Next',
@@ -33,18 +36,23 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   };
 
   public pageNumber = 1;
-  public pageSizeOptions: number[] = [3,15,25];
+  public pageSizeOptions: number[] = [5,15,25];
   public numberOfpages: number[];
+  businesslsist: any;
   
-  constructor() { 
-    this.companylist=json;
-    this.totalRec = this.companylist.length;
-    console.log(this.companylist.length);
-    console.log(this.page);
+  constructor(public BusinessService:BusinessService, private helper: HelperService, private router: Router) { 
   }
  
   ngOnInit() {
-    
+    const userrid=Number(this.helper.getuserId());
+    this.BusinessService.getListOfbusinesses(userrid).subscribe(res => {
+      this.companylist= res;
+      this.totalRec = this.companylist.length;
+    });
   }
-
+  public viewBusiness(companyid){
+    this.helper.setcompanyId(companyid);
+    this.router.navigate(['/business', 'company-info']);
+    console.log(companyid);
+  }
 }

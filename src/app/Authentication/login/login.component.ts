@@ -40,10 +40,12 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (this.formLogin.invalid) {return; }
     this.authService.login(this.formLogin.value).subscribe(res => {
+      console.log(res)
         this.helper.set(res.token);
-        this.router.navigate(['/business/company-info']);
+        this.helper.setuserId(res.user.id);
+        this.router.navigate(['/businesslist']);
         if (res['Role'] === 0) {
-          this.router.navigate(['/business/company-info']);
+          this.router.navigate(['/businesslist']);
         }
     },
     err =>  {
