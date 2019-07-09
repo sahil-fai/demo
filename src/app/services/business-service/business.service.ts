@@ -9,8 +9,8 @@ export class BusinessService {
 
   constructor(private http: HttpClient) { }
 
-  getListOfbusinesses(): Observable<any> {
-    return this.http.get<any>('business/list');
+  getListOfbusinesses(id:number): Observable<any> {
+    return this.http.get<any>('business/list?userId='+id);
   }
 
   getAllCustomers(): Observable<any> {
@@ -34,7 +34,6 @@ export class BusinessService {
   }
 
   getCompanyInformation(): Observable<any> {
-    return this.http.get<any>('business', {
-   });
+    return this.http.get<any>('business'+ '?id=111');
   }
 }

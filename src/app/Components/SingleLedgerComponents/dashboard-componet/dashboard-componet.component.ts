@@ -60,6 +60,15 @@ export class DashboardComponetComponent implements OnInit {
       , err => {
       });
   }
+  public getCompanies()
+  {
+    this.businessService.getListOfbusinesses(28).subscribe(
+      res => {
+        this.value = JSON.stringify(res);
+      }
+      , err => {
+      });
+  }
 
   public getUserProfileInformation()
   {
@@ -72,4 +81,6 @@ export class DashboardComponetComponent implements OnInit {
       }
     )
   }
+
+
 }
