@@ -52,11 +52,11 @@ export class LoginComponent implements OnInit {
         // this.notification.notification$.subscribe(message => {
         //   this.snackBar.open(message);
         // });
-        this.snackBar.open(this.message);
+       // this.snackBar.open(this.message);
         //   this.snackBar.open(this.message,{
         //     duration: 2000
         //  });
-      this.notification.openSnackBar(this.message,'✌✌️✌️');
+     // this.notification.openSnackBar(this.message,'✌✌️✌️');
         this.helper.set(res.token);
         this.helper.setuserId(res.user.id);
         this.router.navigate(['/businesslist']);

@@ -19,7 +19,7 @@ public notification$: Subject<string> = new Subject();
     let config = new MatSnackBarConfig();
     config.verticalPosition = this.verticalPosition;
     config.horizontalPosition = this.horizontalPosition;
-   // config.duration=this.autoHide;
+    config.duration=this.autoHide;
     this._snackBar.open(message,action, config);
     // this._snackBar.openFromComponent(NotificationSnackbarComponent, {
     //   duration: 5000,
