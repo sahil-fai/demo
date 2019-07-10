@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule, MatNativeDateModule, MatPaginatorModule, MatSlideToggleModule, MatProgressBarModule, MatCheckboxModule, MatRadioModule, MatDialogModule, MatListModule } from '@angular/material';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
@@ -52,7 +53,8 @@ import { StylePaginatorDirective } from './Directives/style-paginator.directive'
 //unnecessery
 import {MatIconModule} from '@angular/material/icon';
 import { BottomSheetOverviewExampleSheetComponent } from './Shared/bottom-sheet-overview-example-sheet/bottom-sheet-overview-example-sheet.component';
-import { TermsConditionsComponent } from './Shared/terms-conditions/terms-conditions.component'
+import { TermsConditionsComponent } from './Shared/terms-conditions/terms-conditions.component';
+import { NotificationSnackbarComponent } from './Shared/notification-snackbar/notification-snackbar.component'
 
 @NgModule({
   declarations: [
@@ -79,7 +81,8 @@ import { TermsConditionsComponent } from './Shared/terms-conditions/terms-condit
     StylePaginatorDirective,
     BottomSheetOverviewExampleSheetComponent,
     TermsConditionsComponent,
-    BusinessReloadComponent
+    BusinessReloadComponent,
+    NotificationSnackbarComponent
   ],
   imports: [
     BrowserModule,
@@ -103,6 +106,7 @@ import { TermsConditionsComponent } from './Shared/terms-conditions/terms-condit
     MatDividerModule,
     MatBottomSheetModule,
     MatBadgeModule,
+    MatSnackBarModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-center',
@@ -119,6 +123,6 @@ import { TermsConditionsComponent } from './Shared/terms-conditions/terms-condit
   ],
   providers: [AuthService, LoaderService,{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent],
-  entryComponents: [DialogOverviewExampleDialogComponent, BottomSheetOverviewExampleSheetComponent, TermsConditionsComponent, BusinessReloadComponent]
+  entryComponents: [DialogOverviewExampleDialogComponent, BottomSheetOverviewExampleSheetComponent, TermsConditionsComponent, BusinessReloadComponent, NotificationSnackbarComponent]
 })
 export class AppModule { }

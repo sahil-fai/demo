@@ -1,8 +1,8 @@
 
 <div class="wrapper">
   <div class="header">
-      <div class="progressBar">
-          <app-loader></app-loader>
+      <div class="progressBar" >
+        <mat-progress-bar *ngIf="!isBusinessLoaded" [mode]="'indeterminate'" [color]="'warn'"></mat-progress-bar>
       </div>
     <div class="logoText">
       <app-logo></app-logo>
