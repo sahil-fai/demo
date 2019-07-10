@@ -15,6 +15,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   totalRec : number;
   page: number = 1;
   length:number;
+  public isBusinessLoaded:boolean;
   public maxSize: number = 7;
   public directionLinks: boolean = true;
   public autoHide: boolean = true;
@@ -32,7 +33,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
     itemsPerPage: this.selectedValue,
     currentPage: 1,
     totalItems: this.totalRec,
-    id:"companylis"
+    id:"companylist"
   };
 
   public pageNumber = 1;
@@ -46,8 +47,13 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   ngOnInit() {
     const userrid=Number(this.helper.getuserId());
     this.BusinessService.getListOfbusinesses(userrid).subscribe(res => {
-      this.companylist= res;
-      this.totalRec = this.companylist.length;
+      if(res.length>0){
+        this.companylist= res;
+        this.totalRec = this.companylist.length;
+        this.isBusinessLoaded=true;
+      }else{
+        this.companylist=[];
+      }
     });
   }
   public viewBusiness(companyid){

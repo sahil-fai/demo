@@ -32,10 +32,12 @@
             border: 1px solid #00add8;
             overflow: hidden;
             position: relative;
+            box-shadow: 0 0px 10px -3px rgba(0, 0, 0, 0.2), 0 0px 3px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
         }
 
         .whiteWrapper{
-            background: #e4f6fb;;
+            background: #e4f6fb;
+            background: rgba(228, 246, 251, 0.5);
             width: 100%;
             float: left;
 
@@ -273,7 +275,7 @@
 .noData{
     text-align: center;
     padding: 2em 0 !important;
-    color: #367373;
+    color: #00add8;
 
     h3{
         font-size: 1.87rem;
@@ -413,4 +415,10 @@ select:focus::-ms-value {
 }
 .content-wrapper{
     padding: 0.5rem 2rem;
+}
+.nobusiness{
+    .connectButton{
+        margin: 0 auto;
+        float: initial;
+    }
 }

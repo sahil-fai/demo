@@ -92,7 +92,7 @@ export class SignupComponent implements OnInit {
       }
     this.authService.enroll(this.formRegister.value).subscribe(res => {
       this.isRegistered = true;
-      this.router.navigate(['/business/company-info']);
+      this.router.navigate(['/login']);
     }, err =>{
 
     });

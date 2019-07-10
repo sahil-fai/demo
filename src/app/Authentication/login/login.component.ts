@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   formLogin: FormGroup;
 
   ngOnInit() {
+    localStorage.clear();
     this.createForm();
     this._subscribeFormControls = this.formLogin.controls['username'].valueChanges.subscribe(val => {
       if (val.indexOf(' ') >= 0) {

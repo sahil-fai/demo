@@ -1,18 +1,18 @@
 <h2>{{title}}</h2>
 <mat-divider></mat-divider>
-<div class="profile-container">
+<div class="profile-container"  *ngIf="companyinfo">
     <div class="icon-container"><i class="icon-company"></i></div>
     <div class="profile-name">
-        <h1 *ngIf="companyinfo">{{companyinfo.LegalName}}</h1>
+        <h1>{{companyinfo.LegalName}}</h1>
     </div>
-    <div class="company-info" *ngIf="companyinfo">
+    <div class="company-info">
         <ul>
-            <!-- <li>Source Reference:</li>
-            <li>124855782788875</li> -->
+            <li>Company BlockChain Id:</li>
+            <li>{{companyinfo.CompanyBlockChainId}}</li>
             <li>Name:</li>
-            <li>{{companyinfo.LegalName}}</li>
-            <li>Legal Name:</li>
             <li>{{companyinfo.Name}}</li>
+            <li>Legal Name:</li>
+            <li>{{companyinfo.LegalName}}</li>
             <li>Base Currency:</li>
             <li>{{companyinfo.BaseCurrency.CurrencyName}}</li>
             <li>Phone:</li>
@@ -27,7 +27,7 @@
 <div class="addresses" *ngIf="companyinfo">
         <div class="address">
             <div class="address-icon-container"> <mat-icon>location_city</mat-icon></div>
-               <div class="address-content">
+               <div class="address-content"> 
                     <h4>Address(Office)</h4>
                     <p>{{companyinfo.Address.AddressLine1}}</p>
                     <p>{{companyinfo.Address.CityName}}</p>
@@ -35,7 +35,7 @@
                     <p>{{companyinfo.Address.Country}}</p>
                     <!-- <p>{{companyinfo.Address.PostalZone}}</p> -->
                 </div>
-
+               
             </div>
         <div class="address">
                <div class="address-icon-container"> <mat-icon>location_city</mat-icon></div>
