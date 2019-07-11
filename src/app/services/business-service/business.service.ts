@@ -19,6 +19,7 @@ export class BusinessService {
   }
 
   getAllVendors(id:number): Observable<any> {
+    console.log(id)
     return this.http.get<any>('vendors'+ '?filter={"where":{"referencecompanyid":'+ id +'},"limit":10,"include":[{"relation":"company"}]}', {
    });
   }
