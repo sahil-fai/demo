@@ -13,13 +13,13 @@ export class BusinessService {
     return this.http.get<any>('business/list?userId='+id);
   }
 
-  getAllCustomers(): Observable<any> {
-    return this.http.get<any>('business/customers', {
+  getAllCustomers(id:number): Observable<any> {
+    return this.http.get<any>('customers'+ '?filter={"where":{"referencecompanyid":'+ id +'},"limit":10,"include":[{"relation":"company"}]}', {
    });
   }
 
-  getAllVendors(): Observable<any> {
-    return this.http.get<any>('business/vendors', {
+  getAllVendors(id:number): Observable<any> {
+    return this.http.get<any>('vendors'+ '?filter={"where":{"referencecompanyid":'+ id +'},"limit":10,"include":[{"relation":"company"}]}', {
    });
   }
 

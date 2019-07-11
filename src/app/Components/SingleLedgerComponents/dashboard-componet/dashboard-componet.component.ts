@@ -16,7 +16,7 @@ export class DashboardComponetComponent implements OnInit {
   }
 
   public getCustomers() {
-    this.businessService.getAllCustomers().subscribe(
+    this.businessService.getAllCustomers(215).subscribe(
       res => {
         this.value = JSON.stringify(res);
       }
@@ -25,7 +25,7 @@ export class DashboardComponetComponent implements OnInit {
   }
 
   public getVendors() {
-    this.businessService.getAllVendors().subscribe(
+    this.businessService.getAllVendors(178).subscribe(
       res => {
         this.value = JSON.stringify(res);
       }
