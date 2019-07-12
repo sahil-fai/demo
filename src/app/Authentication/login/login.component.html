@@ -16,7 +16,7 @@
 
         </div>
         <div class="right-container">
-            
+
             <ul class="headings">
                 <li>
                   <a>Sign In</a>
@@ -38,7 +38,7 @@
                     <div class="errorMessage" *ngIf="(f.password.invalid && f.password.dirty && f.password.errors.minlength) || (submitted && f.password.invalid && f.password.errors.minlength)">Minimum 6 characters needed.</div>
                   </li>
                   <li class="buttonWrap">
-                    <button type="submit" class="btn btn-solid login" [disabled]="formLogin.invalid"><i class="icon-submit"></i>Submit</button>
+                    <button type="submit" class="btn btn-solid login" [disabled]="formLogin.invalid"><i class="icon-submit"></i>Login</button>
                   </li>
                   <li class="buttonWrap">
                       <button type="submit" class="btn btn-solid create-account"><a [routerLink]="['/signup']">Create Account</a></button>
