@@ -2,11 +2,14 @@
     <div class="authForm">
     
         <div class="shadowBox">
+            <div class="progressBar">
+                <app-loader></app-loader>
+            </div>
             <div class="left-container">
                 <div class="logoHeader">
                     <img src="/assets/images/SL-logo.svg" alt="Monitor">
                 </div>
-                <div class="video-wrapper" (click)="openDialog('https://www.youtube.com/embed/J5tWbmD7alE')">
+                <div class="video-wrapper" (click)="openVideo('https://www.youtube.com/embed/J5tWbmD7alE')">
                         <div class="monitor">
                             <img src="/assets/images/video-thumb.png" alt="Monitor">
                         </div>
@@ -26,7 +29,7 @@
                             <!-- <input type="text" class="fields newFormatting" formControlName="role" /> -->
                           
                             <mat-form-field class="fields newFormatting">
-                                <mat-select>
+                                <mat-select formControlName="role">
                                     <mat-option *ngFor="let role of roles" [value]="role.value">
                                       {{role.viewValue}}
                                     </mat-option>
@@ -38,31 +41,34 @@
                       </li>
                       <li>
                         <label class="labels newFormatting">First Name</label>
-                        <input type="text" class="fields newFormatting" formControlName="firstName" />
+                        <input type="text" class="fields newFormatting" [ngClass]="{error: (f.firstName.invalid && f.firstName.dirty) || (submitted && f.firstName.invalid)}" formControlName="firstName"  formControlName="firstName" />
+                        <div class="errorMessage" *ngIf="(f.firstName.invalid && f.firstName.dirty && f.firstName.errors.email) || (submitted && f.firstName.invalid && f.firstName.errors.email) || (f.firstName.invalid && f.firstName.dirty)|| (submitted && f.firstName.invalid) ">Please enter First Name.</div>
                       </li>
                       <li>
                         <label class="labels newFormatting">Last Name</label>
-                        <input type="text" class="fields newFormatting" formControlName="lastName"/>
+                        <input type="text" class="fields newFormatting" [ngClass]="{error: (f.lastName.invalid && f.lastName.dirty) || (submitted && f.lastName.invalid)}" formControlName="lastName" formControlName="lastName"/>
+                        <div class="errorMessage" *ngIf="(f.lastName.invalid && f.lastName.dirty && f.lastName.errors.email) || (submitted && f.lastName.invalid && f.lastName.errors.email) || (f.lastName.invalid && f.lastName.dirty)|| (submitted && f.lastName.invalid) ">Please enter Last Name.</div>
                       </li>
                       <li>
                         <label class="labels newFormatting">Email Address</label>
-                        <input type="email" class="fields newFormatting" formControlName="username" />
-
+                        <input type="email" class="fields newFormatting" [ngClass]="{error: (f.username.invalid && f.username.dirty) || (submitted && f.username.invalid)}" formControlName="username" />
+                        <div class="errorMessage" *ngIf="(f.username.invalid && f.username.dirty && f.username.errors.email) || (submitted && f.username.invalid && f.username.errors.email) || (f.username.invalid && f.username.dirty)|| (submitted && f.username.invalid) ">Please enter a valid email address.</div>
                       </li>
-                      <li class="password">
+                      <li class="password" [ngClass]="{error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid)}">
                           <label class="labels newFormatting">Password</label>
                           <div class="password">
-                              <input type="password" class="fields newFormatting" formControlName="password"/>
-                              <button  type="button" class="icon-eye-hide"></button>
+                              <input [type]="showPassword?'text':'password'" class="fields newFormatting" [ngClass]="{error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid)}" formControlName="password"/>
+                              <button  type="button" class="icon-eye-hide"  (click)="togglePasswordVisibility()"></button>
                           </div>
+                          <div class="errorMessage" *ngIf="(submitted && f.password.invalid) ">Please enter Password.</div>
                           <div class="condition">
                             <!-- <span class="top-arrow"></span> -->
                             <ul class="conditionList">
-                              <li><mat-icon style="color:rgb(23, 208, 214); font-size: 12px;">radio_button_checked</mat-icon>Contains minimum of 6 characters.</li>
-                              <li><mat-icon style="color:rgb(247, 132, 142); font-size: 12px;">radio_button_checked</mat-icon>Contains a number.</li>
-                              <li><mat-icon style="color:rgb(23, 208, 214); font-size: 12px;">radio_button_checked</mat-icon>Contains an upper case letter.</li>
-                              <li><mat-icon style="color:rgb(23, 208, 214); font-size: 12px;">radio_button_checked</mat-icon>Contains a lower case letter.</li>
-                              <li><mat-icon style="color:rgb(247, 132, 142); font-size: 12px;">radio_button_checked</mat-icon>Contains a special character.</li>
+                              <li [ngClass]="{notValidated: (f.password.pristine) || (f.password.errors && f.password.errors.required) || (f.password.dirty && f.password.errors && f.password.errors.minlength)}"><mat-icon>radio_button_checked</mat-icon>Contains minimum of 6 characters.</li>
+                              <li [ngClass]="{notValidated: (f.password.pristine) || (f.password.errors && f.password.errors.required) || (f.password.errors && f.password.errors.number)}"><mat-icon>radio_button_checked</mat-icon>Contains a number.</li>
+                              <li [ngClass]="{notValidated: (f.password.pristine) || (f.password.errors && f.password.errors.required) || (f.password.errors && f.password.errors.uppercase)}"><mat-icon>radio_button_checked</mat-icon>Contains an upper case letter.</li>
+                              <li [ngClass]="{notValidated: (f.password.pristine) || (f.password.errors && f.password.errors.required) || (f.password.errors && f.password.errors.lowercase)}"><mat-icon>radio_button_checked</mat-icon>Contains a lower case letter.</li>
+                              <li [ngClass]="{notValidated: (f.password.pristine) || (f.password.errors && f.password.errors.required) || (f.password.errors && f.password.errors.specialcharacter)}"><mat-icon>radio_button_checked</mat-icon>Contains a special character.</li>
                             </ul>
                           </div>
                           
@@ -70,20 +76,21 @@
                       <li>
                         <label class="labels newFormatting"> Confirm Password</label>
                         <div class="password">
-                            <input type="password" class="fields newFormatting" formControlName="password"/>
-                            <button  type="button" class="icon-eye-hide"></button>
+                            <input [type]="showConfirmPassword?'text':'password'" class="fields newFormatting" formControlName="confirmpassword"/>
+                            <button  type="button" class="icon-eye-hide" (click)="toggleConfirmPasswordVisibility()"></button>
                         </div>  
                       </li>
-                      <li class="recaptchaHolder">
-                          <!-- <re-captcha required siteKey="6LcXSkMUAAAAAEmYkp1eSbIbT-vcMkxEnxmoryxd" formControlName="recaptcha"></re-captcha> -->
+                      <!-- <li class="recaptchaHolder g-recaptcha">
+                        <re-captcha required siteKey="6LcXSkMUAAAAAEmYkp1eSbIbT-vcMkxEnxmoryxd" formControlName="recaptcha" ></re-captcha>
+                        
+                      </li> -->
+                      <li class="agreement" (mousedown)="openTermsConditions()">
+                           <mat-checkbox [required]="true" formControlName="isAgree" [(ngModel)]="checked" ><span>I agree to the SingleLedger Terms &amp; Conditions <br> and Privacy Policy</span></mat-checkbox>
                       </li>
-                      <li>
-                        <mat-checkbox [required]="true" formControlName="isAgree"><span>I agree to the SingleLedger Terms &amp; Conditions <br> and Privacy Policy</span></mat-checkbox>
-                    </li>
                     </ul>
                   
                     <div class="buttonWrap">
-                        <button type="submit" class="btn btn-solid submit"><i class="icon-submit"></i>Submit</button>
+                        <button type="submit" class="btn btn-solid submit" [disabled]="formRegister.invalid"  matRipple><i class="icon-submit"></i>Submit</button>
                     </div>
                   <div class="have-an-account">Already have an acoount ? <span class="link-color"><a [routerLink]="['/login']">Sign In</a></span></div>
                   </form>

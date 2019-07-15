@@ -1,6 +1,7 @@
 
 import {tap,  map, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 import { HttpInterceptor, HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 
 import { throwError ,  Observable } from 'rxjs';
@@ -25,7 +26,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
 
         if (!request.headers.has('Content-Type')) {
-            request = request.clone({ headers: request.headers.set('Content-Type', 'application/json'),url: "http://localhost:3000/" + request.url });
+            request = request.clone({ headers: request.headers.set('Content-Type', 'application/json'),url: environment.host + request.url });
         }
 
        request = request.clone({ headers: request.headers.set('Accept', 'application/json') });

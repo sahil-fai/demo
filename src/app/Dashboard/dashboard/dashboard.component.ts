@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { QuickBookConnectService } from '../../services/quickbook-service/quick-book-connect.service'
+import { BusinessReloadComponent } from '../../Shared/business-reload/business-reload.component';
+import { MatDialogRef } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,8 +11,8 @@ import { QuickBookConnectService } from '../../services/quickbook-service/quick-
   styleUrls: ['./dashboard.component.less']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor(public quickbookconnect:QuickBookConnectService) { }
+  public _reloadingDialog: MatDialogRef<BusinessReloadComponent>;
+  constructor(public quickbookconnect:QuickBookConnectService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
   }
@@ -27,13 +31,14 @@ export class DashboardComponent implements OnInit {
           let data;
           if (true) {
             data = JSON.parse(event["data"]);
+            _self.reloadBusiness();
             if (true) {
-            // _self._getBusiness(data["BusinessID"]);
               window.removeEventListener("message", message, false);
             }
           }
         };
-
+        window.addEventListener("message", message, false);
+       // this.reloadBusiness();
         // For IE browser
         const myTimer = setInterval(function () {
           if (windowObjectReference.closed) {
@@ -47,5 +52,35 @@ export class DashboardComponent implements OnInit {
       }, err => {
         windowObjectReference.close();
       });
+  }
+ 
+  public reloadBusiness() {
+    const _self = this;
+    this._reloadingDialog = this.dialog.open(BusinessReloadComponent, {
+      width: '450px',
+      disableClose: true,
+      position: {
+        top: '80px'
+      }
+    });
+    setTimeout(() => {
+      _self._reloadingDialog.close();
+      this.router.navigate(['/businesslist']);
+    }, 30000);
+    //_self._toastr.info(Messages.businessDataReload, '', _self._helper.reloadBiusinessToastConfiguration());
+    // this._bussinessService.reload(businessID).subscribe(res => {
+    //   //_self._helper.clearToastMessages();
+    //   _self._reloadingDialog.close();
+    //   _self.viewBusiness(businessID);
+    // }, err => {
+    //   if (err.error && err.error.Code && err.error.Code === 1012)
+    //   {
+    //   var result = this.businessListActual.find(obj => {
+    //     return obj.ID === businessID
+    //   })
+    //   result.TokensExpiredBit = true;
+    // }
+    //   _self._reloadingDialog.close();
+    // });
   }
 }

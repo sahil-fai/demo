@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
 const TOKEN = 'TOKEN';
+const UserId = 'UserId';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,18 @@ export class HelperService {
   };
   set(token: string): void {
     localStorage.setItem(TOKEN, token);
+  }
+  setuserId(id:any):void {
+    localStorage.setItem(UserId, id);
+  }
+  setcompanyId(id:any):void {
+    localStorage.setItem('CompanyId', id);
+  }
+  getcompanyId(){
+    return localStorage.getItem('CompanyId');
+  }
+  getuserId(){
+    return localStorage.getItem(UserId);
   }
 
   getToken(){

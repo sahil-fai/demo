@@ -3,6 +3,8 @@ import {Component, OnInit, ViewChild, } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import json from './res.json';
 import { MatPaginator } from '@angular/material/paginator';
+import {MatBottomSheet, MatBottomSheetRef, MatBottomSheetConfig} from '@angular/material/bottom-sheet';
+import { BottomSheetOverviewExampleSheetComponent } from 'src/app/Shared/bottom-sheet-overview-example-sheet/bottom-sheet-overview-example-sheet.component';
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -29,44 +31,46 @@ export class InvoicesComponentComponent implements OnInit {
     {value: 'Declined', viewValue: 'Declined'}
   ];
   public dataSource: MatTableDataSource<PeriodicElement>;
-  constructor() { }
+
+//ngx pagination setup
+  invoices: Array<any>;
+  totalRec : number;
+  page: number = 1;
+  length:number;
+  public maxSize: number = 3;
+  public directionLinks: boolean = true;
+  public autoHide: boolean = true;
+  public responsive: boolean = true;
+  public labels: any = {
+      previousLabel: 'Prev',
+      nextLabel: 'Next',
+      screenReaderPaginationLabel: 'Pagination',
+      screenReaderPageLabel: 'page',
+      screenReaderCurrentLabel: `You're on page`
+  };
+  public pageNumber = 1;
+  public numberOfpages: number[];
+  public size = 10;
+  public pageIndex = 0;
+  public config = {
+    itemsPerPage: this.size,
+    currentPage: 1,
+    totalItems: this.totalRec
+  };
+  constructor(private _bottomSheet: MatBottomSheet) {
+    this.invoices=json;
+    this.totalRec = this.invoices.length;
+   }
 
   ngOnInit() {
-    
-    this.handlePage({pageSize:"10",pageIndex:"0"});
-   
-   //this.dataSource.paginator = this.paginator;
+    this.handlePage({pageSize:this.size, pageIndex:this.pageIndex});
   }
   
   @ViewChild(MatPaginator, {}) paginator: MatPaginator;
   displayedColumns: string[] = ["Number","BlockchainTransactionID","Date","DueDate","Customer","Total", "Balance", 'BlockchainStatus','star'];
-  //bills: PeriodicElement[]=this.Paginator(json,1,4).data;
-  //dataSource = new MatTableDataSource<PeriodicElement>(this.bills); 
-  
+
   selection = new SelectionModel<PeriodicElement>(true, []);
  
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: PeriodicElement): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
-  }
-
   Paginator(items, page, per_page) { 
     var page = page || 1,
     per_page = per_page || 10,
@@ -84,12 +88,17 @@ export class InvoicesComponentComponent implements OnInit {
     data: paginatedItems
     };
   }
-
-  public handlePage(e: any) {
-    let pagesize = e.pageSize;
-    let pagenumber = e.pageIndex + 1;
-    let data = this.Paginator(json,pagenumber,pagesize);
+  handlePage(event: any) {
+    this.pageIndex=event;
+    let data = this.Paginator(json,this.pageIndex,this.size);
     this.dataSource = new MatTableDataSource<PeriodicElement>(data.data);
   }
 
+  openBottomSheet(): void { 
+    const sheetConfig = new MatBottomSheetConfig();
+    sheetConfig.panelClass="invoicebottomsheet";
+    this._bottomSheet.open(BottomSheetOverviewExampleSheetComponent,sheetConfig);
+  }
+
+ 
 }

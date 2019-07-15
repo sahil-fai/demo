@@ -58,6 +58,12 @@
         width: 1rem !important;
     }
 }
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 180px;
+}
 
 
 .mat-checkbox-label{
@@ -471,3 +477,22 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
         height: 16px !important;
     }
 }
+app-signup{
+    .condition{
+        .conditionList{
+            li{
+                &.notValidated {
+                    mat-icon{
+                        font-size: 12px;
+                        color: rgb(247, 132, 142);
+                    }
+                }
+                mat-icon{
+                    font-size: 12px;
+                    color: rgb(23, 208, 214);
+                }
+            }
+        }
+    }
+}
+

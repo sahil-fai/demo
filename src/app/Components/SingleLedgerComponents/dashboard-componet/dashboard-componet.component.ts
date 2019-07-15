@@ -16,7 +16,7 @@ export class DashboardComponetComponent implements OnInit {
   }
 
   public getCustomers() {
-    this.businessService.getAllCustomers().subscribe(
+    this.businessService.getAllCustomers(215).subscribe(
       res => {
         this.value = JSON.stringify(res);
       }
@@ -25,7 +25,7 @@ export class DashboardComponetComponent implements OnInit {
   }
 
   public getVendors() {
-    this.businessService.getAllVendors().subscribe(
+    this.businessService.getAllVendors(200).subscribe(
       res => {
         this.value = JSON.stringify(res);
       }
@@ -51,9 +51,18 @@ export class DashboardComponetComponent implements OnInit {
       });
   }
 
-  public getCompanyInformation()
+  // public getCompanyInformation()
+  // {
+  //   this.businessService.getCompanyInformation().subscribe(
+  //     res => {
+  //       this.value = JSON.stringify(res);
+  //     }
+  //     , err => {
+  //     });
+  // }
+  public getCompanies()
   {
-    this.businessService.getCompanyInformation().subscribe(
+    this.businessService.getListOfbusinesses(28).subscribe(
       res => {
         this.value = JSON.stringify(res);
       }
@@ -72,4 +81,6 @@ export class DashboardComponetComponent implements OnInit {
       }
     )
   }
+
+
 }

@@ -3,6 +3,8 @@ import {Component, OnInit, ViewChild, } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import json from './res.json';
 import { MatPaginator } from '@angular/material/paginator';
+import { BusinessService } from '../../../services/business-service/business.service';
+import { HelperService } from '../../../services/helper-service/helper.service';
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -10,12 +12,10 @@ export interface PeriodicElement {
   Vendor: string;
   Total: string;
   Balance: string;
-  Status: string;
+  Status: any;
   Action: string;
   position: number;
 }
-
-
 @Component({
   selector: 'app-vendors-component',
   templateUrl: './vendors-component.component.html',
@@ -32,10 +32,23 @@ public dataSource: MatTableDataSource<PeriodicElement>;
     {value: 'Resend Mail', viewValue: 'Resend Mail'}
   ];
   StatusList= ['Invite','Resend Mail'];
-  constructor() { }
+  vendors: any;
+  constructor(public BusinessService:BusinessService, private helper: HelperService) { }
   
   ngOnInit() {
-    this.handlePage({pageSize:"10",pageIndex:"0"});
+    const companyid=Number(this.helper.getcompanyId());
+  
+    this.BusinessService.getAllVendors(companyid).subscribe(res => {
+      console.log(res);
+      if(res.length>0){
+        this.vendors= res;
+        this.handlePage({pageSize:"10",pageIndex:"0", data:this.vendors});
+        //this.isBusinessLoaded=true;
+      }else{
+       // this.companylist=[];
+      }
+    });
+    
   }
   @ViewChild(MatPaginator, {}) paginator: MatPaginator;
   displayedColumns: string[] = ['select',"CustomerName","ContactEmail","RegisterDate","Organizaton","Status","BlockChainID", "Invite",'star'];
@@ -44,16 +57,34 @@ public dataSource: MatTableDataSource<PeriodicElement>;
  
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
+    if(this.dataSource && this.dataSource.data.length>0){
+      const numSelected = this.selection.selected.length;
+      const numRows = this.dataSource.data.length;
+      const numRowsMinusExcluded = this.dataSource.data
+      .filter(row => row.Status!=='Active')
+      .length;
+      return numSelected === numRowsMinusExcluded;
+    }
+    return null;
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
+  masterToggle(status:any) {
     this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+      this.selection.clear() :
+        this.dataSource.data.forEach(row => {
+          if (row.Status!=='Active') {
+            this.selection.select(row);
+          }
+        });
+        if(status){
+          this.selection.clear();
+          this.dataSource.data.forEach(row => {
+            if (row.Status!=='Active' && row.Status=="Inactive") {
+              this.selection.select(row);
+            }
+          });
+        }
   }
 
   /** The label for the checkbox on the passed row */
@@ -65,12 +96,14 @@ public dataSource: MatTableDataSource<PeriodicElement>;
   }
 
   Paginator(items, page, per_page) { 
+
     var page = page || 1,
     per_page = per_page || 10,
     offset = (page - 1) * per_page,
-   
+    
     paginatedItems = items.slice(offset).slice(0, per_page),
     total_pages = Math.ceil(items.length / per_page);
+    
     return {
     page: page,
     per_page: per_page,
@@ -85,9 +118,11 @@ public dataSource: MatTableDataSource<PeriodicElement>;
   public handlePage(e: any) {
     let pagesize = e.pageSize;
     let pagenumber = e.pageIndex + 1;
-    let data = this.Paginator(json,pagenumber,pagesize);
+    let data = this.Paginator(this.vendors,pagenumber,pagesize);
     this.dataSource = new MatTableDataSource<PeriodicElement>(data.data);
   }
-
+  public checkStatus(status){
+  this.masterToggle(status);
+  }
 
 }

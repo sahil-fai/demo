@@ -92,7 +92,19 @@
                                 <!-- Block chain Id Column -->
                                 <ng-container matColumnDef="BlockchainTransactionID">
                                   <th mat-header-cell *matHeaderCellDef> Blockchain Trasaction ID </th>
-                                  <td mat-cell *matCellDef="let element"> {{element.BlockchainTransactionID}} </td>
+                                  <td mat-cell *matCellDef="let element"> {{element.BlockchainTransactionID}} 
+                                    <!-- <button class="btn btn-solid btn-deepblue"  (click)="openBottomSheet()">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                  </button> -->
+                                  <button  class="trasactions" (click)="openBottomSheet()">
+                                      <span class="dot"></span>
+                                      <span class="dot"></span>
+                                      <span class="dot"></span>
+                                  </button>
+                                 </td>
                                 </ng-container>
                                 <!-- Date Column -->
                                 <ng-container matColumnDef="Date">
@@ -136,15 +148,45 @@
                                   </td>
                                 </ng-container>
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-                                    (click)="selection.toggle(row)" [class.selected]="selection.isSelected(row)">
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns| paginate: {itemsPerPage: size, currentPage: a, totalItems: this.totalRec}"
+                                     [class.selected]="selection.isSelected(row)">
                                 </tr>
                 
                               </table>
                              
                             </div>
-                            <mat-paginator appStylePaginator hidePageSize [length]="15"
-                            [pageSize]="10" (page)="handlePage($event)"></mat-paginator>
+                            <!-- <mat-paginator appStylePaginator hidePageSize [length]="150"
+                            [pageSize]="1" (page)="handlePage($event)"></mat-paginator> -->
+                            <div class="pagination">
+      
+                                <pagination-template  #p="paginationApi" (pageChange)="a = $event;handlePage(a)"  [class.disabled]= "length < config.itemsPerPage" >
+                          
+                                  <div class="custom-pagination">
+                          
+                                      <div style="display:inline-block" *ngIf="!(p.isFirstPage() && p.isLastPage())">
+                                        <div class="nextprevious" [class.disabled]="p.isFirstPage()"  >
+                                          <span  (click)="p.previous()">
+                                            <i class="icon-arrow-left"></i> Prev
+                                              </span>
+                                          </div>
+                                          <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value"  >
+                                                <span (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label }}</span>
+                                              <div *ngIf="p.getCurrent() === page.value">
+                                                <span>{{ page.label }}</span>
+                                              </div>
+                                          </div>
+                                          <div class="nextprevious"  [class.disabled]="p.isLastPage()"  >
+                                            <span  (click)="p.next()"> Next <i
+                                              class="icon-arrow-right"></i> </span>
+                                          </div>
+                                    </div>
+                          
+                                  </div>
+                          
+                                </pagination-template>
+                                
+                            </div>
+                            <!-- <pagination-controls (pageChange)="p = $event;paginate(p)"></pagination-controls> -->
                         </div>
                 </div>
         </mat-card-content>

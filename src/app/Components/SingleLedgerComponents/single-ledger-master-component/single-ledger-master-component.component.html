@@ -13,11 +13,11 @@
                         <i class="icon-company"></i><a [routerLink]="['/business/company-info']">Company Info</a> 
                     </mat-expansion-panel-header>                        
                 </mat-expansion-panel>
-                <mat-expansion-panel routerLinkActive="active" [@.disabled]="true" >
+                <!-- <mat-expansion-panel routerLinkActive="active" [@.disabled]="true" >
                     <mat-expansion-panel-header >
                         <i class="icon-dashboard"></i><a [routerLink]="['/business/dashboard']" routerLinkActive="active" >Dashboard</a>   
                     </mat-expansion-panel-header>
-                </mat-expansion-panel>
+                </mat-expansion-panel> -->
                 <mat-expansion-panel routerLinkActive="active" [@.disabled]="true" >
                         <mat-expansion-panel-header>
                             <i class="icon-customer"></i><a [routerLink]="['/business/customers']" routerLinkActive="active">Customers</a>  
@@ -61,7 +61,7 @@
           <div class="progressBar">
               <app-loader></app-loader>
           </div>
-          <span class="blueHeading modalBlock"><span class="ellipsis">Welcome Network Inc.</span><i class="arrow"></i>
+          <span class="blueHeading modalBlock" ><span class="ellipsis">{{CurrentCompanyName}}</span><i class="arrow"></i>
           <div class="modal">
             <ul>
               <li class="prominent">

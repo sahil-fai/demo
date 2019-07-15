@@ -9,17 +9,18 @@ export class BusinessService {
 
   constructor(private http: HttpClient) { }
 
-  getListOfbusinesses(): Observable<any> {
-    return this.http.get<any>('business/list');
+  getListOfbusinesses(id:number): Observable<any> {
+    return this.http.get<any>('business/list?userId='+id);
   }
 
-  getAllCustomers(): Observable<any> {
-    return this.http.get<any>('business/customers', {
+  getAllCustomers(id:number): Observable<any> {
+    return this.http.get<any>('customers'+ '?filter={"where":{"referencecompanyid":'+ id +'},"limit":10,"include":[{"relation":"company"}]}', {
    });
   }
 
-  getAllVendors(): Observable<any> {
-    return this.http.get<any>('business/vendors', {
+  getAllVendors(id:number): Observable<any> {
+    console.log(id)
+    return this.http.get<any>('vendors'+ '?filter={"where":{"referencecompanyid":'+ id +'},"limit":10,"include":[{"relation":"company"}]}', {
    });
   }
 
@@ -33,8 +34,7 @@ export class BusinessService {
    });
   }
 
-  getCompanyInformation(): Observable<any> {
-    return this.http.get<any>('business', {
-   });
+  getCompanyInformation(id:number): Observable<any> {
+    return this.http.get<any>('companies/'+id + '?filter={"include":[{"relation":"all"}]}');
   }
 }

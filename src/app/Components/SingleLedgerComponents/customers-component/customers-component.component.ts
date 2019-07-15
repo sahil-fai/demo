@@ -4,6 +4,8 @@ import {Component, OnInit, ViewChild, } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import json from './res.json';
 import { MatPaginator } from '@angular/material/paginator';
+import { BusinessService } from '../../../services/business-service/business.service';
+import { HelperService } from '../../../services/helper-service/helper.service';
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -30,10 +32,20 @@ export class CustomersComponentComponent implements OnInit {
     {value: 'Inactive', viewValue: 'Inactive'}
   ];
   StatusList= ['Invite','Resend Mail'];
-  constructor() { }
+  customers: any;
+  constructor(public BusinessService:BusinessService, private helper: HelperService) { }
   
   ngOnInit() {
-    this.handlePage({pageSize:"10",pageIndex:"0"});
+    const companyid=Number(this.helper.getcompanyId());
+  
+    this.BusinessService.getAllCustomers(companyid).subscribe(res => {
+      console.log(res);
+      if(res.length>0){
+        this.customers= res;
+        this.handlePage({pageSize:"10",pageIndex:"0"});
+      }
+    });
+   
   }
   @ViewChild(MatPaginator, {}) paginator: MatPaginator;
   displayedColumns: string[] = ['select',"CustomerName","ContactEmail","RegisterDate","Organizaton","Status","BlockChainID", "Invite",'star'];
@@ -42,9 +54,12 @@ export class CustomersComponentComponent implements OnInit {
  
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
+    if(this.dataSource && this.dataSource.data.length>0){
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
+    }
+  return null;
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
@@ -81,10 +96,11 @@ export class CustomersComponentComponent implements OnInit {
   }
 
   public handlePage(e: any) {
+    console.log(e)
     let pagesize = e.pageSize;
     let pagenumber = e.pageIndex + 1;
-    let data = this.Paginator(json,pagenumber,pagesize);
-    this.dataSource = new MatTableDataSource<PeriodicElement>(data.data);
+    let data = this.Paginator(this.customers,pagenumber,pagesize);
+    this.dataSource = new MatTableDataSource<PeriodicElement>(this.customers);
   }
 
 }

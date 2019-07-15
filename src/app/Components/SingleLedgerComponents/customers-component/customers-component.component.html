@@ -36,7 +36,7 @@
 </div>
 <div class="customers">
     <div class="select-box">
-            
+
             <span class="text-label">Select as all<i class="icon-arrow-down"></i>
                   <!-- <mat-form-field>
                       <mat-select [(value)]="selected"  multiple>
@@ -52,12 +52,12 @@
                         </mat-radio-button>
                       </mat-radio-group>
                     </div>
-                   
-              </span>   
+
+              </span>
     </div>
     <div class="bills-content mat-elevation-z8">
       <div class="example-container">
-        <table mat-table [dataSource]="dataSource" class="">
+        <table mat-table [dataSource]="dataSource">
 
           <!-- Checkbox Column -->
           <ng-container matColumnDef="select" >
@@ -72,55 +72,58 @@
               <mat-checkbox (click)="$event.stopPropagation()"
                             (change)="$event ? selection.toggle(row) : null"
                             [checked]="selection.isSelected(row)"
-                            [aria-label]="checkboxLabel(row)">
+                            [aria-label]="checkboxLabel(row)"
+                            [disabled]="row.Status=='Active'">
               </mat-checkbox>
             </td>
-          </ng-container>         
-        
+          </ng-container>
+
           <!-- Number Column -->
           <ng-container matColumnDef="CustomerName" sticky>
             <th mat-header-cell *matHeaderCellDef> Customer Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.CustomerName}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.company?.legalname}} </td>
           </ng-container>
           <!-- Block chain Id Column -->
           <ng-container matColumnDef="ContactEmail">
             <th mat-header-cell *matHeaderCellDef> Contact Email</th>
-            <td mat-cell *matCellDef="let element"> {{element.ContactEmail}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.company?.companyemail}} </td>
           </ng-container>
           <!-- Date Column -->
           <ng-container matColumnDef="RegisterDate">
             <th mat-header-cell *matHeaderCellDef> Register Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.RegisterDate}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.company?.registerdate| date}} </td>
           </ng-container>
           <ng-container matColumnDef="Organizaton">
               <th mat-header-cell *matHeaderCellDef> Organizaton </th>
-              <td mat-cell *matCellDef="let element"> {{element.Organizaton}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.company?.organization}} </td>
             </ng-container>
-        
+
           <!-- Due Date Column -->
           <ng-container matColumnDef="Status">
             <th mat-header-cell *matHeaderCellDef> Status</th>
             <td mat-cell *matCellDef="let element">
-              <mat-icon *ngIf="element.Status=='Inactive'" [ngClass]="{'inactive':element.Status === 'Inactive'}">radio_button_unchecked</mat-icon>
-              <mat-icon *ngIf="element.Status=='Active'" [ngClass]="{'active':element.Status === 'Active'}">radio_button_checked</mat-icon>
+              <mat-icon *ngIf="element.company?.isdeleted" [ngClass]="{'inactive':element.company?.isdeleted }">radio_button_unchecked</mat-icon>
+              <mat-icon *ngIf="element.company?.isactive" [ngClass]="{'active':element.company?.isactive}">radio_button_checked</mat-icon>
             </td>
           </ng-container>
-        
+
           <!-- Vendor Column -->
           <ng-container matColumnDef="BlockChainID">
             <th mat-header-cell *matHeaderCellDef> BlockChain ID </th>
-            <td mat-cell *matCellDef="let element"> {{element.BlockChainID}} </td>
+            <td mat-cell *matCellDef="let element"> <div class="ellipse">{{element.company?.companyblockchainid}}</div> </td>
           </ng-container>
           <!-- Total Column -->
           <ng-container matColumnDef="Invite">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element"> 
-                <button class="btn btn-small uppercase btn-solid btn-deepblue" *ngIf="element.Status=='Active'" [disabled]="{'disable':element.Status === 'Active'}"><i class="icon-arrow-curve-right"></i>INVITED</button>
-              <button class="btn btn-small uppercase btn-solid btn-deepblue" *ngIf="element.Status=='Inactive' && element.Reinviteflag!=='true'"><i class="icon-arrow-curve-right"></i>INVITE</button> 
-              <button class="btn btn-small uppercase btn-solid btn-navyblue" *ngIf="element.Status=='Inactive' && element.Reinviteflag=='true'"><i class="icon-arrow-curve-left"></i>RE-SEND MAIL</button>
+            <td mat-cell *matCellDef="let element">
+              <!-- <button class="btn btn-small uppercase btn-solid btn-deepblue" *ngIf="element.company?.isactive=='Active'" [disabled]="{'disable':element.company?.isactive === 'Active'}"><i class="icon-arrow-curve-right"></i>INVITED</button> -->
+
+              <!-- *ngIf="element.company?.isactive=='Inactive' && element.company?.Reinviteflag!=='true'" -->
+              <button class="btn btn-small uppercase btn-solid btn-deepblue" ><i class="icon-arrow-curve-right"></i>INVITE</button>
+              <!-- <button class="btn btn-small uppercase btn-solid btn-navyblue" *ngIf="element.company?.isactive=='Inactive' && element.company?.Reinviteflag=='true'"><i class="icon-arrow-curve-left"></i>RE-SEND MAIL</button> -->
             </td>
           </ng-container>
-        
+
           <ng-container matColumnDef="star" stickyEnd>
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
@@ -129,17 +132,17 @@
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-              (click)="selection.toggle(row)" [class.selected]="selection.isSelected(row)">
+              (click)="row.Status!=='Active' && selection.toggle(row)" [class.selected]="selection.isSelected(row)">
           </tr>
 
         </table>
       </div>
       <div class="paginator-container">
           <button class="btn btn-small uppercase btn-solid btn-deepblue invite"><i class="icon-arrow-curve-right"></i>INVITE</button>
-          <mat-paginator appStylePaginator hidePageSize [length]="15"
-          [pageSize]="10" (page)="handlePage($event)"></mat-paginator>
+          <mat-paginator appStylePaginator hidePageSize [length]="1"
+          [pageSize]="1" (page)="handlePage($event)"></mat-paginator>
       </div>
-         
+
     </div>
 </div>
 
