@@ -1,19 +1,13 @@
 
 import {tap,  map, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import {
-    HttpInterceptor,
-    HttpRequest,
-    HttpResponse,
-    HttpHandler,
-    HttpEvent,
-    HttpErrorResponse
-} from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { HttpInterceptor, HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 
 import { throwError ,  Observable } from 'rxjs';
-import { HelperService } from '../services/helper.service';
-import { LoaderService } from '../services/loader.service';
-import { ErrorHandlerService } from '../services/error-handler.service';
+import { HelperService } from '../services/helper-service/helper.service';
+import { LoaderService } from '../services/loader-service/loader.service';
+import { ErrorHandlerService } from '../services/error-handler-service/error-handler.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -23,16 +17,16 @@ export class TokenInterceptor implements HttpInterceptor {
     var token: string = localStorage.getItem('TOKEN');
 
         if (token) {
-            request = request.clone({ 
+            request = request.clone({
               headers: request.headers.set(
                 'Authorization', 'Bearer '+ token,
               )
           });
         }
-        
+
 
         if (!request.headers.has('Content-Type')) {
-            request = request.clone({ headers: request.headers.set('Content-Type', 'application/json'),url: "http://localhost:3000/" + request.url });
+            request = request.clone({ headers: request.headers.set('Content-Type', 'application/json'),url: environment.host + request.url });
         }
 
        request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
@@ -48,6 +42,6 @@ export class TokenInterceptor implements HttpInterceptor {
           }, () => {
             this._loaderService.hideLoader();
           }));
-         
+
 }
 }

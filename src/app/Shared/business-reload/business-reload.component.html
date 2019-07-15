@@ -1,0 +1,28 @@
+<h2 class="spinner">Connecting Business
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+</h2>
+
+<ul class="dataFetchList">
+  <li *ngIf="establishingConnection.isProcessing || establishingConnection.isDone" [ngClass]="{processing: establishingConnection.isProcessing, success: establishingConnection.isDone}">
+    <mat-icon *ngIf="establishingConnection.isProcessing">autorenew</mat-icon>
+    <mat-icon *ngIf="establishingConnection.isDone">done_all</mat-icon>
+    Establishing Connection with QuickBooks
+  </li>
+  <li *ngIf="fetchingTransactions.isProcessing || fetchingTransactions.isDone" [ngClass]="{processing: fetchingTransactions.isProcessing, success: fetchingTransactions.isDone}">
+     <mat-icon *ngIf="fetchingTransactions.isProcessing">autorenew</mat-icon>
+     <mat-icon *ngIf="fetchingTransactions.isDone">done_all</mat-icon>
+    Fetching your transactions 
+  </li>
+  <li *ngIf=" generatingReports.isProcessing || generatingReports.isDone" [ngClass]="{processing: generatingReports.isProcessing, success: generatingReports.isDone}">
+     <mat-icon *ngIf="generatingReports.isProcessing">autorenew</mat-icon>
+     <mat-icon *ngIf="generatingReports.isDone">done_all</mat-icon>
+    Generating your Journal and other reports
+  </li>
+  <li *ngIf="settingUpProjects.isProcessing" [ngClass]="{processing: settingUpProjects.isProcessing}">
+     <mat-icon *ngIf="settingUpProjects.isProcessing">autorenew</mat-icon>
+     <mat-icon *ngIf="settingUpProjects.isDone">done_all</mat-icon>
+    Setting up your account
+  </li>
+</ul>

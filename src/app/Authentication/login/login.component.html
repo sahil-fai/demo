@@ -1,18 +1,22 @@
 <div class="authForm">
-    
+
     <div class="shadowBox">
+        <div class="progressBar">
+            <app-loader></app-loader>
+        </div>
         <div class="left-container">
             <div class="logoHeader">
                 <img src="/assets/images/SL-logo.svg" alt="Monitor">
             </div>
-            <div class="video-wrapper">
+            <div class="video-wrapper" (click)="openDialog('https://www.youtube.com/embed/J5tWbmD7alE')">
                     <div class="monitor">
                         <img src="/assets/images/video-thumb.png" alt="Monitor">
                     </div>
             </div>
-            
+
         </div>
         <div class="right-container">
+
             <ul class="headings">
                 <li>
                   <a>Sign In</a>
@@ -22,15 +26,19 @@
                 <ul class="formFieldsList">
                   <li>
                     <label class="labels newFormatting">Email</label>
-                    <input type="email" class="fields newFormatting" formControlName="username" />
+                    <input type="email" class="fields newFormatting"  [ngClass]="{error: (f.username.invalid && f.username.dirty) || (submitted && f.username.invalid)}" formControlName="username" />
+                    <div class="errorMessage" *ngIf="(f.username.invalid && f.username.dirty && f.username.errors.email) || (submitted && f.username.invalid && f.username.errors.email)">Please enter a valid email address.</div>
                   </li>
                   <li>
                     <label class="labels newFormatting">Password</label>
-                    <input type="password" class="fields newFormatting" formControlName="password"/>
-                   
+                    <div class="password">
+                        <input [type]="showPassword?'text':'password'" class="fields newFormatting"  [ngClass]="{error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid)}" formControlName="password" />
+                        <button  type="button" class="icon-eye-hide"  (click)="togglePasswordVisibility()"></button>
+                    </div>
+                    <div class="errorMessage" *ngIf="(f.password.invalid && f.password.dirty && f.password.errors.minlength) || (submitted && f.password.invalid && f.password.errors.minlength)">Minimum 6 characters needed.</div>
                   </li>
                   <li class="buttonWrap">
-                    <button type="submit" class="btn btn-solid login"><i class="icon-register"></i>Log In</button>
+                    <button type="submit" class="btn btn-solid login" [disabled]="formLogin.invalid"><i class="icon-submit"></i>Login</button>
                   </li>
                   <li class="buttonWrap">
                       <button type="submit" class="btn btn-solid create-account"><a [routerLink]="['/signup']">Create Account</a></button>
@@ -38,7 +46,7 @@
                 </ul>
               </form>
         </div>
-      
+
     </div>
-  
-  </div>  
+
+  </div>

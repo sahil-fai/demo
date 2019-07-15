@@ -1,0 +1,124 @@
+
+<div class="wrapper">
+  <div class="header">
+      <div class="progressBar" >
+        <mat-progress-bar *ngIf="!isBusinessLoaded" [mode]="'indeterminate'" [color]="'warn'"></mat-progress-bar>
+      </div>
+    <div class="logoText">
+      <app-logo></app-logo>
+    </div>
+    <div class="userInfo">
+      <app-userinfo></app-userinfo>
+    </div>
+    <div class="logoutButton">
+      <app-logout></app-logout>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <h2>{{title}}</h2>
+    <div class="businesslistAvial"  *ngIf="isBusinessLoaded; else nobusiness">
+      <div class="searchPanel clearfix">
+        <form   novalidate autocomplete="off">
+          <ul class="floatingList searchBlock">
+            <li>
+              <label class="labels">Filter For</label>
+              <input type="text" class="fields"  />
+            </li>
+            <li>
+              <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter"/>
+            </li>
+            <li>
+              <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" />
+            </li>
+          </ul>
+        </form>
+        <div class="connectButton">
+          <span class="connectBtn">
+            <app-addbusiness></app-addbusiness>
+          </span>
+        </div>
+      </div>
+      <ul class="companyList">
+        <li *ngFor="let company of companylist| paginate: config">
+         
+          <div class="cellWrapper clearfix">
+            <div class="whiteWrapper">
+              <div class="companyWrapper">
+                <ul class="dataList">
+                  <li>
+                    <div>Company Name</div>
+                    <div> <h6>{{company?.company?.LegalName}}</h6></div>
+                  </li>
+                  <li>
+                    <div class="dataLabel">Connected To</div>
+                    <div class="dataValues">QuickBooks</div>
+                  </li>
+                  <li>
+                    <div class="dataLabel">Last Accessed</div>
+                    <div class="dataValues">{{company?.company?.RegisterDate | date}}</div>
+                  </li>
+                  <li>
+                    <div class="dataLabel">Last Updated</div>
+                    <div class="dataValues">{{company?.company?.RegisterDate | date}}</div>
+                  </li>
+                </ul>
+                <ul class="buttonList">
+                  <li>
+                    <button type="button" class="btn btn-outline btn-icon uppercase redBtn" (click)="openDialog(company.companyId)"><i
+                        class="icon-cross"></i>disconnect</button>
+                  </li>
+                  <li>
+                    <button type="button" class="btn btn-outline btn-icon uppercase blueBtn" (click)="viewBusiness(company.companyId)"><i
+                        class="icon-arrow-right"></i><a >Company Info</a></button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="pagination">
+        
+        <pagination-template  #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event" [class.disabled]= "length < config.itemsPerPage" >
+  
+          <div class="custom-pagination">
+  
+              <div style="display:inline-block" *ngIf="!(p.isFirstPage() && p.isLastPage())">
+                <div class="nextprevious" [class.disabled]="p.isFirstPage()">
+                  <span  (click)="p.previous()">
+                    <i class="icon-arrow-left"></i> Prev
+                      </span>
+                  </div>
+                  <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+                        <span (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label }}</span>
+                      <div *ngIf="p.getCurrent() === page.value">
+                        <span>{{ page.label }}</span>
+                      </div>
+                  </div>
+                  <div class="nextprevious"  [class.disabled]="p.isLastPage()">
+                    <span  (click)="p.next()"> Next <i
+                      class="icon-arrow-right"></i> </span>
+                  </div>
+            </div>
+  
+          </div>
+  
+        </pagination-template>
+      </div>
+    </div>
+    <ng-template #nobusiness>
+        <div class="nobusiness" *ngIf="companylist && companylist.length==0">
+            <div class="noData">
+              <h3>Didn't find any business?</h3>
+              <p>You can add new business using button below.</p>
+              <div class="connectButton">
+                <span class="connectBtn">
+                   <app-addbusiness></app-addbusiness>
+                </span>
+              </div>
+            </div>
+          </div>
+    </ng-template>
+  </div>
+</div>
+
