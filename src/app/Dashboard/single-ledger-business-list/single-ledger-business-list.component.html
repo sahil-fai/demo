@@ -40,14 +40,14 @@
       </div>
       <ul class="companyList">
         <li *ngFor="let company of companylist| paginate: config">
-         
+
           <div class="cellWrapper clearfix">
             <div class="whiteWrapper">
               <div class="companyWrapper">
                 <ul class="dataList">
                   <li>
                     <div>Company Name</div>
-                    <div> <h6>{{company?.company?.LegalName}}</h6></div>
+                    <div> <h6>{{company?.company?.legalname}}</h6></div>
                   </li>
                   <li>
                     <div class="dataLabel">Connected To</div>
@@ -55,11 +55,11 @@
                   </li>
                   <li>
                     <div class="dataLabel">Last Accessed</div>
-                    <div class="dataValues">{{company?.company?.RegisterDate | date}}</div>
+                    <div class="dataValues">{{company?.company?.registerdate | date}}</div>
                   </li>
                   <li>
                     <div class="dataLabel">Last Updated</div>
-                    <div class="dataValues">{{company?.company?.RegisterDate | date}}</div>
+                    <div class="dataValues">{{company?.company?.registerdate | date}}</div>
                   </li>
                 </ul>
                 <ul class="buttonList">
@@ -78,11 +78,11 @@
         </li>
       </ul>
       <div class="pagination">
-        
+
         <pagination-template  #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event" [class.disabled]= "length < config.itemsPerPage" >
-  
+
           <div class="custom-pagination">
-  
+
               <div style="display:inline-block" *ngIf="!(p.isFirstPage() && p.isLastPage())">
                 <div class="nextprevious" [class.disabled]="p.isFirstPage()">
                   <span  (click)="p.previous()">
@@ -100,9 +100,9 @@
                       class="icon-arrow-right"></i> </span>
                   </div>
             </div>
-  
+
           </div>
-  
+
         </pagination-template>
       </div>
     </div>
