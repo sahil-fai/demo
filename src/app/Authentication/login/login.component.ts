@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnChanges, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service/auth.service';
@@ -15,15 +15,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
   safeSrc: SafeResourceUrl;
   private _subscribeFormControls: any;
   public submitted = false;
   public showPassword:boolean = false;
   public notificationserveice: Subscription;
-  public message: any="Successfully login";
+  public message: any = 'Successfully login';
+  @ViewChild('email') private elementRef: ElementRef;
 
-  constructor(private router: Router, private _fb: FormBuilder,private authService:AuthService, private helper: HelperService, private sanitizer: DomSanitizer,public dialog: MatDialog, private notification: NotificationsnackbarService, private snackBar: MatSnackBar) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(private router: Router, private _fb: FormBuilder, private authService: AuthService, private helper: HelperService, private sanitizer: DomSanitizer, public dialog: MatDialog, private notification: NotificationsnackbarService, private snackBar: MatSnackBar) { }
 
   formLogin: FormGroup;
 
@@ -56,7 +58,7 @@ export class LoginComponent implements OnInit {
         //   this.snackBar.open(this.message,{
         //     duration: 2000
         //  });
-     // this.notification.openSnackBar(this.message,'✌✌️✌️');
+        this.notification.openSnackBar(this.message,'✌✌️✌️');
         this.helper.set(res.token);
         this.helper.setuserId(res.user.id);
         this.router.navigate(['/businesslist']);
@@ -69,7 +71,7 @@ export class LoginComponent implements OnInit {
     }
     );
   }
-  get f() { 
+  get f() {
     return this.formLogin.controls;
   }
   openDialog(data: string): void {
@@ -85,8 +87,10 @@ export class LoginComponent implements OnInit {
   ngOnChanges(): void {
     console.log(this.formLogin);
   }
-  public togglePasswordVisibility(){
+  ngAfterViewInit(): void {
+    this.elementRef.nativeElement.focus();
+}
+  public togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 }
-

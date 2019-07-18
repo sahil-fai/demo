@@ -143,11 +143,11 @@ body{
 .wrapper{
     width:100%;
     height: 100vh;
-    max-height: 100%;
     max-width: 1346px;
     margin: 0 auto;
     background-color: #ffffff;
     box-shadow: 0 0 70px -10px #000;
+    overflow: auto;
 
     @media screen and (min-width: @laptopsMin) and (max-width: @laptopsMax){
         max-width: 1200px;
@@ -1138,13 +1138,13 @@ textarea.fields.newFormatting{
     padding: 0 6px;
     .searchBlock{
         margin: -0.4em;
-    
+
         li{
             display: inline-block;
             vertical-align: bottom;
             padding: 0.4rem;
         }
-    
+
         .fields{
             font-size: 0.87em;
             height: 2.61em;
@@ -1152,14 +1152,14 @@ textarea.fields.newFormatting{
                 border: 1px solid #00add8;
             }
         }
-    
+
         // input[type=reset]{
         //     margin-left: 0.8rem;
         // }
-    
+
         @media screen and (max-width: @tabletsPortraitMax){
             text-align: center;
-    
+
             li{
                 text-align: left;
             }
@@ -1274,7 +1274,7 @@ textarea.fields.newFormatting{
                     }
                 }
             }
-           
+
         }
 
         a{
@@ -1701,7 +1701,8 @@ textarea.fields.newFormatting{
     border-bottom: 1px solid #dfecef;
     height: 4rem;
     box-sizing: border-box;
-    padding: 0 0 0 1.3em;
+  //  padding: 0 0 0 1.3em;
+    padding: 0;
     position: relative;
     z-index: 2;
     background: #ebeeef;
@@ -2321,7 +2322,7 @@ textarea.fields.newFormatting{
 }
 
 .conditionList{
-   
+
    display: flex;
    align-content: space-between;
    flex-wrap: wrap;
@@ -2444,7 +2445,7 @@ textarea.fields.newFormatting{
             font-size: 1.2rem;
             font-weight: 700;
             height: 2.45em;
-           
+
         }
 
         .btn-icon{
@@ -3065,9 +3066,9 @@ mat-accordion{
         &:hover, &.active{
             background-color: #fff;
             color: #00add8;
-            .mat-content{     
+            .mat-content{
                     i{
-                        text-shadow: none;            
+                        text-shadow: none;
                     }
             }
         }
@@ -3092,7 +3093,7 @@ mat-accordion{
                     z-index: 1;
                     width: 100%;
                     display: block;
-                    
+
                 }
                 i{
                     font-size: 1.2em;
@@ -3120,7 +3121,7 @@ mat-accordion{
                     }
                 }
                 padding: 0;
-                
+
             }
         }
     }
@@ -3129,19 +3130,19 @@ mat-accordion{
         line-height: 1.3;
     }
 }
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     mat-accordion{
         mat-expansion-panel.mat-expansion-panel{
             &.mat-expanded{
                 .mat-expansion-panel-header{
-                    span.mat-expansion-indicator { 
+                    span.mat-expansion-indicator {
                       margin-top: -26px;
-                    }  
+                    }
                 }
             }
-           
+
         }
-      
+
     }
   }
   //ledger customiation
@@ -3176,21 +3177,21 @@ mat-dialog-container{
         .cdk-overlay-pane{
            width: 100%;
         }
-       
+
     }
 }
 .title{
     padding-bottom: 25px;
 }
 .mat-bottom-sheet-container{
-        position: relative !important; 
+        position: relative !important;
         left: calc(50% - 14.3rem);
 }
 @media screen and (max-width: @tabletsLandscapeMax){
     .mat-bottom-sheet-container{
         margin: 0 auto;
         left: auto;
-  }  
+  }
 }
 mat-bottom-sheet-container{
     &.invoicebottomsheet{
@@ -3219,4 +3220,9 @@ mat-bottom-sheet-container{
     background-color: #0ae;
     background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent));
 }
+}
+.mat-snack-bar-container.red-snackbar {
+    color: #fff;
+    background: #2196f3ad;
+    margin: 15px auto;
 }
