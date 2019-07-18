@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
         windowObjectReference.close();
       });
   }
- 
+
   public reloadBusiness() {
     const _self = this;
     this._reloadingDialog = this.dialog.open(BusinessReloadComponent, {

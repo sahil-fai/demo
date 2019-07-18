@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
         //   this.snackBar.open(this.message,{
         //     duration: 2000
         //  });
-        this.notification.openSnackBar(this.message,'✌✌️✌️');
+       // this.notification.openSnackBar(this.message,'✌✌️✌️');
         this.helper.set(res.token);
         this.helper.setuserId(res.user.id);
         this.router.navigate(['/businesslist']);
