@@ -76,9 +76,11 @@
                     <li>
                       <label class="labels newFormatting"> Confirm Password</label>
                       <div class="password">
-                          <input [type]="showConfirmPassword?'text':'password'" class="fields newFormatting" formControlName="confirmpassword"/>
+                          <input [type]="showConfirmPassword?'text':'password'" class="fields newFormatting" formControlName="confirmpassword" [ngClass]="{error: errors && (!f.confirmpassword.pristine)}"/>
                           <span type="button" class="icon-eye-hide" (click)="toggleConfirmPasswordVisibility()"></span>
+                          
                       </div>
+                      <div class="errorMessage" *ngIf="((!f.confirmpassword.pristine) && (errors && errors.notSame))">confirm Password is not matched</div>
                     </li>
                     <!-- <li class="recaptchaHolder g-recaptcha">
                       <re-captcha required siteKey="6LcXSkMUAAAAAEmYkp1eSbIbT-vcMkxEnxmoryxd" formControlName="recaptcha" ></re-captcha>

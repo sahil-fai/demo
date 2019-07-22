@@ -5,7 +5,7 @@ import { AuthService } from '../../services/auth-service/auth.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {MediaMatcher} from '@angular/cdk/layout';
-import { DialogOverviewExampleDialogComponent } from '../../Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component'
+import { DialogOverviewExampleDialogComponent } from '../../Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component' 
 import { TermsConditionsComponent } from '../../Shared/terms-conditions/terms-conditions.component'
 
 @Component({
@@ -24,7 +24,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   width: string;
-
 
   // tslint:disable-next-line: max-line-length
   constructor(private router: Router, private _fb: FormBuilder,private authService:  AuthService,  private sanitizer: DomSanitizer,public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
@@ -48,12 +47,12 @@ export class SignupComponent implements OnInit, OnDestroy {
       username: [this.userEmail, [ Validators.required, Validators.email ]],
       // tslint:disable-next-line: max-line-length
       password: ['', [ Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter ]],
-      confirmpassword: ['', ''],
+      confirmpassword: ['', [ Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter ]],
       isAgree: ['', [ Validators.requiredTrue ]],
-      //recaptcha: [null, [ Validators.required]],
+      // recaptcha: [null, [ Validators.required]],
     //  recaptcha: ['', '',],
       role: [null, [Validators.required]]
-    });
+    }, {validator: this.checkPasswords });
   }
    // check for Numbers
   private hasNumber(control: AbstractControl): { [key: string]: boolean } | null {
@@ -106,6 +105,9 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
    /* Login form validations */
   get f() { return this.formRegister.controls; }
+  get errors(){
+    return this.formRegister.errors
+  }
 
   openVideo(data: string): void {
     this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(data);
@@ -117,6 +119,16 @@ export class SignupComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
      // console.log('The dialog was closed');
     });
+  }
+  public checkPasswords(group: FormGroup) {
+    if(group.controls){
+     
+      let pass = group.controls.password.value;
+      let confirmPass = group.controls.confirmpassword.value;
+       return pass === confirmPass ? null : { notSame: true }
+    }
+    // }
+    // return null;
   }
   openTermsConditions() {
     this.width = (this.mobileQuery.matches) ? '80vw' : '50vw';
