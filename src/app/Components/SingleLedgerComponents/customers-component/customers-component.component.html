@@ -35,9 +35,9 @@
   </form>
 </div>
 <div class="customers">
-    <div class="select-box">
+    <div class="select-box" *ngIf="Totalrec>0">
 
-            <span class="text-label">Select as all<i class="icon-arrow-down"></i>
+            <span class="text-label">Select as all<i class="icon-arrow-down" ></i>
                   <!-- <mat-form-field>
                       <mat-select [(value)]="selected"  multiple>
                         <mat-option *ngFor="let status of StatusList" [value]="status">{{status}}</mat-option>
