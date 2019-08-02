@@ -22,6 +22,7 @@ import {
   BottomSheetOverviewExampleSheetComponent
 } from 'src/app/Shared/bottom-sheet-overview-example-sheet/bottom-sheet-overview-example-sheet.component';
 import { BusinessService } from '../../../services/business-service/business.service';
+import { HelperService } from 'src/app/services/helper-service/helper.service.js';
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -78,7 +79,7 @@ export class InvoicesComponentComponent implements OnInit {
   };
   public pageNumber = 1;
   public numberOfpages: number[];
-  public size = 10;
+  public size = 100;
   public pageIndex = 0;
   public config = {
     itemsPerPage: this.size,
@@ -93,17 +94,18 @@ export class InvoicesComponentComponent implements OnInit {
 
   selection = new SelectionModel < PeriodicElement > (true, []);
   invoice: string;
-  constructor(private _bottomSheet: MatBottomSheet, public businessService: BusinessService) {
+  constructor(private _bottomSheet: MatBottomSheet, public businessService: BusinessService, private helper: HelperService) {
    // this.invoices = json;
    // this.totalRec = this.invoices.length;
   }
 
   ngOnInit() {
-    this.getinvoices();
+    const companyid = Number(this.helper.getcompanyId());
+    this.getinvoices(companyid);
   }
 
-  public getinvoices() {
-    this.businessService.getAllInvoices().subscribe(
+  public getinvoices(companyid:number) {
+    this.businessService.getAllInvoices(companyid).subscribe(
       res => {
         this.invoices = res;
         this.totalRec = this.invoices.length;
