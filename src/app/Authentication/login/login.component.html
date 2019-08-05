@@ -26,14 +26,14 @@
                 <ul class="formFieldsList">
                   <li>
                     <label class="labels newFormatting">Email</label>
-                    <input type="email" class="fields newFormatting"  [ngClass]="{error: (f.username.invalid && f.username.dirty) || (submitted && f.username.invalid)}" formControlName="username" />
-                    <div class="errorMessage" *ngIf="(f.username.invalid && f.username.dirty && f.username.errors.email) || (submitted && f.username.invalid && f.username.errors.email)">Please enter a valid email address.</div>
+                    <input type="email" class="fields newFormatting"  [ngClass]="{error: (f.username.invalid && f.username.dirty) || (submitted && f.username.invalid)}" formControlName="username" #email/>
+                    <div class="errorMessage" *ngIf="(f?.username.invalid && f?.username.dirty && f?.username.errors.email) || (submitted && f?.username.invalid && f?.username.errors.email)">Please enter a valid email address.</div>
                   </li>
                   <li>
                     <label class="labels newFormatting">Password</label>
                     <div class="password">
                         <input [type]="showPassword?'text':'password'" class="fields newFormatting"  [ngClass]="{error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid)}" formControlName="password" />
-                        <button  type="button" class="icon-eye-hide"  (click)="togglePasswordVisibility()"></button>
+                        <span  type="button" class="icon-eye-hide"  (click)="togglePasswordVisibility()"></span>
                     </div>
                     <div class="errorMessage" *ngIf="(f.password.invalid && f.password.dirty && f.password.errors.minlength) || (submitted && f.password.invalid && f.password.errors.minlength)">Minimum 6 characters needed.</div>
                   </li>
