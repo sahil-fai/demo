@@ -16,7 +16,7 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
   ngOnInit() {
     const companyid = Number(this.helper.getcompanyId());
     this.BusinessService.getCompanyInformation(companyid).subscribe(res => {
-    this.CurrentCompanyName = res.LegalName;
+    this.CurrentCompanyName = res.legalname;
    });
   }
   public closeNav() {

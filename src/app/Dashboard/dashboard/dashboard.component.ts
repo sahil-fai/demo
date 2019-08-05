@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit {
     setTimeout(() => {
       _self._reloadingDialog.close();
       this.router.navigate(['/businesslist']);
-    }, 30000);
+    }, 80000);
     //_self._toastr.info(Messages.businessDataReload, '', _self._helper.reloadBiusinessToastConfiguration());
     // this._bussinessService.reload(businessID).subscribe(res => {
     //   //_self._helper.clearToastMessages();

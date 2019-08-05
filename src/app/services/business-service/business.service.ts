@@ -37,7 +37,7 @@ export class BusinessService {
    });
   }
 
-  getCompanyInformation(id: number): Observable<any> {
-    return this.http.get<any>('business/' + id + '?filter={"include":[{"relation":"all"}]}');
+  getCompanyInformation(id: number, filter?:string): Observable<any> {
+    return this.http.get<any>('business/' + id + (filter ? filter : "?filter={}"));
   }
 }
