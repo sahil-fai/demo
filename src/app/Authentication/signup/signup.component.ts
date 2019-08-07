@@ -60,16 +60,16 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
   formRegister: FormGroup;
   roles = [{
-      value: 'CPA',
+      value: 'cpa',
       viewValue: 'CPA'
     },
     {
-      value: 'Business Owner',
+      value: 'businessowner',
       viewValue: 'Business Owner'
     },
     {
-      value: 'Admin',
-      viewValue: 'Adminstator'
+      value: 'accountant',
+      viewValue: 'accountant'
     }
   ];
   ngOnInit() {

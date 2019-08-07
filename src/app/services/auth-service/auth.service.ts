@@ -18,6 +18,7 @@ export class AuthService {
       firstName: data.firstName,
       IsActive: true,
       RoleTypeId: 0,
+      roleType:data.role
       });
   }
 
