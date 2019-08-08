@@ -44,7 +44,7 @@ export class BusinessReloadComponent implements OnInit {
       this.generatingReports.isProcessing = false;
       this.generatingReports.isDone = true;
       this.settingUpProjects.isProcessing = true;
-    }, 30000);
+    }, 80000);
   }
 
 }

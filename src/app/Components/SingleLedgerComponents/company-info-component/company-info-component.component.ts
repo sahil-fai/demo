@@ -14,7 +14,8 @@ export class CompanyInfoComponentComponent implements OnInit {
 
   ngOnInit() {
     const companyid=Number(this.helper.getcompanyId());
-    this.BusinessService.getCompanyInformation(companyid).subscribe(res => {
+    let filter = '?filter={"include":[{"relation":"all"}]}';
+    this.BusinessService.getCompanyInformation(companyid,filter).subscribe(res => {
       console.log(res)
       this.companyinfo= res;
     });

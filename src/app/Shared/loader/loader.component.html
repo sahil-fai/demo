@@ -1,10 +1,12 @@
 <div class="layer" *ngIf="showLoader"></div>
 <mat-progress-bar *ngIf="showLoader" [mode]="'indeterminate'" [color]="'warn'"></mat-progress-bar>
-<div class="loader" *ngIf="showLoader">
+<!-- <div class="loader" *ngIf="showLoader">
     <div class="dots one"></div>
     <div class="dots two"></div>
     <div class="dots three"></div>
     <div class="dots four"></div>
     <div class="dots five"></div>
+  </div> -->
+  <div class="loader" *ngIf="showLoader">
+    <img src="/assets/images/spinnerlight@2x.png" alt="" class="scr">
   </div>
-  

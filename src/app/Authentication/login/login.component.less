@@ -1,64 +1,86 @@
 .shadowBox{
-            
-    max-width: 1100px;
-    .left-container {
-        float: left;
-        width: 22.8%;
-        background: #e9f4f7;
-        max-height: 600px;
-        border-radius: 10px 0 0 10px;
-        .logoHeader{
-            display: flex;
-            justify-content: center;
-            padding: 30px 0;
-        }
-        .video-wrapper {
-            padding: 2rem;
-            margin-top: 60%;
-            margin-bottom: 80%;
-           
-            .monitor{
-                display: flex;
-                justify-content: center;
-                padding: 30px 0;
-                img{
-                    max-width: 100%;
-                }
-            }
-        }
-    }
-    .right-container {
-        width: 40%;
-        display: block;
-        position: absolute;
-        right: 18%;
-        top: 10%;
-        .formFieldsList{
 
-            li{
-                padding: 0.7em 0;
-                position: relative;
-            }
-    
-            .btn{
-                &.login{
-                    background-color: #00add8;
-                    color: #fff;
-                    .icon-submit{
-                        font-size: 25px;
-                    }
-                    &:disabled{
-                        opacity: 0.2;
-                        cursor: not-allowed; 
-                    }
-                }
-                &.create-account{
-                    background-color: #e9f4f7;
-                    color: #275c85
-                }
-               
-            }
-        }
-    }
-   
+  max-width: 1100px;
+  .left-container {
+      float: left;
+      width: 22.8%;
+      background: #e9f4f7;
+      max-height: 600px;
+      border-radius: 10px 0 0 10px;
+      .logoHeader{
+          display: flex;
+          justify-content: center;
+          padding: 30px 0;
+      }
+      .video-wrapper {
+          padding: 2rem;
+          margin-top: 60%;
+          margin-bottom: 80%;
+
+          .monitor{
+              display: flex;
+              justify-content: center;
+              padding: 30px 0;
+              background: #ffffffcf;
+              border-radius: 16px;
+              box-shadow: 0 4px 8px 2px rgba(28, 0, 25, 0.04), 0 6px 13px 4px rgba(7, 48, 8, 0.12), 0 6px 0px -4px rgba(14, 13, 26, 0.12);
+              margin: 0 auto;
+              img{
+                  max-width: 100%;
+              }
+          }
+      }
+  }
+  .right-container {
+      width: 40%;
+      display: block;
+      position: absolute;
+      right: 18%;
+      top: 10%;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px 2px rgba(28, 0, 25, 0.04), 0 6px 13px 4px rgba(7, 48, 8, 0.12), 0 6px 0px -4px rgba(14, 13, 26, 0.12);
+      margin: 0 auto;
+     // min-height: 400px;
+      padding: 50px 40px 40px 40px;
+      .formFieldsList{
+
+          li{
+              padding: 0.7em 0;
+              position: relative;
+          }
+          .icon-eye-hide{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            font-size: 1.2rem;
+            height: 1.27em;
+            border: none;
+            background: none;
+            width: 1.27em;
+            color: #54b6c3;
+            padding: 0;
+            cursor: pointer;
+          }
+          .btn{
+              &.login{
+                  background-color: #00add8;
+                  color: #fff;
+                  .icon-submit{
+                      font-size: 25px;
+                  }
+                  &:disabled{
+                      opacity: 0.2;
+                      cursor: not-allowed;
+                  }
+              }
+              &.create-account{
+                  background-color: #e9f4f7;
+                  color: #275c85
+              }
+
+          }
+      }
+  }
+
 }
