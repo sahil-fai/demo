@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { BusinessService } from '../../../services/business-service/business.service';
+import { HelperService } from 'src/app/services/helper-service/helper.service';
 
 @Component({
   selector: 'app-suppliers',
@@ -91,24 +93,57 @@ export class SuppliersComponent implements OnInit {
     ItemOfSubAccount: '',
     Subject: '',
     editable: true,
-    isActive: '',
+    isActive: true,
     itemDescription1: '',
     itemDescription2: '',
     itemDescription3: '',
-    opration: ''
+    opration: 'AND'
   };
-  constructor() { }
+  vendors: any;
+  constructor(private helper: HelperService,
+              private businessService: BusinessService
+    ) {
+      }
 
   ngOnInit() {
+   this._getChartofAccounts();
+   this._getplatforms();
+   this._getVendors();
   }
+
+  _getVendors() {
+    const companyid = Number(this.helper.getcompanyId());
+    this.businessService.getAllVendors(companyid).subscribe(res => {
+      if (res.length > 0) {
+        this.vendors = res;
+       }
+    });
+  }
+
+
+  _getplatforms() {
+    this.businessService.getPlatforms().subscribe(res => {
+      console.log(res);
+     });
+  }
+
+  _getChartofAccounts() {
+    const companyid = Number(this.helper.getcompanyId());
+    this.businessService.getCompanyChartOfAccounts(companyid).subscribe(res => {
+      console.log(res);
+     });
+  }
+
   public addRecord() {
     if (!this.transcationList[this.transcationList.length - 1].editable) {
       this.transcationList.push(this.transcationListModel);
     }
   }
+
   public saveRecord(){
 
   }
+
   public cancelRecord(){
 
   }
