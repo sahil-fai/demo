@@ -1,0 +1,232 @@
+<div class="title">
+    <h2>{{ title }}</h2>
+</div>
+<mat-card class="example-card">
+    <mat-card-content>
+      <div class="floatBoxesWrapper">
+        <div class="floatBox" id="tableData">
+          <div class="defaultTable">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Vendor</th>
+                  <th>Platfrom</th>
+                  <th>Mapping Type</th>
+                  <th>Email On Biil</th>
+                  <th>isActive</th>
+                  <th>itemDesc1</th>
+                  <th>itemDesc2</th>
+                  <th>itemDesc3</th>
+                  <th>COA</th>
+                  <th>Operation</th>
+                  <th>Subject</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of transcationList">
+                  <ng-container *ngIf="item.editable">
+                    <td>
+                      <ng-select
+                              [items]="Vendor"
+                              [loading]="false"
+                              bindLabel="Name"
+                              placeholder="Select Vendor"
+                              appendTo="body"
+                      >
+                      <ng-template ng-option-tmp let-item="item" let-index="index">
+                            <div title="{{item.Name}}">{{item.Name}}</div>
+                      </ng-template>
+                      </ng-select>
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="!item.editable">
+                    <td>
+                        {{item.vendorName}}
+                    </td>
+                </ng-container>
+
+                  <ng-container *ngIf="item.editable">
+                    <td>
+                      <ng-select
+                      [items]="platfrom"
+                      [loading]="false"
+                      bindLabel="Name"
+                      placeholder="Select platfrom"
+                      appendTo="body">
+                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                          <div title="{{item.Name}}">{{item.Name}}</div>
+                    </ng-template>
+                    </ng-select>
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="!item.editable">
+                    <td>
+                        {{item.platfrom}}
+                    </td>
+                </ng-container>
+
+                <ng-container *ngIf="item.editable">
+                    <td>
+                      <ng-select
+                      [items]="mapping"
+                      [loading]="false"
+                      bindLabel="Name"
+                      placeholder="Select Mapping"
+                      appendTo="body">
+                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                          <div title="{{item.Name}}">{{item.Name}}</div>
+                    </ng-template>
+                    </ng-select>
+                    </td>
+                </ng-container>
+                <ng-container *ngIf="!item.editable">
+                    <td>
+                    {{item.mappingtype}}
+                    </td>
+                </ng-container>
+
+                <ng-container *ngIf="item.editable">
+                    <td><input class="input-edit" type="email"></td>
+                </ng-container>
+                <ng-container *ngIf="!item.editable">
+                    <td>
+                        {{item.vendorEmail}}
+                    </td>
+                </ng-container>
+                <ng-container *ngIf="item.editable">
+                    <td><mat-checkbox [checked]="item.isActive"> {{item.isActive}}</mat-checkbox></td>
+                </ng-container>
+                <ng-container *ngIf="!item.editable">
+                    <td>
+                        {{item.isActive}}
+                    </td>
+                </ng-container>
+                <ng-container *ngIf="item.editable">
+                  <td><input class="input-edit" type="text"></td>
+              </ng-container>
+              <ng-container *ngIf="!item.editable">
+                  <td>
+                      {{item.itemDescription1}}
+                  </td>
+              </ng-container>
+              <ng-container *ngIf="item.editable">
+                <td><input class="input-edit" type="text"></td>
+            </ng-container>
+            <ng-container *ngIf="!item.editable">
+                <td>
+                    {{item.itemDescription2}}
+                </td>
+            </ng-container>
+            <ng-container *ngIf="item.editable">
+              <td><input class="input-edit" type="text"></td>
+          </ng-container>
+          <ng-container *ngIf="!item.editable">
+              <td>
+                  {{item.itemDescription3}}
+              </td>
+          </ng-container>
+
+
+                  <ng-container *ngIf="item.editable">
+                      <td>
+                          <ng-select
+                                  [items]="COA"
+                                  [loading]="false"
+                                  bindLabel="Name"
+                                  placeholder="Select COA"
+                                  appendTo="body"
+                          >
+                          <ng-template ng-option-tmp let-item="item" let-index="index">
+                                <div title="{{item.Name}}">{{item.Name}}</div>
+                          </ng-template>
+                          </ng-select>
+                      </td>
+                  </ng-container>
+                  <ng-container *ngIf="!item.editable">
+                      <td>
+                          {{item.COA}}
+                      </td>
+                  </ng-container>
+
+                  <ng-container *ngIf="item.editable">
+                    <td>
+                        <ng-select
+                                [items]="opration"
+                                [loading]="false"
+                                bindLabel="Name"
+                                placeholder="Select opration"
+                                appendTo="body"
+                        >
+                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                              <div title="{{item.Name}}">{{item.Name}}</div>
+                        </ng-template>
+                        </ng-select>
+                    </td>
+                </ng-container>
+                <ng-container *ngIf="!item.editable">
+                    <td>
+                        {{item.opration}}
+                    </td>
+                </ng-container>
+                  <!-- <ng-container *ngIf="item.editable">
+                      <td>
+                          <ng-select
+                                  [items]="SubAccount"
+                                  [loading]="false"
+                                  bindLabel="Name"
+                                  placeholder="Select SubAccount"
+                                  appendTo="body"
+                          >
+                          <ng-template ng-option-tmp let-item="item" let-index="index">
+                                <div title="{{item.Name}}">{{item.Name}}</div>
+                          </ng-template>
+                          </ng-select>
+                          </td>
+                  </ng-container>
+                  <ng-container *ngIf="!item.editable">
+                      <td>
+                          {{item.ItemOfSubAccount}}
+                      </td>
+                  </ng-container> -->
+                  <ng-container *ngIf="item.editable">
+                      <td><input class="input-edit" type="text"></td>
+                  </ng-container>
+                  <ng-container *ngIf="!item.editable">
+                      <td>
+                          {{item.Subject}}
+                      </td>
+                  </ng-container>
+                  <button  class="btn icon-dots-vertical edit-options" [ngClass]="item.editable?'editable':'disabled'" title="Actions" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{item:item}" title="Actions"><mat-icon>toc</mat-icon>
+                    </button>
+                </tr>
+              </tbody>
+              <tbody *ngIf="!transcationList || !transcationList.length">
+                <tr>
+                  <td colspan="8" style="height:190px;text-align:center;color:#969696;font-weight:700;">No Records Found</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button  type="button" class="clickable add-button" (click)="addRecord()" title="Add Transaction ">
+              <mat-icon>note_add</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu="matMenu">
+            <ng-template let-item="item" matMenuContent>
+              <ng-container>
+                  <button matRipple mat-menu-item (click)="saveRecord(item)">
+                      <i class="icon icon-tick"></i>
+                      <span>Save</span>
+                   </button>
+                    <button matRipple mat-menu-item (click)="cancelRecord(item)">
+                        <i class="icon icon-cross"></i>
+                        <span>Cancel</span>
+                   </button>
+              </ng-container>
+          </ng-template>
+        </mat-menu>
+      </div>
+      </mat-card-content>
+</mat-card>
+

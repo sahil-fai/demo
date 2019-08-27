@@ -44,10 +44,16 @@
               </mat-expansion-panel-header>
           </mat-expansion-panel>
           <mat-expansion-panel routerLinkActive="active" [@.disabled]="true" >
+            <mat-expansion-panel-header>
+                <i class="icon-bill"></i><a [routerLink]="['/business/suppliers']" title='Chart Of Account Mapping'>COA Mapping</a>
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+          <mat-expansion-panel routerLinkActive="active" [@.disabled]="true" >
               <mat-expansion-panel-header>
                   <i class="icon-bill"></i><a [routerLink]="['/connectbusiness']" >Connect Business</a>
               </mat-expansion-panel-header>
           </mat-expansion-panel>
+
 
       </mat-accordion>
   </div>
