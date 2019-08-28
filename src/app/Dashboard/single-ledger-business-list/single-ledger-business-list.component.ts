@@ -59,6 +59,6 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   public viewBusiness(companyid) {
     this.helper.setcompanyId(companyid);
     this.router.navigate(['/business', 'company-info']);
-    console.log(companyid);
+    //console.log(companyid);
   }
 }

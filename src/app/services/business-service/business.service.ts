@@ -20,7 +20,7 @@ export class BusinessService {
   }
 
   getAllVendors(id: number): Observable<any> {
-    console.log(id);
+    //console.log(id);
     // tslint:disable-next-line: max-line-length
     return this.http.get<any>('business/vendors' + '?filter={"where":{"referencecompanyid":' + id + '},"limit":100,"include":[{"relation":"company"}]}', {
    });
@@ -48,7 +48,12 @@ export class BusinessService {
 
   getCompanyChartOfAccounts(id: number, filter?:string): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/chartofaccounts' + '?filter={"where":{"companyid":' + id + '},"limit":100,"include":[{"relation":"all"}]}', {
+    return this.http.get<any>('business/chartofaccounts' + '?filter={"where":{"companyid":' + id + '},"limit":100}', {
     });
+  }
+
+  postchartofaccountmapping(data)
+  {
+      return this.http.post<any>('/chartofaccountmappings', data);
   }
 }

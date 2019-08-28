@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
   }
+
   public onConnect() {
     const _self = this;
     var LeftPosition = (screen.width) ? (screen.width-600)/2 : 0;
