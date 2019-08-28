@@ -41,37 +41,8 @@ export class SuppliersComponent implements OnInit {
     {Name: 'AND', ID: 274},
     {Name: 'OR', ID: 275}
   ];
-  public transcationList = [{
-    vendorName: 'Vendor1',
-    vendorEmail: 'Vendor@mail.com',
-    platfrom: 'QuickBook',
-    mappingtype: 'map-1',
-    COA: 'COA-1',
-    ItemOfSubAccount: 'SubAccount-1',
-    Subject: 'Subject-1',
-    editable: false,
-    isActive: true,
-    itemDescription1: 'desk',
-    itemDescription2: 'portal',
-    itemDescription3: 'adjustable',
-    opration: 'AND'
-
-  },
-  {
-    vendorName: 'Vendor2',
-    vendorEmail: 'Vendor@mail.com',
-    platfrom: 'QuickBook',
-    mappingtype: 'map-2',
-    COA: 'COA-2',
-    ItemOfSubAccount: 'SubAccount-2',
-    Subject: 'Subject-2',
-    editable: false,
-    isActive: true,
-    itemDescription1: 'desk',
-    itemDescription2: 'portal',
-    itemDescription3: 'adjustable',
-    opration: 'OR'
-  }];
+  public transcationList = [];
+  public COAMappings: any;
 
 
   private _createForm() {
@@ -115,7 +86,46 @@ export class SuppliersComponent implements OnInit {
    this._getChartofAccounts();
    this._getplatforms();
    this._getVendors();
+   this._getChartofAccountMappings();
    this._createForm();
+  }
+  _getChartofAccountMappings() {
+   this.businessService.getchartofaccountmapping().subscribe(res => {
+      if (res.length > 0) {
+        this.COAMappings = res;
+        this._generateCOAMapping();
+       }
+    });
+  }
+  _generateCOAMapping() {
+    this.transcationList.length = 0;
+    this.transcationList= [];
+    this.COAMappings.forEach(element => {
+      let data = {
+        vendorName: element.vendor.company.name,
+        vendorEmail: element.emailonthebill,
+        platfrom: element.organization,
+        mappingtype: this._getMappingByID(element.chartofaccountmappingtypeidl),
+        COA: element.chartofaccount.chartofaccountname,
+        ItemOfSubAccount: 'SubAccount-1',
+        Subject: element.subject,
+        editable: false,
+        isActive: element.isactive,
+        itemDescription1: element.itemdescription1,
+        itemDescription2: element.itemdescription2,
+        itemDescription3: element.itemdescription3,
+        opration: this._getOperationTypeByID(element.operationtypeidl)
+      }
+
+      this.transcationList.push(data);
+
+    });
+  }
+  _getOperationTypeByID(operationtypeidl: any) {
+    return this.opration.find(x=>x.ID == operationtypeidl).Name;
+  }
+  _getMappingByID(chartofaccountmappingtypeidl: any) {
+    return this.mapping.find(x=>x.ID == chartofaccountmappingtypeidl).Name;
   }
 
   _getVendors() {
@@ -163,7 +173,7 @@ export class SuppliersComponent implements OnInit {
     };
 
     this.businessService.postchartofaccountmapping(data).subscribe((res) => {
-      console.log(res);
+      this._getChartofAccountMappings();
     });
 
   }

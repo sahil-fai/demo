@@ -56,4 +56,10 @@ export class BusinessService {
   {
       return this.http.post<any>('/chartofaccountmappings', data);
   }
-}
+
+  getchartofaccountmapping(): Observable<any> {
+    // tslint:disable-next-line: max-line-length
+    return this.http.get<any>('/chartofaccountmappings?filter={"limit":10,"include":[{"relation":"all1"}]}', {
+    });
+  }
+ }
