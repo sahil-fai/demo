@@ -113,7 +113,7 @@ export class CustomersComponentComponent implements OnInit {
   }
 
   public handlePage(e: any) {
-    console.log(e)
+    //console.log(e)
     let pagesize = e.pageSize;
     let pagenumber = e.pageIndex + 1;
     let data = this.Paginator(this.customers, pagenumber, pagesize);

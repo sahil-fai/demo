@@ -29,6 +29,4 @@ export class AuthService {
       password: data.password,
     });
   }
-
-
 }
