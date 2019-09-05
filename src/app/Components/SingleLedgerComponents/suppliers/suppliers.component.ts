@@ -10,6 +10,22 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class SuppliersComponent implements OnInit {
+  public transcationListModel = {
+    vendorName: '',
+    vendorEmail: '',
+    platfrom: '',
+    mappingtype: '',
+    COA: '',
+    ItemOfSubAccount: '',
+    Subject: '',
+    editable: true,
+    isActive: true,
+    itemDescription1: '',
+    itemDescription2: '',
+    itemDescription3: '',
+    opration: 'AND'
+  };
+
   public title =  'My Suppliers';
   formTransaction: FormGroup;
   public COA = [
@@ -61,21 +77,7 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
-  public transcationListModel = {
-    vendorName: '',
-    vendorEmail: '',
-    platfrom: '',
-    mappingtype: '',
-    COA: '',
-    ItemOfSubAccount: '',
-    Subject: '',
-    editable: true,
-    isActive: true,
-    itemDescription1: '',
-    itemDescription2: '',
-    itemDescription3: '',
-    opration: 'AND'
-  };
+
 
   constructor(private helper: HelperService,
               private businessService: BusinessService, private _fb: FormBuilder,
@@ -157,6 +159,7 @@ export class SuppliersComponent implements OnInit {
   }
 
   public saveRecord(){
+    const Companyid = Number(this.helper.getcompanyId());
     const formData = this.formTransaction.value;
     const data = {
       vendorid: formData.Contact.vendorid,
@@ -169,7 +172,8 @@ export class SuppliersComponent implements OnInit {
       itemdescription2: formData.Desc2,
       itemdescription3: formData.Desc3,
       operationtypeidl: formData.Operation.ID,
-      subject: formData.Subject
+      subject: formData.Subject,
+      companyid: Companyid
     };
 
     this.businessService.postchartofaccountmapping(data).subscribe((res) => {
