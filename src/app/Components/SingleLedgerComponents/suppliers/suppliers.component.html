@@ -137,13 +137,13 @@
                           <ng-select
                                   [items]="COA"
                                   [loading]="false"
-                                  bindLabel="Name"
+                                  bindLabel="chartofaccountname"
                                   placeholder="Select COA"
                                   appendTo="body"
                                   formControlName="COA"
                           >
                           <ng-template ng-option-tmp let-item="item" let-index="index">
-                                <div title="{{item.Name}}">{{item.Name}}</div>
+                                <div title="{{item.chartofaccountname}}">{{item.chartofaccountname}}</div>
                           </ng-template>
                           </ng-select>
                       </td>

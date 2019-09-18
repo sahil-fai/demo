@@ -153,7 +153,10 @@ export class SuppliersComponent implements OnInit {
   }
 
   public addRecord() {
-    if (!this.transcationList[this.transcationList.length - 1].editable) {
+    if (this.transcationList.length > 0 && !this.transcationList[this.transcationList.length - 1].editable) {
+      this.transcationList.push(this.transcationListModel);
+    }
+    if (this.transcationList.length === 0) {
       this.transcationList.push(this.transcationListModel);
     }
   }
