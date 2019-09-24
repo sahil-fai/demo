@@ -15,9 +15,13 @@
         font-size: 1rem;
 
         > li{
+          display: inline-block;
+          width: 49%;
+          padding: 0 0 0.8em;
+          @media screen  and (max-width: @tabletsLandscapeMin){
             display: block;
             width: 100%;
-            padding: 0 0 0.8em;
+        }
         }
 
         h6{
@@ -307,7 +311,7 @@
 .pagination{
     display: flex;
     justify-content: center;
-    
+
     .custom-pagination {
         * {
           -webkit-user-select: none;
@@ -316,13 +320,13 @@
           -o-user-select: none;
           user-select: none;
           }
-      
+
         .disabled {
           pointer-events: none;
           background: #00a3b8;
           opacity: 0.7;
         }
-      
+
         .nextprevious{
           display: inline-block;
           ::selection { background: transparent; }
@@ -337,15 +341,15 @@
           cursor: pointer;
           line-height: 1.8;
           vertical-align: middle;
-      
+
         };
-      
+
         .page-number{
           :hover{
             background: #e7ecec;
             border-radius:8px;
           }
-      
+
         display: inline-block;
         margin: 0px 4px;
         border-radius:8px;
@@ -411,7 +415,7 @@ select {
 }
 
 select:focus::-ms-value {
-    background-color: transparent; 
+    background-color: transparent;
 }
 .content-wrapper{
     padding: 0.5rem 2rem;

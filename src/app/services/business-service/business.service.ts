@@ -20,8 +20,6 @@ export class BusinessService {
   }
 
   getAllVendors(id: number): Observable<any> {
-    //console.log(id);
-    // tslint:disable-next-line: max-line-length
     return this.http.get<any>('business/vendors' + '?filter={"where":{"referencecompanyid":' + id + '},"limit":100}', {
    });
   }
