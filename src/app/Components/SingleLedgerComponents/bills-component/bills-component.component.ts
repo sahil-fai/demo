@@ -1,5 +1,5 @@
 import {SelectionModel} from '@angular/cdk/collections';
-import {Component, OnInit, ViewChild, } from '@angular/core';
+import {Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import json from './res.json';
 import { MatPaginator } from '@angular/material/paginator';
@@ -21,26 +21,20 @@ export interface PeriodicElement {
   styleUrls: ['./bills-component.component.less']
 })
 export class BillsComponentComponent implements OnInit {
-  title="Bills";
+  title = 'Bills';
+  @ViewChild(MatPaginator, {}) paginator: MatPaginator;
+  displayedColumns: string[] = ['Number', 'BlockchainTransactionID', 'Date', 'DueDate', 'Vendor', 'Total', 'Balance', 'star'];
+  // bills: PeriodicElement[]=this.Paginator(json,1,4).data;
+  // dataSource = new MatTableDataSource<PeriodicElement>(this.bills);
+  selection = new SelectionModel<PeriodicElement>(true, []);
   public dataSource: MatTableDataSource<PeriodicElement>;
-  constructor() { 
-    
+  constructor() {
   }
 
   ngOnInit() {
-    
-    this.handlePage({pageSize:"10",pageIndex:"0"});
-   
-   //this.dataSource.paginator = this.paginator;
+    this.handlePage({pageSize: '10', pageIndex: '0'});
+   //  this.dataSource.paginator = this.paginator;
   }
-  
-  @ViewChild(MatPaginator, {}) paginator: MatPaginator;
-  displayedColumns: string[] = ["Number","BlockchainTransactionID","Date","DueDate","Vendor","Total", "Balance", 'star'];
-  //bills: PeriodicElement[]=this.Paginator(json,1,4).data;
-  //dataSource = new MatTableDataSource<PeriodicElement>(this.bills); 
-  
-  selection = new SelectionModel<PeriodicElement>(true, []);
- 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -63,11 +57,11 @@ export class BillsComponentComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
-  Paginator(items, page, per_page) { 
+  Paginator(items, page, per_page) {
     var page = page || 1,
     per_page = per_page || 10,
     offset = (page - 1) * per_page,
-   
+
     paginatedItems = items.slice(offset).slice(0, per_page),
     total_pages = Math.ceil(items.length / per_page);
     return {

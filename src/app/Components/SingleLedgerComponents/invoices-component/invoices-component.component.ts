@@ -5,25 +5,28 @@ import {
   Component,
   OnInit,
   ViewChild,
+  OnDestroy
 } from '@angular/core';
 import {
   MatTableDataSource
 } from '@angular/material/table';
-import json from './res.json';
 import {
   MatPaginator
 } from '@angular/material/paginator';
 import {
-  MatBottomSheet,
-  MatBottomSheetRef,
-  MatBottomSheetConfig
-} from '@angular/material/bottom-sheet';
-import {
   BottomSheetOverviewExampleSheetComponent
 } from 'src/app/Shared/bottom-sheet-overview-example-sheet/bottom-sheet-overview-example-sheet.component';
-import { BusinessService } from '../../../services/business-service/business.service';
-import { HelperService } from 'src/app/services/helper-service/helper.service.js';
-import { MatDialogConfig, MatDialog } from '@angular/material';
+import {
+  BusinessService
+} from '../../../services/business-service/business.service';
+import {
+  HelperService
+} from 'src/app/services/helper-service/helper.service.js';
+import {
+  MatDialogConfig,
+  MatDialog
+} from '@angular/material';
+import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -41,8 +44,8 @@ export interface PeriodicElement {
   templateUrl: './invoices-component.component.html',
   styleUrls: ['./invoices-component.component.less']
 })
-export class InvoicesComponentComponent implements OnInit {
-  title = "Invoices";
+export class InvoicesComponentComponent implements OnInit, OnDestroy {
+  title = 'Invoices';
   status = [{
       value: 'Transfered',
       viewValue: 'transfered'
@@ -62,7 +65,7 @@ export class InvoicesComponentComponent implements OnInit {
   ];
   public dataSource: MatTableDataSource < PeriodicElement > ;
 
-  //ngx pagination setup
+  // ngx pagination setup
   invoices;
   totalRec: number;
   page: number = 1;
@@ -89,16 +92,20 @@ export class InvoicesComponentComponent implements OnInit {
   };
   @ViewChild(MatPaginator, {}) paginator: MatPaginator;
   displayedColumns: string[] = ['Number',
-  'BlockchainTransactionID', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'star'];
-  // displayedColumns: string[] = ['Number',
- // 'BlockchainTransactionID', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'BlockchainStatus', 'star'];
-
+    'BlockchainTransactionID', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'star'
+  ];
   selection = new SelectionModel < PeriodicElement > (true, []);
   invoice: string;
-  constructor(private _bottomSheet: MatBottomSheet,
-    public businessService: BusinessService, private helper: HelperService, private dialog: MatDialog) {
-   // this.invoices = json;
-   // this.totalRec = this.invoices.length;
+  switchCompanySubscription: any;
+  constructor(public businessService: BusinessService,
+              private helper: HelperService,
+              private dialog: MatDialog,
+              private switchCompany: SwitchCompanyService) {
+              this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
+                  () => {
+                    this.ngOnInit();
+                  }
+                );
   }
 
   ngOnInit() {
@@ -106,7 +113,7 @@ export class InvoicesComponentComponent implements OnInit {
     this.getinvoices(companyid);
   }
 
-  public getinvoices(companyid:number) {
+  public getinvoices(companyid: number) {
     this.businessService.getAllInvoices(companyid).subscribe(
       res => {
         this.invoices = res;
@@ -119,7 +126,7 @@ export class InvoicesComponentComponent implements OnInit {
   }
 
   Paginator(items, page, per_page) {
-      var page = page || 1,
+    var page = page || 1,
       per_page = per_page || 10,
       offset = (page - 1) * per_page,
       paginatedItems = items.slice(offset).slice(0, per_page),
@@ -140,12 +147,6 @@ export class InvoicesComponentComponent implements OnInit {
     this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
   }
 
-  // openBottomSheet(res, invoicenumber, companyblockchainid): void {
-  //   const sheetConfig = new MatBottomSheetConfig();
-  //   sheetConfig.panelClass = 'invoicebottomsheet';
-  //   sheetConfig.data = [res, invoicenumber, companyblockchainid];
-  //   this._bottomSheet.open(BottomSheetOverviewExampleSheetComponent, sheetConfig);
-  // }
   public openBottomSheet(res, invoicenumber, companyblockchainid) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = [res, invoicenumber, companyblockchainid];
@@ -153,6 +154,11 @@ export class InvoicesComponentComponent implements OnInit {
     dialogConfig.width = '546px';
     dialogConfig.panelClass = 'withdrawal-popup';
     const dialogRef = this.dialog.open(BottomSheetOverviewExampleSheetComponent, dialogConfig);
+  }
+  ngOnDestroy() {
+    if (this.switchCompanySubscription) {
+      this.switchCompanySubscription.unsubscribe();
+    }
   }
 
 }

@@ -5,11 +5,11 @@ import {
   Component,
   OnInit,
   ViewChild,
+  OnDestroy,
 } from '@angular/core';
 import {
   MatTableDataSource
 } from '@angular/material/table';
-import json from './res.json';
 import {
   MatPaginator
 } from '@angular/material/paginator';
@@ -19,6 +19,7 @@ import {
 import {
   HelperService
 } from '../../../services/helper-service/helper.service';
+import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -35,9 +36,18 @@ export interface PeriodicElement {
   templateUrl: './vendors-component.component.html',
   styleUrls: ['./vendors-component.component.less']
 })
-export class VendorsComponentComponent implements OnInit {
-  title = "Vendors";
-
+export class VendorsComponentComponent implements OnInit, OnDestroy {
+  title = 'Vendors';
+  displayedColumns: string[] = ['select',
+                                'CustomerName',
+                                'ContactEmail',
+                                'RegisterDate',
+                                'Organizaton',
+                                'Status',
+                                'BlockChainID',
+                                'Invite',
+                                'star'];
+  selection = new SelectionModel < PeriodicElement > (true, []);
 
   public dataSource: MatTableDataSource < PeriodicElement > ;
   selected = ['Active'];
@@ -54,10 +64,20 @@ export class VendorsComponentComponent implements OnInit {
   vendors: any;
   @ViewChild(MatPaginator, {}) paginator: MatPaginator;
   Totalrec: any;
-  constructor(public BusinessService: BusinessService, private helper: HelperService) {}
+  switchCompanySubscription: any;
+  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
+    this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
+      () => {
+        this.ngOnInit();
+      }
+    );
+  }
   ngOnInit() {
+    this.getAllvendors();
+  }
+  getAllvendors() {
     const companyid = Number(this.helper.getcompanyId());
-    this.BusinessService.getAllVendors(companyid).subscribe(res => {
+    this.businessService.getAllVendors(companyid).subscribe(res => {
       console.log(res);
       this.Totalrec = res.length;
       if (res.length > 0) {
@@ -73,9 +93,6 @@ export class VendorsComponentComponent implements OnInit {
       }
     });
   }
-  displayedColumns: string[] = ['select', "CustomerName", "ContactEmail", "RegisterDate", "Organizaton", "Status", "BlockChainID", "Invite", 'star'];
-  selection = new SelectionModel < PeriodicElement > (true, []);
-
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     if (this.dataSource && this.dataSource.data.length > 0) {
@@ -88,7 +105,6 @@ export class VendorsComponentComponent implements OnInit {
     }
     return null;
   }
-
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle(status: any) {
     this.isAllSelected() ?
@@ -107,7 +123,6 @@ export class VendorsComponentComponent implements OnInit {
       });
     }
   }
-
   /** The label for the checkbox on the passed row */
   checkboxLabel(row ?: PeriodicElement): string {
     if (!row) {
@@ -115,7 +130,6 @@ export class VendorsComponentComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
-
   Paginator(items, page, per_page) {
 
     var page = page || 1,
@@ -134,15 +148,19 @@ export class VendorsComponentComponent implements OnInit {
       data: paginatedItems
     };
   }
-
   public handlePage(e: any) {
-    let pagesize = e.pageSize;
-    let pagenumber = e.pageIndex + 1;
-    let data = this.Paginator(this.vendors, pagenumber, pagesize);
+    const pagesize = e.pageSize;
+    const pagenumber = e.pageIndex + 1;
+    const data = this.Paginator(this.vendors, pagenumber, pagesize);
     this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
   }
   public checkStatus(status) {
     this.masterToggle(status);
+  }
+  ngOnDestroy() {
+    if (this.switchCompanySubscription) {
+      this.switchCompanySubscription.unsubscribe();
+    }
   }
 
 }
