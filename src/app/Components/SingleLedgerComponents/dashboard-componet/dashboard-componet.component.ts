@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BusinessService } from '../../../services/business-service/business.service';
 import { UserprofileService } from '../../../services/user-service/userprofile.service';
+import { HelperService } from 'src/app/services/helper-service/helper.service';
 
 @Component({
   selector: 'app-dashboard-componet',
@@ -11,7 +12,7 @@ export class DashboardComponetComponent implements OnInit {
   public title = 'DashBoard';
   public value = '';
   constructor(public businessService: BusinessService,
-              public userService: UserprofileService) { }
+              public userService: UserprofileService, private helper: HelperService) { }
   ngOnInit() {
   }
 
@@ -34,7 +35,9 @@ export class DashboardComponetComponent implements OnInit {
   }
 
   public getBills() {
-    this.businessService.getAllBills().subscribe(
+    const companyid = Number(this.helper.getcompanyId());
+    const filter = '?filter={"include":[{"relation":"all"}]}';
+    this.businessService.getAllBills(companyid, filter).subscribe(
       res => {
         this.value = JSON.stringify(res);
       }

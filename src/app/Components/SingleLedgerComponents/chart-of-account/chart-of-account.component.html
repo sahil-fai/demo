@@ -1,0 +1,170 @@
+
+<div class="floatBoxesWrapper clearfix">
+  <div class="floatBox tabletsOnly" id="tableData">
+    <div class="defaultTable">
+        <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                Asset
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <table class="dataTable" *ngIf="COA">
+                  <thead>
+                    <tr>
+                    <th>Chart Of Account</th>
+                    <th>Description</th>
+                    <th>Classification</th>
+
+                    <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let coa of COA.Asset">
+                          <td>{{coa.chartofaccountname}}</td>
+                          <td>{{coa.description}}</td>
+                          <td>{{coa.classification}}</td>
+
+                          <td></td>
+                      </tr>
+                  </tbody>
+                  <tbody *ngIf="!COA">
+                    <tr>
+                      <td colspan="8" style="height:190px;text-align:center;color:#969696;font-weight:700;">No Records Found</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Expense
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <table class="dataTable" *ngIf="COA">
+                  <thead>
+                    <tr>
+                    <th>Chart Of Account</th>
+                    <th>Description</th>
+                    <th>Classification</th>
+
+                    <th>Set as default</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let coa of COA.Expense">
+                          <td>{{coa.chartofaccountname}}</td>
+                          <td>{{coa.description}}</td>
+                          <td>{{coa.classification}}</td>
+
+                          <td><mat-checkbox></mat-checkbox></td>
+                      </tr>
+                  </tbody>
+                  <tbody *ngIf="!COA">
+                    <tr>
+                      <td colspan="8" style="height:190px;text-align:center;color:#969696;font-weight:700;">No Records Found</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                  Revenue
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <table class="dataTable" *ngIf="COA">
+                    <thead>
+                      <tr>
+                      <th>Chart Of Account</th>
+                      <th>Description</th>
+                      <th>Classification</th>
+
+                      <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let coa of COA.Revenue">
+                            <td>{{coa.chartofaccountname}}</td>
+                            <td>{{coa.description}}</td>
+                            <td>{{coa.classification}}</td>
+
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="!COA">
+                      <tr>
+                        <td colspan="8" style="height:190px;text-align:center;color:#969696;font-weight:700;">No Records Found</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Liability
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <table class="dataTable" *ngIf="COA">
+                      <thead>
+                        <tr>
+                        <th>Chart Of Account</th>
+                        <th>Description</th>
+                        <th>Classification</th>
+
+                        <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let coa of COA.Liability">
+                              <td>{{coa.chartofaccountname}}</td>
+                              <td>{{coa.description}}</td>
+                              <td>{{coa.classification}}</td>
+
+                              <td></td>
+                          </tr>
+                      </tbody>
+                      <tbody *ngIf="!COA">
+                        <tr>
+                          <td colspan="8" style="height:190px;text-align:center;color:#969696;font-weight:700;">No Records Found</td>
+                        </tr>
+                      </tbody>
+                    </table>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                          Equity
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <table class="dataTable" *ngIf="COA">
+                        <thead>
+                          <tr>
+                          <th>Chart Of Account</th>
+                          <th>Description</th>
+                          <th>Classification</th>
+
+                          <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let coa of COA.Equity">
+                                <td>{{coa.chartofaccountname}}</td>
+                                <td>{{coa.description}}</td>
+                                <td>{{coa.classification}}</td>
+
+                                <td></td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="!COA">
+                          <tr>
+                            <td colspan="8" style="height:190px;text-align:center;color:#969696;font-weight:700;">No Records Found</td>
+                          </tr>
+                        </tbody>
+                      </table>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+      </div>
+  </div>
+</div>

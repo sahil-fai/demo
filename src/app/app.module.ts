@@ -165,6 +165,7 @@ import {
   SuppliersComponent
 } from './Components/SingleLedgerComponents/suppliers/suppliers.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/chart-of-account/chart-of-account.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -192,7 +193,8 @@ import {MatMenuModule} from '@angular/material/menu';
     TermsConditionsComponent,
     BusinessReloadComponent,
     NotificationSnackbarComponent,
-    SuppliersComponent
+    SuppliersComponent,
+    ChartOfAccountComponent
   ],
   imports: [
     BrowserModule,
