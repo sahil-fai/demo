@@ -30,7 +30,8 @@ export class ChartOfAccountComponent implements OnInit, OnDestroy {
   Totalrec: any;
   switchCompanySubscription: any;
   public COA: any;
-
+  optionsMap: any;
+public title=  'Chart Of Account';
   constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
@@ -44,12 +45,23 @@ export class ChartOfAccountComponent implements OnInit, OnDestroy {
     this.getAllChartOfAccount(companyid);
   }
   getAllChartOfAccount(companyid) {
-    const filter = '?filter={"include":[{"relation":"all"}]}';
-    this.businessService.getGroupChartofAccounts(companyid, filter).subscribe(res => {
-
+     this.businessService.getGroupChartofAccounts(companyid).subscribe(res => {
       this.COA = res;
-      console.log(this.COA);
-
+    });
+  }
+  updateCheckedOptions(id, event) {
+    this.setAsDefault(event, id);
+    this.businessService.setAsDefault(id).subscribe((res)=>{
+       console.log(res);
+    });
+  }
+  setAsDefault(event, option) {
+    this.COA.Expense.forEach((item) => {
+      if (item.chartofaccountid == option) {
+        item.isDefault = true;
+      } else {
+        item.isDefault = false;
+      }
     });
   }
   ngOnDestroy() {

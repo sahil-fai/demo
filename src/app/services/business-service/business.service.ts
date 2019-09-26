@@ -33,8 +33,7 @@ export class BusinessService {
   }
 
   getAllBills(id: number, filter?:string): Observable<any> {
-    return this.http.get<any>('business/bills'+ '?filter={"where":{"companyid":' + id + '},"limit":100}', {
-   });
+    return this.http.get<any>('business/bills/' + id );
   }
 
   getPlatforms(): Observable<any> {
@@ -62,8 +61,11 @@ export class BusinessService {
     return this.http.get<any>('/chartofaccountmappings?filter={"limit":10,"include":[{"relation":"all1"}]}', {
     });
   }
-  getGroupChartofAccounts(id: number, filter?:string) {
+  getGroupChartofAccounts(id: any) {
     return this.http.get<any>('groupchartofaccount'+ '?filter={"where":{"companyid":' + id + '},"limit":100}', {
     });
+  }
+  setAsDefault(id:number) {
+      return this.http.post<any>('coa/setasdefault/'+ id, null);
   }
  }

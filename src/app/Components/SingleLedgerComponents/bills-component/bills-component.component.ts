@@ -5,7 +5,7 @@ import json from './res.json';
 import { MatPaginator } from '@angular/material/paginator';
 import { BusinessService } from 'src/app/services/business-service/business.service';
 import { HelperService } from 'src/app/services/helper-service/helper.service.js';
-import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service.js';
+import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -28,7 +28,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   bills: any;
   public dataSource: MatTableDataSource<PeriodicElement>;
   @ViewChild(MatPaginator, {}) paginator: MatPaginator;
-  displayedColumns: string[] = ['Number', 'BlockchainTransactionID', 'Date', 'DueDate', 'Vendor', 'Total', 'Balance', 'star'];
+  displayedColumns: string[] = ['index','Number', 'Date', 'DueDate', 'Vendor', 'Total', 'Balance', 'star'];
   selection = new SelectionModel<PeriodicElement>(true, []);
 
   switchCompanySubscription: any;
@@ -46,7 +46,8 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
 getAllBills(){
   const companyid = Number(this.helper.getcompanyId());
   const filter = '?filter={"include":[{"relation":"all"}]}';
-  this.businessService.getAllBills(companyid, filter).subscribe(res => {
+  this.businessService.getAllBills(companyid).subscribe(res => {
+    console.log(res)
     this.bills = res;
     this.handlePage({pageSize: '10', pageIndex: '0'});
   });

@@ -385,6 +385,11 @@ table{
                     border-bottom: 1px solid #00add8;
                     border-top: 1px solid #00add8;
                     background: aliceblue;
+                    td{
+                      border-top: 1px solid #00add8;
+                      background:#00add8;
+                      color: #fff;
+                    }
                 }
             }
         }
@@ -3249,5 +3254,21 @@ mat-bottom-sheet-container{
     justify-content: center;
     border-radius: 3px;
     font-size: 16px;
+  }
+ }
+ .chart-ofaccount{
+  mat-accordion mat-expansion-panel{
+      &.mat-expansion-panel {
+        .mat-expansion-panel-header span.mat-expansion-indicator {
+          display: block;
+          padding: 12px;
+          &:after {
+            color: #fff;
+          }
+        }
+        &:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover {
+          background: #00add8;
+      }
+      }
   }
  }

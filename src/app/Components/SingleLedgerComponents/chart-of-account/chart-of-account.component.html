@@ -1,95 +1,32 @@
-
-<div class="floatBoxesWrapper clearfix">
-  <div class="floatBox tabletsOnly" id="tableData">
-    <div class="defaultTable">
-        <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                Asset
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <table class="dataTable" *ngIf="COA">
-                  <thead>
-                    <tr>
-                    <th>Chart Of Account</th>
-                    <th>Description</th>
-                    <th>Classification</th>
-
-                    <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      <tr *ngFor="let coa of COA.Asset">
-                          <td>{{coa.chartofaccountname}}</td>
-                          <td>{{coa.description}}</td>
-                          <td>{{coa.classification}}</td>
-
-                          <td></td>
-                      </tr>
-                  </tbody>
-                  <tbody *ngIf="!COA">
-                    <tr>
-                      <td colspan="8" style="height:190px;text-align:center;color:#969696;font-weight:700;">No Records Found</td>
-                    </tr>
-                  </tbody>
-                </table>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Expense
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <table class="dataTable" *ngIf="COA">
-                  <thead>
-                    <tr>
-                    <th>Chart Of Account</th>
-                    <th>Description</th>
-                    <th>Classification</th>
-
-                    <th>Set as default</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      <tr *ngFor="let coa of COA.Expense">
-                          <td>{{coa.chartofaccountname}}</td>
-                          <td>{{coa.description}}</td>
-                          <td>{{coa.classification}}</td>
-
-                          <td><mat-checkbox></mat-checkbox></td>
-                      </tr>
-                  </tbody>
-                  <tbody *ngIf="!COA">
-                    <tr>
-                      <td colspan="8" style="height:190px;text-align:center;color:#969696;font-weight:700;">No Records Found</td>
-                    </tr>
-                  </tbody>
-                </table>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
+<div class="chart-ofaccount">
+  <div class="title"><h2>{{title}}</h2></div>
+  <mat-card class="example-card">
+    <mat-card-content>
+        <mat-accordion *ngIf="COA">
+            <mat-expansion-panel [@.disabled]="true" [expanded]=true>
                 <mat-expansion-panel-header>
                   <mat-panel-title>
-                  Revenue
+                      Expense
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-                <table class="dataTable" *ngIf="COA">
+                <div class="floatBoxesWrapper clearfix">
+                <div class="floatBox tabletsOnly">
+                  <div class="defaultTable">
+                   <table class="dataTable" *ngIf="COA">
                     <thead>
                       <tr>
                       <th>Chart Of Account</th>
                       <th>Description</th>
                       <th>Classification</th>
-
-                      <th>Status</th>
+                      <th>Set as default</th>
                       </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let coa of COA.Revenue">
+                        <tr *ngFor="let coa of COA.Expense">
                             <td>{{coa.chartofaccountname}}</td>
                             <td>{{coa.description}}</td>
                             <td>{{coa.classification}}</td>
-
-                            <td></td>
+                            <td><mat-checkbox [(ngModel)]="coa.isDefault" (change)="updateCheckedOptions(coa.chartofaccountid, $event)"></mat-checkbox></td>
                         </tr>
                     </tbody>
                     <tbody *ngIf="!COA">
@@ -98,21 +35,94 @@
                       </tr>
                     </tbody>
                   </table>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Liability
-                    </mat-panel-title>
-                  </mat-expansion-panel-header>
+                  </div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            <mat-expansion-panel [@.disabled]="true" >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                Asset
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="floatBoxesWrapper clearfix">
+              <div class="floatBox tabletsOnly">
+                <div class="defaultTable">
                   <table class="dataTable" *ngIf="COA">
                       <thead>
                         <tr>
                         <th>Chart Of Account</th>
                         <th>Description</th>
                         <th>Classification</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let coa of COA.Asset">
+                              <td>{{coa.chartofaccountname}}</td>
+                              <td>{{coa.description}}</td>
+                              <td>{{coa.classification}}</td>
+                          </tr>
+                      </tbody>
+                      <tbody *ngIf="!COA">
+                        <tr>
+                          <td colspan="8" style="height:190px;text-align:center;color:#969696;font-weight:700;">No Records Found</td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </div>
+            </div>
+              </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel [@.disabled]="true">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                  Revenue
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="floatBoxesWrapper clearfix">
+                <div class="floatBox tabletsOnly">
+                  <div class="defaultTable">
+                   <table class="dataTable" *ngIf="COA">
+                    <thead>
+                      <tr>
+                      <th>Chart Of Account</th>
+                      <th>Description</th>
+                      <th>Classification</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let coa of COA.Revenue">
+                            <td>{{coa.chartofaccountname}}</td>
+                            <td>{{coa.description}}</td>
+                            <td>{{coa.classification}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="!COA">
+                      <tr>
+                        <td colspan="8" style="height:190px;text-align:center;color:#969696;font-weight:700;">No Records Found</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  </div>
+                  </div>
+                  </div>
 
-                        <th>Status</th>
+            </mat-expansion-panel>
+            <mat-expansion-panel [@.disabled]="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Liability
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="floatBoxesWrapper clearfix">
+                  <div class="floatBox tabletsOnly">
+                    <div class="defaultTable">
+                  <table class="dataTable" *ngIf="COA">
+                      <thead>
+                        <tr>
+                        <th>Chart Of Account</th>
+                        <th>Description</th>
+                        <th>Classification</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -120,8 +130,6 @@
                               <td>{{coa.chartofaccountname}}</td>
                               <td>{{coa.description}}</td>
                               <td>{{coa.classification}}</td>
-
-                              <td></td>
                           </tr>
                       </tbody>
                       <tbody *ngIf="!COA">
@@ -130,21 +138,25 @@
                         </tr>
                       </tbody>
                     </table>
+                    </div>
+                    </div>
+                    </div>
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel [@.disabled]="true">
                     <mat-expansion-panel-header>
                       <mat-panel-title>
                           Equity
                       </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <table class="dataTable" *ngIf="COA">
+                    <div class="floatBoxesWrapper clearfix">
+                    <div class="floatBox tabletsOnly">
+                      <div class="defaultTable">
+                        <table class="dataTable" *ngIf="COA">
                         <thead>
                           <tr>
                           <th>Chart Of Account</th>
                           <th>Description</th>
                           <th>Classification</th>
-
-                          <th>Status</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -152,8 +164,6 @@
                                 <td>{{coa.chartofaccountname}}</td>
                                 <td>{{coa.description}}</td>
                                 <td>{{coa.classification}}</td>
-
-                                <td></td>
                             </tr>
                         </tbody>
                         <tbody *ngIf="!COA">
@@ -162,9 +172,11 @@
                           </tr>
                         </tbody>
                       </table>
+                      </div>
+                      </div>
+                 </div>
             </mat-expansion-panel>
-          </mat-accordion>
-
-      </div>
-  </div>
+        </mat-accordion>
+    </mat-card-content>
+  </mat-card>
 </div>
