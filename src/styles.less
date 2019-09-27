@@ -3278,3 +3278,22 @@ mat-bottom-sheet-container{
  .toast-container.toast-top-center .ngx-toastr, .toast-container.toast-bottom-center .ngx-toastr {
   width: 30rem !important;
 }
+.user-profile{
+  &.mat-menu-panel {
+    max-width: fit-content;
+  }
+    .mat-menu-content:not(:empty) {
+      width: 300px;
+      background: #00add8;
+      color: #fff;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    button.mat-menu-item {
+      color: #fff;
+      border-bottom: 1px solid #f7f4f4;
+      .mat-icon-no-color, .mat-menu-item-submenu-trigger::after {
+        color: #fff;
+      }
+    }
+}

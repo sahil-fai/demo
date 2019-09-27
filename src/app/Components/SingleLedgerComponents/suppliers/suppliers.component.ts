@@ -182,8 +182,6 @@ export class SuppliersComponent implements OnInit {
       subject: formData.Subject,
       companyid: Companyid
     };
-
-    this.checkforExisting
     this.businessService.postchartofaccountmapping(data).subscribe((res) => {
       this._getChartofAccountMappings();
     });
