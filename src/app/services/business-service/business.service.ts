@@ -62,7 +62,7 @@ export class BusinessService {
     });
   }
   getGroupChartofAccounts(id: any) {
-    return this.http.get<any>('groupchartofaccount'+ '?filter={"where":{"companyid":' + id + '},"limit":100}', {
+    return this.http.get<any>('groupchartofaccount'+ '?filter={"where":{"companyid":' + id + '},"limit":1000}', {
     });
   }
   setAsDefault(id:number) {

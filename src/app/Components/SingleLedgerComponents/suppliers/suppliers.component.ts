@@ -59,7 +59,7 @@ export class SuppliersComponent implements OnInit {
   ];
   public transcationList = [];
   public COAMappings: any;
-  public isCOAEnabled: boolean= true;
+  public isCOAEnabled= true;
 
 
   private _createForm() {
@@ -102,9 +102,9 @@ export class SuppliersComponent implements OnInit {
   }
   _generateCOAMapping() {
     this.transcationList.length = 0;
-    this.transcationList= [];
+    this.transcationList = [];
     this.COAMappings.forEach(element => {
-      let data = {
+      const data = {
         vendorName: element.vendor.company.name,
         vendorEmail: element.emailonthebill,
         platfrom: element.organization,
@@ -118,23 +118,23 @@ export class SuppliersComponent implements OnInit {
         itemDescription2: element.itemdescription2,
         itemDescription3: element.itemdescription3,
         opration: 274
-      }
+      };
 
       this.transcationList.push(data);
 
     });
   }
   _getOperationTypeByID(operationtypeidl: any) {
-    return this.opration.find(x=>x.ID == operationtypeidl).Name;
+    return this.opration.find(x => x.ID === operationtypeidl).Name;
   }
   _getMappingByID(chartofaccountmappingtypeidl: any) {
-    return this.mapping.find(x=>x.ID == chartofaccountmappingtypeidl).Name;
+    return this.mapping.find(x => x.ID === chartofaccountmappingtypeidl).Name;
   }
 
   _getVendors() {
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getAllVendors(companyid).subscribe(res => {
-      if (res.length == 0) {this.isCOAEnabled = false;}
+      if (res.length == 0) {this.isCOAEnabled = false; }
       if (res.length > 0) {
         this.Vendor = res;
        }
@@ -143,7 +143,7 @@ export class SuppliersComponent implements OnInit {
 
   _getplatforms() {
     this.businessService.getPlatforms().subscribe(res => {
-      if (res.length == 0) {this.isCOAEnabled = false;}
+      if (res.length == 0) {this.isCOAEnabled = false; }
       this.platfrom = res;
      });
   }
@@ -151,7 +151,7 @@ export class SuppliersComponent implements OnInit {
   _getChartofAccounts() {
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getCompanyChartOfAccounts(companyid).subscribe(res => {
-      if (res.length == 0) {this.isCOAEnabled = false;}
+      if (res.length == 0) {this.isCOAEnabled = false; }
       this.COA = res;
      });
   }
@@ -165,7 +165,7 @@ export class SuppliersComponent implements OnInit {
     }
   }
 
-  public saveRecord(){
+  public saveRecord() {
     const Companyid = Number(this.helper.getcompanyId());
     const formData = this.formTransaction.value;
     const data = {
@@ -183,15 +183,25 @@ export class SuppliersComponent implements OnInit {
       companyid: Companyid
     };
 
+    if (this.COAMappings) {
+      const vendor = this.COAMappings.filter(x => x.vendorid === formData.Contact.vendorid);
+      if (vendor && vendor.length > 0) {
+        alert('Chart of account mapping already exists for same Vendor\n Maximum one mapping per Vendor');
+        return ;
+      }
 
+    }
     this.businessService.postchartofaccountmapping(data).subscribe((res) => {
       this._getChartofAccountMappings();
     });
 
   }
 
-  public cancelRecord(){
-
+  public cancelRecord() {
+    if (this.transcationList)
+    {
+      this.transcationList.splice(this.transcationList.length - 1, 1);
+    }
   }
 
 }
