@@ -19,7 +19,7 @@ import {
 import {
   HelperService
 } from '../../../services/helper-service/helper.service';
-import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
+import { SwitchCompanyService } from '../../../services/switch-company-service/switch-company.service';
 
 @Component({
   selector: 'app-chart-of-account',
