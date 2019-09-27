@@ -59,6 +59,7 @@ export class SuppliersComponent implements OnInit {
   ];
   public transcationList = [];
   public COAMappings: any;
+  public isCOAEnabled: boolean= true;
 
 
   private _createForm() {
@@ -116,7 +117,7 @@ export class SuppliersComponent implements OnInit {
         itemDescription1: element.itemdescription1,
         itemDescription2: element.itemdescription2,
         itemDescription3: element.itemdescription3,
-        opration: this._getOperationTypeByID(element.operationtypeidl)
+        opration: 274
       }
 
       this.transcationList.push(data);
@@ -133,6 +134,7 @@ export class SuppliersComponent implements OnInit {
   _getVendors() {
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getAllVendors(companyid).subscribe(res => {
+      if (res.length == 0) {this.isCOAEnabled = false;}
       if (res.length > 0) {
         this.Vendor = res;
        }
@@ -141,6 +143,7 @@ export class SuppliersComponent implements OnInit {
 
   _getplatforms() {
     this.businessService.getPlatforms().subscribe(res => {
+      if (res.length == 0) {this.isCOAEnabled = false;}
       this.platfrom = res;
      });
   }
@@ -148,6 +151,7 @@ export class SuppliersComponent implements OnInit {
   _getChartofAccounts() {
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getCompanyChartOfAccounts(companyid).subscribe(res => {
+      if (res.length == 0) {this.isCOAEnabled = false;}
       this.COA = res;
      });
   }
@@ -174,11 +178,12 @@ export class SuppliersComponent implements OnInit {
       itemdescription1: formData.Desc1,
       itemdescription2: formData.Desc2,
       itemdescription3: formData.Desc3,
-      operationtypeidl: formData.Operation.ID,
+      operationtypeidl: 274,
       subject: formData.Subject,
       companyid: Companyid
     };
 
+    this.checkforExisting
     this.businessService.postchartofaccountmapping(data).subscribe((res) => {
       this._getChartofAccountMappings();
     });
