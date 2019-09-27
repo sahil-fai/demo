@@ -47,7 +47,7 @@ export class BusinessService {
 
   getCompanyChartOfAccounts(id: number, filter?:string): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/chartofaccounts' + '?filter={"where":{"companyid":' + id + '},"limit":100}', {
+    return this.http.get<any>('business/chartofaccounts' + '?filter={"where":{"classification":"Expense", "companyid":' + id + '},"limit":1000}', {
     });
   }
 
