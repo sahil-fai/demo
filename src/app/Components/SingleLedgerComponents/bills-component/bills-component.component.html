@@ -1,5 +1,5 @@
 <div class="title"><h2>{{title}}</h2></div>
-<!-- <mat-card class="example-card">  
+<!-- <mat-card class="example-card">
     <mat-card-content>
       <div>
         <ul class="bill-status">
@@ -23,7 +23,7 @@
       </div>
     </mat-card-content>
 </mat-card> -->
-<mat-card class="example-card">  
+<mat-card class="example-card">
     <mat-card-content>
         <div class="bill-content">
             <div class="searchPanel clearfix">
@@ -42,11 +42,17 @@
                         <input type="text" class="fields calendar" />
                       </li>
                       <li>
-                          <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter"/>
-                        </li>
-                        <li>
-                          <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" />
-                        </li>
+                        <ul>
+                          <li>
+                            <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter"/>
+                          </li>
+                          <li>
+                            <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" />
+                          </li>
+                        </ul>
+                      </li>
+
+
                   </ul>
                 </form>
             </div>
@@ -70,8 +76,8 @@
                                   [aria-label]="checkboxLabel(row)">
                     </mat-checkbox>
                   </td>
-                </ng-container>         
-              
+                </ng-container>
+
                 <!-- Number Column -->
                 <ng-container matColumnDef="Number" sticky>
                   <th mat-header-cell *matHeaderCellDef> Number </th>
@@ -87,13 +93,13 @@
                   <th mat-header-cell *matHeaderCellDef> Date </th>
                   <td mat-cell *matCellDef="let element"> {{element.Date}} </td>
                 </ng-container>
-              
+
                 <!-- Due Date Column -->
                 <ng-container matColumnDef="DueDate">
                   <th mat-header-cell *matHeaderCellDef> Due Date </th>
                   <td mat-cell *matCellDef="let element"> {{element.DueDate}} </td>
                 </ng-container>
-              
+
                 <!-- Vendor Column -->
                 <ng-container matColumnDef="Vendor">
                   <th mat-header-cell *matHeaderCellDef> Vendor </th>

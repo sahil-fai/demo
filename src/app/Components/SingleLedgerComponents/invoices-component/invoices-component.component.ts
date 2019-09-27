@@ -23,6 +23,7 @@ import {
 } from 'src/app/Shared/bottom-sheet-overview-example-sheet/bottom-sheet-overview-example-sheet.component';
 import { BusinessService } from '../../../services/business-service/business.service';
 import { HelperService } from 'src/app/services/helper-service/helper.service.js';
+import { MatDialogConfig, MatDialog } from '@angular/material';
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -94,7 +95,8 @@ export class InvoicesComponentComponent implements OnInit {
 
   selection = new SelectionModel < PeriodicElement > (true, []);
   invoice: string;
-  constructor(private _bottomSheet: MatBottomSheet, public businessService: BusinessService, private helper: HelperService) {
+  constructor(private _bottomSheet: MatBottomSheet,
+    public businessService: BusinessService, private helper: HelperService, private dialog: MatDialog) {
    // this.invoices = json;
    // this.totalRec = this.invoices.length;
   }
@@ -138,12 +140,19 @@ export class InvoicesComponentComponent implements OnInit {
     this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
   }
 
-  openBottomSheet(res, invoicenumber, companyblockchainid): void {
-    const sheetConfig = new MatBottomSheetConfig();
-    sheetConfig.panelClass = 'invoicebottomsheet';
-    sheetConfig.data = [res, invoicenumber, companyblockchainid];
-    this._bottomSheet.open(BottomSheetOverviewExampleSheetComponent, sheetConfig);
+  // openBottomSheet(res, invoicenumber, companyblockchainid): void {
+  //   const sheetConfig = new MatBottomSheetConfig();
+  //   sheetConfig.panelClass = 'invoicebottomsheet';
+  //   sheetConfig.data = [res, invoicenumber, companyblockchainid];
+  //   this._bottomSheet.open(BottomSheetOverviewExampleSheetComponent, sheetConfig);
+  // }
+  public openBottomSheet(res, invoicenumber, companyblockchainid) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = [res, invoicenumber, companyblockchainid];
+    dialogConfig.disableClose = true;
+    dialogConfig.width = '546px';
+    dialogConfig.panelClass = 'withdrawal-popup';
+    const dialogRef = this.dialog.open(BottomSheetOverviewExampleSheetComponent, dialogConfig);
   }
-
 
 }
