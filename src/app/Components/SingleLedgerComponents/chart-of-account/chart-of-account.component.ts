@@ -51,7 +51,7 @@ public title=  'Chart Of Account';
   }
   updateCheckedOptions(id, event) {
     this.setAsDefault(event, id);
-    this.businessService.setAsDefault(id).subscribe((res)=>{
+    this.businessService.setAsDefault(id).subscribe((res) => {
        console.log(res);
     });
   }
