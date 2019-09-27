@@ -1,8 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { BusinessService } from '../../services/business-service/business.service';
-import { from } from 'rxjs';
-import { HelperService } from '../../services/helper-service/helper.service';
-import { Router } from '@angular/router';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  BusinessService
+} from '../../services/business-service/business.service';
+import {
+  from
+} from 'rxjs';
+import {
+  HelperService
+} from '../../services/helper-service/helper.service';
+import {
+  Router
+} from '@angular/router';
+import {
+  SwitchCompanyService
+} from '../../services/switch-company-service/switch-company.service';
 
 @Component({
   selector: 'app-single-ledger-business-list',
@@ -11,7 +25,7 @@ import { Router } from '@angular/router';
 })
 export class SingleLedgerBusinessListComponent implements OnInit {
   title = 'Business(s) List';
-  companylist: Array<any>;
+  companylist: Array < any > ;
   totalRec: number;
   page = 1;
   length: number;
@@ -22,11 +36,11 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   public responsive = true;
   public selectedValue = 5;
   public labels: any = {
-      previousLabel: 'Prev',
-      nextLabel: 'Next',
-      screenReaderPaginationLabel: 'Pagination',
-      screenReaderPageLabel: 'page',
-      screenReaderCurrentLabel: `You're on page`
+    previousLabel: 'Prev',
+    nextLabel: 'Next',
+    screenReaderPaginationLabel: 'Pagination',
+    screenReaderPageLabel: 'page',
+    screenReaderCurrentLabel: `You're on page`
   };
 
   public config = {
@@ -40,8 +54,16 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   public pageSizeOptions: number[] = [5, 15, 25];
   public numberOfpages: number[];
   businesslsist: any;
+  switchCompanySubscription: any;
 
-  constructor(public businessService: BusinessService, private helper: HelperService, private router: Router) {
+  constructor(public businessService: BusinessService,
+              private helper: HelperService, private router: Router,
+              private switchCompany: SwitchCompanyService) {
+    this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
+      () => {
+        this.ngOnInit();
+      }
+    );
   }
 
   ngOnInit() {
@@ -59,6 +81,5 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   public viewBusiness(companyid) {
     this.helper.setcompanyId(companyid);
     this.router.navigate(['/business', 'company-info']);
-    //console.log(companyid);
   }
 }

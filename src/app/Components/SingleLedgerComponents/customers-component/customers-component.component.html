@@ -17,7 +17,7 @@
         <input type="text" class="fields calendar" />
       </li>
       <li class="smallFields">
-        <label class="labels">status</label>
+        <label class="labels">Status</label>
         <select class="fields">
           <option disabled value style="display:none"></option>
           <option *ngFor="let status of status" [value]="status.value">
@@ -26,11 +26,16 @@
         </select>
       </li>
       <li>
-        <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
+        <ul>
+          <li>
+            <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
+          </li>
+          <li>
+            <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" />
+          </li>
+        </ul>
       </li>
-      <li>
-        <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" />
-      </li>
+
     </ul>
   </form>
 </div>
