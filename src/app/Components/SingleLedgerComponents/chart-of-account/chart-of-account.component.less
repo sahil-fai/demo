@@ -1,0 +1,89 @@
+.defaultTable {
+  overflow: auto;
+
+  td {
+    min-width: 120px;
+  }
+
+  tr {
+
+    th {
+      &:first-child {
+        left: 0px;
+        position: sticky;
+        z-index: 1;
+        box-shadow: 3px 0 5px -4px #bbbbbb;
+        min-width: 13rem;
+        background: #dfeaf5;
+      }
+    }
+    td {
+      &:first-child {
+        left: 0px;
+        position: sticky;
+        z-index: 1;
+        box-shadow: 3px 0 5px -4px #bbbbbb;
+        min-width: 13rem;
+       background:#fff;
+      }
+    }
+    &:hover{
+      td  {
+           background: #00add8;
+            color: #fff;
+        }
+      }
+  }
+
+  .dataTable tbody tr:nth-child(odd) td {
+    // background-color: #fff;
+  }
+
+  .dataTable td {
+    font-weight: 400;
+  }
+}
+
+.floatBoxesWrapper {
+  position: relative;
+}
+
+tbody {
+  .month-total {
+    td {
+      font-size: 0.8rem;
+      color: #fff;
+      font-weight: 600;
+      background: #40c4d9;
+      border-radius: 21px
+    }
+  }
+}
+
+mat-accordion mat-expansion-panel.mat-expansion-panel .mat-expansion-panel-header span.mat-expansion-indicator {
+  display: block;
+}
+
+.mat-expansion-panel-header-title {
+  color: #fff;
+  margin: 0 17px;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+mat-accordion mat-expansion-panel.mat-expansion-panel .mat-expansion-panel-header span.mat-expansion-indicator {
+  display: block;
+  padding: 12px;
+
+  &:after {
+    color: #fff;
+  }
+}
+
+mat-accordion mat-expansion-panel.mat-expansion-panel {
+  background: #00add8;
+  color: #fff;
+  border-radius: 5px !important;
+  margin: 16px 10px;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}

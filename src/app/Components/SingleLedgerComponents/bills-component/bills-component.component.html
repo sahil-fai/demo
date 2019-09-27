@@ -77,43 +77,46 @@
                     </mat-checkbox>
                   </td>
                 </ng-container>
-
+                <ng-container matColumnDef="index" sticky>
+                  <th mat-header-cell *matHeaderCellDef>#</th>
+                  <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+                </ng-container>
                 <!-- Number Column -->
                 <ng-container matColumnDef="Number" sticky>
-                  <th mat-header-cell *matHeaderCellDef> Number </th>
-                  <td mat-cell *matCellDef="let element"> {{element.Number}} </td>
+                  <th mat-header-cell *matHeaderCellDef> Bill ID </th>
+                  <td mat-cell *matCellDef="let element"> {{element.invoiceid}} </td>
                 </ng-container>
                 <!-- Block chain Id Column -->
                 <ng-container matColumnDef="BlockchainTransactionID">
                   <th mat-header-cell *matHeaderCellDef> Blockchain Trasaction ID </th>
-                  <td mat-cell *matCellDef="let element"> {{element.BlockchainTransactionID}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.billid}} </td>
                 </ng-container>
                 <!-- Date Column -->
                 <ng-container matColumnDef="Date">
                   <th mat-header-cell *matHeaderCellDef> Date </th>
-                  <td mat-cell *matCellDef="let element"> {{element.Date}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.date|date}} </td>
                 </ng-container>
 
                 <!-- Due Date Column -->
                 <ng-container matColumnDef="DueDate">
                   <th mat-header-cell *matHeaderCellDef> Due Date </th>
-                  <td mat-cell *matCellDef="let element"> {{element.DueDate}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.duedate|date}} </td>
                 </ng-container>
 
                 <!-- Vendor Column -->
                 <ng-container matColumnDef="Vendor">
                   <th mat-header-cell *matHeaderCellDef> Vendor </th>
-                  <td mat-cell *matCellDef="let element"> {{element.Vendor}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.vendor}} </td>
                 </ng-container>
                 <!-- Total Column -->
                 <ng-container matColumnDef="Total">
                   <th mat-header-cell *matHeaderCellDef> Total </th>
-                  <td mat-cell *matCellDef="let element"> {{element.Total}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.total}} </td>
                 </ng-container>
                 <!-- Balance Column -->
                 <ng-container matColumnDef="Balance">
                   <th mat-header-cell *matHeaderCellDef> Balance </th>
-                  <td mat-cell *matCellDef="let element"> {{element.Balance}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.total-element.deposit}} </td>
                 </ng-container>
                 <!-- <ng-container matColumnDef="Status">
                   <th mat-header-cell *matHeaderCellDef> Status </th>
