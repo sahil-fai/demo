@@ -1,9 +1,10 @@
 
 <div class="wrapper">
   <div class="header">
-      <div class="progressBar" >
+      <!-- <div class="progressBar" >
         <mat-progress-bar *ngIf="!isBusinessLoaded" [mode]="'indeterminate'" [color]="'warn'"></mat-progress-bar>
-      </div>
+
+      </div> -->
     <div class="logoText">
       <app-logo></app-logo>
     </div>
@@ -126,5 +127,6 @@
           </div>
     </ng-template>
   </div>
+  <app-loader></app-loader>
 </div>
 

@@ -166,6 +166,7 @@ import {
 } from './Components/SingleLedgerComponents/suppliers/suppliers.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/chart-of-account/chart-of-account.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -221,6 +222,7 @@ import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/cha
     MatSnackBarModule,
     NgSelectModule,
     MatMenuModule,
+    NgxSpinnerModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-center',
