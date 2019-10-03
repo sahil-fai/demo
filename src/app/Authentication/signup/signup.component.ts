@@ -30,10 +30,10 @@ import {
 } from '@angular/cdk/layout';
 import {
   DialogOverviewExampleDialogComponent
-} from '../../Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component'
+} from '../../Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component';
 import {
   TermsConditionsComponent
-} from '../../Shared/terms-conditions/terms-conditions.component'
+} from '../../Shared/terms-conditions/terms-conditions.component';
 
 @Component({
   selector: 'app-signup',
@@ -49,14 +49,14 @@ export class SignupComponent implements OnInit, OnDestroy {
   isRegistered = false;
   checked = false;
   mobileQuery: MediaQueryList;
-  private _mobileQueryListener: () => void;
+  private mobileQueryListener: () => void;
   width: string;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private router: Router, private _fb: FormBuilder, private authService: AuthService, private sanitizer: DomSanitizer, public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
+  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private sanitizer: DomSanitizer, public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
     this.mobileQuery = media.matchMedia('(max-width: 767px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this.mobileQueryListener);
   }
   formRegister: FormGroup;
   roles = [{
@@ -76,7 +76,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.createForm();
   }
   private createForm() {
-    this.formRegister = this._fb.group({
+    this.formRegister = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       username: [this.userEmail, [Validators.required, Validators.email]],
@@ -184,14 +184,13 @@ export class SignupComponent implements OnInit, OnDestroy {
       let confirmPass = group.controls.confirmpassword.value;
       return pass === confirmPass ? null : {
         notSame: true
-      }
+      };
     }
     // }
     // return null;
   }
   openTermsConditions() {
-    this.width = (this.mobileQuery.matches) ? '80vw' : '50vw';
-
+    this.width = '90vw';
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -212,7 +211,7 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.mobileQuery.removeListener(this.mobileQueryListener);
   }
 
 }

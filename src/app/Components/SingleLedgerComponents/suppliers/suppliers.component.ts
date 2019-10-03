@@ -59,11 +59,11 @@ export class SuppliersComponent implements OnInit {
   ];
   public transcationList = [];
   public COAMappings: any;
-  public isCOAEnabled= true;
+  public isCOAEnabled = true;
 
 
   private _createForm() {
-    this.formTransaction = this._fb.group({
+    this.formTransaction = this.fb.group({
       Contact: [],
       Platform: [],
       Mapping: [],
@@ -81,7 +81,7 @@ export class SuppliersComponent implements OnInit {
 
 
   constructor(private helper: HelperService,
-              private businessService: BusinessService, private _fb: FormBuilder,
+              private businessService: BusinessService, private fb: FormBuilder,
     ) {
       }
 
@@ -134,7 +134,7 @@ export class SuppliersComponent implements OnInit {
   _getVendors() {
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getAllVendors(companyid).subscribe(res => {
-      if (res.length == 0) {this.isCOAEnabled = false; }
+      if (res.length === 0) {this.isCOAEnabled = false; }
       if (res.length > 0) {
         this.Vendor = res;
        }
@@ -143,7 +143,7 @@ export class SuppliersComponent implements OnInit {
 
   _getplatforms() {
     this.businessService.getPlatforms().subscribe(res => {
-      if (res.length == 0) {this.isCOAEnabled = false; }
+      if (res.length === 0) {this.isCOAEnabled = false; }
       this.platfrom = res;
      });
   }
@@ -151,7 +151,7 @@ export class SuppliersComponent implements OnInit {
   _getChartofAccounts() {
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getCompanyChartOfAccounts(companyid).subscribe(res => {
-      if (res.length == 0) {this.isCOAEnabled = false; }
+      if (res.length === 0) {this.isCOAEnabled = false; }
       this.COA = res;
      });
   }
@@ -198,8 +198,7 @@ export class SuppliersComponent implements OnInit {
   }
 
   public cancelRecord() {
-    if (this.transcationList)
-    {
+    if (this.transcationList) {
       this.transcationList.splice(this.transcationList.length - 1, 1);
     }
   }

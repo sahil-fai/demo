@@ -42,17 +42,17 @@
                     <li>
                       <label class="labels newFormatting">First Name</label>
                       <input type="text" class="fields newFormatting" [ngClass]="{error: (f.firstName.invalid && f.firstName.dirty) || (submitted && f.firstName.invalid)}" formControlName="firstName"  formControlName="firstName" />
-                      <div class="errorMessage" *ngIf="(f.firstName.invalid && f.firstName.dirty && f.firstName.errors.email) || (submitted && f.firstName.invalid && f.firstName.errors.email) || (f.firstName.invalid && f.firstName.dirty)|| (submitted && f.firstName.invalid) ">Please enter First Name.</div>
+                      <div class="errorMessage" *ngIf="(!!f.firstName.invalid && !!f.firstName.dirty && !!f.firstName.errors.email) || (submitted && !!f.firstName.invalid && !!f.firstName.errors.email) || (!!f.firstName.invalid && !!f.firstName.dirty)|| (submitted && !!f.firstName.invalid) ">Please enter First Name.</div>
                     </li>
                     <li>
                       <label class="labels newFormatting">Last Name</label>
                       <input type="text" class="fields newFormatting" [ngClass]="{error: (f.lastName.invalid && f.lastName.dirty) || (submitted && f.lastName.invalid)}" formControlName="lastName" formControlName="lastName"/>
-                      <div class="errorMessage" *ngIf="(f.lastName.invalid && f.lastName.dirty && f.lastName.errors.email) || (submitted && f.lastName.invalid && f.lastName.errors.email) || (f.lastName.invalid && f.lastName.dirty)|| (submitted && f.lastName.invalid) ">Please enter Last Name.</div>
+                      <div class="errorMessage" *ngIf="(!!f.lastName.invalid && !!f.lastName.dirty && !!f.lastName.errors.email) || (submitted && !!f.lastName.invalid && !!f.lastName.errors.email) || (!!f.lastName.invalid && !!f.lastName.dirty)|| (submitted && !!f.lastName.invalid) ">Please enter Last Name.</div>
                     </li>
                     <li>
                       <label class="labels newFormatting">Email Address</label>
                       <input type="email" class="fields newFormatting" [ngClass]="{error: (f.username.invalid && f.username.dirty) || (submitted && f.username.invalid)}" formControlName="username" />
-                      <div class="errorMessage" *ngIf="(f.username.invalid && f.username.dirty && f.username.errors.email) || (submitted && f.username.invalid && f.username.errors.email) || (f.username.invalid && f.username.dirty)|| (submitted && f.username.invalid) ">Please enter a valid email address.</div>
+                      <div class="errorMessage" *ngIf="(!!f.username.invalid && !!f.username.dirty && !!f.username.errors.email) || (submitted && !!f.username.invalid && !!f.username.errors.email) || (!!f.username.invalid && !!f.username.dirty)|| (submitted && !!f.username.invalid) ">Please enter a valid email address.</div>
                     </li>
                     <li class="password" [ngClass]="{error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid)}">
                         <label class="labels newFormatting">Password</label>
@@ -90,7 +90,6 @@
                          <mat-checkbox [required]="true" formControlName="isAgree" [(ngModel)]="checked" (keydown)="openTermsConditions()"><span>I agree to the SingleLedger Terms &amp; Conditions <br> and Privacy Policy</span></mat-checkbox>
                     </li>
                   </ul>
-
                   <div class="buttonWrap">
                       <button type="submit" class="btn btn-solid submit" [disabled]="formRegister.invalid"  matRipple><i class="icon-submit"></i>Submit</button>
                   </div>

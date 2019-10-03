@@ -93,9 +93,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
     this.helper.setcompanyId(companyid);
     this.router.navigate(['/business', 'company-info']);
   }
-  public openDialog(){
-
-  }
+  public openDialog(){}
   public onFilter() {
     this.submitted = true;
     if (this.formSearch.invalid) { return; }

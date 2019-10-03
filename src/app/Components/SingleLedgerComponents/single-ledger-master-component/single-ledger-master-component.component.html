@@ -67,9 +67,7 @@
 
 <div class="mainContainer">
     <div class="header clearfix">
-        <div class="progressBar">
-            <app-loader></app-loader>
-        </div>
+
         <div class="nav-mobile" (click)="openNav()"><a id="nav-toggle"><span></span></a></div>
         <span class="blueHeading modalBlock" ><span class="ellipsis">{{CurrentCompanyName}}</span><i class="arrow"></i>
         <div class="modal">
@@ -103,7 +101,7 @@
       <router-outlet></router-outlet>
     </div>
   </div>
-
+  <app-loader></app-loader>
 </div>
 
 
