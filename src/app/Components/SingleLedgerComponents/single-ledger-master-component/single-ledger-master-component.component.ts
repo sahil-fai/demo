@@ -1,6 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { HelperService } from '../../../services/helper-service/helper.service';
-import { BusinessService } from '../../../services/business-service/business.service';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  HelperService
+} from '../../../services/helper-service/helper.service';
+import {
+  BusinessService
+} from '../../../services/business-service/business.service';
+import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 
 @Component({
   selector: 'app-single-ledger-master-component',
@@ -10,14 +18,20 @@ import { BusinessService } from '../../../services/business-service/business.ser
 export class SingleLedgerMasterComponentComponent implements OnInit {
   CurrentCompanyName: any;
   public isNavOpen = false;
+  businessList: any;
+  isModal: boolean;
 
-  constructor(private helper: HelperService, public BusinessService: BusinessService) { }
+  constructor(private helper: HelperService, public businessService: BusinessService, private switchCompany: SwitchCompanyService) {}
 
   ngOnInit() {
     const companyid = Number(this.helper.getcompanyId());
-    this.BusinessService.getCompanyInformation(companyid).subscribe(res => {
-    this.CurrentCompanyName = res.legalname;
-   });
+    const userId = Number(this.helper.getuserId());
+    this.businessService.getCompanyInformation(companyid).subscribe(res => {
+      this.CurrentCompanyName = res.legalname;
+    });
+    this.businessService.getListOfbusinesses(userId).subscribe(res => {
+      this.businessList = res;
+    });
   }
   public closeNav() {
     this.isNavOpen = !this.isNavOpen;
@@ -25,6 +39,10 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
   public openNav() {
     this.isNavOpen = !this.isNavOpen;
   }
+  public viewBusiness(businessID) {
+    this.ngOnInit();
+    this.helper.setcompanyId(businessID);
+    this.switchCompany.switchCompany();
 
+  }
 }
-

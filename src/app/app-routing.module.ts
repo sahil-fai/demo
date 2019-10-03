@@ -15,6 +15,7 @@ import { InvoicesComponentComponent } from './Components/SingleLedgerComponents/
 import { CompanyInfoComponentComponent } from './Components/SingleLedgerComponents/company-info-component/company-info-component.component';
 import { DashboardComponetComponent } from './Components/SingleLedgerComponents/dashboard-componet/dashboard-componet.component';
 import { SuppliersComponent } from './Components/SingleLedgerComponents/suppliers/suppliers.component';
+import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/chart-of-account/chart-of-account.component';
 const routes: Routes = [
   {
     path: 'login', component: LoginComponent
@@ -30,7 +31,7 @@ const routes: Routes = [
     path: 'businesslist', component: SingleLedgerBusinessListComponent
   },
   {
-    path: 'business', component: SingleLedgerMasterComponentComponent, children: [
+  path: 'business', component: SingleLedgerMasterComponentComponent, children: [
           {
             path: 'dashboard', component: DashboardComponetComponent
           },
@@ -51,6 +52,9 @@ const routes: Routes = [
           },
           {
             path: 'suppliers', component: SuppliersComponent
+          },
+          {
+            path: 'chart-of-account', component: ChartOfAccountComponent
           }
         ]
   },

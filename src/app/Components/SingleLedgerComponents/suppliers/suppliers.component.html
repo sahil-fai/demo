@@ -11,17 +11,17 @@
               <thead>
                 <tr>
                   <th>Vendor</th>
-                  <th>Platfrom</th>
+                  <th>Platform</th>
                   <th>Mapping Type</th>
-                  <th>Email On Biil</th>
-                  <th>isActive</th>
-                  <th>itemDesc1</th>
+                  <!-- <th>Email On Biil</th> -->
+                  <!-- <th>isActive</th> -->
+                  <!-- <th>itemDesc1</th>
                   <th>itemDesc2</th>
-                  <th>itemDesc3</th>
+                  <th>itemDesc3</th> -->
                   <th>COA</th>
-                  <th>Operation</th>
+                  <!-- <th>Operation</th>
                   <th>Subject</th>
-                  <th></th>
+                  <th></th> -->
                 </tr>
               </thead>
               <tbody>
@@ -90,15 +90,15 @@
                     </td>
                 </ng-container>
 
-                <ng-container *ngIf="item.editable">
+                <!-- <ng-container *ngIf="item.editable">
                     <td><input class="input-edit" type="email" formControlName="Email"></td>
                 </ng-container>
                 <ng-container *ngIf="!item.editable">
                     <td>
                         {{item.vendorEmail}}
                     </td>
-                </ng-container>
-                <ng-container *ngIf="item.editable">
+                </ng-container> -->
+                <!-- <ng-container *ngIf="item.editable">
                     <td><mat-checkbox [checked]="item.isActive" formControlName="IsActive"> {{item.isActive}}</mat-checkbox></td>
                 </ng-container>
                 <ng-container *ngIf="!item.editable">
@@ -106,11 +106,11 @@
                         {{item.isActive}}
                     </td>
                 </ng-container>
-                <ng-container *ngIf="item.editable">
-                  <td><input class="input-edit" type="text" formControlName="Desc1"></td>
+                <ng-container  *ngIf="item.editable">
+                  <td [hidden]="true"><input class="input-edit" type="text" formControlName="Desc1"></td>
               </ng-container>
               <ng-container *ngIf="!item.editable">
-                  <td>
+                  <td >
                       {{item.itemDescription1}}
                   </td>
               </ng-container>
@@ -130,7 +130,7 @@
                   {{item.itemDescription3}}
               </td>
           </ng-container>
-
+-->
 
                   <ng-container *ngIf="item.editable">
                       <td>
@@ -154,7 +154,7 @@
                       </td>
                   </ng-container>
 
-                  <ng-container *ngIf="item.editable">
+                  <!-- <ng-container *ngIf="item.editable">
                     <td>
                         <ng-select
                                 [items]="opration"
@@ -174,7 +174,7 @@
                     <td>
                         {{item.opration}}
                     </td>
-                </ng-container>
+                </ng-container> -->
                   <!-- <ng-container *ngIf="item.editable">
                       <td>
                           <ng-select
@@ -195,26 +195,31 @@
                           {{item.ItemOfSubAccount}}
                       </td>
                   </ng-container> -->
-                  <ng-container *ngIf="item.editable">
+                  <!-- <ng-container *ngIf="item.editable">
                       <td><input class="input-edit" type="text" formControlName="Subject"></td>
                   </ng-container>
                   <ng-container *ngIf="!item.editable">
                       <td>
                           {{item.Subject}}
                       </td>
-                  </ng-container>
+                  </ng-container> -->
                   <button  class="btn icon-dots-vertical edit-options" [ngClass]="item.editable?'editable':'disabled'" title="Actions" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{item:item}" title="Actions"><mat-icon>toc</mat-icon>
                     </button>
                 </tr>
               </tbody>
-              <tbody *ngIf="!transcationList || !transcationList.length">
+              <!-- <tbody *ngIf="!transcationList || !transcationList.length">
                 <tr>
-                  <td colspan="8" style="height:190px;text-align:center;color:#969696;font-weight:700;">No Records Found</td>
+                  <td colspan="8" style="text-align:center;">
+                      <div class="no-record ng-star-inserted">
+                          <span class="norecord-text"> No Vendors Found</span>
+                        </div>
+                  </td>
                 </tr>
-              </tbody>
+              </tbody> -->
             </table>
+            <div class="no-record"  *ngIf="!transcationList || !transcationList.length"> <span class="norecord-text"> No Vendors Found</span></div>
           </div>
-          <button  type="button" class="clickable add-button" (click)="addRecord()" title="Add Transaction ">
+          <button  type="button" class="clickable add-button" [class.disabled]="!isCOAEnabled" (click)="addRecord()" title="Add Transaction ">
               <mat-icon>note_add</mat-icon>
           </button>
         </div>

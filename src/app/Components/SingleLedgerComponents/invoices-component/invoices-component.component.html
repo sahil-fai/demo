@@ -45,7 +45,7 @@
                                 <input type="text" class="fields calendar" />
                             </li>
                             <li class="smallFields">
-                                <label class="labels">status</label>
+                                <label class="labels">Status</label>
                                 <select class="fields">
                                 <option value="all" >ALL</option>
                                 <option *ngFor="let status of status" [value]="status.value">
@@ -54,11 +54,16 @@
                                 </select>
                             </li>
                             <li>
-                                <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
+                              <ul>
+                                <li>
+                                  <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
+                              </li>
+                              <li>
+                                  <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset"  />
+                              </li>
+                              </ul>
                             </li>
-                            <li>
-                                <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset"  />
-                            </li>
+
                             </ul>
                         </form>
                         </div>
@@ -132,7 +137,7 @@
                                 <!-- Balance Column -->
                                 <ng-container matColumnDef="Balance">
                                   <th mat-header-cell *matHeaderCellDef> Balance </th>
-                                  <td mat-cell *matCellDef="let element"> {{element.invoicebalance}} </td>
+                                  <td mat-cell *matCellDef="let element"> {{element.total-element.deposit}} </td>
                                 </ng-container>
                                 <!-- <ng-container matColumnDef="BlockchainStatus">
                                   <th mat-header-cell *matHeaderCellDef> BlockchainStatus </th>

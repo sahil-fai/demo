@@ -18,18 +18,24 @@
     <h2>{{title}}</h2>
     <div class="businesslistAvial"  *ngIf="isBusinessLoaded; else nobusiness">
       <div class="searchPanel clearfix">
-        <form   novalidate autocomplete="off">
+        <form  class="search-panel-form" [formGroup]="formSearch" (ngSubmit)="onFilter()" novalidate autocomplete="off">
           <ul class="floatingList searchBlock">
             <li>
               <label class="labels">Filter For</label>
-              <input type="text" class="fields"  />
+              <input type="text" placeholder="Business Name " class="fields" formControlName="keywords"
+              [ngClass]="{error: (f.keywords.invalid && f.keywords.dirty) || (submitted && f.keywords.invalid)}" />
             </li>
             <li>
-              <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter"/>
+              <ul>
+                <li>
+                  <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter"/>
+                </li>
+                <li>
+                  <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" (click)="onReset()"/>
+                </li>
+              </ul>
             </li>
-            <li>
-              <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" />
-            </li>
+
           </ul>
         </form>
         <div class="connectButton">

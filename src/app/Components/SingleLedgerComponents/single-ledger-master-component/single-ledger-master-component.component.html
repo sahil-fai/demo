@@ -48,13 +48,16 @@
                 <i class="icon-bill"></i><a [routerLink]="['/business/suppliers']" title='Chart Of Account Mapping'>COA Mapping</a>
             </mat-expansion-panel-header>
         </mat-expansion-panel>
-          <mat-expansion-panel routerLinkActive="active" [@.disabled]="true" >
+        <mat-expansion-panel routerLinkActive="active" [@.disabled]="true" >
+          <mat-expansion-panel-header>
+              <i class="icon-bill"></i><a [routerLink]="['/business/chart-of-account']" >Chart Of Account</a>
+          </mat-expansion-panel-header>
+    </mat-expansion-panel>
+        <mat-expansion-panel routerLinkActive="active" [@.disabled]="true" >
               <mat-expansion-panel-header>
                   <i class="icon-bill"></i><a [routerLink]="['/connectbusiness']" >Connect Business</a>
               </mat-expansion-panel-header>
-          </mat-expansion-panel>
-
-
+        </mat-expansion-panel>
       </mat-accordion>
   </div>
 <!-- NAVIGATION ENDS HERE -->
@@ -80,14 +83,9 @@
                 </tr>
               </table>
               <ul>
-                <!-- <li *ngFor="let business of businessList">
-                  <a href="javascript:void(0)" (click)="viewBusiness(business.ID)">- {{business.CompanyName}}</a>
-                </li> -->
-                <li><a href="">Welcome NetWork</a></li>
-                <li><a href="">Apple vie Venture</a></li>
-                <li><a href="">TDK Contarcting Ltd</a></li>
-                <li><a href="">Pay Pie FintTech</a></li>
-                <li><a href="">Maple Ltd</a></li>
+                <li *ngFor="let business of businessList">
+                  <a href="javascript:void(0)" (click)="viewBusiness(business.companyId)">- {{business.company.legalname}}</a>
+                </li>
               </ul>
             </li>
           </ul>

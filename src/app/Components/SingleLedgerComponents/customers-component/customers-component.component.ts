@@ -5,11 +5,11 @@ import {
   Component,
   OnInit,
   ViewChild,
+  OnDestroy
 } from '@angular/core';
 import {
   MatTableDataSource
 } from '@angular/material/table';
-import json from './res.json';
 import {
   MatPaginator
 } from '@angular/material/paginator';
@@ -19,6 +19,7 @@ import {
 import {
   HelperService
 } from '../../../services/helper-service/helper.service';
+import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -35,7 +36,7 @@ export interface PeriodicElement {
   templateUrl: './customers-component.component.html',
   styleUrls: ['./customers-component.component.less']
 })
-export class CustomersComponentComponent implements OnInit {
+export class CustomersComponentComponent implements OnInit, OnDestroy {
   title = 'Customers';
   public dataSource: MatTableDataSource < PeriodicElement > ;
   selected = ['Active'];
@@ -53,23 +54,34 @@ export class CustomersComponentComponent implements OnInit {
   customers: any;
   Totalrec: any;
   @ViewChild(MatPaginator, {}) paginator: MatPaginator;
-  constructor(public BusinessService: BusinessService, private helper: HelperService) {}
+  switchCompanySubscription: any;
+  displayedColumns: string[] = ['select',
+  'CustomerName',
+  'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'BlockChainID', 'Invite', 'star'];
+  selection = new SelectionModel < PeriodicElement > (true, []);
+  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
+    this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
+      () => {
+        this.ngOnInit();
+      }
+    );
+  }
   ngOnInit() {
     const companyid = Number(this.helper.getcompanyId());
-    this.BusinessService.getAllCustomers(companyid).subscribe(res => {
-      this.Totalrec = res.length;
-      if (res.length > 0) {
-        this.customers = res;
-        this.handlePage({
-          pageSize: '10',
-          pageIndex: '0'
-        });
-      }
-    });
+    this.getAllCustomer(companyid);
   }
-
-  displayedColumns: string[] = ['select', "CustomerName", "ContactEmail", "RegisterDate", "Organizaton", "Status", "BlockChainID", "Invite", 'star'];
-  selection = new SelectionModel < PeriodicElement > (true, []);
+getAllCustomer(companyid) {
+  this.businessService.getAllCustomers(companyid).subscribe(res => {
+    this.Totalrec = res.length;
+    if (res.length > 0) {
+      this.customers = res;
+      this.handlePage({
+        pageSize: '10',
+        pageIndex: '0'
+      });
+    }
+  });
+}
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     if (this.dataSource && this.dataSource.data.length > 0) {
@@ -119,5 +131,9 @@ export class CustomersComponentComponent implements OnInit {
     let data = this.Paginator(this.customers, pagenumber, pagesize);
     this.dataSource = new MatTableDataSource < PeriodicElement > (this.customers);
   }
-
+  ngOnDestroy() {
+    if (this.switchCompanySubscription) {
+      this.switchCompanySubscription.unsubscribe();
+    }
+  }
 }
