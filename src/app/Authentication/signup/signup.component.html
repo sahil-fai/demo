@@ -60,7 +60,7 @@
                             <input [type]="showPassword?'text':'password'" class="fields newFormatting" [ngClass]="{error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid)}" formControlName="password"/>
                             <span type="button" class="icon-eye-hide"  (click)="togglePasswordVisibility()"></span>
                         </div>
-                        <div class="errorMessage" *ngIf="(submitted && f.password.invalid) ">Please enter Password.</div>
+                        <div class="errorMessage" *ngIf="(submitted && !!f.password.invalid) ">Please enter Password.</div>
                         <div class="condition">
                           <!-- <span class="top-arrow"></span> -->
                           <ul class="conditionList">
@@ -78,16 +78,16 @@
                       <div class="password">
                           <input [type]="showConfirmPassword?'text':'password'" class="fields newFormatting" formControlName="confirmpassword" [ngClass]="{error: errors && (!f.confirmpassword.pristine)}"/>
                           <span type="button" class="icon-eye-hide" (click)="toggleConfirmPasswordVisibility()"></span>
-                          
+
                       </div>
-                      <div class="errorMessage" *ngIf="((!f.confirmpassword.pristine) && (errors && errors.notSame))">confirm Password is not matched</div>
+                      <div class="errorMessage" *ngIf="((!f.confirmpassword.pristine) && (errors && !!errors.notSame))">confirm Password is not matched</div>
                     </li>
                     <!-- <li class="recaptchaHolder g-recaptcha">
                       <re-captcha required siteKey="6LcXSkMUAAAAAEmYkp1eSbIbT-vcMkxEnxmoryxd" formControlName="recaptcha" ></re-captcha>
 
                     </li> -->
-                    <li class="agreement" (mousedown)="openTermsConditions()">
-                         <mat-checkbox [required]="true" formControlName="isAgree" [(ngModel)]="checked" ><span>I agree to the SingleLedger Terms &amp; Conditions <br> and Privacy Policy</span></mat-checkbox>
+                    <li class="agreement" (mousedown)="openTermsConditions()" >
+                         <mat-checkbox [required]="true" formControlName="isAgree" [(ngModel)]="checked" (keydown)="openTermsConditions()"><span>I agree to the SingleLedger Terms &amp; Conditions <br> and Privacy Policy</span></mat-checkbox>
                     </li>
                   </ul>
 
