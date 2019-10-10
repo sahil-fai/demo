@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoaderService } from 'src/app/services/loader-service/loader.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { constants } from 'os';
 
 @Component({
   selector: 'app-loader',
