@@ -147,11 +147,11 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
   }
 
-  public openBottomSheet(res, invoicenumber, companyblockchainid) {
+  public openBottomSheet(Description, Entityid, Blocknumber, Timestamp, Chaincodename, Channelname) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = [res, invoicenumber, companyblockchainid];
+    dialogConfig.data = [Description, Entityid, Blocknumber, Timestamp, Chaincodename, Channelname];
     dialogConfig.disableClose = true;
-    dialogConfig.width = '546px';
+    dialogConfig.width = '650px';
     dialogConfig.panelClass = 'withdrawal-popup';
     const dialogRef = this.dialog.open(BottomSheetOverviewExampleSheetComponent, dialogConfig);
   }
