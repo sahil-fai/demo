@@ -27,6 +27,7 @@ import {
   MatDialog
 } from '@angular/material';
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
+
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -45,6 +46,7 @@ export interface PeriodicElement {
   styleUrls: ['./invoices-component.component.less']
 })
 export class InvoicesComponentComponent implements OnInit, OnDestroy {
+
   title = 'Invoices';
   status = [{
       value: 'Transfered',
@@ -147,11 +149,12 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
   }
 
-  public openBottomSheet(Description, Entityid, Blocknumber, Timestamp, Chaincodename, Channelname) {
+  public openBottomSheet(data) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = [Description, Entityid, Blocknumber, Timestamp, Chaincodename, Channelname];
+       console.log(data);
+    dialogConfig.data = data;
     dialogConfig.disableClose = true;
-    dialogConfig.width = '650px';
+    dialogConfig.width = '600px';
     dialogConfig.panelClass = 'withdrawal-popup';
     const dialogRef = this.dialog.open(BottomSheetOverviewExampleSheetComponent, dialogConfig);
   }

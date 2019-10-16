@@ -59,6 +59,7 @@ import {
 import {
   LoaderService
 } from './services/loader-service/loader.service';
+
 import { NgSelectModule } from '@ng-select/ng-select';
 // recaptcha
 import {
@@ -167,6 +168,8 @@ import {
 import {MatMenuModule} from '@angular/material/menu';
 import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/chart-of-account/chart-of-account.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SortpipePipe } from './Sortpipe/sortpipe.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -195,7 +198,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BusinessReloadComponent,
     NotificationSnackbarComponent,
     SuppliersComponent,
-    ChartOfAccountComponent
+    ChartOfAccountComponent,
+    SortpipePipe,
+
   ],
   imports: [
     BrowserModule,
@@ -239,9 +244,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
       warnOnNgModelWithFormControl: 'never'
     })
   ],
-  providers: [AuthService, LoaderService, {
+  providers: [AuthService, LoaderService,{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
+
     multi: true
   }],
   bootstrap: [AppComponent],

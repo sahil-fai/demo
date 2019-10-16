@@ -8,21 +8,21 @@
           <thead>
             <tr>
             <th>Description</th>
-            <th>Entityid</th>
-            <th>Blocknumber</th>
+            <th>Entity Id</th>
+            <th>Block Number</th>
             <th>Timestamp</th>
-            <th>Chaincodename</th>
-            <th>Channelname</th>
+            <th>Chain Code Name</th>
+            <th>Channel Name</th>
             </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let coa of trasactions">
-                  <td>{{coa.description}}</td>
-                  <td>{{coa.entityid}}</td>
-                  <td>{{coa.blocknumber}}</td>
-                  <td>{{coa.timestamp}}</td>
-                  <td>{{coa.chaincodename}}</td>
-                  <td>{{coa.channelname}}</td>
+              <tr *ngFor="let varriable of trasactions">
+                  <td>{{varriable.description}}</td>
+                  <td>{{varriable.entityid}}</td>
+                  <td>{{varriable.blocknumber}}</td>
+                  <td>{{varriable.timestamp}}</td>
+                  <td>{{varriable.chaincodename}}</td>
+                  <td>{{varriable.channelname}}</td>
                 </tr>
           </tbody>
 
