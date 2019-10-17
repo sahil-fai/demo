@@ -12,6 +12,7 @@ export class SortpipePipe implements PipeTransform {
   // todaydate = new Date();
 
   transform(val: string): string {
+    console.log(val)
     const split = val.split('').join('');
     const extract = split.substring(0, 4) + '....' + split.slice(-4);
     console.log(extract);
