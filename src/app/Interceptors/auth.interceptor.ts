@@ -63,7 +63,8 @@ export class TokenInterceptor implements HttpInterceptor {
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
         this._loaderService.hideLoader();
-        this._errHandler.pushError(err.error.error.message);
+        console.log(err)
+       // this._errHandler.pushError(err.error.error.message);
       }
     }, () => {
       this._loaderService.hideLoader();

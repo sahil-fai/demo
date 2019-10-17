@@ -2,11 +2,11 @@
 <mat-menu #menu="matMenu" class="user-profile" xPosition="before">
   <button mat-menu-item>
     <mat-icon>account_circle</mat-icon>
-    <span>Hamid</span>
+    <span>{{userinfo?.firstName}} {{userinfo?.lastname}}</span>
   </button>
   <button mat-menu-item>
     <mat-icon>email</mat-icon>
-    <span>hamid@gmail.com</span>
+    <span>{{userinfo.email}}</span>
   </button>
   <button mat-menu-item>
       <mat-icon>settings</mat-icon>
