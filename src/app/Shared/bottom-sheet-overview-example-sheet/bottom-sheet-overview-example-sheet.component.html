@@ -17,12 +17,12 @@
           </thead>
           <tbody>
               <tr *ngFor="let varriable of trasactions">
-                  <td>{{varriable.description}}</td>
-                  <td>{{varriable.entityid}}</td>
-                  <td>{{varriable.blocknumber}}</td>
-                  <td>{{varriable.timestamp}}</td>
-                  <td>{{varriable.chaincodename}}</td>
-                  <td>{{varriable.channelname}}</td>
+                  <td >{{varriable.description}}</td>
+                  <td class="td-width">{{varriable.entityid}}</td>
+                  <td class="td-width">{{varriable.blocknumber}}</td>
+                  <td class="td-width">{{varriable.timestamp |date:'mm/dd/yy'}}</td>
+                  <td class="td-width">{{varriable.chaincodename}}</td>
+                  <td class="td-width">{{varriable.channelname}}</td>
                 </tr>
           </tbody>
 

@@ -1,6 +1,7 @@
 import {
   SelectionModel
 } from '@angular/cdk/collections';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 import {
   Component,
   OnInit,
@@ -43,10 +44,16 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-invoices-component',
   templateUrl: './invoices-component.component.html',
-  styleUrls: ['./invoices-component.component.less']
+  styleUrls: ['./invoices-component.component.less'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class InvoicesComponentComponent implements OnInit, OnDestroy {
-
   title = 'Invoices';
   status = [{
       value: 'Transfered',
@@ -96,6 +103,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['Number',
     'BlockchainTransactionID', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'star'
   ];
+  expandedElement: PeriodicElement | null;
   selection = new SelectionModel < PeriodicElement > (true, []);
   invoice: string;
   switchCompanySubscription: any;
@@ -154,7 +162,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
        console.log(data);
     dialogConfig.data = data;
     dialogConfig.disableClose = true;
-    dialogConfig.width = '600px';
+    dialogConfig.width = '65vw';
     dialogConfig.panelClass = 'withdrawal-popup';
     const dialogRef = this.dialog.open(BottomSheetOverviewExampleSheetComponent, dialogConfig);
   }
@@ -163,5 +171,6 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       this.switchCompanySubscription.unsubscribe();
     }
   }
+
 
 }
