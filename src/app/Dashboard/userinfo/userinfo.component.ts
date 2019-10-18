@@ -8,10 +8,13 @@ import { HelperService } from 'src/app/services/helper-service/helper.service';
   styleUrls: ['./userinfo.component.less']
 })
 export class UserinfoComponent implements OnInit {
+  userinfo: any;
 
   constructor(private helper: HelperService, private _router: Router) { }
 
   ngOnInit() {
+    this.userinfo = this.helper.userInfo.get();
+
   }
   public onLogout() {
     this.helper.clearToken();
