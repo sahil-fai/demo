@@ -167,8 +167,8 @@
                                                 <table class="dataTable">
                                                   <thead>
                                                     <tr>
-                                                    <th>Description</th>
-                                                    <th>Entity Id</th>
+                                                    <th>Transaction ID</th>
+                                                    <!-- <th>Entity Id</th> -->
                                                     <th>Block Number</th>
                                                     <th>Timestamp</th>
                                                     <th>Chain Code Name</th>
@@ -178,9 +178,9 @@
                                                   <tbody>
                                                       <tr *ngFor="let varriable of element.blockchainhistories">
                                                           <td >{{varriable.description}}</td>
-                                                          <td class="td-width">{{varriable.entityid}}</td>
+                                                          <!-- <td class="td-width">{{varriable.entityid}}</td> -->
                                                           <td class="td-width">{{varriable.blocknumber}}</td>
-                                                          <td class="td-width">{{varriable.timestamp |date:'mm/dd/yy'}}</td>
+                                                          <td class="td-width">{{varriable.timestamp| date:'medium' }}</td>
                                                           <td class="td-width">{{varriable.chaincodename}}</td>
                                                           <td class="td-width">{{varriable.channelname}}</td>
                                                         </tr>
