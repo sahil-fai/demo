@@ -59,6 +59,7 @@ import {
 import {
   LoaderService
 } from './services/loader-service/loader.service';
+
 import { NgSelectModule } from '@ng-select/ng-select';
 // recaptcha
 import {
@@ -166,6 +167,9 @@ import {
 } from './Components/SingleLedgerComponents/suppliers/suppliers.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/chart-of-account/chart-of-account.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { SortpipePipe } from './pipe/sortpipe.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -194,7 +198,9 @@ import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/cha
     BusinessReloadComponent,
     NotificationSnackbarComponent,
     SuppliersComponent,
-    ChartOfAccountComponent
+    ChartOfAccountComponent,
+    SortpipePipe,
+
   ],
   imports: [
     BrowserModule,
@@ -221,6 +227,7 @@ import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/cha
     MatSnackBarModule,
     NgSelectModule,
     MatMenuModule,
+    NgxSpinnerModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-center',
@@ -237,9 +244,10 @@ import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/cha
       warnOnNgModelWithFormControl: 'never'
     })
   ],
-  providers: [AuthService, LoaderService, {
+  providers: [AuthService, LoaderService,{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
+
     multi: true
   }],
   bootstrap: [AppComponent],

@@ -28,7 +28,7 @@ export class BusinessService {
 
   getAllInvoices(id: number): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/invoices' + '?filter={"where":{"companyid":' + id + '},"limit":100,"include":[{"relation":"all"}]}',{
+    return this.http.get<any>('business/'+id+'/invoices',{
     });
   }
 
@@ -47,7 +47,7 @@ export class BusinessService {
 
   getCompanyChartOfAccounts(id: number, filter?:string): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/chartofaccounts' + '?filter={"where":{"classification":"Expense", "companyid":' + id + '},"limit":1000}', {
+    return this.http.get<any>('business/chartofaccounts' + '?filter={"where":{"classification":"Expense", "companyId":' + id + '},"limit":1000}', {
     });
   }
 
@@ -62,7 +62,7 @@ export class BusinessService {
     });
   }
   getGroupChartofAccounts(id: any) {
-    return this.http.get<any>('groupchartofaccount'+ '?filter={"where":{"companyid":' + id + '},"limit":1000}', {
+    return this.http.get<any>('groupchartofaccount'+ '?filter={"where":{"companyId":' + id + '},"limit":1000}', {
     });
   }
   setAsDefault(id:number) {

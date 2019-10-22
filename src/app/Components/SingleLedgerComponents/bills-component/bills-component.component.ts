@@ -28,7 +28,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   bills: any;
   public dataSource: MatTableDataSource<PeriodicElement>;
   @ViewChild(MatPaginator, {}) paginator: MatPaginator;
-  displayedColumns: string[] = ['index','Number', 'Date', 'DueDate', 'Vendor', 'Total', 'Balance', 'star'];
+  displayedColumns: string[] = ['index', 'Number', 'Date', 'DueDate', 'Vendor', 'Total', 'Balance', 'star'];
   selection = new SelectionModel<PeriodicElement>(true, []);
 
   switchCompanySubscription: any;
@@ -43,7 +43,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   ngOnInit() {
       this.getAllBills();
   }
-getAllBills(){
+getAllBills() {
   const companyid = Number(this.helper.getcompanyId());
   const filter = '?filter={"include":[{"relation":"all"}]}';
   this.businessService.getAllBills(companyid).subscribe(res => {

@@ -1,6 +1,7 @@
 import {
   SelectionModel
 } from '@angular/cdk/collections';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 import {
   Component,
   OnInit,
@@ -27,6 +28,7 @@ import {
   MatDialog
 } from '@angular/material';
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
+
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -42,7 +44,14 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-invoices-component',
   templateUrl: './invoices-component.component.html',
-  styleUrls: ['./invoices-component.component.less']
+  styleUrls: ['./invoices-component.component.less'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class InvoicesComponentComponent implements OnInit, OnDestroy {
   title = 'Invoices';
@@ -94,6 +103,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['Number',
     'BlockchainTransactionID', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'star'
   ];
+  expandedElement: PeriodicElement | null;
   selection = new SelectionModel < PeriodicElement > (true, []);
   invoice: string;
   switchCompanySubscription: any;
@@ -147,11 +157,12 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
   }
 
-  public openBottomSheet(res, invoicenumber, companyblockchainid) {
+  public openBottomSheet(data) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = [res, invoicenumber, companyblockchainid];
+       console.log(data);
+    dialogConfig.data = data;
     dialogConfig.disableClose = true;
-    dialogConfig.width = '546px';
+    dialogConfig.width = '65vw';
     dialogConfig.panelClass = 'withdrawal-popup';
     const dialogRef = this.dialog.open(BottomSheetOverviewExampleSheetComponent, dialogConfig);
   }
@@ -160,5 +171,6 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       this.switchCompanySubscription.unsubscribe();
     }
   }
+
 
 }

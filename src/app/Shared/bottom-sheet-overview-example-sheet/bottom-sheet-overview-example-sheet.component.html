@@ -1,12 +1,33 @@
 
 <div class="blockchaintx"  [@.disabled]="true">
   <!-- <span class="close" (click)="close()">&times;</span> -->
-  <div class="comapany-name">{{ invoiceNumeber }}</div>
-  <div class="companyblockchainid">
-    <p><span>CompanyBlockChainId : {{  CompanyBlockChainId}}</span></p>
-  </div>
-  <ul>
-    <li *ngFor="let item of trasactions">TxId	:	{{  item.description}}</li>
-  </ul>
-</div>
+  <div class="floatBoxesWrapper clearfix">
+      <div class="floatBox tabletsOnly">
+        <div class="defaultTable">
+         <table class="dataTable">
+          <thead>
+            <tr>
+            <th>Description</th>
+            <th>Entity Id</th>
+            <th>Block Number</th>
+            <th>Timestamp</th>
+            <th>Chain Code Name</th>
+            <th>Channel Name</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let varriable of trasactions">
+                  <td >{{varriable.description}}</td>
+                  <td class="td-width">{{varriable.entityid}}</td>
+                  <td class="td-width">{{varriable.blocknumber}}</td>
+                  <td class="td-width">{{varriable.timestamp |date:'mm/dd/yy'}}</td>
+                  <td class="td-width">{{varriable.chaincodename}}</td>
+                  <td class="td-width">{{varriable.channelname}}</td>
+                </tr>
+          </tbody>
+
+        </table>
+        </div>
+        </div>
+      </div>
 <button type="button" mat-dialog-close class="btn closeButton">&#215;</button>

@@ -13,6 +13,11 @@ export class HelperService {
     'set': function(session) {localStorage.setItem('session', JSON.stringify(session)); },
     'remove': function() {localStorage.removeItem('session'); }
   };
+   public userInfo = {
+    'get': function() {return JSON.parse(localStorage.getItem('userInfo'));},
+    'set': function(userinfo) {localStorage.setItem('userInfo', JSON.stringify(userinfo)); },
+    'remove': function() {localStorage.removeItem('userInfo'); }
+  };
   set(token: string): void {
     localStorage.setItem(TOKEN, token);
   }
@@ -41,6 +46,6 @@ export class HelperService {
   isLogged() {
     return localStorage.getItem(TOKEN) != null;
   }
-  
+
   constructor() { }
 }

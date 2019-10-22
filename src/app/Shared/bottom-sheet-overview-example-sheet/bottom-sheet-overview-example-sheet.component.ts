@@ -3,6 +3,7 @@ import {
   OnInit,
   Inject
 } from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 import {
   MatBottomSheetRef,
 } from '@angular/material';
@@ -15,23 +16,31 @@ import {
   MatDialogConfig,
   MatDialog
 } from '@angular/material/dialog';
+
+// import {
+//   ShortStringService
+// } from '../app/services/short-service/shortstring.service';
+
 @Component({
   selector: 'app-bottom-sheet-overview-example-sheet',
   templateUrl: './bottom-sheet-overview-example-sheet.component.html',
   styleUrls: ['./bottom-sheet-overview-example-sheet.component.less']
+
 })
 export class BottomSheetOverviewExampleSheetComponent implements OnInit {
   invoiceNumeber: any;
   CompanyBlockChainId: any;
   trasactions: any;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public trasaction: any) {
+  constructor(@Inject(MAT_DIALOG_DATA) public trasaction: any ) {
 
   }
   ngOnInit(): void {
-    this.trasactions = this.trasaction[0];
-    this.invoiceNumeber = this.trasaction[1];
-    this.CompanyBlockChainId = this.trasaction[2];
+    console.log(this.trasaction);
+    this.trasactions = this.trasaction.blockchainhistories;
+    console.log(this.trasactions);
+    // this.invoiceNumeber = this.trasaction[1];
+    // this.CompanyBlockChainId = this.trasaction[2];
   }
   // close() {
   //   this.bottomSheetRef.dismiss();

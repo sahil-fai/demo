@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
   ngOnInit() {
     localStorage.clear();
     this.createForm();
-    this._subscribeFormControls = this.formLogin.controls['username'].valueChanges.subscribe(val => {
+    this._subscribeFormControls = this.formLogin.controls.username.valueChanges.subscribe(val => {
       if (val.indexOf(' ') >= 0) {
        // this.formLogin.controls['username'].setValue(this.helper.removeEmptySpaces(val));
       }
@@ -59,10 +59,11 @@ export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
         //     duration: 2000
         //  });
        // this.notification.openSnackBar(this.message,'✌✌️✌️');
+        this.helper.userInfo.set(res.user);
         this.helper.set(res.token);
         this.helper.setuserId(res.user.id);
         this.router.navigate(['/businesslist']);
-        if (res['Role'] === 0) {
+        if (res.Role === 0) {
           this.router.navigate(['/businesslist']);
         }
     },

@@ -13,9 +13,8 @@ export class LoaderService {
   loaderState = this.loaderSubject.asObservable();
 
   showLoader() {
-    this.loaderSubject.next(this.numberOfRequests);
     this.numberOfRequests++;
-
+    console.log(this.numberOfRequests)
     this.loaderSubject.next(this.numberOfRequests);
   }
 

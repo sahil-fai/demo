@@ -38,7 +38,6 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest < any > , next: HttpHandler): Observable < HttpEvent < any >> {
     this._loaderService.showLoader();
     var token: string = localStorage.getItem('TOKEN');
-
     if (token) {
       request = request.clone({
         headers: request.headers.set(
@@ -46,8 +45,6 @@ export class TokenInterceptor implements HttpInterceptor {
         )
       });
     }
-
-
     if (!request.headers.has('Content-Type')) {
       request = request.clone({
         headers: request.headers.set('Content-Type', 'application/json'),
@@ -60,13 +57,14 @@ export class TokenInterceptor implements HttpInterceptor {
     });
     return next.handle(request).pipe(tap((event: HttpEvent < any > ) => {
       if (event instanceof HttpResponse) {
+       // this._loaderService.showLoader();
         // do stuff with response if you want
       }
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
         this._loaderService.hideLoader();
-        console.log(err.error.error.message);
-        this._errHandler.pushError(err.error.error.message);
+        console.log(err)
+       this._errHandler.pushError(err.error.error.message);
       }
     }, () => {
       this._loaderService.hideLoader();

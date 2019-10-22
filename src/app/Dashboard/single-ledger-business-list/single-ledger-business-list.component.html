@@ -1,9 +1,10 @@
 
 <div class="wrapper">
   <div class="header">
-      <div class="progressBar" >
+      <!-- <div class="progressBar" >
         <mat-progress-bar *ngIf="!isBusinessLoaded" [mode]="'indeterminate'" [color]="'warn'"></mat-progress-bar>
-      </div>
+
+      </div> -->
     <div class="logoText">
       <app-logo></app-logo>
     </div>
@@ -57,7 +58,7 @@
                   </li>
                   <li>
                     <div class="dataLabel">Connected To</div>
-                    <div class="dataValues">QuickBooks</div>
+                    <div class="dataValues">{{company?.company?.organization === "126" ? "Xero": "Quickbooks"}}</div>
                   </li>
                   <li>
                     <div class="dataLabel">Last Accessed</div>
@@ -126,5 +127,6 @@
           </div>
     </ng-template>
   </div>
+  <app-loader></app-loader>
 </div>
 
