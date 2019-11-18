@@ -78,7 +78,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   private createForm() {
     this.formRegister = this.fb.group({
       firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      lastName: [''],
       username: [this.userEmail, [Validators.required, Validators.email]],
       // tslint:disable-next-line: max-line-length
       password: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
