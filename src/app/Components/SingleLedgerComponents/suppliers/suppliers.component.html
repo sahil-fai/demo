@@ -1,5 +1,5 @@
 <div class="title">
-    <h2>{{ title }}</h2>
+    <h2>{{ title || 'N/A' }}</h2>
 </div>
 <mat-card class="example-card">
     <mat-card-content>
@@ -37,14 +37,14 @@
                               formControlName="Contact"
                       >
                       <ng-template ng-option-tmp let-item="item" let-index="index">
-                            <div title="{{item.company.name}}">{{item.company.name}}</div>
+                            <div title="{{item.company.name|| 'N/A' }}">{{item.company.name|| 'N/A' }}</div>
                       </ng-template>
                       </ng-select>
                   </td>
                 </ng-container>
                 <ng-container *ngIf="!item.editable">
                     <td>
-                        {{item.vendorName}}
+                        {{item.vendorName|| 'N/A' }}
                     </td>
                 </ng-container>
 
@@ -58,14 +58,14 @@
                       formControlName="Platform"
                       appendTo="body">
                     <ng-template ng-option-tmp let-item="item" let-index="index">
-                          <div title="{{item.name}}">{{item.name}}</div>
+                          <div title="{{item.name|| 'N/A' }}">{{item.name|| 'N/A' }}</div>
                     </ng-template>
                     </ng-select>
                   </td>
                 </ng-container>
                 <ng-container *ngIf="!item.editable">
                     <td>
-                        {{item.platfrom}}
+                        {{item.platfrom|| 'N/A' }}
                     </td>
                 </ng-container>
 
@@ -79,14 +79,14 @@
                       appendTo="body"
                       formControlName="Mapping">
                     <ng-template ng-option-tmp let-item="item" let-index="index">
-                          <div title="{{item.Name}}">{{item.Name}}</div>
+                          <div title="{{item.Name|| 'N/A' }}">{{item.Name|| 'N/A' }}</div>
                     </ng-template>
                     </ng-select>
                     </td>
                 </ng-container>
                 <ng-container *ngIf="!item.editable">
                     <td>
-                    {{item.mappingtype}}
+                    {{item.mappingtype|| 'N/A' }}
                     </td>
                 </ng-container>
 
@@ -95,15 +95,15 @@
                 </ng-container>
                 <ng-container *ngIf="!item.editable">
                     <td>
-                        {{item.vendorEmail}}
+                        {{item.vendorEmail|| 'N/A' }}
                     </td>
                 </ng-container> -->
                 <!-- <ng-container *ngIf="item.editable">
-                    <td><mat-checkbox [checked]="item.isActive" formControlName="IsActive"> {{item.isActive}}</mat-checkbox></td>
+                    <td><mat-checkbox [checked]="item.isActive" formControlName="IsActive"> {{item.isActive|| 'N/A' }}</mat-checkbox></td>
                 </ng-container>
                 <ng-container *ngIf="!item.editable">
                     <td>
-                        {{item.isActive}}
+                        {{item.isActive|| 'N/A' }}
                     </td>
                 </ng-container>
                 <ng-container  *ngIf="item.editable">
@@ -111,7 +111,7 @@
               </ng-container>
               <ng-container *ngIf="!item.editable">
                   <td >
-                      {{item.itemDescription1}}
+                      {{item.itemDescription1|| 'N/A' }}
                   </td>
               </ng-container>
               <ng-container *ngIf="item.editable">
@@ -119,7 +119,7 @@
             </ng-container>
             <ng-container *ngIf="!item.editable">
                 <td>
-                    {{item.itemDescription2}}
+                    {{item.itemDescription2|| 'N/A' }}
                 </td>
             </ng-container>
             <ng-container *ngIf="item.editable">
@@ -127,7 +127,7 @@
           </ng-container>
           <ng-container *ngIf="!item.editable">
               <td>
-                  {{item.itemDescription3}}
+                  {{item.itemDescription3|| 'N/A' }}
               </td>
           </ng-container>
 -->
@@ -143,14 +143,14 @@
                                   formControlName="COA"
                           >
                           <ng-template ng-option-tmp let-item="item" let-index="index">
-                                <div title="{{item.chartofaccountname}}">{{item.chartofaccountname}}</div>
+                                <div title="{{item.chartofaccountname|| 'N/A' }}">{{item.chartofaccountname|| 'N/A' }}</div>
                           </ng-template>
                           </ng-select>
                       </td>
                   </ng-container>
                   <ng-container *ngIf="!item.editable">
                       <td>
-                          {{item.COA}}
+                          {{item.COA|| 'N/A' }}
                       </td>
                   </ng-container>
 
@@ -165,14 +165,14 @@
                                 formControlName="Operation"
                         >
                         <ng-template ng-option-tmp let-item="item" let-index="index">
-                              <div title="{{item.Name}}">{{item.Name}}</div>
+                              <div title="{{item.Name|| 'N/A' }}">{{item.Name|| 'N/A' }}</div>
                         </ng-template>
                         </ng-select>
                     </td>
                 </ng-container>
                 <ng-container *ngIf="!item.editable">
                     <td>
-                        {{item.opration}}
+                        {{item.opration|| 'N/A' }}
                     </td>
                 </ng-container> -->
                   <!-- <ng-container *ngIf="item.editable">
@@ -185,14 +185,14 @@
                                   appendTo="body"
                           >
                           <ng-template ng-option-tmp let-item="item" let-index="index">
-                                <div title="{{item.Name}}">{{item.Name}}</div>
+                                <div title="{{item.Name|| 'N/A' }}">{{item.Name|| 'N/A' }}</div>
                           </ng-template>
                           </ng-select>
                           </td>
                   </ng-container>
                   <ng-container *ngIf="!item.editable">
                       <td>
-                          {{item.ItemOfSubAccount}}
+                          {{item.ItemOfSubAccount|| 'N/A' }}
                       </td>
                   </ng-container> -->
                   <!-- <ng-container *ngIf="item.editable">
@@ -200,7 +200,7 @@
                   </ng-container>
                   <ng-container *ngIf="!item.editable">
                       <td>
-                          {{item.Subject}}
+                          {{item.Subject|| 'N/A' }}
                       </td>
                   </ng-container> -->
                   <button  class="btn icon-dots-vertical edit-options" [ngClass]="item.editable?'editable':'disabled'" title="Actions" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{item:item}" title="Actions"><mat-icon>toc</mat-icon>

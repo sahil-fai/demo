@@ -1,24 +1,24 @@
-<h2>{{title}}</h2>
+<h2>{{title|| 'N/A' }}</h2>
 <mat-divider></mat-divider>
 <div class="profile-container"  *ngIf="companyinfo">
     <div class="icon-container"><i class="icon-company"></i></div>
     <div class="profile-name">
-        <h1>{{companyinfo.legalname}}</h1>
+        <h1>{{companyinfo.legalname|| 'N/A' }}</h1>
     </div>
     <div class="company-info">
         <ul>
             <li>Company BlockChain Id:</li>
-            <li>{{companyinfo.companyblockchainid}}</li>
+            <li>{{companyinfo.companyblockchainid|| 'N/A' }}</li>
             <li>Name:</li>
-            <li>{{companyinfo.name}}</li>
+            <li>{{companyinfo.name|| 'N/A' }}</li>
             <li>Legal Name:</li>
-            <li>{{companyinfo.legalname}}</li>
+            <li>{{companyinfo.legalname|| 'N/A' }}</li>
             <li>Base Currency:</li>
-            <li>{{companyinfo.basecurrency.currencyname}}</li>
+            <li>{{companyinfo.basecurrency.currencyname|| 'N/A' }}</li>
             <li>Phone:</li>
-            <li>{{companyinfo.contact.telephone}}</li>
+            <li>{{companyinfo.contact.telephone|| 'N/A' }}</li>
             <li>Email:</li>
-            <li>{{companyinfo.companyemail}}</li>
+            <li>{{companyinfo.companyemail|| 'N/A' }}</li>
             <!-- <li>Web Links:</li>
             <li>user.com</li> -->
         </ul>
@@ -29,11 +29,11 @@
             <div class="address-icon-container"> <mat-icon>location_city</mat-icon></div>
                <div class="address-content">
                     <h4>Address(Office)</h4>
-                    <p>{{companyinfo.address.addressline1}}</p>
-                    <p>{{companyinfo.address.cityname}}</p>
-                    <p>{{companyinfo.address.state}}</p>
-                    <p>{{companyinfo.address.country}}</p>
-                    <!-- <p>{{companyinfo.Address.PostalZone}}</p> -->
+                    <p>{{companyinfo.address.addressline1|| 'N/A' }}</p>
+                    <p>{{companyinfo.address.cityname|| 'N/A' }}</p>
+                    <p>{{companyinfo.address.state|| 'N/A' }}</p>
+                    <p>{{companyinfo.address.country|| 'N/A' }}</p>
+                    <!-- <p>{{companyinfo.Address.PostalZone|| 'N/A' }}</p> -->
                 </div>
 
             </div>
@@ -41,20 +41,20 @@
                <div class="address-icon-container"> <mat-icon>location_city</mat-icon></div>
                <div class="address-content">
                 <h4>Customer Face Address</h4>
-                <p>{{companyinfo.customerfaceaddress.addressline1}}</p>
-                <p>{{companyinfo.customerfaceaddress.cityname}}</p>
-                <p>{{companyinfo.customerfaceaddress.state}}</p>
-                <p>{{companyinfo.customerfaceaddress.country}}</p>
+                <p>{{companyinfo.customerfaceaddress.addressline1|| 'N/A' }}</p>
+                <p>{{companyinfo.customerfaceaddress.cityname|| 'N/A' }}</p>
+                <p>{{companyinfo.customerfaceaddress.state|| 'N/A' }}</p>
+                <p>{{companyinfo.customerfaceaddress.country|| 'N/A' }}</p>
                 </div>
             </div>
         <div class="address">
                <div class="address-icon-container"> <mat-icon>location_city</mat-icon></div>
                <div class="address-content">
                     <h4>Legal Address</h4>
-                    <p>{{companyinfo.legaladdress.addressline1}}</p>
-                    <p>{{companyinfo.legaladdress.cityname}}</p>
-                    <p>{{companyinfo.legaladdress.state}}</p>
-                    <p>{{companyinfo.legaladdress.country}}</p>
+                    <p>{{companyinfo.legaladdress.addressline1|| 'N/A' }}</p>
+                    <p>{{companyinfo.legaladdress.cityname|| 'N/A' }}</p>
+                    <p>{{companyinfo.legaladdress.state|| 'N/A' }}</p>
+                    <p>{{companyinfo.legaladdress.country|| 'N/A' }}</p>
                 </div>
             </div>
 </div>
