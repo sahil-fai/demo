@@ -69,7 +69,7 @@
     <div class="header clearfix">
 
         <div class="nav-mobile" (click)="openNav()"><a id="nav-toggle"><span></span></a></div>
-        <span class="blueHeading modalBlock" ><span class="ellipsis">{{CurrentCompanyName}}</span><i class="arrow"></i>
+        <span class="blueHeading modalBlock" ><span class="ellipsis">{{CurrentCompanyName|| 'N/A' }}</span><i class="arrow"></i>
         <div class="modal">
           <ul>
             <li class="prominent">
@@ -82,7 +82,7 @@
               </table>
               <ul>
                 <li *ngFor="let business of businessList">
-                  <a href="javascript:void(0)" (click)="viewBusiness(business.companyId)">- {{business.company.legalname}}</a>
+                  <a href="javascript:void(0)" (click)="viewBusiness(business.companyId)">- {{business.company.legalname|| 'N/A' }}</a>
                 </li>
               </ul>
             </li>
@@ -101,7 +101,9 @@
       <router-outlet></router-outlet>
     </div>
   </div>
-  <app-loader></app-loader>
+  <div class="progressBar">
+    <app-loader></app-loader>
+</div>
 </div>
 
 
