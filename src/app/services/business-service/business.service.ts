@@ -56,15 +56,17 @@ export class BusinessService {
       return this.http.post<any>('/chartofaccountmappings', data);
   }
 
-  getchartofaccountmapping(): Observable<any> {
+  getchartofaccountmapping(id): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('/chartofaccountmappings?filter={"limit":10,"include":[{"relation":"all1"}]}', {
+    return this.http.get<any>('/chartofaccountmappings?filter={"where":{"companyid":' + id + '},"limit":10,"include":[{"relation":"all1"}]}', {
     });
   }
+  
   getGroupChartofAccounts(id: any) {
     return this.http.get<any>('groupchartofaccount'+ '?filter={"where":{"companyId":' + id + '},"limit":1000}', {
     });
   }
+
   setAsDefault(id:number) {
       return this.http.post<any>('coa/setasdefault/'+ id, null);
   }

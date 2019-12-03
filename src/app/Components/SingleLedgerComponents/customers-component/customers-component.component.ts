@@ -57,7 +57,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   switchCompanySubscription: any;
   displayedColumns: string[] = ['select',
   'CustomerName',
-  'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'BlockChainID', 'Invite', 'star'];
+  'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'Invite', 'star'];
   selection = new SelectionModel < PeriodicElement > (true, []);
   constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(

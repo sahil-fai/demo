@@ -16,6 +16,8 @@ import { CompanyInfoComponentComponent } from './Components/SingleLedgerComponen
 import { DashboardComponetComponent } from './Components/SingleLedgerComponents/dashboard-componet/dashboard-componet.component';
 import { SuppliersComponent } from './Components/SingleLedgerComponents/suppliers/suppliers.component';
 import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/chart-of-account/chart-of-account.component';
+import { LoginGuard } from './Guards/login.guard';
+import { BusinessGuard } from './Guards/business.guard';
 const routes: Routes = [
   {
     path: 'login', component: LoginComponent
@@ -25,36 +27,36 @@ const routes: Routes = [
   },
   {
    // path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]
-    path: 'connectbusiness', component: DashboardComponent
+    path: 'connectbusiness', component: DashboardComponent, canActivate:[LoginGuard]
   },
   {
-    path: 'businesslist', component: SingleLedgerBusinessListComponent
+    path: 'businesslist', component: SingleLedgerBusinessListComponent, canActivate:[LoginGuard]
   },
   {
-  path: 'business', component: SingleLedgerMasterComponentComponent, children: [
+  path: 'business', component: SingleLedgerMasterComponentComponent, canActivate:[LoginGuard, BusinessGuard],children: [
           {
-            path: 'dashboard', component: DashboardComponetComponent
+            path: 'dashboard', component: DashboardComponetComponent,canActivate:[LoginGuard,BusinessGuard]
           },
           {
-            path: 'customers', component: CustomersComponentComponent
+            path: 'customers', component: CustomersComponentComponent,canActivate:[LoginGuard,BusinessGuard]
           },
           {
-            path: 'vendors', component: VendorsComponentComponent
+            path: 'vendors', component: VendorsComponentComponent,canActivate:[LoginGuard,BusinessGuard]
           },
           {
-            path: 'invoices', component: InvoicesComponentComponent
+            path: 'invoices', component: InvoicesComponentComponent,canActivate:[LoginGuard,BusinessGuard]
           },
           {
-            path: 'bills', component: BillsComponentComponent
+            path: 'bills', component: BillsComponentComponent,canActivate:[LoginGuard,BusinessGuard]
           },
           {
-            path: 'company-info', component: CompanyInfoComponentComponent
+            path: 'company-info', component: CompanyInfoComponentComponent,canActivate:[LoginGuard,BusinessGuard]
           },
           {
-            path: 'suppliers', component: SuppliersComponent
+            path: 'suppliers', component: SuppliersComponent,canActivate:[LoginGuard,BusinessGuard]
           },
           {
-            path: 'chart-of-account', component: ChartOfAccountComponent
+            path: 'chart-of-account', component: ChartOfAccountComponent,canActivate:[LoginGuard,BusinessGuard]
           }
         ]
   },

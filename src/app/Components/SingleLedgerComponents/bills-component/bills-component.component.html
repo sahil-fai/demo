@@ -26,7 +26,7 @@
 <mat-card class="example-card">
     <mat-card-content>
         <div class="bill-content">
-            <div class="searchPanel clearfix">
+            <div class="searchPanel clearfix" *ngIf="bills && bills.length > 0">
                 <form   novalidate autocomplete="off">
                   <ul class="floatingList searchBlock">
                     <li class="filter-for">
@@ -58,7 +58,7 @@
             </div>
             <div class="bills-content mat-elevation-z8">
             <div class="example-container">
-              <table mat-table [dataSource]="dataSource" class="">
+              <table mat-table [dataSource]="dataSource" class="" *ngIf="bills && bills.length > 0">
 
                 <!-- Checkbox Column -->
                 <ng-container matColumnDef="select" >
@@ -88,13 +88,13 @@
                 </ng-container>
                 <!-- Block chain Id Column -->
                 <ng-container matColumnDef="BlockchainTransactionID">
-                  <th mat-header-cell *matHeaderCellDef> Blockchain Trasaction ID </th>
+                  <th mat-header-cell *matHeaderCellDef> Blockchain Transaction ID </th>
                   <td mat-cell *matCellDef="let element"> {{element.billid|| 'N/A' }} </td>
                 </ng-container>
                 <!-- Date Column -->
                 <ng-container matColumnDef="Date">
-                  <th mat-header-cell *matHeaderCellDef> Date </th>
-                  <td mat-cell *matCellDef="let element"> {{element.date|date }} </td>
+                  <th mat-header-cell *matHeaderCellDef> Issue Date </th>
+                  <td mat-cell *matCellDef="let element"> {{element.issuedate|date }} </td>
                 </ng-container>
 
                 <!-- Due Date Column -->
@@ -139,8 +139,9 @@
 
               </table>
             </div>
-            <mat-paginator appStylePaginator hidePageSize [length]="15"
-              [pageSize]="10" (page)="handlePage($event)"></mat-paginator>
+            <div class="no-record" *ngIf="bills && bills.length == 0"> <span class="norecord-text"> No records found</span></div>
+            <!-- <mat-paginator appStylePaginator hidePageSize [length]="15"
+              [pageSize]="10" (page)="handlePage($event)"></mat-paginator> -->
           </div>
         </div>
     </mat-card-content>
