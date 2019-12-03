@@ -44,7 +44,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
                                 'RegisterDate',
                                 'Organizaton',
                                 'Status',
-                                'BlockChainID',
+                                // 'BlockChainID',
                                 'Invite',
                                 'star'];
   selection = new SelectionModel < PeriodicElement > (true, []);
@@ -78,7 +78,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
   getAllvendors() {
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getAllVendors(companyid).subscribe(res => {
-      console.log(res);
+      //console.log(res);
       this.Totalrec = res.length;
       if (res.length > 0) {
         this.vendors = res;

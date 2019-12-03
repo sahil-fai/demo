@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { BusinessService } from '../../../services/business-service/business.service';
 import { HelperService } from 'src/app/services/helper-service/helper.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 
 @Component({
   selector: 'app-suppliers',
@@ -60,6 +61,7 @@ export class SuppliersComponent implements OnInit {
   public transcationList = [];
   public COAMappings: any;
   public isCOAEnabled = true;
+  switchCompanySubscription: any;
 
 
   private _createForm() {
@@ -67,8 +69,8 @@ export class SuppliersComponent implements OnInit {
       Contact: [],
       Platform: [],
       Mapping: [],
-      Email:  '',
-      IsActive:  false,
+      Email: '',
+      IsActive: false,
       Desc1: '',
       Desc2: '',
       Desc3: '',
@@ -78,11 +80,16 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
-
-
   constructor(private helper: HelperService,
               private businessService: BusinessService, private fb: FormBuilder,
-    ) {
+              private switchCompany: SwitchCompanyService) {
+                this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
+                    () => {
+                      this.transcationList = [];
+                      this.COAMappings=[];
+                      this.ngOnInit();
+                    }
+                  );
       }
 
   ngOnInit() {
@@ -93,7 +100,8 @@ export class SuppliersComponent implements OnInit {
    this._createForm();
   }
   _getChartofAccountMappings() {
-   this.businessService.getchartofaccountmapping().subscribe(res => {
+    const companyid = Number(this.helper.getcompanyId());
+   this.businessService.getchartofaccountmapping(companyid).subscribe(res => {
       if (res.length > 0) {
         this.COAMappings = res;
         this._generateCOAMapping();

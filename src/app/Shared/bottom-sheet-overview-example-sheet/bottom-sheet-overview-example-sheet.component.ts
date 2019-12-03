@@ -36,9 +36,9 @@ export class BottomSheetOverviewExampleSheetComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    console.log(this.trasaction);
+   // console.log(this.trasaction);
     this.trasactions = this.trasaction.blockchainhistories;
-    console.log(this.trasactions);
+    //console.log(this.trasactions);
     // this.invoiceNumeber = this.trasaction[1];
     // this.CompanyBlockChainId = this.trasaction[2];
   }

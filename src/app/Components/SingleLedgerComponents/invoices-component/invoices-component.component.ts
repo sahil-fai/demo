@@ -159,7 +159,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
 
   public openBottomSheet(data) {
     const dialogConfig = new MatDialogConfig();
-       console.log(data);
+       //console.log(data);
     dialogConfig.data = data;
     dialogConfig.disableClose = true;
     dialogConfig.width = '65vw';

@@ -48,20 +48,16 @@ export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
     this.submitted = true;
     if (this.formLogin.invalid) {return; }
     this.authService.login(this.formLogin.value).subscribe(res => {
-        // this.notificationserveice= this.notification.snackbarState.subscribe(
-        //   this.message="Successfully login";
-        // )
-        // this.notification.notification$.subscribe(message => {
-        //   this.snackBar.open(message);
-        // });
-       // this.snackBar.open(this.message);
-        //   this.snackBar.open(this.message,{
-        //     duration: 2000
-        //  });
-       // this.notification.openSnackBar(this.message,'✌✌️✌️');
+        
+       if (res===null)
+       {
+         this.router.navigate(['/login'])
+         console.log(res);
+         return;
+       }
+
         this.helper.userInfo.set(res.user);
         this.helper.set(res.token);
-        this.helper.setuserId(res.user.id);
         this.router.navigate(['/businesslist']);
         if (res.Role === 0) {
           this.router.navigate(['/businesslist']);
