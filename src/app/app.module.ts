@@ -169,6 +169,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/chart-of-account/chart-of-account.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SortpipePipe } from './pipe/sortpipe.pipe';
+import { ArraytostringPipe } from './pipe/arraytostring.pipe';
 
 @NgModule({
   declarations: [
@@ -200,6 +201,7 @@ import { SortpipePipe } from './pipe/sortpipe.pipe';
     SuppliersComponent,
     ChartOfAccountComponent,
     SortpipePipe,
+    ArraytostringPipe,
 
   ],
   imports: [

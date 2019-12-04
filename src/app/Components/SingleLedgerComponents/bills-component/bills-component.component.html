@@ -96,6 +96,10 @@
                   <th mat-header-cell *matHeaderCellDef> Issue Date </th>
                   <td mat-cell *matCellDef="let element"> {{element.issuedate|date }} </td>
                 </ng-container>
+                <ng-container matColumnDef="VendorName">
+                  <th mat-header-cell *matHeaderCellDef> Vendor </th>
+                  <td mat-cell *matCellDef="let element"> {{element.department|| 'N/A' }} </td>
+                </ng-container>
 
                 <!-- Due Date Column -->
                 <ng-container matColumnDef="DueDate">

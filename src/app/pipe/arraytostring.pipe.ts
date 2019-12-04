@@ -14,5 +14,4 @@ export class ArraytostringPipe implements PipeTransform {
     
     return 'N/A';
   }
-
 }
