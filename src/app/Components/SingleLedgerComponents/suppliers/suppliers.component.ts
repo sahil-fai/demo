@@ -59,7 +59,7 @@ export class SuppliersComponent implements OnInit {
     { Name: 'OR', ID: 275 }
   ];
   public transcationList = [];
-  public COAMappings=[];
+  public COAMappings: any;
   public isCOAEnabled = true;
   switchCompanySubscription: any;
 
@@ -82,25 +82,31 @@ export class SuppliersComponent implements OnInit {
 
 
 
-  constructor(private helper: HelperService,
-    private businessService: BusinessService, private fb: FormBuilder,
-    private switchCompany: SwitchCompanyService) {
-      this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
-          () => {
-            this.transcationList = [];
-            this.COAMappings=[];
-            this.ngOnInit();
-          }
-        );
-}
+    	
+     constructor(private helper: HelperService,
+         private businessService: BusinessService, private fb: FormBuilder,
+         private switchCompany: SwitchCompanyService) {
+    	
+         	
+         this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
+    	
+             () => {
+    
+               this.transcationList = [];
+    
+               this.COAMappings=[];
+    	
+               this.ngOnInit();
+    	
+             }
+    
+           );
+    	
+    }
 
   ngOnInit() {
     this.transcationList.length = 0;
     this.transcationList = [];
-    this.COA.length=0
-    this.COAMappings.length =0;
-    this.Vendor.length =0;
-
     this._getChartofAccounts();
     this._getplatforms();
     this._getVendors();
@@ -111,12 +117,9 @@ export class SuppliersComponent implements OnInit {
 
   }
   _getChartofAccountMappings() {
-    this.transcationList.length =0;
-    this.COAMappings.length =0;
-    this.transcationList = [];
-    this.COAMappings=[];
-    const companyid = Number(this.helper.getcompanyId());
-   this.businessService.getchartofaccountmapping(companyid).subscribe(res => {
+
+     const companyid = Number(this.helper.getcompanyId());
+  this.businessService.getchartofaccountmapping(companyid).subscribe(res => {
       if (res.length > 0) {
         this.COAMappings = res;
         this._generateCOAMapping();
@@ -124,7 +127,8 @@ export class SuppliersComponent implements OnInit {
     });
   }
   _generateCOAMapping() {
-
+    this.transcationList.length = 0;
+    this.addRecord();
     this.COAMappings.forEach(element => {
       const data = {
         vendorName: element.vendor.company.name,
@@ -204,15 +208,12 @@ export class SuppliersComponent implements OnInit {
       companyid: Companyid
     };
 
-    console.log(this.COAMappings);
-    console.log(formData);
-    console.log("\n\n\n\n\n");
-
     if (this.COAMappings) {
 
       const vendor = this.COAMappings.filter(x => (x.vendorid === formData.Contact.vendorid) &&
         (x.organization === formData.Platform.name) &&
-        (x.chartofaccountmappingtypeidl === formData.Mapping.ID) 
+        (x.chartofaccountmappingtypeidl === formData.Mapping.ID) &&
+        (x.chartofaccountId === formData.COA.chartofaccountid)
       );
       if (vendor && vendor.length > 0) {
         alert('Chart of account mapping already exists for same Vendor\n Maximum one mapping per Vendor');

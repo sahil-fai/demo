@@ -67,13 +67,17 @@ export class TokenInterceptor implements HttpInterceptor {
       if (err instanceof HttpErrorResponse) {
         if (err.statusText === "Unknown Error" || err.status == 401)
         {
+          if (err.statusText === "Unknown Error")
+          {this._errHandler.pushError(err.statusText);}
+      
             localStorage.clear();
+            
             if (err.status == 401)
             {
               this._router.navigate(['./login']);
                       }
           this._loaderService.hideLoader();
-          this._errHandler.pushError(err.statusText);
+          //this._errHandler.pushError(err.statusText);
           return
         }
         this._loaderService.hideLoader();
