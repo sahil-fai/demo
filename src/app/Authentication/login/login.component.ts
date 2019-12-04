@@ -58,10 +58,7 @@ export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
 
         this.helper.userInfo.set(res.user);
         this.helper.set(res.token);
-        this.router.navigate(['/businesslist']);
-        if (res.Role === 0) {
-          this.router.navigate(['/businesslist']);
-        }
+        this.router.navigate(['/businesslist']);       
     },
     err =>  {
       this.formLogin.patchValue({password: ''});
