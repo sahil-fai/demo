@@ -30,6 +30,7 @@ import {
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 
 export interface PeriodicElement {
+  CustomerName:string;
   Number: string;
   Date: string;
   DueDate: string;
@@ -101,7 +102,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   };
   @ViewChild(MatPaginator, {}) paginator: MatPaginator;
   displayedColumns: string[] = ['Number',
-    'BlockchainTransactionID', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'star'
+  'CustomerName','Date', 'DueDate', 'Customer', 'Total', 'Balance', 'star','BlockchainTransactionID'
   ];
   expandedElement: PeriodicElement | null;
   selection = new SelectionModel < PeriodicElement > (true, []);

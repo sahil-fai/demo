@@ -6,9 +6,38 @@
         <h1>{{companyinfo.legalname|| 'N/A' }}</h1>
     </div>
     <div class="company-info">
-        <ul>
-            <li>Company BlockChain Id:</li>
-            <li>{{companyinfo.companyblockchainid|| 'N/A' }}</li>
+        <table>
+            <tr>
+                <td class="alnRight head">Company BlockChain Id:</td>
+                <td>
+                    <div class="ellipsis" [title]="companyinfo.companyblockchainid|| 'N/A' ">{{companyinfo.companyblockchainid|| 'N/A' }}</div>
+                </td>
+            </tr>
+            <tr>
+            <td class="alnRight head">Name:</td>
+            <td>{{companyinfo.name|| 'N/A' }}</td>
+            </tr>
+            <tr>
+                <td class="alnRight head">Legal Name:</td>
+                <td>{{companyinfo.legalname|| 'N/A' }}</td>
+            </tr>
+            <tr>
+                <td class="alnRight head">Base Currency:</td>
+                <td>{{companyinfo.basecurrency.currencyname|| 'N/A' }}</td>
+            </tr>
+            <tr>
+                 <td class="alnRight head">Phone:</td>
+                <td>{{companyinfo.contact.telephone | arraytostring }}</td>
+             </tr>
+            <tr>
+                 <td class="alnRight head">Email:</td>
+                <td>{{companyinfo.companyemail|| 'N/A' }}</td>
+            </tr>
+                            
+        </table>
+        <!-- <ul>
+            <li></li>
+            <li></li>
             <li>Name:</li>
             <li>{{companyinfo.name|| 'N/A' }}</li>
             <li>Legal Name:</li>
@@ -19,9 +48,9 @@
             <li>{{companyinfo.contact.telephone|| 'N/A' }}</li>
             <li>Email:</li>
             <li>{{companyinfo.companyemail|| 'N/A' }}</li>
-            <!-- <li>Web Links:</li>
-            <li>user.com</li> -->
-        </ul>
+            <li>Web Links:</li>
+            <li>user.com</li>
+        </ul> -->
     </div>
 </div>
 <div class="addresses" *ngIf="companyinfo">
