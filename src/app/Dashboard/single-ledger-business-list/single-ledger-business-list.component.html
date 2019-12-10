@@ -1,10 +1,10 @@
 
 <div class="wrapper">
   <div class="header">
-      <!-- <div class="progressBar" >
+      <div class="progressBar" >
         <mat-progress-bar *ngIf="!isBusinessLoaded" [mode]="'indeterminate'" [color]="'warn'"></mat-progress-bar>
-
-      </div> -->
+        <app-loader></app-loader>
+      </div>
     <div class="logoText">
       <app-logo></app-logo>
     </div>
@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="content-wrapper">
-    <h2>{{title}}</h2>
+    <h2>{{title|| 'N/A' }}</h2>
     <div class="businesslistAvial"  *ngIf="isBusinessLoaded; else nobusiness">
       <div class="searchPanel clearfix">
         <form  class="search-panel-form" [formGroup]="formSearch" (ngSubmit)="onFilter()" novalidate autocomplete="off">
@@ -54,20 +54,20 @@
                 <ul class="dataList">
                   <li>
                     <div>Company Name</div>
-                    <div> <h6>{{company?.company?.legalname}}</h6></div>
+                    <div> <h6>{{company?.company?.legalname|| 'N/A' }}</h6></div>
                   </li>
                   <li>
                     <div class="dataLabel">Connected To</div>
-                    <div class="dataValues">{{company?.company?.organization === "126" ? "Xero": "Quickbooks"}}</div>
+                    <div class="dataValues">{{company?.company?.organization === "126" ? "Xero": "Quickbooks"|| 'N/A' }}</div>
                   </li>
                   <li>
-                    <div class="dataLabel">Last Accessed</div>
-                    <div class="dataValues">{{company?.company?.registerdate | date}}</div>
+                    <div class="dataLabel">Register Date</div>
+                    <div class="dataValues">{{company?.company?.registerdate |date }}</div>
                   </li>
-                  <li>
+                  <!-- <li>
                     <div class="dataLabel">Last Updated</div>
-                    <div class="dataValues">{{company?.company?.registerdate | date}}</div>
-                  </li>
+                    <div class="dataValues">{{company?.company?.registerdate |date }}</div>
+                  </li> -->
                 </ul>
                 <ul class="buttonList">
                   <li>
@@ -97,9 +97,9 @@
                       </span>
                   </div>
                   <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
-                        <span (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label }}</span>
+                        <span (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label || 'N/A' }}</span>
                       <div *ngIf="p.getCurrent() === page.value">
-                        <span>{{ page.label }}</span>
+                        <span>{{ page.label || 'N/A' }}</span>
                       </div>
                   </div>
                   <div class="nextprevious"  [class.disabled]="p.isLastPage()">
@@ -127,6 +127,8 @@
           </div>
     </ng-template>
   </div>
-  <app-loader></app-loader>
+  <!-- <div class="progressBar">
+     <app-loader></app-loader> 
+  </div> -->
 </div>
 

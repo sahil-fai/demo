@@ -1,9 +1,9 @@
 <div class="title">
-    <h2>{{ title }}</h2>
+  <h2>{{ title || 'N/A' }}</h2>
 </div>
 <mat-card class="example-card">
-    <mat-card-content>
-      <form [formGroup]="formTransaction" novalidate autocomplete="off">
+  <mat-card-content>
+    <form [formGroup]="formTransaction" novalidate autocomplete="off">
       <div class="floatBoxesWrapper">
         <div class="floatBox" id="tableData">
           <div class="defaultTable">
@@ -28,82 +28,66 @@
                 <tr *ngFor="let item of transcationList">
                   <ng-container *ngIf="item.editable">
                     <td>
-                      <ng-select
-                              [items]="Vendor"
-                              [loading]="false"
-                              bindLabel="company.name"
-                              placeholder="Select Vendor"
-                              appendTo="body"
-                              formControlName="Contact"
-                      >
-                      <ng-template ng-option-tmp let-item="item" let-index="index">
-                            <div title="{{item.company.name}}">{{item.company.name}}</div>
-                      </ng-template>
+                      <ng-select [items]="Vendor" [loading]="false" bindLabel="company.name" placeholder="Select Vendor"
+                        appendTo="body" formControlName="Contact" required>
+                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                          <div title="{{item.company.name|| 'N/A' }}">{{item.company.name|| 'N/A' }}</div>
+                        </ng-template>
                       </ng-select>
-                  </td>
-                </ng-container>
-                <ng-container *ngIf="!item.editable">
-                    <td>
-                        {{item.vendorName}}
                     </td>
-                </ng-container>
+                  </ng-container>
+                  <ng-container *ngIf="!item.editable">
+                    <td>
+                      {{item.vendorName|| 'N/A' }}
+                    </td>
+                  </ng-container>
 
                   <ng-container *ngIf="item.editable">
                     <td>
-                      <ng-select
-                      [items]="platfrom"
-                      [loading]="false"
-                      bindLabel="name"
-                      placeholder="Select platfrom"
-                      formControlName="Platform"
-                      appendTo="body">
-                    <ng-template ng-option-tmp let-item="item" let-index="index">
-                          <div title="{{item.name}}">{{item.name}}</div>
-                    </ng-template>
-                    </ng-select>
-                  </td>
-                </ng-container>
-                <ng-container *ngIf="!item.editable">
-                    <td>
-                        {{item.platfrom}}
+                      <ng-select [items]="platfrom" [loading]="false" bindLabel="name" placeholder="Select Platform"
+                        formControlName="Platform" appendTo="body" required>
+                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                          <div title="{{item.name|| 'N/A' }}">{{item.name|| 'N/A' }}</div>
+                        </ng-template>
+                      </ng-select>
                     </td>
-                </ng-container>
+                  </ng-container>
+                  <ng-container *ngIf="!item.editable">
+                    <td>
+                      {{item.platfrom|| 'N/A' }}
+                    </td>
+                  </ng-container>
 
-                <ng-container *ngIf="item.editable">
+                  <ng-container *ngIf="item.editable">
                     <td>
-                      <ng-select
-                      [items]="mapping"
-                      [loading]="false"
-                      bindLabel="Name"
-                      placeholder="Select Mapping"
-                      appendTo="body"
-                      formControlName="Mapping">
-                    <ng-template ng-option-tmp let-item="item" let-index="index">
-                          <div title="{{item.Name}}">{{item.Name}}</div>
-                    </ng-template>
-                    </ng-select>
+                      <ng-select [items]="mapping" [loading]="false" bindLabel="Name" placeholder="Select Mapping"
+                        appendTo="body" formControlName="Mapping" required>
+                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                          <div title="{{item.Name|| 'N/A' }}">{{item.Name|| 'N/A' }}</div>
+                        </ng-template>
+                      </ng-select>
                     </td>
-                </ng-container>
-                <ng-container *ngIf="!item.editable">
+                  </ng-container>
+                  <ng-container *ngIf="!item.editable">
                     <td>
-                    {{item.mappingtype}}
+                      {{item.mappingtype|| 'N/A' }}
                     </td>
-                </ng-container>
+                  </ng-container>
 
-                <!-- <ng-container *ngIf="item.editable">
+                  <!-- <ng-container *ngIf="item.editable">
                     <td><input class="input-edit" type="email" formControlName="Email"></td>
                 </ng-container>
                 <ng-container *ngIf="!item.editable">
                     <td>
-                        {{item.vendorEmail}}
+                        {{item.vendorEmail|| 'N/A' }}
                     </td>
                 </ng-container> -->
-                <!-- <ng-container *ngIf="item.editable">
-                    <td><mat-checkbox [checked]="item.isActive" formControlName="IsActive"> {{item.isActive}}</mat-checkbox></td>
+                  <!-- <ng-container *ngIf="item.editable">
+                    <td><mat-checkbox [checked]="item.isActive" formControlName="IsActive"> {{item.isActive|| 'N/A' }}</mat-checkbox></td>
                 </ng-container>
                 <ng-container *ngIf="!item.editable">
                     <td>
-                        {{item.isActive}}
+                        {{item.isActive|| 'N/A' }}
                     </td>
                 </ng-container>
                 <ng-container  *ngIf="item.editable">
@@ -111,7 +95,7 @@
               </ng-container>
               <ng-container *ngIf="!item.editable">
                   <td >
-                      {{item.itemDescription1}}
+                      {{item.itemDescription1|| 'N/A' }}
                   </td>
               </ng-container>
               <ng-container *ngIf="item.editable">
@@ -119,7 +103,7 @@
             </ng-container>
             <ng-container *ngIf="!item.editable">
                 <td>
-                    {{item.itemDescription2}}
+                    {{item.itemDescription2|| 'N/A' }}
                 </td>
             </ng-container>
             <ng-container *ngIf="item.editable">
@@ -127,31 +111,25 @@
           </ng-container>
           <ng-container *ngIf="!item.editable">
               <td>
-                  {{item.itemDescription3}}
+                  {{item.itemDescription3|| 'N/A' }}
               </td>
           </ng-container>
 -->
 
                   <ng-container *ngIf="item.editable">
-                      <td>
-                          <ng-select
-                                  [items]="COA"
-                                  [loading]="false"
-                                  bindLabel="chartofaccountname"
-                                  placeholder="Select COA"
-                                  appendTo="body"
-                                  formControlName="COA"
-                          >
-                          <ng-template ng-option-tmp let-item="item" let-index="index">
-                                <div title="{{item.chartofaccountname}}">{{item.chartofaccountname}}</div>
-                          </ng-template>
-                          </ng-select>
-                      </td>
+                    <td>
+                      <ng-select [items]="COA" [loading]="false" bindLabel="chartofaccountname" placeholder="Select COA"
+                        appendTo="body" formControlName="COA" required>
+                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                          <div title="{{item.chartofaccountname|| 'N/A' }}">{{item.chartofaccountname|| 'N/A' }}</div>
+                        </ng-template>
+                      </ng-select>
+                    </td>
                   </ng-container>
                   <ng-container *ngIf="!item.editable">
-                      <td>
-                          {{item.COA}}
-                      </td>
+                    <td>
+                      {{item.COA|| 'N/A' }}
+                    </td>
                   </ng-container>
 
                   <!-- <ng-container *ngIf="item.editable">
@@ -165,14 +143,14 @@
                                 formControlName="Operation"
                         >
                         <ng-template ng-option-tmp let-item="item" let-index="index">
-                              <div title="{{item.Name}}">{{item.Name}}</div>
+                              <div title="{{item.Name|| 'N/A' }}">{{item.Name|| 'N/A' }}</div>
                         </ng-template>
                         </ng-select>
                     </td>
                 </ng-container>
                 <ng-container *ngIf="!item.editable">
                     <td>
-                        {{item.opration}}
+                        {{item.opration|| 'N/A' }}
                     </td>
                 </ng-container> -->
                   <!-- <ng-container *ngIf="item.editable">
@@ -185,14 +163,14 @@
                                   appendTo="body"
                           >
                           <ng-template ng-option-tmp let-item="item" let-index="index">
-                                <div title="{{item.Name}}">{{item.Name}}</div>
+                                <div title="{{item.Name|| 'N/A' }}">{{item.Name|| 'N/A' }}</div>
                           </ng-template>
                           </ng-select>
                           </td>
                   </ng-container>
                   <ng-container *ngIf="!item.editable">
                       <td>
-                          {{item.ItemOfSubAccount}}
+                          {{item.ItemOfSubAccount|| 'N/A' }}
                       </td>
                   </ng-container> -->
                   <!-- <ng-container *ngIf="item.editable">
@@ -200,11 +178,25 @@
                   </ng-container>
                   <ng-container *ngIf="!item.editable">
                       <td>
-                          {{item.Subject}}
+                          {{item.Subject|| 'N/A' }}
                       </td>
                   </ng-container> -->
-                  <button  class="btn icon-dots-vertical edit-options" [ngClass]="item.editable?'editable':'disabled'" title="Actions" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{item:item}" title="Actions"><mat-icon>toc</mat-icon>
-                    </button>
+
+
+                  <!-- <button class="btn icon-dots-vertical edit-options" [ngClass]="item.editable?'editable':'disabled'"
+                    title="Actions" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{item:item}" title="Actions">
+                    <mat-icon>toc</mat-icon>
+                  </button> -->
+                  <button class="btn icon-dots-vertical edit-options" *ngIf="item.editable" (click)="saveRecord(item)"
+                    title="Add Transaction">
+                    <mat-icon>note_add</mat-icon>
+                  </button>
+
+                  <!-- <button class="btn icon-dots-vertical edit-options" *ngIf="!item.editable"  title="Actions" [matMenuTriggerFor]="menu"
+                    [matMenuTriggerData]="{item:item}">
+                    <mat-icon>toc</mat-icon>
+                  </button> -->
+
                 </tr>
               </tbody>
               <!-- <tbody *ngIf="!transcationList || !transcationList.length">
@@ -217,29 +209,34 @@
                 </tr>
               </tbody> -->
             </table>
-            <div class="no-record"  *ngIf="!transcationList || !transcationList.length"> <span class="norecord-text"> No Vendors Found</span></div>
+            <div class="no-record" *ngIf="!transcationList || transcationList.length == 1"> <span class="norecord-text">
+                No Records Found</span></div>
           </div>
-          <button  type="button" class="clickable add-button" [class.disabled]="!isCOAEnabled" (click)="addRecord()" title="Add Transaction ">
-              <mat-icon>note_add</mat-icon>
-          </button>
+          <!-- <button type="button" class="clickable add-button" [class.disabled]="!isCOAEnabled" (click)="addRecord()"
+            title="Add Transaction ">
+            <mat-icon>note_add</mat-icon>
+          </button> -->
         </div>
         <mat-menu #menu="matMenu">
-            <ng-template let-item="item" matMenuContent>
-              <ng-container>
-                  <button matRipple mat-menu-item (click)="saveRecord(item)">
-                      <i class="icon icon-tick"></i>
-                      <span>Save</span>
-                   </button>
-                    <button matRipple mat-menu-item (click)="cancelRecord(item)">
-                        <i class="icon icon-cross"></i>
-                        <span>Cancel</span>
-                   </button>
-              </ng-container>
+          <ng-template let-item="item" matMenuContent>
+            <ng-container>
+              <!-- <button matRipple mat-menu-item (click)="saveRecord(item)">
+                <i class="icon icon-tick"></i>
+                <span>Save</span>
+              </button> -->
+              <button matRipple mat-menu-item (click)="editRecord(item)">
+                <i class="icon icon-edit"></i>
+                <span>Edit</span>
+              </button>
+              <button matRipple mat-menu-item (click)="cancelRecord(item)">
+                <i class="icon icon-cross"></i>
+                <span>Cancel</span>
+              </button>
+            </ng-container>
           </ng-template>
         </mat-menu>
       </div>
 
     </form>
-      </mat-card-content>
+  </mat-card-content>
 </mat-card>
-

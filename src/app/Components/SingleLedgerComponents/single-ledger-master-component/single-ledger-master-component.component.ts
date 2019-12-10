@@ -40,6 +40,12 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
     this.isNavOpen = !this.isNavOpen;
   }
   public viewBusiness(businessID) {
+    let companyid = this.helper.getcompanyId();
+    if (companyid === String(businessID))
+    {
+        return;
+    }
+
     this.helper.setcompanyId(businessID);
     this.switchCompany.switchCompany();
     this.ngOnInit();

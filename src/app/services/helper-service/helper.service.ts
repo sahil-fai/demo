@@ -1,8 +1,7 @@
 
 import { Injectable } from '@angular/core';
 const TOKEN = 'TOKEN';
-const UserId = 'UserId';
-
+interface userInfo {id:number,email:string,lastname:string};
 @Injectable({
   providedIn: 'root'
 })
@@ -21,17 +20,20 @@ export class HelperService {
   set(token: string): void {
     localStorage.setItem(TOKEN, token);
   }
-  setuserId(id:any):void {
-    localStorage.setItem(UserId, id);
-  }
   setcompanyId(id:any):void {
     localStorage.setItem('CompanyId', id);
   }
   getcompanyId(){
-    return localStorage.getItem('CompanyId');
+    let companyid =  localStorage.getItem('CompanyId');
+    if (companyid && companyid.length > 0)
+    {
+        return companyid;
+    }
+    
   }
   getuserId(){
-    return localStorage.getItem(UserId);
+    let userinfo:userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    return userinfo.id;
   }
 
   getToken(){

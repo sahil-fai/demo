@@ -1,5 +1,5 @@
 <div class="chart-ofaccount">
-  <div class="title"><h2>{{title}}</h2></div>
+  <div class="title"><h2>{{title || 'N/A' }}</h2></div>
   <mat-card class="example-card">
     <mat-card-content>
         <mat-accordion *ngIf="COA">
@@ -23,9 +23,9 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let coa of COA.Expense">
-                            <td>{{coa.chartofaccountname}}</td>
-                            <td>{{coa.description}}</td>
-                            <td>{{coa.classification}}</td>
+                            <td>{{coa.chartofaccountname|| 'N/A' }}</td>
+                            <td>{{coa.description|| 'N/A' }}</td>
+                            <td>{{coa.classification|| 'N/A' }}</td>
                             <td><mat-checkbox [(ngModel)]="coa.isDefault" (change)="updateCheckedOptions(coa.chartofaccountid, $event)"></mat-checkbox></td>
                         </tr>
                     </tbody>
@@ -58,9 +58,9 @@
                       </thead>
                       <tbody>
                           <tr *ngFor="let coa of COA.Asset">
-                              <td>{{coa.chartofaccountname}}</td>
-                              <td>{{coa.description}}</td>
-                              <td>{{coa.classification}}</td>
+                              <td>{{coa.chartofaccountname|| 'N/A' }}</td>
+                              <td>{{coa.description|| 'N/A' }}</td>
+                              <td>{{coa.classification|| 'N/A' }}</td>
                           </tr>
                       </tbody>
                       <tbody *ngIf="!COA">
@@ -92,9 +92,9 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let coa of COA.Revenue">
-                            <td>{{coa.chartofaccountname}}</td>
-                            <td>{{coa.description}}</td>
-                            <td>{{coa.classification}}</td>
+                            <td>{{coa.chartofaccountname|| 'N/A' }}</td>
+                            <td>{{coa.description|| 'N/A' }}</td>
+                            <td>{{coa.classification|| 'N/A' }}</td>
                         </tr>
                     </tbody>
                     <tbody *ngIf="!COA">
@@ -127,9 +127,9 @@
                       </thead>
                       <tbody>
                           <tr *ngFor="let coa of COA.Liability">
-                              <td>{{coa.chartofaccountname}}</td>
-                              <td>{{coa.description}}</td>
-                              <td>{{coa.classification}}</td>
+                              <td>{{coa.chartofaccountname|| 'N/A' }}</td>
+                              <td>{{coa.description|| 'N/A' }}</td>
+                              <td>{{coa.classification|| 'N/A' }}</td>
                           </tr>
                       </tbody>
                       <tbody *ngIf="!COA">
@@ -161,9 +161,9 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let coa of COA.Equity">
-                                <td>{{coa.chartofaccountname}}</td>
-                                <td>{{coa.description}}</td>
-                                <td>{{coa.classification}}</td>
+                                <td>{{coa.chartofaccountname|| 'N/A' }}</td>
+                                <td>{{coa.description|| 'N/A' }}</td>
+                                <td>{{coa.classification|| 'N/A' }}</td>
                             </tr>
                         </tbody>
                         <tbody *ngIf="!COA">

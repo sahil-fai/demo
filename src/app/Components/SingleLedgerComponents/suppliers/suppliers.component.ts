@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { BusinessService } from '../../../services/business-service/business.service';
 import { HelperService } from 'src/app/services/helper-service/helper.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 
 @Component({
   selector: 'app-suppliers',
@@ -26,40 +27,41 @@ export class SuppliersComponent implements OnInit {
     opration: 'AND'
   };
 
-  public title =  'My Suppliers';
+  public title = 'My Suppliers';
   formTransaction: FormGroup;
   public COA = [
-    {Name: 'COA-1', ID: 1},
-    {Name: 'COA-2', ID: 2},
-    {Name: 'COA-3', ID: 3},
+    { Name: 'COA-1', ID: 1 },
+    { Name: 'COA-2', ID: 2 },
+    { Name: 'COA-3', ID: 3 },
   ];
   public mapping = [
-    {Name: 'VendorBase', ID: 113},
-    {Name: 'SubjectBase', ID: 114},
-    {Name: 'ItemBase', ID: 116},
+    { Name: 'VendorBase', ID: 113 },
+    { Name: 'SubjectBase', ID: 114 },
+    { Name: 'ItemBase', ID: 116 },
   ];
   public platfrom = [
-    {Name: 'Platfrom-1', ID: 1},
-    {Name: 'Platfrom-2', ID: 2},
-    {Name: 'Platfrom-3', ID: 3},
+    { Name: 'Platfrom-1', ID: 1 },
+    { Name: 'Platfrom-2', ID: 2 },
+    { Name: 'Platfrom-3', ID: 3 },
   ];
   public Vendor = [
-    {Name: 'Vendor-1', ID: 1},
-    {Name: 'Vendor-2', ID: 2},
-    {Name: 'Vendor-3', ID: 3},
+    { Name: 'Vendor-1', ID: 1 },
+    { Name: 'Vendor-2', ID: 2 },
+    { Name: 'Vendor-3', ID: 3 },
   ];
   public SubAccount = [
-    {Name: 'SubAccount-1', ID: 1},
-    {Name: 'SubAccount-2', ID: 2},
-    {Name: 'SubAccount-3', ID: 3},
+    { Name: 'SubAccount-1', ID: 1 },
+    { Name: 'SubAccount-2', ID: 2 },
+    { Name: 'SubAccount-3', ID: 3 },
   ];
   public opration = [
-    {Name: 'AND', ID: 274},
-    {Name: 'OR', ID: 275}
+    { Name: 'AND', ID: 274 },
+    { Name: 'OR', ID: 275 }
   ];
   public transcationList = [];
   public COAMappings: any;
   public isCOAEnabled = true;
+  switchCompanySubscription: any;
 
 
   private _createForm() {
@@ -67,8 +69,8 @@ export class SuppliersComponent implements OnInit {
       Contact: [],
       Platform: [],
       Mapping: [],
-      Email:  '',
-      IsActive:  false,
+      Email: '',
+      IsActive: false,
       Desc1: '',
       Desc2: '',
       Desc3: '',
@@ -80,29 +82,53 @@ export class SuppliersComponent implements OnInit {
 
 
 
-  constructor(private helper: HelperService,
-              private businessService: BusinessService, private fb: FormBuilder,
-    ) {
-      }
+    	
+     constructor(private helper: HelperService,
+         private businessService: BusinessService, private fb: FormBuilder,
+         private switchCompany: SwitchCompanyService) {
+    	
+         	
+         this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
+    	
+             () => {
+    
+               this.transcationList = [];
+    
+               this.COAMappings=[];
+    	
+               this.ngOnInit();
+    	
+             }
+    
+           );
+    	
+    }
 
   ngOnInit() {
-   this._getChartofAccounts();
-   this._getplatforms();
-   this._getVendors();
-   this._getChartofAccountMappings();
-   this._createForm();
+    this.transcationList.length = 0;
+    this.transcationList = [];
+    this._getChartofAccounts();
+    this._getplatforms();
+    this._getVendors();
+    this._getChartofAccountMappings();
+    this._createForm();
+
+    this.addRecord();
+
   }
   _getChartofAccountMappings() {
-   this.businessService.getchartofaccountmapping().subscribe(res => {
+
+     const companyid = Number(this.helper.getcompanyId());
+  this.businessService.getchartofaccountmapping(companyid).subscribe(res => {
       if (res.length > 0) {
         this.COAMappings = res;
         this._generateCOAMapping();
-       }
+      }
     });
   }
   _generateCOAMapping() {
     this.transcationList.length = 0;
-    this.transcationList = [];
+    this.addRecord();
     this.COAMappings.forEach(element => {
       const data = {
         vendorName: element.vendor.company.name,
@@ -119,10 +145,9 @@ export class SuppliersComponent implements OnInit {
         itemDescription3: element.itemdescription3,
         opration: 274
       };
-
       this.transcationList.push(data);
-
     });
+
   }
   _getOperationTypeByID(operationtypeidl: any) {
     return this.opration.find(x => x.ID === operationtypeidl).Name;
@@ -134,26 +159,26 @@ export class SuppliersComponent implements OnInit {
   _getVendors() {
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getAllVendors(companyid).subscribe(res => {
-      if (res.length === 0) {this.isCOAEnabled = false; }
+      if (res.length === 0) { this.isCOAEnabled = false; }
       if (res.length > 0) {
         this.Vendor = res;
-       }
+      }
     });
   }
 
   _getplatforms() {
     this.businessService.getPlatforms().subscribe(res => {
-      if (res.length === 0) {this.isCOAEnabled = false; }
+      if (res.length === 0) { this.isCOAEnabled = false; }
       this.platfrom = res;
-     });
+    });
   }
 
   _getChartofAccounts() {
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getCompanyChartOfAccounts(companyid).subscribe(res => {
-      if (res.length === 0) {this.isCOAEnabled = false; }
+      if (res.length === 0) { this.isCOAEnabled = false; }
       this.COA = res;
-     });
+    });
   }
 
   public addRecord() {
@@ -184,15 +209,21 @@ export class SuppliersComponent implements OnInit {
     };
 
     if (this.COAMappings) {
-      const vendor = this.COAMappings.filter(x => x.vendorid === formData.Contact.vendorid);
+
+      const vendor = this.COAMappings.filter(x => (x.vendorid === formData.Contact.vendorid) &&
+        (x.organization === formData.Platform.name) &&
+        (x.chartofaccountmappingtypeidl === formData.Mapping.ID) &&
+        (x.chartofaccountId === formData.COA.chartofaccountid)
+      );
       if (vendor && vendor.length > 0) {
         alert('Chart of account mapping already exists for same Vendor\n Maximum one mapping per Vendor');
-        return ;
+        return;
       }
 
     }
     this.businessService.postchartofaccountmapping(data).subscribe((res) => {
       this._getChartofAccountMappings();
+      this.formTransaction.reset();
     });
 
   }
@@ -203,4 +234,11 @@ export class SuppliersComponent implements OnInit {
     }
   }
 
+
+  // public editRecord(item) {
+  //   console.log(this.formTransaction);
+  //   console.log(item);
+  //   item.editable = true;
+  //   this.formTransaction.controls["Contact"].setValue(item.vendorName);
+  // }
 }

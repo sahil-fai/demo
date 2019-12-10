@@ -31,10 +31,13 @@ import {
 import {
   ErrorHandlerService
 } from '../services/error-handler-service/error-handler.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(public auth: HelperService, private _loaderService: LoaderService, private _errHandler: ErrorHandlerService) {}
+  constructor(public auth: HelperService, private _loaderService: LoaderService,
+    private _router :Router,
+     private _errHandler: ErrorHandlerService) {}
   intercept(request: HttpRequest < any > , next: HttpHandler): Observable < HttpEvent < any >> {
     this._loaderService.showLoader();
     var token: string = localStorage.getItem('TOKEN');
@@ -62,11 +65,30 @@ export class TokenInterceptor implements HttpInterceptor {
       }
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
+        if (err.statusText === "Unknown Error" || err.status == 401)
+        {
+          if (err.statusText === "Unknown Error")
+          {this._errHandler.pushError(err.statusText);}
+      
+            localStorage.clear();
+            
+            if (err.status == 401)
+            {
+              this._router.navigate(['./login']);
+                      }
+          this._loaderService.hideLoader();
+          //this._errHandler.pushError(err.statusText);
+          return
+        }
         this._loaderService.hideLoader();
         console.log(err)
-       this._errHandler.pushError(err.error.error.message);
-      }
-    }, () => {
+        if (err.error && err.error.error && err.error.error.message)
+       {        this._errHandler.pushError(err.error.error.message);}
+       else
+       {
+        this._errHandler.pushError(err.message);}
+       }
+          }, () => {
       this._loaderService.hideLoader();
     }));
 

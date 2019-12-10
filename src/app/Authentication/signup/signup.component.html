@@ -31,7 +31,7 @@
                           <mat-form-field class="fields newFormatting">
                               <mat-select formControlName="role">
                                   <mat-option *ngFor="let role of roles" [value]="role.value">
-                                    {{role.viewValue}}
+                                    {{role.viewValue|| 'N/A' }}
                                   </mat-option>
                                 </mat-select>
                             </mat-form-field>

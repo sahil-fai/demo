@@ -42,6 +42,10 @@
 .example-container {
     width: auto;
     overflow: auto;
+    max-height: 500px;
+    .example-element-row {
+cursor: pointer;
+    }
   }
 
   table {
@@ -233,11 +237,16 @@ tr.example-detail-row {
 
 tr.example-element-row:not(.example-expanded-row):active {
   background: #efefef;
+  
 }
 
-.example-element-row td {
+.example-element-row {
+  cursor: pointer;
+  td {
   border-bottom-width: 0;
+  }
 }
+
 
 .example-element-detail {
   overflow: hidden;

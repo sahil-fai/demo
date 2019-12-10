@@ -15,7 +15,7 @@ export class CompanyInfoComponentComponent implements OnInit , OnDestroy {
   constructor(private helper: HelperService, public businessService: BusinessService, private switchCompany: SwitchCompanyService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       (res) => {
-        console.log(res)
+        //console.log(res)
         this.ngOnInit();
       }
     );
