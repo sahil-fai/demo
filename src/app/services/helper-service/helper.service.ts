@@ -49,5 +49,13 @@ export class HelperService {
     return localStorage.getItem(TOKEN) != null;
   }
 
+  convertJsonKeysToLower(obj:any)
+  {
+    var json = JSON.stringify(obj);
+    var newJson = json.replace(/"([\w]+)":/g, function($0, $1) {
+  return ('"' + $1.toLowerCase() + '":');
+});
+return JSON.parse(newJson);
+  }
   constructor() { }
 }

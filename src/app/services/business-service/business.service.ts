@@ -42,7 +42,7 @@ export class BusinessService {
   }
 
   getCompanyInformation(id: number, filter?:string): Observable<any> {
-    return this.http.get<any>('business/' + id + (filter ? filter : "?filter={}"));
+    return this.http.get<any>('business/' + id);
   }
 
   getCompanyChartOfAccounts(id: number, filter?:string): Observable<any> {
