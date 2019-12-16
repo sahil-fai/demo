@@ -12,7 +12,7 @@ export class BusinessService {
   constructor(private http: HttpClient, private helper:HelperService) { }
 
   getListOfbusinesses(id: number): Observable<any> {
-    return this.http.get<any>('business/list' + '?filter={"where":{"userid":' + id + '},"limit":100,"include":[{"relation":"all"}]}');
+    return this.http.get<any>('/users/' + id + '/list');
   }
 
   getAllCustomers(id: number): Observable<any> {
