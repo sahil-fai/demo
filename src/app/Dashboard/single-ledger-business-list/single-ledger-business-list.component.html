@@ -54,28 +54,28 @@
                 <ul class="dataList">
                   <li>
                     <div>Company Name</div>
-                    <div> <h6>{{company?.company?.legalname|| 'N/A' }}</h6></div>
+                    <div> <h6>{{company?.legalName|| 'N/A' }}</h6></div>
                   </li>
                   <li>
                     <div class="dataLabel">Connected To</div>
-                    <div class="dataValues">{{company?.company?.organization === "126" ? "Xero": "Quickbooks"|| 'N/A' }}</div>
+                    <div class="dataValues">{{company?.organization === "126" ? "Xero": "Quickbooks"|| 'N/A' }}</div>
                   </li>
                   <li>
                     <div class="dataLabel">Register Date</div>
-                    <div class="dataValues">{{company?.company?.registerdate |date }}</div>
+                    <div class="dataValues">{{company?.registerdate |date }}</div>
                   </li>
                   <!-- <li>
                     <div class="dataLabel">Last Updated</div>
-                    <div class="dataValues">{{company?.company?.registerdate |date }}</div>
+                    <div class="dataValues">{{company?.registerdate |date }}</div>
                   </li> -->
                 </ul>
                 <ul class="buttonList">
                   <li>
-                    <button type="button" class="btn btn-outline btn-icon uppercase redBtn" (click)="openDialog(company.companyId)"><i
+                    <button type="button" class="btn btn-outline btn-icon uppercase redBtn" (click)="openDialog(company.id)"><i
                         class="icon-cross"></i>disconnect</button>
                   </li>
                   <li>
-                    <button type="button" class="btn btn-outline btn-icon uppercase blueBtn" (click)="viewBusiness(company.companyId)"><i
+                    <button type="button" class="btn btn-outline btn-icon uppercase blueBtn" (click)="viewBusiness(company.id)"><i
                         class="icon-arrow-right"></i><a >Company Info</a></button>
                   </li>
                 </ul>

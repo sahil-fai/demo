@@ -25,7 +25,9 @@ export class CompanyInfoComponentComponent implements OnInit , OnDestroy {
     const companyid = Number(this.helper.getcompanyId());
     const filter = '?filter={"include":[{"relation":"all"}]}';
     this.businessService.getCompanyInformation(companyid, filter).subscribe(res => {
-      this.companyinfo = res;
+      let compinfo = this.helper.convertJsonKeysToLower(res);
+      console.log(compinfo);
+      this.companyinfo = compinfo;
     });
   }
   ngOnDestroy() {

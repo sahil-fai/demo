@@ -17,12 +17,12 @@ export class BusinessService {
 
   getAllCustomers(id: number): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/customers' + '?filter={"where":{"referencecompanyid":' + id + '},"limit":100,"include":[{"relation":"company"}]}', {
+    return this.http.get<any>('business/'+id+'/customers' , {
    });
   }
 
   getAllVendors(id: number): Observable<any> {
-    return this.http.get<any>('business/vendors' + '?filter={"where":{"referencecompanyid":' + id + '},"limit":100}', {
+    return this.http.get<any>('business/'+id+'/vendors', {
    });
   }
 
@@ -42,7 +42,7 @@ export class BusinessService {
   }
 
   getCompanyInformation(id: number, filter?:string): Observable<any> {
-    return this.http.get<any>('business/' + id + (filter ? filter : "?filter={}"));
+    return this.http.get<any>('business/' + id);
   }
 
   getCompanyChartOfAccounts(id: number, filter?:string): Observable<any> {
