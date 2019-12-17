@@ -26,7 +26,7 @@
                             <td>{{coa.chartofaccountname|| 'N/A' }}</td>
                             <td>{{coa.description|| 'N/A' }}</td>
                             <td>{{coa.classification|| 'N/A' }}</td>
-                            <td><mat-checkbox [(ngModel)]="coa.isDefault" (change)="updateCheckedOptions(coa.chartofaccountid, $event)"></mat-checkbox></td>
+                            <td><mat-checkbox [(ngModel)]="coa.isdefault" (change)="updateCheckedOptions(coa.chartofaccountid, $event)"></mat-checkbox></td>
                         </tr>
                     </tbody>
                     <tbody *ngIf="!COA">

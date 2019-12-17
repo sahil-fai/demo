@@ -58,12 +58,12 @@ export class BusinessService {
 
   getchartofaccountmapping(id): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('/chartofaccountmappings?filter={"where":{"companyid":' + id + '},"limit":10,"include":[{"relation":"all1"}]}', {
+    return this.http.get<any>('business/' +id +'/chartofaccountmappings', {
     });
   }
   
   getGroupChartofAccounts(id: any) {
-    return this.http.get<any>('groupchartofaccount'+ '?filter={"where":{"companyId":' + id + '},"limit":1000}', {
+    return this.http.get<any>('business/'+id +'/groupchartofaccount', {
     });
   }
 

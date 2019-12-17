@@ -131,7 +131,7 @@ export class SuppliersComponent implements OnInit {
     this.addRecord();
     this.COAMappings.forEach(element => {
       const data = {
-        vendorName: element.vendor.company.name,
+        vendorName: element.vendor.companyName,
         vendorEmail: element.emailonthebill,
         platfrom: element.organization,
         mappingtype: this._getMappingByID(element.chartofaccountmappingtypeidl),
