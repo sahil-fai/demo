@@ -62,19 +62,19 @@
                   </li>
                   <li>
                     <div class="dataLabel">Register Date</div>
-                    <div class="dataValues">{{company?.registerdate |date }}</div>
+                    <div class="dataValues">{{company?.registeredOnProviderDate |date }}</div>
                   </li>
-                  <!-- <li>
-                    <div class="dataLabel">Last Updated</div>
-                    <div class="dataValues">{{company?.registerdate |date }}</div>
-                  </li> -->
+                  <li>
+                    <div class="dataLabel">OnBoard Date</div>
+                    <div class="dataValues">{{company?.onBoardedDate |date }}</div>
+                  </li>
                 </ul>
                 <ul class="buttonList">
-                  <li>
+                  <!-- <li>
                     <button type="button" class="btn btn-outline btn-icon uppercase redBtn" (click)="openDialog(company.id)"><i
                         class="icon-cross"></i>disconnect</button>
-                  </li>
-                  <li>
+                  </li> -->
+                  <li style="text-align: center;">
                     <button type="button" class="btn btn-outline btn-icon uppercase blueBtn" (click)="viewBusiness(company.id)"><i
                         class="icon-arrow-right"></i><a >Company Info</a></button>
                   </li>

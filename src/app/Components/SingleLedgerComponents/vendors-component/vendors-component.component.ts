@@ -81,7 +81,10 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
       //console.log(res);
       this.Totalrec = res.length;
       if (res.length > 0) {
-        this.vendors = res;
+      let response = this.helper.convertJsonKeysToLower(res);
+      this.vendors = response;
+
+
         this.handlePage({
           pageSize: '10',
           pageIndex: '0',
