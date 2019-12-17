@@ -35,9 +35,9 @@ export class SuppliersComponent implements OnInit {
     { Name: 'COA-3', ID: 3 },
   ];
   public mapping = [
-    { Name: 'VendorBase', ID: 113 },
-    { Name: 'SubjectBase', ID: 114 },
-    { Name: 'ItemBase', ID: 116 },
+    { Name: 'VendorBase', ID: 270 },
+    { Name: 'SubjectBase', ID: 271 },
+    { Name: 'ItemBase', ID: 272 },
   ];
   public platfrom = [
     { Name: 'Platfrom-1', ID: 1 },
