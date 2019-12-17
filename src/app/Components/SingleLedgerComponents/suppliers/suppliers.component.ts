@@ -194,7 +194,7 @@ export class SuppliersComponent implements OnInit {
     const Companyid = Number(this.helper.getcompanyId());
     const formData = this.formTransaction.value;
     const data = {
-      vendorid: formData.Contact.vendorid,
+      vendorid: formData.Contact.id,
       chartofaccountmappingtypeidl: formData.Mapping.ID,
       emailonthebill: formData.Email,
       chartofaccountid: formData.COA.chartofaccountid,
@@ -207,7 +207,7 @@ export class SuppliersComponent implements OnInit {
       subject: formData.Subject,
       companyid: Companyid
     };
-
+console.log(JSON.stringify(data))
     if (this.COAMappings) {
 
       const vendor = this.COAMappings.filter(x => (x.vendorid === formData.Contact.vendorid) &&

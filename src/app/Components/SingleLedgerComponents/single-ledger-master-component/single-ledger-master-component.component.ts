@@ -27,7 +27,7 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
     const companyid = Number(this.helper.getcompanyId());
     const userId = Number(this.helper.getuserId());
     this.businessService.getCompanyInformation(companyid).subscribe(res => {
-      this.CurrentCompanyName = res.legalname;
+      this.CurrentCompanyName = res.name;
     });
     this.businessService.getListOfbusinesses(userId).subscribe(res => {
       this.businessList = res;

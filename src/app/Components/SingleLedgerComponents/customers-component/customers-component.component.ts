@@ -74,7 +74,8 @@ getAllCustomer(companyid) {
   this.businessService.getAllCustomers(companyid).subscribe(res => {
     this.Totalrec = res.length;
     if (res.length > 0) {
-      this.customers = res;
+      let response = this.helper.convertJsonKeysToLower(res)
+      this.customers = response;
       this.handlePage({
         pageSize: '10',
         pageIndex: '0'
