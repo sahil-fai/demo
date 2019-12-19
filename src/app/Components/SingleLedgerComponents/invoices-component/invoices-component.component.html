@@ -134,7 +134,7 @@
                                 <!-- Vendor Column -->
                                 <ng-container matColumnDef="Customer">
                                   <th mat-header-cell *matHeaderCellDef> Organization </th>
-                                  <td mat-cell *matCellDef="let element"> {{element.organization === "126" ? "Xero": "Quickbooks"|| 'N/A' }} </td>
+                                  <td mat-cell *matCellDef="let element"> {{platformid | organisationpipe}} </td>
                                 </ng-container>
                                 <!-- Total Column -->
                                 <ng-container matColumnDef="Total">

@@ -99,7 +99,7 @@
             </ng-container>
             <ng-container matColumnDef="Organizaton">
                 <th mat-header-cell *matHeaderCellDef> Organizaton </th>
-                <td mat-cell *matCellDef="let element">  {{element.organization === "126" ? "Xero": "Quickbooks" }} </td>
+                <td mat-cell *matCellDef="let element">  {{platformid | organisationpipe }} </td>
               </ng-container>
 
             <!-- Due Date Column -->

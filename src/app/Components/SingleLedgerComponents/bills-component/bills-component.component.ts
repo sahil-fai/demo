@@ -32,6 +32,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   selection = new SelectionModel<PeriodicElement>(true, []);
 
   switchCompanySubscription: any;
+  platformid: number;
   constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
@@ -42,6 +43,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
       this.getAllBills();
+      this.platformid = this.helper.getplatformId();
   }
 getAllBills() {
   const companyid = Number(this.helper.getcompanyId());

@@ -108,6 +108,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   selection = new SelectionModel < PeriodicElement > (true, []);
   invoice: string;
   switchCompanySubscription: any;
+  platformid: number;
   constructor(public businessService: BusinessService,
               private helper: HelperService,
               private dialog: MatDialog,
@@ -121,6 +122,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const companyid = Number(this.helper.getcompanyId());
+    this.platformid = this.helper.getplatformId();
     this.getinvoices(companyid);
   }
 

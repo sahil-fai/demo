@@ -28,6 +28,7 @@ export class CompanyInfoComponentComponent implements OnInit , OnDestroy {
       let compinfo = this.helper.convertJsonKeysToLower(res);
       console.log(compinfo);
       this.companyinfo = compinfo;
+      this.helper.setplatformId(compinfo.platformid);
     });
   }
   ngOnDestroy() {
