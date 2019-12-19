@@ -139,12 +139,12 @@
                                 <!-- Total Column -->
                                 <ng-container matColumnDef="Total">
                                   <th mat-header-cell *matHeaderCellDef> Total </th>
-                                  <td mat-cell *matCellDef="let element"> {{element.total|| 'N/A' }} </td>
+                                  <td mat-cell *matCellDef="let element"> {{element.total }} </td>
                                 </ng-container>
                                 <!-- Balance Column -->
                                 <ng-container matColumnDef="Balance">
                                   <th mat-header-cell *matHeaderCellDef> Balance </th>
-                                  <td mat-cell *matCellDef="let element" > {{element.total-element.deposit|| 'N/A' }} </td>
+                                  <td mat-cell *matCellDef="let element" > {{element.total-element.deposit }} </td>
                                 </ng-container>
                                 <!-- <ng-container matColumnDef="BlockchainStatus">
                                   <th mat-header-cell *matHeaderCellDef> BlockchainStatus </th>
