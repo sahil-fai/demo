@@ -82,8 +82,7 @@
               </table>
               <ul>
                 <li *ngFor="let business of businessList">
-                  
-                  <a href="javascript:void(0)" (click)="viewBusiness(business.companyId)">- {{business.legalName|| 'N/A' }}</a>
+                               <a href="javascript:void(0)" (click)="viewBusiness(business.id)">- {{business.legalName|| 'N/A' }} </a>
                 </li>
               </ul>
             </li>
