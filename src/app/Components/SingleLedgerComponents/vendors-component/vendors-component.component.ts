@@ -65,6 +65,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, {}) paginator: MatPaginator;
   Totalrec: any;
   switchCompanySubscription: any;
+  platformid: number;
   constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
@@ -77,6 +78,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
   }
   getAllvendors() {
     const companyid = Number(this.helper.getcompanyId());
+    this.platformid= this.helper.getplatformId()
     this.businessService.getAllVendors(companyid).subscribe(res => {
       //console.log(res);
       this.Totalrec = res.length;

@@ -23,6 +23,12 @@ export class HelperService {
   setcompanyId(id:any):void {
     localStorage.setItem('CompanyId', id);
   }
+
+  setplatformId(id:any):void {
+    localStorage.setItem('PlatformId', id);
+  }
+
+
   getcompanyId(){
     let companyid =  localStorage.getItem('CompanyId');
     if (companyid && companyid.length > 0)
@@ -31,6 +37,12 @@ export class HelperService {
     }
     
   }
+  getplatformId(){
+    let platformid =  localStorage.getItem('PlatformId');
+    return Number(platformid);
+  }
+
+
   getuserId(){
     let userinfo:userInfo = JSON.parse(localStorage.getItem('userInfo'));
     return userinfo.id;

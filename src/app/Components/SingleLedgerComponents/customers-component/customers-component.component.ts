@@ -59,6 +59,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   'CustomerName',
   'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'Invite', 'star'];
   selection = new SelectionModel < PeriodicElement > (true, []);
+  platformid: number;
   constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
@@ -68,6 +69,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     const companyid = Number(this.helper.getcompanyId());
+    this.platformid = this.helper.getplatformId();
     this.getAllCustomer(companyid);
   }
 getAllCustomer(companyid) {
