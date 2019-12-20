@@ -62,7 +62,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
   ];
   StatusList = ['Invite', 'Resend Mail'];
   vendors: any;
-  @ViewChild(MatPaginator, {}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   Totalrec: any;
   switchCompanySubscription: any;
   platformid: number;

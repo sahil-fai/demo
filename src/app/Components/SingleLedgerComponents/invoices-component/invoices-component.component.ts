@@ -100,7 +100,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     currentPage: 1,
     totalItems: this.totalRec
   };
-  @ViewChild(MatPaginator, {}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns: string[] = ['Number',
   'CustomerName','Date', 'DueDate', 'Customer', 'Total', 'Balance','BlockchainTransactionID', 'star',
   ];

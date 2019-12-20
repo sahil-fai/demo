@@ -53,7 +53,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   StatusList = ['Invite', 'Resend Mail'];
   customers: any;
   Totalrec: any;
-  @ViewChild(MatPaginator, {}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   switchCompanySubscription: any;
   displayedColumns: string[] = ['select',
   'CustomerName',
