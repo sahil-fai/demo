@@ -1,4 +1,4 @@
 export const environment = {
-  host: 'https://beta.singleledger.org:3000/',
+  host: 'https://beta.singleledger.org/',
   production: true
 };

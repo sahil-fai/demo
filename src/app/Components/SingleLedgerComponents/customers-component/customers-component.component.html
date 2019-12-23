@@ -124,7 +124,7 @@
               <!-- <button class="btn btn-small uppercase btn-solid btn-deepblue" *ngIf="element?.isactive=='Active'" [disabled]="{'disable':element?.isactive === 'Active'}"><i class="icon-arrow-curve-right"></i>INVITED</button> -->
 
               <!-- *ngIf="element?.isactive=='Inactive' && element?.Reinviteflag!=='true'" -->
-              <button class="btn btn-small uppercase btn-solid btn-deepblue" ><i class="icon-arrow-curve-right"></i>INVITE</button>
+              <button (click)="postInvite(element)"  class="btn btn-small uppercase btn-solid btn-deepblue" ><i class="icon-arrow-curve-right"></i>INVITE</button>
               <!-- <button class="btn btn-small uppercase btn-solid btn-navyblue" *ngIf="element?.isactive=='Inactive' && element?.Reinviteflag=='true'"><i class="icon-arrow-curve-left"></i>RE-SEND MAIL</button> -->
             </td>
           </ng-container>

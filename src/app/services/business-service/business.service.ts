@@ -63,11 +63,17 @@ export class BusinessService {
   }
   
   getGroupChartofAccounts(id: any) {
-    return this.http.get<any>('business/'+id +'/groupchartofaccount', {
+        return this.http.get<any>('business/'+id +'/groupchartofaccount', {
     });
   }
 
   setAsDefault(id:number) {
       return this.http.post<any>('coa/setasdefault/'+ id, null);
+  }
+
+  postInvite(userid:number,compid:number,email:string)
+  {
+    return this.http.post<any>('/users/'+ userid+'/company/'+compid +'/invite/'+ email, {
+    });
   }
  }
