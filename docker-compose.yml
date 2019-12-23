@@ -1,0 +1,8 @@
+version: '2' # specify docker-compose version
+
+# Define the services/containers to be run
+services:
+  angular: # name of the first service
+    build:  './'
+    ports:
+      - "4200:80" # specify port forewarding
