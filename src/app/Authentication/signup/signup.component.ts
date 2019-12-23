@@ -12,7 +12,7 @@ import {
   AbstractControl
 } from '@angular/forms';
 import {
-  Router
+  Router, ActivatedRoute
 } from '@angular/router';
 import {
   AuthService
@@ -53,7 +53,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   width: string;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private sanitizer: DomSanitizer, public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
+  constructor(private router: Router, private route: ActivatedRoute,private fb: FormBuilder, private authService: AuthService, private sanitizer: DomSanitizer, public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
     this.mobileQuery = media.matchMedia('(max-width: 767px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);
@@ -73,10 +73,20 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
   ];
   ngOnInit() {
-    this.createForm();
+    let data=
+    { 
+      invitetype : this.route.snapshot.params.invitetype,
+      invitecompanyid : this.route.snapshot.params.invitecompanyid,
+      inviteuserid : this.route.snapshot.params.inviteuserid
+    };
+
+    this.createForm(data);
   }
-  private createForm() {
+  private createForm(data?:any) {
     this.formRegister = this.fb.group({
+      invitetype:[data.invitetype],
+      invitecompanyid:[data.invitecompanyid],
+      inviteuserid:[data.inviteuserid],
       firstName: ['', [Validators.required]],
       lastName: [''],
       username: [this.userEmail, [Validators.required, Validators.email]],

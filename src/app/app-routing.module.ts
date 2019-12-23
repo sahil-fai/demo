@@ -23,8 +23,11 @@ const routes: Routes = [
     path: 'login', component: LoginComponent
   },
   {
-    path: 'signup', component: SignupComponent
+    path: 'signup', component: SignupComponent,
+    
   },
+  {path:'signup/:invitetype/:inviteuserid/:invitecompanyid', component:SignupComponent},
+
   {
    // path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]
     path: 'connectbusiness', component: DashboardComponent, canActivate:[LoginGuard]
