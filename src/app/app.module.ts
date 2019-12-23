@@ -170,6 +170,8 @@ import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/cha
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SortpipePipe } from './pipe/sortpipe.pipe';
 import { ArraytostringPipe } from './pipe/arraytostring.pipe';
+import { AddresstypePipe } from './pipe/addresstype.pipe';
+import { OrganisationpipePipe } from './pipe/organisationpipe.pipe';
 
 @NgModule({
   declarations: [
@@ -202,6 +204,8 @@ import { ArraytostringPipe } from './pipe/arraytostring.pipe';
     ChartOfAccountComponent,
     SortpipePipe,
     ArraytostringPipe,
+    AddresstypePipe,
+    OrganisationpipePipe,
 
   ],
   imports: [

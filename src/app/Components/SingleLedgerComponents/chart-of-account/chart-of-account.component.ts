@@ -58,9 +58,9 @@ public title=  'Chart Of Account';
   setAsDefault(event, option) {
     this.COA.Expense.forEach((item) => {
       if (item.chartofaccountid == option) {
-        item.isDefault = true;
+        item.isdefault = true;
       } else {
-        item.isDefault = false;
+        item.isdefault = false;
       }
     });
   }

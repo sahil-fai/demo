@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
   public showPassword:boolean = false;
   public notificationserveice: Subscription;
   public message: any = 'Successfully login';
-  @ViewChild('email') private elementRef: ElementRef;
+  @ViewChild('email', { static: true }) private elementRef: ElementRef;
 
   // tslint:disable-next-line: max-line-length
   constructor(private router: Router, private _fb: FormBuilder, private authService: AuthService, private helper: HelperService, private sanitizer: DomSanitizer, public dialog: MatDialog, private notification: NotificationsnackbarService, private snackBar: MatSnackBar) { }

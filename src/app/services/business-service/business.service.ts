@@ -12,17 +12,17 @@ export class BusinessService {
   constructor(private http: HttpClient, private helper:HelperService) { }
 
   getListOfbusinesses(id: number): Observable<any> {
-    return this.http.get<any>('business/list' + '?filter={"where":{"userid":' + id + '},"limit":100,"include":[{"relation":"all"}]}');
+    return this.http.get<any>('/users/' + id + '/list');
   }
 
   getAllCustomers(id: number): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/customers' + '?filter={"where":{"referencecompanyid":' + id + '},"limit":100,"include":[{"relation":"company"}]}', {
+    return this.http.get<any>('business/'+id+'/customers' , {
    });
   }
 
   getAllVendors(id: number): Observable<any> {
-    return this.http.get<any>('business/vendors' + '?filter={"where":{"referencecompanyid":' + id + '},"limit":100}', {
+    return this.http.get<any>('business/'+id+'/vendors', {
    });
   }
 
@@ -42,12 +42,12 @@ export class BusinessService {
   }
 
   getCompanyInformation(id: number, filter?:string): Observable<any> {
-    return this.http.get<any>('business/' + id + (filter ? filter : "?filter={}"));
+    return this.http.get<any>('business/' + id);
   }
 
   getCompanyChartOfAccounts(id: number, filter?:string): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/chartofaccounts' + '?filter={"where":{"classification":"Expense", "companyId":' + id + '},"limit":1000}', {
+    return this.http.get<any>('business/'+id +'/chartofaccounts' + '?type=expense', {
     });
   }
 
@@ -58,12 +58,12 @@ export class BusinessService {
 
   getchartofaccountmapping(id): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('/chartofaccountmappings?filter={"where":{"companyid":' + id + '},"limit":10,"include":[{"relation":"all1"}]}', {
+    return this.http.get<any>('business/' +id +'/chartofaccountmappings', {
     });
   }
   
   getGroupChartofAccounts(id: any) {
-    return this.http.get<any>('groupchartofaccount'+ '?filter={"where":{"companyId":' + id + '},"limit":1000}', {
+    return this.http.get<any>('business/'+id +'/groupchartofaccount', {
     });
   }
 

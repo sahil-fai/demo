@@ -62,9 +62,10 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
   ];
   StatusList = ['Invite', 'Resend Mail'];
   vendors: any;
-  @ViewChild(MatPaginator, {}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   Totalrec: any;
   switchCompanySubscription: any;
+  platformid: number;
   constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
@@ -77,11 +78,15 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
   }
   getAllvendors() {
     const companyid = Number(this.helper.getcompanyId());
+    this.platformid= this.helper.getplatformId()
     this.businessService.getAllVendors(companyid).subscribe(res => {
       //console.log(res);
       this.Totalrec = res.length;
       if (res.length > 0) {
-        this.vendors = res;
+      let response = this.helper.convertJsonKeysToLower(res);
+      this.vendors = response;
+
+
         this.handlePage({
           pageSize: '10',
           pageIndex: '0',

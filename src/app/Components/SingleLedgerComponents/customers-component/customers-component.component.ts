@@ -53,12 +53,13 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   StatusList = ['Invite', 'Resend Mail'];
   customers: any;
   Totalrec: any;
-  @ViewChild(MatPaginator, {}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   switchCompanySubscription: any;
   displayedColumns: string[] = ['select',
   'CustomerName',
   'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'Invite', 'star'];
   selection = new SelectionModel < PeriodicElement > (true, []);
+  platformid: number;
   constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
@@ -68,13 +69,15 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     const companyid = Number(this.helper.getcompanyId());
+    this.platformid = this.helper.getplatformId();
     this.getAllCustomer(companyid);
   }
 getAllCustomer(companyid) {
   this.businessService.getAllCustomers(companyid).subscribe(res => {
     this.Totalrec = res.length;
     if (res.length > 0) {
-      this.customers = res;
+      let response = this.helper.convertJsonKeysToLower(res)
+      this.customers = response;
       this.handlePage({
         pageSize: '10',
         pageIndex: '0'

@@ -23,11 +23,11 @@
             </tr>
             <tr>
                 <td class="alnRight head">Base Currency:</td>
-                <td>{{companyinfo.basecurrency.currencyname|| 'N/A' }}</td>
+                <td>{{companyinfo.basecurrency?.currencyname|| 'N/A' }}</td>
             </tr>
             <tr>
                  <td class="alnRight head">Phone:</td>
-                <td>{{companyinfo.contact.telephone | arraytostring }}</td>
+                <td>{{companyinfo.contact?.telephone | arraytostring }}</td>
              </tr>
             <tr>
                  <td class="alnRight head">Email:</td>
@@ -53,38 +53,16 @@
         </ul> -->
     </div>
 </div>
-<div class="addresses" *ngIf="companyinfo">
-        <div class="address">
-            <div class="address-icon-container"> <mat-icon>location_city</mat-icon></div>
-               <div class="address-content">
-                    <h4>Address(Office)</h4>
-                    <p>{{companyinfo.address.addressline1|| 'N/A' }}</p>
-                    <p>{{companyinfo.address.cityname|| 'N/A' }}</p>
-                    <p>{{companyinfo.address.state|| 'N/A' }}</p>
-                    <p>{{companyinfo.address.country|| 'N/A' }}</p>
-                    <!-- <p>{{companyinfo.Address.PostalZone|| 'N/A' }}</p> -->
-                </div>
-
-            </div>
-        <div class="address">
-               <div class="address-icon-container"> <mat-icon>location_city</mat-icon></div>
-               <div class="address-content">
-                <h4>Customer Face Address</h4>
-                <p>{{companyinfo.customerfaceaddress.addressline1|| 'N/A' }}</p>
-                <p>{{companyinfo.customerfaceaddress.cityname|| 'N/A' }}</p>
-                <p>{{companyinfo.customerfaceaddress.state|| 'N/A' }}</p>
-                <p>{{companyinfo.customerfaceaddress.country|| 'N/A' }}</p>
-                </div>
-            </div>
-        <div class="address">
-               <div class="address-icon-container"> <mat-icon>location_city</mat-icon></div>
-               <div class="address-content">
-                    <h4>Legal Address</h4>
-                    <p>{{companyinfo.legaladdress.addressline1|| 'N/A' }}</p>
-                    <p>{{companyinfo.legaladdress.cityname|| 'N/A' }}</p>
-                    <p>{{companyinfo.legaladdress.state|| 'N/A' }}</p>
-                    <p>{{companyinfo.legaladdress.country|| 'N/A' }}</p>
-                </div>
-            </div>
+<div class="addresses" *ngIf="companyinfo && companyinfo.address">
+        <div *ngFor="let address of companyinfo.address"  class="address">
+                <div class="address-icon-container"> <mat-icon>location_city</mat-icon></div>
+                <div class="address-content">
+                     <h4>{{address.addresstype|addresstype}}</h4>
+                     <p>{{address.addressline1|| 'N/A' }}</p>
+                     <p>{{address.cityname|| 'N/A' }}</p>
+                     <p>{{address.state|| 'N/A' }}</p>
+                     <p>{{address.country|| 'N/A' }}</p>
+                 </div>
+             </div>   
 </div>
 

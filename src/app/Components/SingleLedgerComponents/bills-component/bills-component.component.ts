@@ -27,11 +27,12 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   title = 'Bills';
   bills: any;
   public dataSource: MatTableDataSource<PeriodicElement>;
-  @ViewChild(MatPaginator, {}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns: string[] = ['index', 'Number', 'VendorName','Date', 'DueDate', 'Total', 'Balance', 'star'];
   selection = new SelectionModel<PeriodicElement>(true, []);
 
   switchCompanySubscription: any;
+  platformid: number;
   constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
@@ -42,6 +43,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
       this.getAllBills();
+      this.platformid = this.helper.getplatformId();
   }
 getAllBills() {
   const companyid = Number(this.helper.getcompanyId());

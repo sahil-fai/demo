@@ -35,9 +35,9 @@ export class SuppliersComponent implements OnInit {
     { Name: 'COA-3', ID: 3 },
   ];
   public mapping = [
-    { Name: 'VendorBase', ID: 113 },
-    { Name: 'SubjectBase', ID: 114 },
-    { Name: 'ItemBase', ID: 116 },
+    { Name: 'VendorBase', ID: 270 },
+    { Name: 'SubjectBase', ID: 271 },
+    { Name: 'ItemBase', ID: 272 },
   ];
   public platfrom = [
     { Name: 'Platfrom-1', ID: 1 },
@@ -131,7 +131,7 @@ export class SuppliersComponent implements OnInit {
     this.addRecord();
     this.COAMappings.forEach(element => {
       const data = {
-        vendorName: element.vendor.company.name,
+        vendorName: element.vendor.companyName,
         vendorEmail: element.emailonthebill,
         platfrom: element.organization,
         mappingtype: this._getMappingByID(element.chartofaccountmappingtypeidl),
@@ -194,7 +194,7 @@ export class SuppliersComponent implements OnInit {
     const Companyid = Number(this.helper.getcompanyId());
     const formData = this.formTransaction.value;
     const data = {
-      vendorid: formData.Contact.vendorid,
+      vendorid: formData.Contact.id,
       chartofaccountmappingtypeidl: formData.Mapping.ID,
       emailonthebill: formData.Email,
       chartofaccountid: formData.COA.chartofaccountid,
@@ -207,7 +207,7 @@ export class SuppliersComponent implements OnInit {
       subject: formData.Subject,
       companyid: Companyid
     };
-
+console.log(JSON.stringify(data))
     if (this.COAMappings) {
 
       const vendor = this.COAMappings.filter(x => (x.vendorid === formData.Contact.vendorid) &&
