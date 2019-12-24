@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --o --port 4200",
-    "start-qa": "ng serve --host 0.0.0.0 --public-host qaqbo.singleledger.org --port 4200",
+    "start": "ng serve --o --port 4200 --ssl true --ssl-cert './prod-certificate/b244250f947ac546.crt' --ssl-key './prod-certificate/beta.singleledger.org.key'",
+    "start-qa": "ng serve --ssl true --ssl-cert './prod-certificate/b244250f947ac546.crt' --ssl-key './prod-certificate/beta.singleledger.org.key' --host 0.0.0.0 --public-host beta.singleledger.org --port 4200",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

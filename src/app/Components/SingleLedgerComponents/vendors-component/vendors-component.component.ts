@@ -167,5 +167,13 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
       this.switchCompanySubscription.unsubscribe();
     }
   }
+  postInvite(item:any)
+  {
 
+    const userrid = Number(this.helper.getuserId());
+    const compid = Number(this.helper.getcompanyId());
+    const email = item.email;
+    this.businessService.postInvite(userrid,compid,email).subscribe((res)=>{console.log("email sent")},(err)=>{console.log("email failed")})
+    console.log(item)
+  }
 }

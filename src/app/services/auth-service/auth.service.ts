@@ -16,8 +16,11 @@ export class AuthService {
       lastname: data.lastName,
       password: data.password,
       firstName: data.firstName,
-      roleType:data.role
-      
+      roleType:data.role,
+      inviteby:data.inviteby,
+      invitetype:data.invitetype,
+      invitecompanyid:data.invitecompanyid,
+      inviteuserid:data.inviteuserid      
       });
   }
 
