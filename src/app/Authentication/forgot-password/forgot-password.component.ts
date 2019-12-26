@@ -17,7 +17,7 @@ export class ForgotPasswordComponent implements OnInit {
   formLogin: FormGroup;
   submitted: boolean;
   // tslint:disable-next-line: variable-name
-  _authService: any;
+  
   formForgot: any;
   isMailSent: boolean;
 
@@ -27,11 +27,13 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit() {
     this.createForm();
   }
+  
   private createForm() {
     this.formLogin = this._fb.group({
       username: ['', [ Validators.required, Validators.email ]]
     });
   }
+
   get f() {
     return this.formLogin.controls;
   }
@@ -43,8 +45,10 @@ export class ForgotPasswordComponent implements OnInit {
     this.submitted = true;
     console.log('hi...', this.formLogin.value);
     if (this.formLogin.valid) {
-    //  this._authService.forgotPassword(this.formLogin.value);
-      this.isMailSent = true;
+     this.authService.forgotPassword(this.formLogin.value["username"]).subscribe((res)=>{
+      this.isMailSent = true; 
+     });
+      
     }
     // if (this.formLogin.invalid) { return; }
     // this._authService.forgotPassword(this.formLogin.value);
