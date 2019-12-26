@@ -6,6 +6,12 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
+  resetPassword(data: any) {
+    return this.http.post<any>('users/update-password', {
+      requestId: data.requestid,
+      password: data.password,
+    });
+  }
   constructor(private http: HttpClient) {
   }
 
@@ -42,4 +48,11 @@ export class AuthService {
       password: data.password,
     });
   }
+
+  //2019-12-26 13:18:19 method added for forget password  functioanlity , 
+  // will send email over service endpoints and a mail will be send to registered  email of user
+  forgotPassword(username): Observable<any> {
+    return this.http.post<any>('users/forget-password/' + username, null);
+  }
+  
 }
