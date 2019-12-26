@@ -140,10 +140,9 @@ getAllCustomer(companyid) {
     }
   }
 
-  // 2019-12-24 09:32:03 sahil added this method 
-  // this method used to send or resend the mail over invite functionality
   postInvite(item:any)
   {
+
     const userrid = Number(this.helper.getuserId());
     const compid = Number(this.helper.getcompanyId());
     const email = item.email;

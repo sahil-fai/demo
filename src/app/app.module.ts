@@ -172,6 +172,8 @@ import { SortpipePipe } from './pipe/sortpipe.pipe';
 import { ArraytostringPipe } from './pipe/arraytostring.pipe';
 import { AddresstypePipe } from './pipe/addresstype.pipe';
 import { OrganisationpipePipe } from './pipe/organisationpipe.pipe';
+import { ForgotPasswordComponent } from './Authentication/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './Authentication/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -206,6 +208,8 @@ import { OrganisationpipePipe } from './pipe/organisationpipe.pipe';
     ArraytostringPipe,
     AddresstypePipe,
     OrganisationpipePipe,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
 
   ],
   imports: [
