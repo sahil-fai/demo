@@ -83,4 +83,5 @@ export class ResetPasswordComponent implements OnInit {
 
     });
   }
+  get f() { return this.formReset.controls;}
 }
