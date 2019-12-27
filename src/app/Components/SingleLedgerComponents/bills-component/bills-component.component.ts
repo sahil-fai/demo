@@ -33,6 +33,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
 
   switchCompanySubscription: any;
   platformid: number;
+  companyCurrency: string;
   constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
@@ -44,12 +45,14 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   ngOnInit() {
       this.getAllBills();
       this.platformid = this.helper.getplatformId();
+      if(localStorage.getItem('CompanyCurrency')) {
+        this.companyCurrency = localStorage.getItem('CompanyCurrency');
+      }
   }
 getAllBills() {
   const companyid = Number(this.helper.getcompanyId());
   const filter = '?filter={"include":[{"relation":"all"}]}';
   this.businessService.getAllBills(companyid).subscribe(res => {
-    console.log(res)
     this.bills = res;
     this.handlePage({pageSize: '10', pageIndex: '0'});
   });

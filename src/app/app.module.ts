@@ -174,6 +174,7 @@ import { AddresstypePipe } from './pipe/addresstype.pipe';
 import { OrganisationpipePipe } from './pipe/organisationpipe.pipe';
 import { ForgotPasswordComponent } from './Authentication/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './Authentication/reset-password/reset-password.component';
+import { TransactionTypePipe } from './pipe/transactiontype.pipe';
 
 @NgModule({
   declarations: [
@@ -210,6 +211,7 @@ import { ResetPasswordComponent } from './Authentication/reset-password/reset-pa
     OrganisationpipePipe,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    TransactionTypePipe
 
   ],
   imports: [

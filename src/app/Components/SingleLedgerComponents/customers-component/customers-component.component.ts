@@ -20,6 +20,7 @@ import {
   HelperService
 } from '../../../services/helper-service/helper.service';
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
+import { ErrorHandlerService } from 'src/app/services/error-handler-service/error-handler.service';
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -60,7 +61,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'Invite', 'star'];
   selection = new SelectionModel < PeriodicElement > (true, []);
   platformid: number;
-  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
+  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
         this.ngOnInit();
@@ -141,20 +142,23 @@ getAllCustomer(companyid) {
   }
 
   postInvite(item:any)
-  {
-
-    const userid = Number(this.helper.getuserId());
-    const compid = Number(this.helper.getcompanyId());
-    const email = item.email;
-    const companyContactId = item.id;
-    const data = {
-      userid: userid,
-      businessid: compid,
-      email: email,
-      ccId: companyContactId
-      };
-      console.log(item)
-    this.businessService.postInvite(data).subscribe((res)=>{console.log("email sent")},(err)=>{console.log("email failed")})
-    console.log(item)
+  { 
+    if(item.email) { 
+        const userid = Number(this.helper.getuserId());
+        const compid = Number(this.helper.getcompanyId());
+        const email = item.email;
+        const companyContactId = item.id;
+        const data = {
+          userid: userid,
+          businessid: compid,
+          email: email,
+          ccId: companyContactId
+          };
+          console.log(item)
+        this.businessService.postInvite(data).subscribe((res)=>{ console.log("email sent")},(err)=>{console.log("email failed")})
+        console.log(item)
+    } else {
+      this._errHandler.pushError('Sorry email is empty');
+    }
   }
 }
