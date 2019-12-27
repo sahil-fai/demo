@@ -71,9 +71,8 @@ export class BusinessService {
       return this.http.post<any>('coa/setasdefault/'+ id, null);
   }
 
-  postInvite(userid:number,compid:number,email:string)
+  postInvite(data)
   {
-    return this.http.post<any>('/users/'+ userid+'/company/'+compid +'/invite/'+ email, {
-    });
+    return this.http.post<any>('/users/invite', data);
   }
  }
