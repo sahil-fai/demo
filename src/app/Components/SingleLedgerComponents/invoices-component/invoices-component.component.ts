@@ -100,6 +100,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     currentPage: 1,
     totalItems: this.totalRec
   };
+  companyCurrency: string;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns: string[] = ['Number',
   'CustomerName','Date', 'DueDate', 'Customer', 'Total', 'Balance','BlockchainTransactionID', 'star',
@@ -123,13 +124,16 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const companyid = Number(this.helper.getcompanyId());
     this.platformid = this.helper.getplatformId();
+    if(localStorage.getItem('CompanyCurrency')) {
+      this.companyCurrency = localStorage.getItem('CompanyCurrency');
+    }
     this.getinvoices(companyid);
   }
 
   public getinvoices(companyid: number) {
     this.businessService.getAllInvoices(companyid).subscribe(
       res => {
-        this.invoices = res;
+        this.invoices = res; 
         this.totalRec = this.invoices.length;
         this.handlePage({
           pageSize: this.size,

@@ -139,12 +139,12 @@
                                 <!-- Total Column -->
                                 <ng-container matColumnDef="Total">
                                   <th mat-header-cell *matHeaderCellDef> Total </th>
-                                  <td mat-cell *matCellDef="let element"> {{element.total }} </td>
+                                  <td mat-cell *matCellDef="let element"> {{element.total | currency:companyCurrency}} </td>
                                 </ng-container>
                                 <!-- Balance Column -->
                                 <ng-container matColumnDef="Balance">
                                   <th mat-header-cell *matHeaderCellDef> Balance </th>
-                                  <td mat-cell *matCellDef="let element" > {{element.total-element.deposit }} </td>
+                                  <td mat-cell *matCellDef="let element" > {{element.total-element.deposit | currency:companyCurrency }} </td>
                                 </ng-container>
                                 <!-- <ng-container matColumnDef="BlockchainStatus">
                                   <th mat-header-cell *matHeaderCellDef> BlockchainStatus </th>
@@ -177,6 +177,7 @@
                                                     <th>Transaction ID</th>
                                                     <!-- <th>Entity Id</th> -->
                                                     <th>Block Number</th>
+                                                    <th>Transaction Type</th>
                                                     <th>Timestamp</th>
                                                     <th>Chain Code Name</th>
                                                     <th>Channel Name</th>
@@ -187,6 +188,7 @@
                                                           <td >{{varriable.description|| 'N/A' }}</td>
                                                           <!-- <td class="td-width">{{varriable.entityid|| 'N/A' }}</td> -->
                                                           <td class="td-width">{{varriable.blocknumber|| 'N/A' }}</td>
+                                                          <td class="td-width">{{varriable.historyactiontypeidl | transactionTypePipe }}</td>
                                                           <td class="td-width">{{varriable.timestamp| date:'mediumDate' || 'N/A' }}</td>
                                                           <td class="td-width">{{varriable.chaincodename|| 'N/A' }}</td>
                                                           <td class="td-width">{{varriable.channelname|| 'N/A' }}</td>

@@ -122,7 +122,8 @@
               <td mat-cell *matCellDef="let element">
                   <!-- *ngIf="element.isactive=='Inactive' && element.Reinviteflag!=='true'" -->
                   <!-- <button class="btn btn-small uppercase btn-solid btn-deepblue" *ngIf="element.isactive=='Active'" [disabled]="{'disable':element.isactive === 'Active'}"><i class="icon-arrow-curve-right"></i>INVITED</button> -->
-                <button class="btn btn-small uppercase btn-solid btn-deepblue" (click)="postInvite(item)"><i class="icon-arrow-curve-right"></i>INVITE</button>
+                <button class="btn btn-small uppercase btn-solid btn-deepblue" *ngIf="element?.invitecount == 0" (click)="postInvite(element)"><i class="icon-arrow-curve-right"></i>INVITE</button>
+                <button class="btn btn-small uppercase btn-solid btn-deepblue" *ngIf="element?.invitecount > 0" (click)="postInvite(element)"><i class="icon-arrow-curve-right"></i>RESEND INVITE</button>
                 <!-- <button class="btn btn-small uppercase btn-solid btn-navyblue" *ngIf="element.isactive=='Inactive' && element.Reinviteflag=='true'"><i class="icon-arrow-curve-left"></i>RE-SEND MAIL</button> -->
               </td>
             </ng-container>
