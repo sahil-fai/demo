@@ -41,11 +41,16 @@
                     <button type="submit" class="btn btn-solid login" [disabled]="formLogin.invalid"><i class="icon-submit"></i>Login</button>
                   </li>
                   <li class="buttonWrap">
-                      <button type="submit" class="btn btn-solid create-account"><a [routerLink]="['/signup']">Create Account</a></button>
+                      <!-- <button type="submit" class="btn btn-solid create-account"> -->
+                      <span class="button-link"><a [routerLink]="['/signup']">Create Account</a></span>
+                      <span class="button-link right"><a [routerLink]="['/forgot-password']">Forgot your password</a></span>
+                      <!-- </button> -->
                   </li>
-                  <li class="buttonWrap">
-                      <button type="submit" class="btn btn-solid create-account"><a [routerLink]="['/forgot-password']">Forgot your password</a></button>
-                  </li>
+                 <!-- <li class="buttonWrap">
+                       <button type="submit" class="btn btn-solid create-account"> 
+                        <a [routerLink]="['/forgot-password']">Forgot your password</a>
+                      </button> 
+                  </li> -->
                 </ul>
               </form>
         </div>
