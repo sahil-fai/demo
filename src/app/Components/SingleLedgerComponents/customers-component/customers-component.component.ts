@@ -1,27 +1,13 @@
-import {
-  SelectionModel
-} from '@angular/cdk/collections';
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  OnDestroy
-} from '@angular/core';
-import {
-  MatTableDataSource
-} from '@angular/material/table';
-import {
-  MatPaginator
-} from '@angular/material/paginator';
-import {
-  BusinessService
-} from '../../../services/business-service/business.service';
-import {
-  HelperService
-} from '../../../services/helper-service/helper.service';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { BusinessService } from '../../../services/business-service/business.service';
+import { HelperService } from '../../../services/helper-service/helper.service';
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 import { ErrorHandlerService } from 'src/app/services/error-handler-service/error-handler.service';
 import { ToastrService } from 'ngx-toastr';
+
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -33,38 +19,39 @@ export interface PeriodicElement {
   Action: string;
   position: number;
 }
+
 @Component({
   selector: 'app-customers-component',
   templateUrl: './customers-component.component.html',
   styleUrls: ['./customers-component.component.less']
 })
-export class CustomersComponentComponent implements OnInit, OnDestroy {
-  title = 'Customers';
-  public dataSource: MatTableDataSource < PeriodicElement > ;
-  selected = ['Active'];
 
+export class CustomersComponentComponent implements OnInit, OnDestroy {
+  public dataSource: MatTableDataSource<PeriodicElement>;
+  title = 'Customers';  
+  selected = ['Active'];
   status = [{
-      value: 'Active',
-      viewValue: 'Active'
-    },
-    {
-      value: 'Inactive',
-      viewValue: 'Inactive'
-    }
+    value: 'Active',
+    viewValue: 'Active'
+  },
+  {
+    value: 'Inactive',
+    viewValue: 'Inactive'
+  }
   ];
   StatusList = ['Invite', 'Resend Mail'];
   customers: any;
   Totalrec: any;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   switchCompanySubscription: any;
-  displayedColumns: string[] = ['select',
-  'CustomerName',
-  'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'Invite', 'star'];
-  selection = new SelectionModel < PeriodicElement > (true, []);
+  displayedColumns: string[] = ['select', 'CustomerName', 'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'Invite', 
+ // 'star'
+];
+  selection = new SelectionModel<PeriodicElement>(true, []);
   platformid: number;
+
   constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
-    this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
-      () => {
+    this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(() => {
         this.ngOnInit();
       }
     );
@@ -74,19 +61,19 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
     this.platformid = this.helper.getplatformId();
     this.getAllCustomer(companyid);
   }
-getAllCustomer(companyid) {
-  this.businessService.getAllCustomers(companyid).subscribe(res => {
-    this.Totalrec = res.length;
-    if (res.length > 0) {
-      let response = this.helper.convertJsonKeysToLower(res)
-      this.customers = response;
-      this.handlePage({
-        pageSize: '10',
-        pageIndex: '0'
-      });
-    }
-  });
-}
+  getAllCustomer(companyid) { 
+    this.businessService.getAllCustomers(companyid).subscribe(res => {
+      this.Totalrec = res.length;
+      if (res.length > 0) {
+        let response = this.helper.convertJsonKeysToLower(res)
+        this.customers = response;
+        this.handlePage({
+          pageSize: '10',
+          pageIndex: '0'
+        });
+      }
+    });
+  }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     if (this.dataSource && this.dataSource.data.length > 0) {
@@ -105,7 +92,7 @@ getAllCustomer(companyid) {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row ?: PeriodicElement): string {
+  checkboxLabel(row?: PeriodicElement): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
@@ -134,37 +121,41 @@ getAllCustomer(companyid) {
     let pagesize = e.pageSize;
     let pagenumber = e.pageIndex + 1;
     let data = this.Paginator(this.customers, pagenumber, pagesize);
-    this.dataSource = new MatTableDataSource < PeriodicElement > (this.customers);
+    this.dataSource = new MatTableDataSource<PeriodicElement>(this.customers); console.log('datasource: ', this.dataSource);
   }
+
+  postInvite(item: any) {
+    if (item.email) {
+      const userid = Number(this.helper.getuserId());
+      const compid = Number(this.helper.getcompanyId());
+      const email = item.email;
+      const companyContactId = item.id;
+      const data = {
+        userid: userid,
+        businessid: compid,
+        email: email,
+        ccId: companyContactId
+      };
+      this.businessService.postInvite(data).subscribe((res) => {
+        console.log("email sent: ");           
+        if(res) {
+          if(res.invite_count == 1) {
+           this.getAllCustomer(compid);           
+          }
+          this._toastr.success(res.message);
+        }
+      }, (err) => {
+        console.log("email failed")
+      })
+    } else {
+      this._errHandler.pushError('Sorry email is empty');
+    }
+  }
+
   ngOnDestroy() {
     if (this.switchCompanySubscription) {
       this.switchCompanySubscription.unsubscribe();
     }
   }
 
-  postInvite(item:any)
-  { 
-    if(item.email) { 
-        const userid = Number(this.helper.getuserId());
-        const compid = Number(this.helper.getcompanyId());
-        const email = item.email;
-        const companyContactId = item.id;
-        const data = {
-          userid: userid,
-          businessid: compid,
-          email: email,
-          ccId: companyContactId
-          };
-          console.log(item)
-        this.businessService.postInvite(data).subscribe((res)=>{ 
-          console.log("email sent");
-          this._toastr.success("Email sent successfully!")
-        },(err)=>{
-          console.log("email failed")
-        })
-        console.log(item)
-    } else {
-      this._errHandler.pushError('Sorry email is empty');
-    }
-  }
 }
