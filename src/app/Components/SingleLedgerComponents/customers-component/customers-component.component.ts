@@ -21,6 +21,7 @@ import {
 } from '../../../services/helper-service/helper.service';
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 import { ErrorHandlerService } from 'src/app/services/error-handler-service/error-handler.service';
+import { ToastrService } from 'ngx-toastr';
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -61,7 +62,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'Invite', 'star'];
   selection = new SelectionModel < PeriodicElement > (true, []);
   platformid: number;
-  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService) {
+  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
         this.ngOnInit();
@@ -155,7 +156,12 @@ getAllCustomer(companyid) {
           ccId: companyContactId
           };
           console.log(item)
-        this.businessService.postInvite(data).subscribe((res)=>{ console.log("email sent")},(err)=>{console.log("email failed")})
+        this.businessService.postInvite(data).subscribe((res)=>{ 
+          console.log("email sent");
+          this._toastr.success("Email sent successfully!")
+        },(err)=>{
+          console.log("email failed")
+        })
         console.log(item)
     } else {
       this._errHandler.pushError('Sorry email is empty');

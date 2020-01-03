@@ -211,7 +211,7 @@ import { TransactionTypePipe } from './pipe/transactiontype.pipe';
     OrganisationpipePipe,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    TransactionTypePipe
+    TransactionTypePipe,
 
   ],
   imports: [
