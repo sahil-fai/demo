@@ -130,12 +130,21 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
       const compid = Number(this.helper.getcompanyId());
       const email = item.email;
       const companyContactId = item.id;
+      // const data = {
+      //   userid: userid,
+      //   businessid: compid,
+      //   email: email,
+      //   ccId: companyContactId
+      // };
       const data = {
-        userid: userid,
+        userId: userid,
         businessid: compid,
-        email: email,
-        ccId: companyContactId
-      };
+        requestType: 2,
+        ccId: companyContactId,
+        contactType:1,
+        email: email
+       }
+
       this.businessService.postInvite(data).subscribe((res) => {
         console.log("email sent: ");           
         if(res) {
