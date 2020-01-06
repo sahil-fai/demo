@@ -176,12 +176,23 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
         const compid = Number(this.helper.getcompanyId());
         const email = item.email;
         const companyContactId = item.id;
+        // const data = {
+        // userid: userid,
+        // businessid: compid,
+        // email: email,
+        // ccId: companyContactId
+        // };
+
         const data = {
-        userid: userid,
-        businessid: compid,
-        email: email,
-        ccId: companyContactId
-        };
+          userId: userid,
+          businessid: compid,
+          requestType: 2,
+          ccId: companyContactId,
+          contactType: 2,
+          email: email
+          };
+
+
         this.businessService.postInvite(data).subscribe((res)=>{
           if(res) {
             if(res.invite_count == 1) {
