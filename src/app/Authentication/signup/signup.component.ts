@@ -149,8 +149,8 @@ export class SignupComponent implements OnInit, OnDestroy {
             roleType: this.formRegister.value.role,
             inviteby: this.formRegister.value.inviteby, 
             invitetype: this.invitetype,
-            invitecompanyid: this.invitecompanyid.toString(),
-            inviteuserid: this.inviteuserid.toString()
+            invitecompanyid: this.invitecompanyid?this.invitecompanyid.toString():undefined,
+            inviteuserid: this.inviteuserid?this.inviteuserid.toString():undefined
         } 
         this.authService.enroll(data).subscribe(res => {
           this.isRegistered = true;
