@@ -86,7 +86,7 @@
           <!-- Number Column -->
           <ng-container matColumnDef="CustomerName" sticky>
             <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element?.givenname }} </td>
+            <td mat-cell *matCellDef="let element"> {{element?.displayname }} </td>
           </ng-container>
           <!-- Block chain Id Column -->
           <ng-container matColumnDef="ContactEmail">
@@ -124,17 +124,18 @@
               <!-- <button class="btn btn-small uppercase btn-solid btn-deepblue" *ngIf="element?.isactive=='Active'" [disabled]="{'disable':element?.isactive === 'Active'}"><i class="icon-arrow-curve-right"></i>INVITED</button> -->
 
               <!-- *ngIf="element?.isactive=='Inactive' && element?.Reinviteflag!=='true'" -->
-              <button class="btn btn-small uppercase btn-solid btn-deepblue" ><i class="icon-arrow-curve-right"></i>INVITE</button>
+              <button (click)="postInvite(element)" *ngIf="element?.invitecount == 0" class="btn btn-small uppercase btn-solid btn-deepblue" ><i class="icon-arrow-curve-right"></i>INVITE</button>
+              <button (click)="postInvite(element)" *ngIf="element?.invitecount > 0" class="btn btn-small uppercase btn-solid btn-deepblue" ><i class="icon-arrow-curve-right"></i>RESEND INVITE</button>
               <!-- <button class="btn btn-small uppercase btn-solid btn-navyblue" *ngIf="element?.isactive=='Inactive' && element?.Reinviteflag=='true'"><i class="icon-arrow-curve-left"></i>RE-SEND MAIL</button> -->
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="star" stickyEnd>
+          <!-- <ng-container matColumnDef="star" stickyEnd>
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
               <span><i  class="icon-arrow-right"></i></span>
             </td>
-          </ng-container>
+          </ng-container> -->
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"
               (click)="row.Status!=='Active' && selection.toggle(row)" [class.selected]="selection.isSelected(row)">

@@ -18,13 +18,24 @@ import { SuppliersComponent } from './Components/SingleLedgerComponents/supplier
 import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/chart-of-account/chart-of-account.component';
 import { LoginGuard } from './Guards/login.guard';
 import { BusinessGuard } from './Guards/business.guard';
+import { ForgotPasswordComponent } from './Authentication/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './Authentication/reset-password/reset-password.component';
 const routes: Routes = [
   {
     path: 'login', component: LoginComponent
   },
   {
-    path: 'signup', component: SignupComponent
+    path: 'signup', component: SignupComponent,
+
   },
+  {
+    path: 'forgot-password', component: ForgotPasswordComponent,
+  },
+  {
+    path: 'reset-password', component: ResetPasswordComponent,
+  },
+  {path: 'signup/:invitetype/:inviteuserid/:invitecompanyid', component:SignupComponent},
+
   {
    // path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]
     path: 'connectbusiness', component: DashboardComponent, canActivate:[LoginGuard]

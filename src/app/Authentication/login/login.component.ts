@@ -9,6 +9,7 @@ import { DialogOverviewExampleDialogComponent } from '../../Shared/dialog-overvi
 import { NotificationsnackbarService } from '../../services/notificationsnackbar.service'
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorHandlerService } from 'src/app/services/error-handler-service/error-handler.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('email', { static: true }) private elementRef: ElementRef;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private router: Router, private _fb: FormBuilder, private authService: AuthService, private helper: HelperService, private sanitizer: DomSanitizer, public dialog: MatDialog, private notification: NotificationsnackbarService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private _fb: FormBuilder,private _errHandler: ErrorHandlerService, private authService: AuthService, private helper: HelperService, private sanitizer: DomSanitizer, public dialog: MatDialog, private notification: NotificationsnackbarService, private snackBar: MatSnackBar) { }
 
   formLogin: FormGroup;
 
@@ -61,6 +62,18 @@ export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
         this.router.navigate(['/businesslist']);       
     },
     err =>  {
+      if (err.status === 401)
+      {
+        this._errHandler.pushError("Invalid Credentials")
+      }
+     else if (err.status === 404)
+      {
+
+      }
+      else {
+         this._errHandler.pushError(err.message)
+        }
+      
       this.formLogin.patchValue({password: ''});
     }
     );

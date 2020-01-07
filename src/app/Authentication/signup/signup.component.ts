@@ -1,39 +1,12 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectorRef,
-  Input,
-  OnDestroy
-} from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  AbstractControl
-} from '@angular/forms';
-import {
-  Router
-} from '@angular/router';
-import {
-  AuthService
-} from '../../services/auth-service/auth.service';
-import {
-  DomSanitizer,
-  SafeResourceUrl
-} from '@angular/platform-browser';
-import {
-  MatDialog,
-  MatDialogConfig
-} from '@angular/material/dialog';
-import {
-  MediaMatcher
-} from '@angular/cdk/layout';
-import {
-  DialogOverviewExampleDialogComponent
-} from '../../Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component';
-import {
-  TermsConditionsComponent
-} from '../../Shared/terms-conditions/terms-conditions.component';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../services/auth-service/auth.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { DialogOverviewExampleDialogComponent } from '../../Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component';
+import { TermsConditionsComponent } from '../../Shared/terms-conditions/terms-conditions.component';
 
 @Component({
   selector: 'app-signup',
@@ -51,9 +24,13 @@ export class SignupComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   private mobileQueryListener: () => void;
   width: string;
+  verifyInviteRes: any;
+  showInvalidPage: boolean = true;
+  invitetype: string;
+  invitecompanyid: string;
+  inviteuserid: string;
 
-  // tslint:disable-next-line: max-line-length
-  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private sanitizer: DomSanitizer, public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
+  constructor(private router: Router, private route: ActivatedRoute,private fb: FormBuilder, private authService: AuthService, private sanitizer: DomSanitizer, public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
     this.mobileQuery = media.matchMedia('(max-width: 767px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);
@@ -73,20 +50,38 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
   ];
   ngOnInit() {
+    // let data = { 
+    //   invitetype : this.route.snapshot.queryParams.invitetype,
+    //   invitecompanyid : this.route.snapshot.queryParams.invitecompanyid,
+    //   inviteuserid : this.route.snapshot.queryParams.inviteuserid
+    // };
+
+    
+    if(this.route.snapshot.queryParams.requestId) {
+
+      this.authService.verifyInvite(Number(this.route.snapshot.queryParams.requestId)).subscribe(res => {  
+      if(res.status) {
+        this.invitetype = res.source;
+        this.invitecompanyid = res.companyid;
+        this.inviteuserid = res.userid;               
+      } else {
+        this.showInvalidPage = false;
+        this.verifyInviteRes = res; 
+      }      
+      });
+    }
     this.createForm();
+    
+
   }
   private createForm() {
     this.formRegister = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: [''],
       username: [this.userEmail, [Validators.required, Validators.email]],
-      // tslint:disable-next-line: max-line-length
       password: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
-      // tslint:disable-next-line: max-line-length
       confirmpassword: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
       isAgree: ['', [Validators.requiredTrue]],
-      // recaptcha: [null, [ Validators.required]],
-      //  recaptcha: ['', '',],
       role: [null, [Validators.required]]
     }, {
       validator: this.checkPasswords
@@ -141,15 +136,32 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
   public onRegister() {
     this.submitted = true;
-    if (this.formRegister.invalid) {
-      return;
-    }
-    this.authService.enroll(this.formRegister.value).subscribe(res => {
-      this.isRegistered = true;
-      this.router.navigate(['/login']);
-    }, err => {
+    // if (this.formRegister.invalid) {
+    //   return;
+    // }
+    // if(this.verifyInviteRes.status) {
+      if(this.formRegister.valid) {
+        const data = {
+            email: this.formRegister.value.username,
+            lastname: this.formRegister.value.lastName,
+            password: this.formRegister.value.password,
+            firstName: this.formRegister.value.firstName,
+            roleType: this.formRegister.value.role,
+            inviteby: this.formRegister.value.inviteby, 
+            invitetype: this.invitetype,
+            invitecompanyid: this.invitecompanyid?this.invitecompanyid.toString():undefined,
+            inviteuserid: this.inviteuserid?this.inviteuserid.toString():undefined
+        } 
+        this.authService.enroll(data).subscribe(res => {
+          this.isRegistered = true;
+          this.router.navigate(['/login']);
+        });
+      }
 
-    });
+    // }
+
+
+
   }
   public togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -175,7 +187,6 @@ export class SignupComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
     });
   }
   public checkPasswords(group: FormGroup) {
@@ -186,13 +197,10 @@ export class SignupComponent implements OnInit, OnDestroy {
         notSame: true
       };
     }
-    // }
-    // return null;
   }
   openTermsConditions() {
     this.width = '90vw';
     const dialogConfig = new MatDialogConfig();
-    // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = this.width;
     dialogConfig.height = '90%';
@@ -203,13 +211,12 @@ export class SignupComponent implements OnInit, OnDestroy {
     dialogConfig.hasBackdrop = true;
     dialogConfig.panelClass = 'terms-conditions';
     dialogConfig.closeOnNavigation = true;
-
     const dialogRef = this.dialog.open(TermsConditionsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       data => this.checked = data
     );
-
   }
+
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this.mobileQueryListener);
   }
