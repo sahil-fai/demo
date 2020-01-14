@@ -28,7 +28,9 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   bills: any;
   public dataSource: MatTableDataSource<PeriodicElement>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  displayedColumns: string[] = ['index', 'Number', 'VendorName','Date', 'DueDate', 'Total', 'Balance', 'star'];
+  displayedColumns: string[] = ['index', 'Number', 'VendorName','Date', 'DueDate', 'Total', 'Balance', 
+ // 'star'
+];
   selection = new SelectionModel<PeriodicElement>(true, []);
 
   switchCompanySubscription: any;
