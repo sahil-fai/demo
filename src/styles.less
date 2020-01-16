@@ -3325,3 +3325,51 @@ perfect-scrollbar > .ps.ps--active-y > .ps__rail-y.ps--clicking{
     width: 6px !important;
     background-color: #00add8 !important;
 }
+
+
+
+// Mat Select Style Include Here
+
+mat-form-field{
+    .mat-form-field-wrapper{
+        .mat-form-field-flex{
+            .mat-form-field-infix{
+                padding-left: 0px;
+                mat-select{
+                    .mat-select-trigger{
+                        .mat-select-arrow-wrapper{
+                            .mat-select-arrow{
+                                height: 12px;
+                                width: 12px;
+                                margin-right: 0px;
+                                padding-right: 0px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+mat-checkbox{
+    label{
+        .mat-checkbox-label{
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: #ffffff !important;
+            span{
+                br{
+                    display: none;
+                }
+            }
+        }
+    }
+    &.mat-checkbox-checked{
+        .mat-checkbox-layout{
+            .mat-checkbox-background{
+                background-color: #aebdbe !important;
+            }
+        }
+    }
+}
