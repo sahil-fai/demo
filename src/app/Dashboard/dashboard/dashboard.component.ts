@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuickBookConnectService } from '../../services/quickbook-service/quick-book-connect.service'
 import { BusinessReloadComponent } from '../../Shared/business-reload/business-reload.component';
 import { MatDialogRef } from '@angular/material';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { XeroConnectService } from 'src/app/services/xero-connect-service/xero-connect.service';
 
@@ -13,6 +13,7 @@ import { XeroConnectService } from 'src/app/services/xero-connect-service/xero-c
 })
 export class DashboardComponent implements OnInit {
   public _reloadingDialog: MatDialogRef<BusinessReloadComponent>;
+  public connectedToBusiness:string;
   constructor(public quickbookconnect:QuickBookConnectService,public xeroconnect:XeroConnectService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
@@ -20,6 +21,7 @@ export class DashboardComponent implements OnInit {
 
   public onConnect() {
     const _self = this;
+     this.connectedToBusiness='QuickBook Online';
     var LeftPosition = (screen.width) ? (screen.width-600)/2 : 0;
     var TopPosition = (screen.height) ? (screen.height-700)/2 : 0;
     var settings ='height='+700+',width='+600+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable';
@@ -58,6 +60,7 @@ export class DashboardComponent implements OnInit {
 
   public onXeroConnect() {
     const _self = this;
+    this.connectedToBusiness='Xero';
     var LeftPosition = (screen.width) ? (screen.width-600)/2 : 0;
     var TopPosition = (screen.height) ? (screen.height-700)/2 : 0;
     var settings ='height='+700+',width='+600+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable';
@@ -95,11 +98,15 @@ export class DashboardComponent implements OnInit {
   }
   public reloadBusiness() {
     const _self = this;
+
     this._reloadingDialog = this.dialog.open(BusinessReloadComponent, {
       width: '450px',
       disableClose: true,
       position: {
         top: '80px'
+      },
+      data: {
+        connectedSource: this.connectedToBusiness
       }
     });
     setTimeout(() => {
