@@ -8,7 +8,7 @@
 
       li {
         label {
-          font-family: Roboto, "Helvetica Neue", sans-serif;
+          font-family: 'Roboto';
         }
 
         ul {
@@ -115,6 +115,10 @@ table {
   width: 100%;
   font-weight: 500;
 
+  td {
+    font-family: 'Open Sans';
+    font-weight: 600;
+  }
 }
 
 td.mat-column-star {
@@ -141,17 +145,18 @@ td.mat-column-position {
 tr.mat-row {
   &:hover {
     .mat-cell {
-      border-bottom: 2px solid #00add8;
-      border-top: 2px solid #00add8;
+      // border-bottom: 2px solid #00add8;
+      // border-top: 2px solid #00add8;
+      background: #e3f8fd;
     }
   }
 
   &.selected {
-    border-bottom: 2px solid #00add8;
-    border-top: 2px solid #00add8;
+    // border-bottom: 2px solid #00add8;
+    // border-top: 2px solid #00add8;
 
     td.mat-cell.mat-table-sticky {
-      border-top: 2px solid #00add8;
+      // border-top: 2px solid #00add8;
     }
   }
 }
@@ -159,11 +164,20 @@ tr.mat-row {
 tr.mat-header-row {
   height: 35px !important;
   background: #e1f1f5;
+
+  .table-head {
+    font-family: 'Roboto';
+    position: sticky;
+    top: 0;
+
+  }
+
 }
 
 th.mat-header-cell {
   font-weight: 500;
   font-size: 14px;
+
 }
 
 .paginator-container {

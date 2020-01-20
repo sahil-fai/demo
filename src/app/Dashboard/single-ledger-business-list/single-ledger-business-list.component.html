@@ -36,7 +36,7 @@
               <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" (click)="onReset()"/>
             </li>
           </ul>
-        </form>    
+        </form>
       </div>
       <ul class="companyList">
         <li *ngFor="let company of companylist| paginate: config">
@@ -46,7 +46,7 @@
               <div class="companyWrapper">
                 <ul class="dataList">
                   <li>
-                    <div>Company Name</div>
+                    <div class="company-name">Company Name</div>
                     <div> <h6>{{company?.legalName|| 'N/A' }}</h6></div>
                   </li>
                   <li>
@@ -115,7 +115,7 @@
     </ng-template>
   </div>
   <!-- <div class="progressBar">
-     <app-loader></app-loader> 
+     <app-loader></app-loader>
   </div> -->
 </div>
 

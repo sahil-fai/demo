@@ -1,0 +1,6 @@
+[0117/110615.236:ERROR:process_memory_win.cc(73)] ReadMemory at 0x0 of 32 bytes failed: Only part of a ReadProcessMemory or WriteProcessMemory request was completed. (0x12B)
+[0117/110615.255:WARNING:pe_image_annotations_reader.cc(146)] could not read annotation at index 1 in C:\Program Files (x86)\Google\Chrome\Application\79.0.3945.117\chrome_child.dll
+[0117/110615.380:ERROR:process_memory_win.cc(73)] ReadMemory at 0x0 of 32 bytes failed: Only part of a ReadProcessMemory or WriteProcessMemory request was completed. (0x12B)
+[0117/110615.380:WARNING:pe_image_annotations_reader.cc(146)] could not read annotation at index 1 in C:\Program Files (x86)\Google\Chrome\Application\79.0.3945.117\chrome_child.dll
+[0117/110615.381:ERROR:process_memory_win.cc(73)] ReadMemory at 0x0 of 32 bytes failed: Only part of a ReadProcessMemory or WriteProcessMemory request was completed. (0x12B)
+[0117/110615.382:WARNING:pe_image_annotations_reader.cc(146)] could not read annotation at index 1 in C:\Program Files (x86)\Google\Chrome\Application\79.0.3945.117\chrome_child.dll

@@ -2,35 +2,41 @@
   overflow: auto;
 
   td {
-    min-width: 120px;
+    font-family: 'Open Sans';
+    font-weight: 600;
   }
 
   tr {
 
     th {
+      position: sticky;
+      top: 0;
+       z-index: 1;
+      background: #dfeaf5;
       &:first-child {
         left: 0px;
         position: sticky;
-        z-index: 1;
+        // z-index: 1;
+        top: 0;
         box-shadow: 3px 0 5px -4px #bbbbbb;
         min-width: 13rem;
         background: #dfeaf5;
       }
     }
     td {
-      &:first-child {
-        left: 0px;
-        position: sticky;
-        z-index: 1;
-        box-shadow: 3px 0 5px -4px #bbbbbb;
-        min-width: 13rem;
-       background:#fff;
-      }
+      // &:first-child {
+      //   left: 0px;
+      //   position: sticky;
+      //   // z-index: 1;
+      //   box-shadow: 3px 0 5px -4px #bbbbbb;
+      //   min-width: 13rem;
+      //  background:#fff;
+      // }
     }
     &:hover{
       td  {
-           background: #00add8;
-            color: #fff;
+        background: #e3f8fd;
+            // color: #fff;
         }
       }
   }
@@ -69,6 +75,7 @@ mat-accordion mat-expansion-panel.mat-expansion-panel .mat-expansion-panel-heade
   margin: 0 17px;
   font-weight: 500;
   font-size: 1.1rem;
+  font-family: 'Roboto';
 }
 
 mat-accordion mat-expansion-panel.mat-expansion-panel .mat-expansion-panel-header span.mat-expansion-indicator {

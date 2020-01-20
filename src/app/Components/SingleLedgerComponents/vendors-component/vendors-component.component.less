@@ -8,7 +8,7 @@
 
       li {
         label {
-          font-family: Roboto, "Helvetica Neue", sans-serif;
+          font-family: 'Roboto';
         }
 
         ul {
@@ -114,6 +114,15 @@ button:disabled {
 table {
   width: 100%;
   font-weight: 500;
+  .table-head{
+    position: sticky;
+    top: 0;
+
+  }
+  td{
+    font-family: 'Open Sans';
+    font-weight: 600;
+  }
 
 }
 
@@ -127,9 +136,9 @@ td.mat-column-position {
   padding-left: 8px;
 }
 
-.mat-table-sticky {
+.mat-cell {
   &:first-child {
-    border-right: 1px solid #e0e0e0;
+    // border-right: 1px solid #e0e0e0;
   }
 
   &:last-child {
@@ -141,17 +150,19 @@ td.mat-column-position {
 tr.mat-row {
   &:hover {
     .mat-cell {
-      border-bottom: 1px solid #00add8;
+      // border-bottom: 1px solid #00add8;
+      // border-top: 1px solid #00add8;
+      background: #e3f8fd;
     }
   }
 
   &.selected {
     .mat-cell {
-      border-bottom: 1px solid #00add8;
+      // border-bottom: 1px solid #00add8;
     }
 
     td.mat-cell.mat-table-sticky {
-      border-top: 1px solid #00add8;
+      // border-top: 1px solid #00add8;
     }
   }
 }
