@@ -14,7 +14,7 @@ mat-card {
 
               li {
                 label {
-                  font-family: Roboto, "Helvetica Neue", sans-serif;
+                  font-family: 'Roboto';
                 }
 
                 ul {
@@ -81,6 +81,20 @@ mat-card {
   width: auto;
   overflow: auto;
   max-height: 500px;
+  .table-head{
+    position: sticky;
+    top: 0;
+    left: 0;
+    background: #e1f1f5;
+    z-index: 1;
+  }
+  .table-head-second {
+    position: sticky;
+    top: 33px;
+    left: 0;
+    z-index: 1;
+    background: #ffff;
+}
 
   .example-element-row {
     cursor: pointer;
@@ -91,6 +105,19 @@ table {
   width: 1106px;
   font-weight: 500;
   // width: 1037px;
+  td{
+    font-family: 'Open Sans';
+    font-weight: 600;
+  }
+  th
+  {
+ &.table-inner-head{
+   position: sticky;
+   top: 0;
+   background-color: #dfeaf5;
+
+ }
+  }
 }
 
 td.mat-column-star {
@@ -106,13 +133,16 @@ td {
 }
 
 .mat-table-sticky {
+
   &:first-child {
     border-right: 1px solid #e0e0e0;
+    z-index: 0!important;
   }
 
   &:last-child {
     text-align: right;
     padding-right: 10px;
+    z-index: 0!important;
   }
 }
 
@@ -122,13 +152,13 @@ tr {
 
     &.selected,
     &:hover {
-      border-bottom-color: #00add8;
-      border-top-color: #00add8;
-      background: #a7d7ec;
+
+      background: #e3f8fd;
 
       td {
-        border-bottom-color: #00add8;
-        border-top-color: #00add8;
+        // border-bottom-color: #00add8;
+        // border-top-color: #00add8;
+        background: #e3f8fd;
       }
     }
   }

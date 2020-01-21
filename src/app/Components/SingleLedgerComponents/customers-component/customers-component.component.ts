@@ -28,7 +28,7 @@ export interface PeriodicElement {
 
 export class CustomersComponentComponent implements OnInit, OnDestroy {
   public dataSource: MatTableDataSource<PeriodicElement>;
-  title = 'Customers';  
+  title = 'Customers';
   selected = ['Active'];
   status = [{
     value: 'Active',
@@ -44,7 +44,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   Totalrec: any;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   switchCompanySubscription: any;
-  displayedColumns: string[] = ['select', 'CustomerName', 'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'Invite', 
+  displayedColumns: string[] = ['select', 'CustomerName', 'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'Invite',
  // 'star'
 ];
   selection = new SelectionModel<PeriodicElement>(true, []);
@@ -61,7 +61,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
     this.platformid = this.helper.getplatformId();
     this.getAllCustomer(companyid);
   }
-  getAllCustomer(companyid) { 
+  getAllCustomer(companyid) {
     this.businessService.getAllCustomers(companyid).subscribe(res => {
       this.Totalrec = res.length;
       if (res.length > 0) {
@@ -146,10 +146,10 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
        }
 
       this.businessService.postInvite(data).subscribe((res) => {
-        console.log("email sent: ");           
+        console.log("email sent: ");
         if(res) {
           if(res.invite_count == 1) {
-           this.getAllCustomer(compid);           
+           this.getAllCustomer(compid);
           }
           this._toastr.success(res.message);
         }

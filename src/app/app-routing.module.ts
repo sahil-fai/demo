@@ -38,11 +38,16 @@ const routes: Routes = [
 
   {
    // path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]
-    path: 'connectbusiness', component: DashboardComponent, canActivate:[LoginGuard]
+    // path: 'connectbusiness', component: DashboardComponent, canActivate:[LoginGuard],children:[
+    //   {path: '404', component: DashboardComponent},
+    //   {path: '**', redirectTo: 'connectbusiness'},
+    // ]
+    path: 'connectbusiness', component: DashboardComponent, canActivate: [LoginGuard]
   },
   {
     path: 'businesslist', component: SingleLedgerBusinessListComponent, canActivate:[LoginGuard]
   },
+
   {
   path: 'business', component: SingleLedgerMasterComponentComponent, canActivate:[LoginGuard, BusinessGuard],children: [
           {
@@ -68,15 +73,18 @@ const routes: Routes = [
           },
           {
             path: 'chart-of-account', component: ChartOfAccountComponent,canActivate:[LoginGuard,BusinessGuard]
-          }
+          },
+          // {path: '404', component: CompanyInfoComponentComponent},
+          // {path: '**', redirectTo: 'company-info'}
         ]
   },
   {
     path: '', redirectTo: 'login', pathMatch: 'full'
   },
-  {
-    path: '**', redirectTo: 'login'
-  }
+  // {
+  //   path: '**', redirectTo: 'login'
+  // }
+  {path: '**', redirectTo: 'connectbusiness'},
 ];
 
 @NgModule({

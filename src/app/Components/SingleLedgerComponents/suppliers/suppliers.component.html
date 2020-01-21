@@ -19,9 +19,10 @@
                   <th>itemDesc2</th>
                   <th>itemDesc3</th> -->
                   <th>COA</th>
+                  <th></th>
                   <!-- <th>Operation</th>
                   <th>Subject</th>
-                  <th></th> -->
+                   <th></th> -->
                 </tr>
               </thead>
               <tbody>
@@ -131,6 +132,7 @@
                       {{item.COA|| 'N/A' }}
                     </td>
                   </ng-container>
+                  <!-- <td></td> -->
 
                   <!-- <ng-container *ngIf="item.editable">
                     <td>
@@ -187,11 +189,12 @@
                     title="Actions" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{item:item}" title="Actions">
                     <mat-icon>toc</mat-icon>
                   </button> -->
+                  <td>
                   <button class="btn icon-dots-vertical edit-options" *ngIf="item.editable" (click)="saveRecord(item)"
                     title="Add Transaction">
                     <mat-icon>add</mat-icon>
                   </button>
-
+                </td>
                   <!-- <button class="btn icon-dots-vertical edit-options" *ngIf="!item.editable"  title="Actions" [matMenuTriggerFor]="menu"
                     [matMenuTriggerData]="{item:item}">
                     <mat-icon>toc</mat-icon>

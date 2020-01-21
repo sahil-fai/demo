@@ -183,6 +183,7 @@ h2{
     color: #00add8;
     //padding: 0.56em 0;
     padding: 0.56em 0 0.56em;
+    font-family: 'Roboto';
 
     i{
         color:inherit;
@@ -389,7 +390,7 @@ table{
                     background: aliceblue;
                     td{
                       border-top: 1px solid #a7d7ec;
-                      background: #a7d7ec;
+                      // background: #a7d7ec;
                       color: rgb(0, 0, 0);
                     }
                 }
@@ -3314,14 +3315,62 @@ mat-bottom-sheet-container{
 }
 
 // Perfect Scroll Bar Style Include Here
-perfect-scrollbar > .ps.ps--active-y > .ps__rail-y:hover, 
+perfect-scrollbar > .ps.ps--active-y > .ps__rail-y:hover,
 perfect-scrollbar > .ps.ps--active-y > .ps__rail-y.ps--clicking{
     width: 10px !important;
 }
 .ps__rail-y > .ps__thumb-y,
-.ps__rail-y:hover > .ps__thumb-y, 
-.ps__rail-y:focus > .ps__thumb-y, 
+.ps__rail-y:hover > .ps__thumb-y,
+.ps__rail-y:focus > .ps__thumb-y,
 .ps__rail-y.ps--clicking .ps__thumb-y{
     width: 6px !important;
     background-color: #00add8 !important;
+}
+
+
+
+// Mat Select Style Include Here
+
+mat-form-field{
+    .mat-form-field-wrapper{
+        .mat-form-field-flex{
+            .mat-form-field-infix{
+                padding-left: 0px;
+                mat-select{
+                    .mat-select-trigger{
+                        .mat-select-arrow-wrapper{
+                            .mat-select-arrow{
+                                height: 12px;
+                                width: 12px;
+                                margin-right: 0px;
+                                padding-right: 0px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+mat-checkbox{
+    label{
+        .mat-checkbox-label{
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: #ffffff !important;
+            span{
+                br{
+                    display: none;
+                }
+            }
+        }
+    }
+    &.mat-checkbox-checked{
+        .mat-checkbox-layout{
+            .mat-checkbox-background{
+                background-color: #aebdbe !important;
+            }
+        }
+    }
 }
