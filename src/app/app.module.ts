@@ -175,6 +175,13 @@ import { OrganisationpipePipe } from './pipe/organisationpipe.pipe';
 import { ForgotPasswordComponent } from './Authentication/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './Authentication/reset-password/reset-password.component';
 import { TransactionTypePipe } from './pipe/transactiontype.pipe';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { NgxCaptchaModule } from 'ngx-captcha';
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   declarations: [
@@ -240,6 +247,8 @@ import { TransactionTypePipe } from './pipe/transactiontype.pipe';
     NgSelectModule,
     MatMenuModule,
     NgxSpinnerModule,
+    PerfectScrollbarModule,
+    NgxCaptchaModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-center',
@@ -259,9 +268,13 @@ import { TransactionTypePipe } from './pipe/transactiontype.pipe';
   providers: [AuthService, LoaderService,{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
-
     multi: true
-  }],
+  },
+  {
+    provide: PERFECT_SCROLLBAR_CONFIG,
+    useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+  }
+],
   bootstrap: [AppComponent],
   entryComponents:
   [

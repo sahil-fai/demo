@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?6nyfd6');
-  src:  url('fonts/icomoon.eot?6nyfd6#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?6nyfd6') format('truetype'),
-    url('fonts/icomoon.woff?6nyfd6') format('woff'),
-    url('fonts/icomoon.svg?6nyfd6#icomoon') format('svg');
+  src:  url('assets/fonts/icomoon.eot?r648yo');
+  src:  url('assets/fonts/icomoon.eot?r648yo#iefix') format('embedded-opentype'),
+    url('assets/fonts/icomoon.ttf?r648yo') format('truetype'),
+    url('assets/fonts/icomoon.woff?r648yo') format('woff'),
+    url('assets/fonts/icomoon.svg?r648yo#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -13,7 +13,7 @@
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
-  speak: none;
+  // speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -25,402 +25,75 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-settings:before {
-  content: "\20";
-}
-.icon-folder:before {
-  content: "\21";
-}
-.icon-home:before {
-  content: "\22";
-}
-.icon-bids:before {
-  content: "\23";
-}
-.icon-telegram:before {
-  content: "\24";
-}
-.icon-linked-in:before {
-  content: "\25";
-}
-.icon-facebook:before {
-  content: "\26";
-}
-.icon-twitter:before {
-  content: "\27";
-}
-.icon-register:before {
-  content: "\28";
-}
-.icon-cross:before {
-  content: "\29";
-}
-.icon-tick:before {
-  content: "\30";
-}
-.icon-eye-hidden:before {
-  content: "\31";
-}
-.icon-eye-show:before {
-  content: "\32";
-}
-.icon-man:before {
-  content: "\33";
-}
-.icon-unlock:before {
-  content: "\34";
-}
-.icon-edit-profile:before {
-  content: "\35";
-}
-.icon-tick-round:before {
-  content: "\36";
-}
-.icon-cross-round:before {
-  content: "\37";
-}
-.icon-reset:before {
-  content: "\38";
-}
-.icon-arrow-right:before {
-  content: "\39";
-}
-.icon-risk-score:before {
-  content: "\40";
-}
-.icon-kyc:before {
-  content: "\41";
-}
-.icon-line-graph:before {
-  content: "\42";
-}
-.icon-bar-graph:before {
-  content: "\43";
-}
-.icon-arrow-down:before {
-  content: "\44";
-}
-.icon-calender:before {
-  content: "\45";
-}
-.icon-arrow-down1:before {
-  content: "\46";
-}
-.icon-check-list:before {
-  content: "\47";
-}
-.icon-plus-circle:before {
-  content: "\48";
-}
-.icon-user:before {
-  content: "\49";
-}
-.icon-bids1:before {
-  content: "\50";
-}
-.icon-check-list1:before {
-  content: "\51";
-}
-.icon-arrow-right1:before {
-  content: "\52";
-}
-.icon-logout:before {
-  content: "\53";
-}
-.icon-list:before {
-  content: "\54";
-}
-.icon-bell:before {
-  content: "\55";
-}
-.icon-gear:before {
-  content: "\56";
-}
-.icon-pie-chart:before {
-  content: "\57";
-}
-.icon-plus:before {
-  content: "\58";
-}
-.icon-attachment:before {
-  content: "\59";
-}
-.icon-cash-flow:before {
-  content: "\60";
-}
-.icon-cash:before {
-  content: "\61";
-}
-.icon-dots-vertical:before {
-  content: "\62";
-}
-.icon-bar-dollar-graph:before {
-  content: "\63";
-}
-.icon-bar-line-arrow-graph:before {
-  content: "\64";
-}
-.icon-document-arrowup:before {
-  content: "\65";
-}
-.icon-line-arrow-graph:before {
-  content: "\66";
-}
-.icon-investment:before {
-  content: "\67";
-}
-.icon-wallet:before {
-  content: "\68";
-}
-.icon-marketplace:before {
-  content: "\69";
-}
-.icon-circle-minus:before {
-  content: "\70";
-}
-.icon-man-tie:before {
-  content: "\71";
-}
-.icon-checkbox:before {
-  content: "\72";
-}
-.icon-checkbox-tick:before {
-  content: "\73";
-}
-.icon-checkbox-tick-filled:before {
-  content: "\74";
-}
-.icon-timer:before {
-  content: "\75";
-}
-.icon-cashflow:before {
-  content: "\102";
-}
-.icon-arrow-rotation-with-dollar:before {
-  content: "\84";
-}
-.icon-arr-right:before {
-  content: "\100";
-}
-.icon-arr-left:before {
+.icon-dashboard:before {
   content: "\101";
 }
-.icon-payment:before {
-  content: "\77";
+.icon-customer:before {
+  content: "\102";
 }
-.icon-plus-minus:before {
-  content: "\78";
+.icon-vendor:before {
+  content: "\103";
 }
-.icon-money-arrow-down:before {
-  content: "\79";
+.icon-invoice:before {
+  content: "\104";
 }
-.icon-pdf-download:before {
-  content: "\e900";
-}
-.icon-feedback:before {
+.icon-bill:before {
   content: "\105";
 }
-.icon-trend-analysis:before {
+.icon-company:before {
   content: "\106";
 }
-.icon-arrow-up:before {
+.icon-logout:before {
   content: "\107";
 }
-.icon-arrow-up-down:before {
+.icon-profile:before {
   content: "\108";
 }
-.icon-help:before {
+.icon-arrow-down:before {
   content: "\109";
 }
-.icon-arrow-down-1:before {
+.icon-arrow-left:before {
   content: "\110";
 }
-.icon-arrow-up-1:before {
+.icon-arrow-right:before {
   content: "\111";
 }
-.icon-pencil:before {
+.icon-calender:before {
   content: "\112";
 }
-.icon-arrow-left-1:before {
+.icon-checkbox:before {
   content: "\113";
 }
-.icon-minus-plus:before {
+.icon-checkbox-tick-filled:before {
   content: "\114";
 }
-.icon-customer-analysis:before {
+.icon-arrow-curve-left:before {
   content: "\115";
 }
-.icon-ratios:before {
+.icon-arrow-curve-right:before {
   content: "\116";
 }
-.icon-arrow-down-2:before {
+.icon-arrow-left1:before {
   content: "\117";
 }
-.icon-star-filled:before {
+.icon-arrow-right1:before {
   content: "\118";
 }
-.icon-company-list:before {
+.icon-eye-hide:before {
   content: "\119";
 }
-.icon-info:before {
+.icon-submit:before {
   content: "\120";
 }
-.icon-dollar-sign:before {
+.icon-user-login:before {
   content: "\121";
 }
-.icon-arrow-down-3:before {
+.icon-connect-business:before {
   content: "\122";
 }
-.icon-arrow-up-2:before {
+.icon-chart-of-accounts:before {
   content: "\123";
 }
-.icon-doc:before {
+.icon-accounts-mapping:before {
   content: "\124";
-}
-.icon-pencil-plus:before {
-  content: "\125";
-}
-.icon-forecast:before {
-  content: "\126";
-}
-.icon-arrow-down-4:before {
-  content: "\127";
-}
-.icon-arrow-up-3:before {
-  content: "\128";
-}
-.icon-reports:before {
-  content: "\129";
-}
-.icon-home1:before {
-  content: "\130";
-}
-.icon-disconnect:before {
-  content: "\131";
-}
-.icon-user-add:before {
-  content: "\132";
-}
-.icon-excel:before {
-  content: "\133";
-}
-.icon-delete:before {
-  content: "\134";
-}
-.icon-system-actual:before {
-  content: "\135";
-}
-.icon-system-forecasted:before {
-  content: "\136";
-}
-.icon-user-forecasted:before {
-  content: "\137";
-}
-.icon-arrow-rotation:before {
-  content: "\138";
-}
-.icon-expand:before {
-  content: "\139";
-}
-.icon-collapse:before {
-  content: "\140";
-}
-.icon-calender1:before {
-  content: "\141";
-}
-.icon-rnd-arrow-transparent-left:before {
-  content: "\142";
-}
-.icon-rnd-arrow-transparent-right:before {
-  content: "\143";
-}
-.icon-rnd-arrow-filled-left:before {
-  content: "\144";
-}
-.icon-rnd-arrow-filled-right:before {
-  content: "\145";
-}
-.icon-full-screen:before {
-  content: "\146";
-}
-.icon-minus:before {
-  content: "\147";
-}
-.icon-arrow-down-5:before {
-  content: "\148";
-}
-.icon-dispose:before {
-  content: "\149";
-}
-.icon-cancel:before {
-  content: "\150";
-}
-.icon-save:before {
-  content: "\151";
-}
-.icon-expand1:before {
-  content: "\152";
-}
-.icon-collapse1:before {
-  content: "\153";
-}
-.icon-credit-cards:before {
-  content: "\154";
-}
-.icon-full-view-graph:before {
-  content: "\155";
-}
-.icon-plus-square:before {
-  content: "\156";
-}
-.icon-minus-square:before {
-  content: "\157";
-}
-.icon-info-round:before {
-  content: "\158";
-}
-.icon-bell-plus:before {
-  content: "\159";
-}
-.icon-add-report:before {
-  content: "\160";
-}
-.icon-ms-word:before {
-  content: "\161";
-}
-.icon-send1:before {
-  content: "\162";
-}
-.icon-bucket:before {
-  content: "\163";
-}
-.icon-history:before {
-  content: "\164";
-}
-.icon-preview-docs:before {
-  content: "\165";
-}
-.icon-cross1:before {
-  content: "\166";
-}
-.icon-dots-12:before {
-  content: "\167";
-}
-.icon-arrows-left-right:before {
-  content: "\168";
-}
-.icon-merge:before {
-  content: "\169";
-}
-.icon-calender-date-range:before {
-  content: "\170";
-}
-.icon-move-all-sides:before {
-  content: "\171";
-}
-.icon-tick-circle:before {
-  content: "\172";
-}
-.icon-exclude:before {
-  content: "\173";
 }

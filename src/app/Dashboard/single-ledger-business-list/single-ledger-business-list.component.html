@@ -11,39 +11,32 @@
     <div class="userInfo">
       <app-userinfo></app-userinfo>
     </div>
-    <div class="logoutButton">
+    <!-- <div class="logoutButton">
       <app-logout></app-logout>
-    </div>
+    </div> -->
   </div>
   <div class="content-wrapper">
+    <div class="bussiness-header">
     <h2>{{title|| 'N/A' }}</h2>
+      <span class="connectBtn">
+        <app-addbusiness></app-addbusiness>
+      </span>
+    </div>
     <div class="businesslistAvial"  *ngIf="isBusinessLoaded; else nobusiness">
       <div class="searchPanel clearfix">
         <form  class="search-panel-form" [formGroup]="formSearch" (ngSubmit)="onFilter()" novalidate autocomplete="off">
           <ul class="floatingList searchBlock">
             <li>
               <label class="labels">Filter For</label>
-              <input type="text" placeholder="Business Name " class="fields" formControlName="keywords"
-              [ngClass]="{error: (f.keywords.invalid && f.keywords.dirty) || (submitted && f.keywords.invalid)}" />
             </li>
             <li>
-              <ul>
-                <li>
-                  <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter"/>
-                </li>
-                <li>
-                  <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" (click)="onReset()"/>
-                </li>
-              </ul>
+              <input type="text" placeholder="Business Name " class="fields" formControlName="keywords"
+              [ngClass]="{error: (f.keywords.invalid && f.keywords.dirty) || (submitted && f.keywords.invalid)}" />
+              <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter"/>
+              <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" (click)="onReset()"/>
             </li>
-
           </ul>
         </form>
-        <div class="connectButton">
-          <span class="connectBtn">
-            <app-addbusiness></app-addbusiness>
-          </span>
-        </div>
       </div>
       <ul class="companyList">
         <li *ngFor="let company of companylist| paginate: config">
@@ -53,7 +46,7 @@
               <div class="companyWrapper">
                 <ul class="dataList">
                   <li>
-                    <div>Company Name</div>
+                    <div class="company-name">Company Name</div>
                     <div> <h6>{{company?.legalName|| 'N/A' }}</h6></div>
                   </li>
                   <li>
@@ -85,15 +78,12 @@
         </li>
       </ul>
       <div class="pagination">
-
         <pagination-template  #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event" [class.disabled]= "length < config.itemsPerPage" >
-
           <div class="custom-pagination">
-
               <div style="display:inline-block" *ngIf="!(p.isFirstPage() && p.isLastPage())">
                 <div class="nextprevious" [class.disabled]="p.isFirstPage()">
                   <span  (click)="p.previous()">
-                    <i class="icon-arrow-left"></i> Prev
+                    <i class="icon-arrow-left"></i>
                       </span>
                   </div>
                   <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
@@ -103,13 +93,10 @@
                       </div>
                   </div>
                   <div class="nextprevious"  [class.disabled]="p.isLastPage()">
-                    <span  (click)="p.next()"> Next <i
-                      class="icon-arrow-right"></i> </span>
+                    <span  (click)="p.next()"><i class="icon-arrow-right"></i> </span>
                   </div>
             </div>
-
           </div>
-
         </pagination-template>
       </div>
     </div>
@@ -128,7 +115,7 @@
     </ng-template>
   </div>
   <!-- <div class="progressBar">
-     <app-loader></app-loader> 
+     <app-loader></app-loader>
   </div> -->
 </div>
 

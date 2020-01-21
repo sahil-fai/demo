@@ -1,5 +1,4 @@
 <h2>{{title|| 'N/A' }}</h2>
-<mat-divider></mat-divider>
 <div class="profile-container"  *ngIf="companyinfo">
     <div class="icon-container"><i class="icon-company"></i></div>
     <div class="profile-name">
@@ -27,13 +26,16 @@
             </tr>
             <tr>
                  <td class="alnRight head">Phone:</td>
-                <td>{{companyinfo.contact?.telephone | arraytostring }}</td>
+                <td>{{companyinfo.PrimaryPhone  || 'N/A'}}</td>
              </tr>
             <tr>
-                 <td class="alnRight head">Email:</td>
-                <td>{{companyinfo.companyemail|| 'N/A' }}</td>
+                 <td class="alnRight head">Website:</td>
+                <td>{{companyinfo.website || 'N/A' }}</td>
             </tr>
-                            
+            <tr>
+              <td class="alnRight head">Email:</td>
+             <td>{{companyinfo.companyemail|| 'N/A' }}</td>
+         </tr>
         </table>
         <!-- <ul>
             <li></li>
@@ -55,6 +57,7 @@
 </div>
 <div class="addresses" *ngIf="companyinfo && companyinfo.address">
         <div *ngFor="let address of companyinfo.address"  class="address">
+            <div class="inner-address-wrapper">
                 <div class="address-icon-container"> <mat-icon>location_city</mat-icon></div>
                 <div class="address-content">
                      <h4>{{address.addresstype|addresstype}}</h4>
@@ -63,6 +66,7 @@
                      <p>{{address.state|| 'N/A' }}</p>
                      <p>{{address.country|| 'N/A' }}</p>
                  </div>
-             </div>   
+                 </div>
+             </div>
 </div>
 

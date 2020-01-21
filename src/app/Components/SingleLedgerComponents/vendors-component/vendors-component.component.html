@@ -46,7 +46,7 @@
                         <mat-select [(value)]="selected"  multiple>
                           <mat-option *ngFor="let status of StatusList" [value]="status">{{status|| 'N/A' }}</mat-option>
                         </mat-select>
-                      </mat-form-field> 
+                      </mat-form-field>
                       <div class="status-modal">
                           <mat-radio-group
                           class="example-radio-group"
@@ -61,6 +61,7 @@
       </div> -->
       <div class="bills-content mat-elevation-z8">
         <div class="example-container">
+          <perfect-scrollbar style="max-height: 500px">
           <table mat-table [dataSource]="dataSource" *ngIf="Totalrec > 0">
 
             <!-- Checkbox Column -->
@@ -83,8 +84,8 @@
             </ng-container>
 
             <!-- Number Column -->
-            <ng-container matColumnDef="CustomerName" sticky>
-              <th mat-header-cell *matHeaderCellDef> Name </th>
+            <ng-container matColumnDef="CustomerName" >
+              <th mat-header-cell *matHeaderCellDef class="table-head"> Name </th>
               <td mat-cell *matCellDef="let element"> {{element.displayname|| 'N/A' }} </td>
             </ng-container>
             <!-- Block chain Id Column -->
@@ -135,11 +136,15 @@
               </td>
             </ng-container> -->
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+            <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"
                 (click)="row.Status!=='Active' && selection.toggle(row)" [class.selected]="selection.isSelected(row)">
+            </tr> -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                (click)="row.Status!=='Active'" [class.selected]="selection.isSelected(row)">
             </tr>
 
           </table>
+          </perfect-scrollbar>
           <div class="no-record" *ngIf="Totalrec === 0"> <span class="norecord-text"> No records found</span></div>
         </div>
         <!-- <div class="paginator-container" *ngIf="Totalrec > 0">

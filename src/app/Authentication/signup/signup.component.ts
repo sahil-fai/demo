@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   invitetype: string;
   invitecompanyid: string;
   inviteuserid: string;
-
+  protected aFormGroup: FormGroup;
   constructor(private router: Router, private route: ActivatedRoute,private fb: FormBuilder, private authService: AuthService, private sanitizer: DomSanitizer, public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
     this.mobileQuery = media.matchMedia('(max-width: 767px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -50,28 +50,31 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
   ];
   ngOnInit() {
-    // let data = { 
+    // let data = {
     //   invitetype : this.route.snapshot.queryParams.invitetype,
     //   invitecompanyid : this.route.snapshot.queryParams.invitecompanyid,
     //   inviteuserid : this.route.snapshot.queryParams.inviteuserid
     // };
+    // this.aFormGroup = this.fb.group({
+    //   recaptcha: ['', Validators.required]
+    // });
 
-    
+
     if(this.route.snapshot.queryParams.requestId) {
 
-      this.authService.verifyInvite(Number(this.route.snapshot.queryParams.requestId)).subscribe(res => {  
+      this.authService.verifyInvite(Number(this.route.snapshot.queryParams.requestId)).subscribe(res => {
       if(res.status) {
         this.invitetype = res.source;
         this.invitecompanyid = res.companyid;
-        this.inviteuserid = res.userid;               
+        this.inviteuserid = res.userid;
       } else {
         this.showInvalidPage = false;
-        this.verifyInviteRes = res; 
-      }      
+        this.verifyInviteRes = res;
+      }
       });
     }
     this.createForm();
-    
+
 
   }
   private createForm() {
@@ -82,10 +85,16 @@ export class SignupComponent implements OnInit, OnDestroy {
       password: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
       confirmpassword: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
       isAgree: ['', [Validators.requiredTrue]],
+      recaptcha: ['', Validators.required],
       role: [null, [Validators.required]]
     }, {
       validator: this.checkPasswords
     });
+  }
+
+  public handleSuccess(event)
+  {
+
   }
   // check for Numbers
   private hasNumber(control: AbstractControl): {
@@ -147,11 +156,11 @@ export class SignupComponent implements OnInit, OnDestroy {
             password: this.formRegister.value.password,
             firstName: this.formRegister.value.firstName,
             roleType: this.formRegister.value.role,
-            inviteby: this.formRegister.value.inviteby, 
+            inviteby: this.formRegister.value.inviteby,
             invitetype: this.invitetype,
             invitecompanyid: this.invitecompanyid?this.invitecompanyid.toString():undefined,
             inviteuserid: this.inviteuserid?this.inviteuserid.toString():undefined
-        } 
+        }
         this.authService.enroll(data).subscribe(res => {
           this.isRegistered = true;
           this.router.navigate(['/login']);

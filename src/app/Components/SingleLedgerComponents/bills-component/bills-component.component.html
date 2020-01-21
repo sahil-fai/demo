@@ -51,13 +51,12 @@
                           </li>
                         </ul>
                       </li>
-
-
                   </ul>
                 </form>
             </div>
             <div class="bills-content mat-elevation-z8">
             <div class="example-container">
+              <perfect-scrollbar style="max-height: 500px;">
               <table mat-table [dataSource]="dataSource" class="" *ngIf="bills && bills.length > 0">
 
                 <!-- Checkbox Column -->
@@ -77,12 +76,12 @@
                     </mat-checkbox>
                   </td>
                 </ng-container>
-                <ng-container matColumnDef="index" sticky>
+                <ng-container matColumnDef="index" >
                   <th mat-header-cell *matHeaderCellDef>#</th>
                   <td mat-cell *matCellDef="let element; let i = index;"> {{i+1|| 'N/A' }} </td>
                 </ng-container>
                 <!-- Number Column -->
-                <ng-container matColumnDef="Number" sticky>
+                <ng-container matColumnDef="Number" >
                   <th mat-header-cell *matHeaderCellDef> Bill ID </th>
                   <td mat-cell *matCellDef="let element"> {{element.invoiceid|| 'N/A' }} </td>
                 </ng-container>
@@ -130,18 +129,19 @@
                   <th mat-header-cell *matHeaderCellDef> Action </th>
                   <td mat-cell *matCellDef="let element" > {{element.Action|| 'N/A' }} </td>
                 </ng-container> -->
-                <ng-container matColumnDef="star" stickyEnd>
+                <!-- <ng-container matColumnDef="star" End>
                   <th mat-header-cell *matHeaderCellDef></th>
                   <td mat-cell *matCellDef="let element">
                     <span><i  class="icon-arrow-right"></i></span>
                   </td>
-                </ng-container>
+                </ng-container> -->
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"
                     (click)="selection.toggle(row)" [class.selected]="selection.isSelected(row)">
                 </tr>
 
               </table>
+            </perfect-scrollbar>
             </div>
             <div class="no-record" *ngIf="bills && bills.length == 0"> <span class="norecord-text"> No records found</span></div>
             <!-- <mat-paginator appStylePaginator hidePageSize [length]="15"

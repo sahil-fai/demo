@@ -22,20 +22,24 @@ h1{
 }
 .defaultTable{
   overflow: auto;
+  td{
+    font-family: 'Open Sans';
+    font-weight: 600;
+  }
   .dataTable{
     font-size: 0.8rem;
     tbody{
       tr{
         &:hover{
-          background: #eff9fb;
+          background: #e3f8fd;
         }
-          &:nth-child(even){
-            td{
-              background-color:transparent;
-              border-bottom: 1px solid #e9f3f4;
-              border-top: 1px solid #e9f3f4;
-            }
-           }
+          // &:nth-child(even){
+          //   td{
+          //     background-color:transparent;
+          //     // border-bottom: 1px solid #e9f3f4;
+          //     // border-top: 1px solid #e9f3f4;
+          //   }
+          //  }
 
             &.hide-row{
               td, .contactname{
@@ -48,10 +52,13 @@ h1{
       font-size: 0.8rem;
       background-color: #eff9fb;
       color: #40c4d9;
-      border-color: #eff9fb;
+      border-color: #bde9f1;
      }
      td{
       padding: 0.5rem;
+      &:hover{
+         background: #e3f8fd;
+      }
       .ellipsis{
         width: 120px;
       }
@@ -127,7 +134,7 @@ h1{
   width: 100%;
   background-color: #ffeb3b14;
   border-radius: 4px;
-  border: 1px solid #00bcd452;
+  // border: 1px solid #00bcd452;
   min-height: 21px;
   align-items: center;
   font-size: 10px;
@@ -207,7 +214,7 @@ button{
     border-radius: 0;
     font-size: 19px;
     text-align:center;
-    border-top: 1px solid #e9f3f4;
+    // border-top: 1px solid #e9f3f4;
     color: #cccccc;
     i{
       padding: 0px;
