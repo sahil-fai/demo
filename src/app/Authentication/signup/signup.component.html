@@ -123,6 +123,23 @@
                               Password is not matched</div>
                           </div>
                         </div>
+
+                        <div class="input-group">
+                          <ngx-recaptcha2 #captchaElem
+                           [siteKey]="'6LdE6c8UAAAAAMN2BRGwbzIEQLh2UwviTtyNZY30'"
+                          (reset)="handleReset()"
+                          (expire)="handleExpire()"
+                          (load)="handleLoad()"
+                          (success)="handleSuccess($event)"
+                          [useGlobalDomain]="false"
+                          [size]="size"
+                          [hl]="lang"
+                          [theme]="theme"
+                          [type]="type"
+                          formControlName="recaptcha">
+                          </ngx-recaptcha2>
+                        </div>
+
                         <div class="column full-col">
                           <div class="form-group" (mousedown)="openTermsConditions()">
                             <mat-checkbox [required]="true" formControlName="isAgree" [(ngModel)]="checked"
