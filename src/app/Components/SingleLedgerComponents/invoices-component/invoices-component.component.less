@@ -98,6 +98,8 @@ mat-card {
 
   .example-element-row {
     cursor: pointer;
+    border-bottom: 1px solid rgb(243, 243, 243);
+    border-top: 1px solid rgb(243, 243, 243);
   }
 }
 
@@ -342,7 +344,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   cursor: pointer;
 
   td {
-    border-bottom-width: 0;
+    // border-bottom-width: 0;
   }
 }
 
@@ -378,4 +380,9 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 td.mat-cell.cdk-column-expandedDetail.mat-column-expandedDetail.ng-tns-c12-19.ng-star-inserted {
   background-color: #00add8;
+}
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+  padding: 0;
+  border-bottom-width: 0px;
+  border-bottom-style: inherit;
 }
