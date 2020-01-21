@@ -8,12 +8,12 @@
   <li *ngIf="establishingConnection.isProcessing || establishingConnection.isDone" [ngClass]="{processing: establishingConnection.isProcessing, success: establishingConnection.isDone}">
     <mat-icon *ngIf="establishingConnection.isProcessing">autorenew</mat-icon>
     <mat-icon *ngIf="establishingConnection.isDone">done_all</mat-icon>
-    Establishing Connection with QuickBooks
+    Establishing Connection with {{connectionSource}}
   </li>
   <li *ngIf="fetchingTransactions.isProcessing || fetchingTransactions.isDone" [ngClass]="{processing: fetchingTransactions.isProcessing, success: fetchingTransactions.isDone}">
      <mat-icon *ngIf="fetchingTransactions.isProcessing">autorenew</mat-icon>
      <mat-icon *ngIf="fetchingTransactions.isDone">done_all</mat-icon>
-    Fetching your transactions 
+    Fetching your transactions
   </li>
   <li *ngIf=" generatingReports.isProcessing || generatingReports.isDone" [ngClass]="{processing: generatingReports.isProcessing, success: generatingReports.isDone}">
      <mat-icon *ngIf="generatingReports.isProcessing">autorenew</mat-icon>

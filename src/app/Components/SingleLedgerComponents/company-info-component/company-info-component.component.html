@@ -26,13 +26,16 @@
             </tr>
             <tr>
                  <td class="alnRight head">Phone:</td>
-                <td>{{companyinfo.contact?.telephone | arraytostring }}</td>
+                <td>{{companyinfo.PrimaryPhone  || 'N/A'}}</td>
              </tr>
             <tr>
-                 <td class="alnRight head">Email:</td>
-                <td>{{companyinfo.companyemail|| 'N/A' }}</td>
+                 <td class="alnRight head">Website:</td>
+                <td>{{companyinfo.website || 'N/A' }}</td>
             </tr>
-                            
+            <tr>
+              <td class="alnRight head">Email:</td>
+             <td>{{companyinfo.companyemail|| 'N/A' }}</td>
+         </tr>
         </table>
         <!-- <ul>
             <li></li>
@@ -64,6 +67,6 @@
                      <p>{{address.country|| 'N/A' }}</p>
                  </div>
                  </div>
-             </div>   
+             </div>
 </div>
 

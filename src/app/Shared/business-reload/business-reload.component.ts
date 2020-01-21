@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 // import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
@@ -24,10 +25,14 @@ export class BusinessReloadComponent implements OnInit {
   }
 
   public settingUpProjects = {
-    isProcessing: false
+    isProcessing: false,
+    isDone: false
   }
+  public connectionSource: string;
+  constructor( @Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<BusinessReloadComponent>) {
+  this.connectionSource = this.data.connectedSource;
 
-  constructor() { }
+   }
 
   ngOnInit() {
     setTimeout(() => {
@@ -44,7 +49,9 @@ export class BusinessReloadComponent implements OnInit {
       this.generatingReports.isProcessing = false;
       this.generatingReports.isDone = true;
       this.settingUpProjects.isProcessing = true;
+      this.dialogRef.close();
     }, 80000);
-  }
 
+
+  }
 }
