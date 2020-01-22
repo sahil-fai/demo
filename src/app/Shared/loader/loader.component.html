@@ -10,7 +10,7 @@
   <!-- <div class="loader" *ngIf="showLoader">
     <img src="/assets/images/spinnerlight@2x.png" alt="" class="scr">
   </div> -->
-  <ngx-spinner
+  <!-- <ngx-spinner
             bdOpacity = 0.9
             bdColor = "rgba(60,55,55,0.77)"
             size = "medium"
@@ -18,4 +18,68 @@
             type = "ball-scale-pulse"
             [fullScreen] = "true">
   <p style="color: white" > Loading... </p>
-  </ngx-spinner>
+  </ngx-spinner> -->
+  <!-- <div class="loader" *ngIf="showLoader"></div> -->
+  <!-- <div class="loader" >Loading...</div> -->
+  <!-- <div *ngIf="showLoader" style="position: absolute; background-color: rgba(255, 255, 255, 0.6); width: 100%; height: 100%; z-index: 100000">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+      Loading...
+    </div>
+</div> -->
+<div class="fixed-wrapper" *ngIf="showLoader"></div>
+<div class="stretch-progress" *ngIf="showLoader">
+  <div class="stretch-progress-elem1"></div>
+  <div class="stretch-progress-elem2"></div>
+  <div class="stretch-progress-elem3"></div>
+  <div class="stretch-progress-elem4"></div>
+  <div class="stretch-progress-elem5"></div>
+</div>
+
+<!--
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<rect fill="#3498db" width="3" height="100" transform="translate(0) rotate(180 3 50)">
+  <animate
+      attributeName="height"
+      attributeType="XML"
+      dur="1s"
+      values="30; 100; 30"
+      repeatCount="indefinite"/>
+</rect>
+<rect x="17" fill="#3498db" width="3" height="100" transform="translate(0) rotate(180 20 50)">
+  <animate
+      attributeName="height"
+      attributeType="XML"
+      dur="1s"
+      values="30; 100; 30"
+      repeatCount="indefinite"
+      begin="0.1s"/>
+</rect>
+<rect x="40" fill="#3498db" width="3" height="100" transform="translate(0) rotate(180 40 50)">
+  <animate
+      attributeName="height"
+      attributeType="XML"
+      dur="1s"
+      values="30; 100; 30"
+      repeatCount="indefinite"
+      begin="0.3s"/>
+</rect>
+<rect x="60" fill="#3498db" width="3" height="100" transform="translate(0) rotate(180 58 50)">
+  <animate
+      attributeName="height"
+      attributeType="XML"
+      dur="1s"
+      values="30; 100; 30"
+      repeatCount="indefinite"
+      begin="0.5s"/>
+</rect>
+<rect x="80" fill="#3498db" width="3" height="100" transform="translate(0) rotate(180 76 50)">
+  <animate
+      attributeName="height"
+      attributeType="XML"
+      dur="1s"
+      values="30; 100; 30"
+      repeatCount="indefinite"
+      begin="0.1s"/>
+</rect>
+</svg> -->

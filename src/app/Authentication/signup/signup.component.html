@@ -1,6 +1,9 @@
 <section class="login-sec">
   <div class="container">
     <div class="row">
+      <div class="progressBar">
+        <app-loader></app-loader>
+    </div>
       <div class="column full-col">
         <div class="login-wrapper">
           <div class="row">
@@ -10,8 +13,8 @@
                   <div class="logo-sec">
                     <img src="/assets/images/SL-logo.svg" alt="Logo">
                   </div>
-                  <div class="video-wrapper" (click)="openDialog('https://www.youtube.com/embed/J5tWbmD7alE')">
-                    <img src="/assets/images/monitor.svg" alt="Monitor">
+                  <div class="video-wrapper" (click)="openVideo('https://www.youtube.com/embed/J5tWbmD7alE')">
+                    <img src="/assets/images/monitor.png" alt="Monitor">
                   </div>
                 </div>
               </div>
@@ -123,9 +126,9 @@
                               Password is not matched</div>
                           </div>
                         </div>
-
+                        <div class="column full-col">
                         <div class="input-group">
-                          <ngx-recaptcha2 #captchaElem
+                          <ngx-recaptcha2 #captchaElem class="dhb"
                            [siteKey]="'6LdE6c8UAAAAAMN2BRGwbzIEQLh2UwviTtyNZY30'"
                           (reset)="handleReset()"
                           (expire)="handleExpire()"
@@ -138,6 +141,7 @@
                           [type]="type"
                           formControlName="recaptcha">
                           </ngx-recaptcha2>
+                        </div>
                         </div>
 
                         <div class="column full-col">
