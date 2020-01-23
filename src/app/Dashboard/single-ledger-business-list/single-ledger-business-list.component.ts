@@ -18,6 +18,8 @@ import {
   SwitchCompanyService
 } from '../../services/switch-company-service/switch-company.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SocketService } from 'src/app/services/socket.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-single-ledger-business-list',
@@ -60,9 +62,11 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   businessListFiltered: any;
   actualBusinessList: any[];
   constructor(public businessService: BusinessService,
+              public socketService:SocketService,
               private helper: HelperService, private router: Router,
               private switchCompany: SwitchCompanyService,
-              private _fb: FormBuilder) {
+              private _fb: FormBuilder,
+              private message:ToastrService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
         this.ngOnInit();
@@ -71,6 +75,10 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   }
   formSearch: FormGroup;
   ngOnInit() {
+    this.socketService.newUser();
+    this.socketService.messages.subscribe((msg)=>{
+      this.message.success(String(msg));
+    })
     const userrid = Number(this.helper.getuserId());
     this._createForm();
     this.businessService.getListOfbusinesses(userrid).subscribe(res => {
