@@ -22,6 +22,9 @@ mat-card {
                     padding-bottom: 0px;
                   }
                 }
+                .reset-filter{
+                  display: flex;
+                }
               }
             }
           }
@@ -98,11 +101,13 @@ mat-card {
 
   .example-element-row {
     cursor: pointer;
+    border-bottom: 1px solid rgb(243, 243, 243);
+    border-top: 1px solid rgb(243, 243, 243);
   }
 }
 
 table {
-  width: 1106px;
+  width: 100%;
   font-weight: 500;
   // width: 1037px;
   td{
@@ -156,7 +161,7 @@ tr {
       background: #e3f8fd;
 
       td {
-        // border-bottom-color: #00add8;
+        border-bottom-color: rgba(134, 134, 134, 0.12);
         // border-top-color: #00add8;
         background: #e3f8fd;
       }
@@ -342,7 +347,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   cursor: pointer;
 
   td {
-    border-bottom-width: 0;
+    // border-bottom-width: 0;
   }
 }
 
@@ -370,6 +375,18 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .example-element-description {
   padding: 16px;
+  overflow: auto;
+  // table{
+  //   th{
+  //     min-width: 300px;
+  //     max-width: 300px;
+  //   }
+  //   td{
+  //     min-width: 300px;
+  //     max-width: 300px;
+
+  //   }
+  // }
 }
 
 .example-element-description-attribution {
@@ -378,4 +395,9 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 td.mat-cell.cdk-column-expandedDetail.mat-column-expandedDetail.ng-tns-c12-19.ng-star-inserted {
   background-color: #00add8;
+}
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+  padding: 0;
+  border-bottom-width: 1px;
+  border-bottom-style: double;
 }

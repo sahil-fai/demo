@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoaderService } from 'src/app/services/loader-service/loader.service';
-import { NgxSpinnerService } from 'ngx-spinner';
+// import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-loader',
@@ -8,21 +8,29 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./loader.component.less']
 })
 export class LoaderComponent implements OnInit, OnDestroy {
-
   private subscription;
   public showLoader = false;
 
-  constructor(private loaderService: LoaderService, private spinner: NgxSpinnerService) { }
+  constructor(
+    private loaderService: LoaderService,
+  //  private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
-    this.spinner.show();
-    this.subscription = this.loaderService.loaderState.subscribe((loader) => {
-     // this.showLoader = true;
-     if (loader > 0) {
-        this.spinner.show();
+    // this.spinner.show();
+   // this.showLoader = true;
+    this.subscription = this.loaderService.loaderState.subscribe(loader => {
+      if (loader > 0) {
+
+        this.showLoader = true;
       } else {
-          this.spinner.hide();
+        this.showLoader = false;
       }
+      //  if (loader > 0) {
+      //     this.spinner.show();
+      //   } else {
+      //       this.spinner.hide();
+      //   }
     });
   }
 
@@ -30,4 +38,3 @@ export class LoaderComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 }
-

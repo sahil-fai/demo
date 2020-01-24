@@ -1,6 +1,9 @@
 <section class="login-sec">
   <div class="container">
     <div class="row">
+      <div class="progressBar">
+        <app-loader></app-loader>
+    </div>
       <div class="column full-col">
         <div class="login-wrapper">
           <div class="row">
@@ -22,7 +25,7 @@
                   <ng-container *ngIf="showInvalidPage; else invalidLinkSection">
                     <h1>Sign Up</h1>
                     <p>Sign up below and create your account</p>
-                    <form [formGroup]="formRegister" (ngSubmit)="onRegister()" novalidate autocomplete="off">
+                    <form [formGroup]="formRegister" (ngSubmit)="onRegister()" novalidate autocomplete="ng-dirty ng-touched ng-valid">
                       <div class="row">
                         <div class="column half-col">
                           <div class="form-group">
@@ -123,9 +126,9 @@
                               Password is not matched</div>
                           </div>
                         </div>
-
+                        <div class="column full-col">
                         <div class="input-group">
-                          <ngx-recaptcha2 #captchaElem
+                          <!-- <ngx-recaptcha2 #captchaElem class="dhb"
                            [siteKey]="'6LdE6c8UAAAAAMN2BRGwbzIEQLh2UwviTtyNZY30'"
                           (reset)="handleReset()"
                           (expire)="handleExpire()"
@@ -137,10 +140,17 @@
                           [theme]="theme"
                           [type]="type"
                           formControlName="recaptcha">
-                          </ngx-recaptcha2>
+                          </ngx-recaptcha2>-->
+                          <ngx-recaptcha2 #captchaElem class="dhb"
+                           [siteKey]="'6LdE6c8UAAAAAMN2BRGwbzIEQLh2UwviTtyNZY30'"
+                          (success)="handleSuccess($event)"
+                          [useGlobalDomain]="false"
+                          formControlName="recaptcha">
+                        </ngx-recaptcha2>
+                        </div>
                         </div>
 
-                        <div class="column full-col">
+                        <div class="column full-col margin">
                           <div class="form-group" (mousedown)="openTermsConditions()">
                             <mat-checkbox [required]="true" formControlName="isAgree" [(ngModel)]="checked"
                               (keydown)="openTermsConditions()"><span>I agree to the SingleLedger Terms &amp; Conditions
@@ -149,7 +159,7 @@
                           </div>
                         </div>
                         <div class="column full-col">
-                          <button type="submit" class="login-btn" [disabled]="formRegister.invalid" matRipple><i
+                          <button type="submit" class="login-btn"  matRipple><i
                               class="icon-submit"></i>Submit</button>
                         </div>
                       </div>

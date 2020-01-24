@@ -54,7 +54,7 @@
                                 </select>
                             </li>
                             <li>
-                              <ul>
+                              <ul class="reset-filter">
                                 <li>
                                   <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
                               </li>
@@ -76,17 +76,15 @@
                                 <!-- Checkbox Column -->
                                 <ng-container matColumnDef="select" >
                                   <th mat-header-cell *matHeaderCellDef class="table-head">
-                                    <mat-checkbox (change)="$event ? masterToggle() : null"
-                                                  [checked]="selection.hasValue() && isAllSelected()"
-                                                  [indeterminate]="selection.hasValue() && !isAllSelected()"
-                                                  [aria-label]="checkboxLabel()">
+                                    <mat-checkbox (change)="$event ? '' : null"
+                                                  [checked]="selection.hasValue()"
+                                                  [indeterminate]="selection.hasValue()">
                                     </mat-checkbox>
                                   </th>
                                   <td mat-cell *matCellDef="let row" class="table-head-second">
                                     <mat-checkbox (click)="$event.stopPropagation()"
                                                   (change)="$event ? selection.toggle(row) : null"
-                                                  [checked]="selection.isSelected(row)"
-                                                  [aria-label]="checkboxLabel(row)">
+                                                  [checked]="selection.isSelected(row)">
                                     </mat-checkbox>
                                   </td>
                                 </ng-container>
@@ -224,8 +222,8 @@
                             [pageSize]="1" (page)="handlePage($event)"></mat-paginator> -->
                             <div class="pagination" *ngIf="totalRec > 0">
 
-                                <pagination-template  #p="paginationApi" (pageChange)="a = $event;handlePage(a)"  [class.disabled]= "length < config.itemsPerPage" >
-
+                                <!-- <pagination-template  #p="paginationApi" (pageChange)="a = $event; handlePage(a)"  [class.disabled]= "length < config.itemsPerPage" > -->
+                                  <pagination-template  #p="paginationApi" (pageChange)="a = $event; handlePage()"  [class.disabled]= "length < config.itemsPerPage" >
                                   <div class="custom-pagination">
 
                                       <div style="display:inline-block" *ngIf="!(p.isFirstPage() && p.isLastPage())">

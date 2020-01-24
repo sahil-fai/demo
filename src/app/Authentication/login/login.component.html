@@ -1,6 +1,9 @@
 <section class="login-sec">
   <div class="container">
     <div class="row">
+      <div class="progressBar">
+        <app-loader></app-loader>
+    </div>
       <div class="column full-col">
         <div class="login-wrapper">
           <div class="row">
@@ -11,7 +14,7 @@
                     <img src="/assets/images/SL-logo.svg" alt="Logo">
                   </div>
                   <div class="video-wrapper" (click)="openDialog('https://www.youtube.com/embed/J5tWbmD7alE')">
-                    <img src="/assets/images/monitor.svg" alt="Monitor">
+                    <img src="/assets/images/monitor.png" alt="Monitor">
                   </div>
                 </div>
               </div>
@@ -21,7 +24,7 @@
                 <div class="inner-sec">
                   <h1>Sign In</h1>
                   <p>Login below to get started.</p>
-                  <form [formGroup]="formLogin" (ngSubmit)="onLogin()" novalidate autocomplete="off">
+                  <form [formGroup]="formLogin" (ngSubmit)="onLogin()" novalidate autocomplete="ng-dirty ng-touched ng-valid">
                     <div class="form-group">
                       <label>Email</label>
                       <input type="email" class=""
@@ -41,11 +44,11 @@
                             class="icon-eye-hide"></i></button>
                       </div>
                       <div class="errorMessage"
-                        *ngIf="(!!f.password.invalid && !!f.password.dirty && !!f.password.errors.minlength) || (submitted && f.password.invalid && f.password.errors.minlength)">
+                        *ngIf="(!!f.password.invalid && !!f.password.dirty && !!f.password.errors.minlength) || (submitted && f.password.invalid && f.password.errors.minlength )">
                         Minimum 6 characters needed.</div>
                     </div>
 
-                    <button type="submit" class="login-btn" [disabled]="formLogin.invalid"><i
+                    <button type="submit" class="login-btn"  ><i
                         class="icon-submit"></i>Login</button>
                   </form>
                   <div class="link-sec">

@@ -102,8 +102,8 @@
           margin-bottom: 45px;
 
           img {
-            max-width: 100%;
             margin: auto;
+            max-width: 50%;
           }
         }
 
@@ -136,7 +136,7 @@
         position: relative;
 
         h1 {
-          font-size: 31px;
+          font-size: 2.1rem;
           color: #FFFFFF;
           text-align: center;
           text-transform: uppercase;
@@ -144,7 +144,7 @@
         }
 
         p {
-          font-size: 16px;
+          font-size: 1.05rem;
           color: #FFFFFF;
           text-align: center;
           margin-bottom: 45px;
@@ -254,6 +254,9 @@
           &[disabled]{
               cursor: not-allowed;
           }
+          &[enabled]{
+            background-color: #007997;
+          }
         }
 
         .link-sec {
@@ -268,7 +271,7 @@
           justify-content: space-between;
 
           a {
-            font-size: 16px;
+            font-size: 1.05rem;
             color: #FFFFFF;
 
           }
@@ -276,4 +279,9 @@
       }
     }
   }
+}
+form.ng-invalid [type=button], form.ng-invalid [type=submit], form.ng-invalid.ng-pristine [type=Reset] {
+  opacity: .5;
+  pointer-events: none;
+  cursor: default;
 }

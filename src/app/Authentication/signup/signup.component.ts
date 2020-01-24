@@ -149,23 +149,24 @@ export class SignupComponent implements OnInit, OnDestroy {
     //   return;
     // }
     // if(this.verifyInviteRes.status) {
-      if(this.formRegister.valid) {
-        const data = {
-            email: this.formRegister.value.username,
-            lastname: this.formRegister.value.lastName,
-            password: this.formRegister.value.password,
-            firstName: this.formRegister.value.firstName,
-            roleType: this.formRegister.value.role,
-            inviteby: this.formRegister.value.inviteby,
-            invitetype: this.invitetype,
-            invitecompanyid: this.invitecompanyid?this.invitecompanyid.toString():undefined,
-            inviteuserid: this.inviteuserid?this.inviteuserid.toString():undefined
-        }
-        this.authService.enroll(data).subscribe(res => {
-          this.isRegistered = true;
-          this.router.navigate(['/login']);
-        });
+    if (this.formRegister.valid) {
+      const data = {
+        email: this.formRegister.value.username,
+        lastname: this.formRegister.value.lastName,
+        password: this.formRegister.value.password,
+        firstName: this.formRegister.value.firstName,
+        roleType: this.formRegister.value.role,
+        inviteby: this.formRegister.value.inviteby,
+        invitetype: this.invitetype,
+        invitecompanyid: this.invitecompanyid ? this.invitecompanyid.toString() : undefined,
+        // inviteuserid: this.inviteuserid ? this.inviteuserid.toString() : undefined
+        requestId: this.inviteuserid ? this.inviteuserid.toString() : undefined
       }
+      this.authService.enroll(data).subscribe(res => {
+        this.isRegistered = true;
+        this.router.navigate(['/login']);
+      });
+    }
 
     // }
 

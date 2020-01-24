@@ -82,26 +82,26 @@ export class SuppliersComponent implements OnInit {
 
 
 
-    	
+
      constructor(private helper: HelperService,
          private businessService: BusinessService, private fb: FormBuilder,
          private switchCompany: SwitchCompanyService) {
-    	
-         	
+
+
          this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
-    	
+
              () => {
-    
+
                this.transcationList = [];
-    
+
                this.COAMappings=[];
-    	
+
                this.ngOnInit();
-    	
+
              }
-    
+
            );
-    	
+
     }
 
   ngOnInit() {
@@ -235,10 +235,10 @@ console.log(JSON.stringify(data))
   }
 
 
-  // public editRecord(item) {
+   public editRecord(item) {
   //   console.log(this.formTransaction);
   //   console.log(item);
   //   item.editable = true;
   //   this.formTransaction.controls["Contact"].setValue(item.vendorName);
-  // }
+   }
 }
