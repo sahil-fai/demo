@@ -31,7 +31,6 @@ export class DashboardComponent implements OnInit {
         this._reloadingDialog.close();
         this._reloadingDialog.afterClosed().subscribe(data=>{
         this.router.navigate(['/businesslist']);
-        this._reloadingDialog = null
         })
      
       }
