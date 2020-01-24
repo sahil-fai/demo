@@ -18,7 +18,7 @@ export class ResetPasswordComponent implements OnInit {
   public submitted = false;
   private _resetCode: string;
   formReset: FormGroup;
-  public showPassword: boolean = false; 
+  public showPassword: boolean = false;
   _authService: any;
   _router: any;
   safeSrc: any;
@@ -26,16 +26,16 @@ export class ResetPasswordComponent implements OnInit {
   showInvalidPage: boolean = true;
 
   constructor(private router: Router, private route:ActivatedRoute, private _fb: FormBuilder, private authService: AuthService, private helper: HelperService, private sanitizer: DomSanitizer, public dialog: MatDialog, private notification: NotificationsnackbarService, private snackBar: MatSnackBar) { }
-  
-  ngOnInit() { 
+
+  ngOnInit() {
     this._resetCode = this.route.snapshot.queryParams.requestId;
     if(this._resetCode) {
-      this.authService.checkResetPasswordLinkStatus(Number(this._resetCode)).subscribe(res => {  
-      if(!res.status){ 
+      this.authService.checkResetPasswordLinkStatus(Number(this._resetCode)).subscribe(res => {
+      if(!res.status){
       this.checkResetPasswordStatus = res;
       this.showInvalidPage = false;
       }
-        
+
       });
     }
     this.createForm();
@@ -102,8 +102,8 @@ export class ResetPasswordComponent implements OnInit {
       });
     }
   }
-  
-  
+
+
   get f() { return this.formReset.controls;}
 
 
@@ -117,4 +117,9 @@ export class ResetPasswordComponent implements OnInit {
      // console.log('The dialog was closed');
     });
   }
+
+  public togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
 }
