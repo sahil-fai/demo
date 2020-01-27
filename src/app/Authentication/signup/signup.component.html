@@ -13,8 +13,8 @@
                   <div class="logo-sec">
                     <img src="/assets/images/SL-logo.svg" alt="Logo">
                   </div>
-                  <div class="video-wrapper">
-                    <img src="/assets/images/monitor.svg" alt="Monitor">
+                  <div class="video-wrapper" (click)="openVideo('https://www.youtube.com/embed/J5tWbmD7alE')">
+                    <img src="/assets/images/monitor.png" alt="Monitor">
                   </div>
                 </div>
               </div>
@@ -25,7 +25,7 @@
                   <ng-container *ngIf="showInvalidPage; else invalidLinkSection">
                     <h1>Sign Up</h1>
                     <p>Sign up below and create your account</p>
-                    <form [formGroup]="formRegister" (ngSubmit)="onRegister()" novalidate autocomplete="ng-dirty ng-touched ng-valid">
+                    <form [formGroup]="formRegister" (ngSubmit)="onRegister()" autocomplete="off" novalidate class="ng-dirty ng-touched ng-invalid">
                       <div class="row">
                         <div class="column half-col">
                           <div class="form-group">

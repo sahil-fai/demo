@@ -202,6 +202,9 @@
               border-bottom-right-radius: .25rem;
               border: none;
               cursor: pointer;
+              i{
+                vertical-align: middle;
+              }
             }
           }
           .errorMessage{
@@ -254,9 +257,9 @@
           &[disabled]{
               cursor: not-allowed;
           }
-          &[enabled]{
-            background-color: #007997;
-          }
+          // &[enabled]{
+          //   background-color: #007997;
+          // }
         }
 
         .link-sec {
@@ -280,7 +283,7 @@
     }
   }
 }
-form.ng-invalid [type=button], form.ng-invalid [type=submit], form.ng-invalid.ng-pristine [type=Reset] {
+ form.ng-invalid [type=submit], form.ng-invalid.ng-pristine [type=Reset] {
   opacity: .5;
   pointer-events: none;
   cursor: default;

@@ -66,20 +66,20 @@
 
             <!-- Checkbox Column -->
             <ng-container matColumnDef="select" >
-              <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox (change)="$event ? masterToggle() : null"
+              <th mat-header-cell *matHeaderCellDef class="table-head">
+                <!-- <mat-checkbox (change)="$event ? masterToggle() : null"
                               [checked]="selection.hasValue() && isAllSelected()"
                               [indeterminate]="selection.hasValue() && !isAllSelected()"
                               [aria-label]="checkboxLabel()">
-                </mat-checkbox>
+                </mat-checkbox> -->
               </th>
               <td mat-cell *matCellDef="let row">
-                <mat-checkbox (click)="$event.stopPropagation()"
+                <!-- <mat-checkbox (click)="$event.stopPropagation()"
                               (change)="$event ? selection.toggle(row) : null"
                               [checked]="selection.isSelected(row)"
                               [aria-label]="checkboxLabel(row)"
                               [disabled]="row.Status=='Active'">
-                </mat-checkbox>
+                </mat-checkbox> -->
               </td>
             </ng-container>
 
@@ -90,22 +90,22 @@
             </ng-container>
             <!-- Block chain Id Column -->
             <ng-container matColumnDef="ContactEmail">
-              <th mat-header-cell *matHeaderCellDef> ContactEmail</th>
+              <th mat-header-cell *matHeaderCellDef class="table-head"> ContactEmail</th>
               <td mat-cell *matCellDef="let element"> {{element.email|| 'N/A' }} </td>
             </ng-container>
             <!-- Date Column -->
             <ng-container matColumnDef="RegisterDate">
-              <th mat-header-cell *matHeaderCellDef> CreatedDate </th>
+              <th mat-header-cell *matHeaderCellDef class="table-head"> CreatedDate </th>
               <td mat-cell *matCellDef="let element"> {{element.createdat|date }} </td>
             </ng-container>
             <ng-container matColumnDef="Organizaton">
-                <th mat-header-cell *matHeaderCellDef> Organizaton </th>
+                <th mat-header-cell *matHeaderCellDef class="table-head"> Organizaton </th>
                 <td mat-cell *matCellDef="let element">  {{platformid | organisationpipe }} </td>
               </ng-container>
 
             <!-- Due Date Column -->
             <ng-container matColumnDef="Status">
-              <th mat-header-cell *matHeaderCellDef> Status</th>
+              <th mat-header-cell *matHeaderCellDef class="table-head"> Status</th>
               <td mat-cell *matCellDef="let element">
                 <mat-icon *ngIf="element.isdeleted" [ngClass]="{'inactive':element.isdeleted }">radio_button_unchecked</mat-icon>
                 <mat-icon *ngIf="element.isactive" [ngClass]="{'active':element.isactive}">radio_button_checked</mat-icon>
@@ -114,12 +114,12 @@
 
             <!-- Vendor Column -->
             <ng-container matColumnDef="BlockChainID">
-              <th mat-header-cell *matHeaderCellDef> BlockChain ID </th>
+              <th mat-header-cell *matHeaderCellDef class="table-head"> BlockChain ID </th>
               <td mat-cell *matCellDef="let element"> {{element.companyblockchainid|| 'N/A' }} </td>
             </ng-container>
             <!-- Total Column -->
-            <ng-container matColumnDef="Invite">
-              <th mat-header-cell *matHeaderCellDef>Invite </th>
+            <ng-container matColumnDef="Invite" >
+              <th mat-header-cell *matHeaderCellDef class="table-head">Invite </th>
               <td mat-cell *matCellDef="let element">
                   <!-- *ngIf="element.isactive=='Inactive' && element.Reinviteflag!=='true'" -->
                   <!-- <button class="btn btn-small uppercase btn-solid btn-deepblue" *ngIf="element.isactive=='Active'" [disabled]="{'disable':element.isactive === 'Active'}"><i class="icon-arrow-curve-right"></i>INVITED</button> -->

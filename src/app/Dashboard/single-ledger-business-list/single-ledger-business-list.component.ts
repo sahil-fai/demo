@@ -74,7 +74,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   }
   formSearch: FormGroup;
   ngOnInit() {
-  
+
     const userrid = Number(this.helper.getuserId());
     this._createForm();
     this.businessService.getListOfbusinesses(userrid).subscribe(res => {
