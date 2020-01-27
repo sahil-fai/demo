@@ -29,6 +29,10 @@ const routes: Routes = [
 
   },
   {
+    path: 'verify-invite/:requestId', component: SignupComponent,
+
+  },
+  {
     path: 'forgot-password', component: ForgotPasswordComponent,
   },
   {

@@ -24,7 +24,7 @@
                 <div class="inner-sec">
                   <h1>Sign In</h1>
                   <p>Login below to get started.</p>
-                  <form [formGroup]="formLogin" (ngSubmit)="onLogin()" novalidate autocomplete="ng-dirty ng-touched ng-valid">
+                  <form [formGroup]="formLogin" (ngSubmit)="onLogin()"  autocomplete="off" novalidate class="ng-dirty ng-touched ng-invalid">
                     <div class="form-group">
                       <label>Email</label>
                       <input type="email" class=""

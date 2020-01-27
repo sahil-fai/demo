@@ -69,20 +69,20 @@
 
           <!-- Checkbox Column -->
           <ng-container matColumnDef="select" >
-            <th mat-header-cell *matHeaderCellDef>
-              <mat-checkbox (change)="$event ? masterToggle() : null"
+            <th mat-header-cell *matHeaderCellDef class="table-head">
+              <!-- <mat-checkbox (change)="$event ? masterToggle() : null"
                             [checked]="selection.hasValue() && isAllSelected()"
                             [indeterminate]="selection.hasValue() && !isAllSelected()"
                             [aria-label]="checkboxLabel()">
-              </mat-checkbox>
+              </mat-checkbox> -->
             </th>
             <td mat-cell *matCellDef="let row">
-              <mat-checkbox (click)="$event.stopPropagation()"
+              <!-- <mat-checkbox (click)="$event.stopPropagation()"
                             (change)="$event ? selection.toggle(row) : null"
                             [checked]="selection.isSelected(row)"
                             [aria-label]="checkboxLabel(row)"
                             [disabled]="row.Status=='Active'">
-              </mat-checkbox>
+              </mat-checkbox> -->
             </td>
           </ng-container>
             <!-- {{element|json }} -->

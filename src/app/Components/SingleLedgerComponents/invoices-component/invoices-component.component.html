@@ -170,8 +170,9 @@
                                       <div class="example-element-description">
                                           <div class="floatBoxesWrapper clearfix">
                                               <div class="floatBox tabletsOnly">
+                                                <perfect-scrollbar style="max-height: 200px">
                                                 <div class="defaultTable" *ngIf="element.blockchainhistories && element.blockchainhistories.length>0">
-                                                  <perfect-scrollbar style="max-height: 500px">
+
                                                 <table class="dataTable">
                                                   <thead>
                                                     <tr>
@@ -196,8 +197,9 @@
                                                         </tr>
                                                   </tbody>
                                                 </table>
-                                              </perfect-scrollbar>
+
                                                 </div>
+                                              </perfect-scrollbar>
                                                 <div class="no-record" *ngIf="!element.blockchainhistories"> <span class="norecord-text"> No records found</span></div>
                                                 </div>
                                               </div>
