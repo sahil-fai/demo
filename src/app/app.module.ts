@@ -75,7 +75,7 @@ import {
 } from 'ngx-pagination';
 // Interceptors
 import {
-  TokenInterceptor
+  TokenInterceptor, DEFAULT_TIMEOUT
 } from './Interceptors/auth.interceptor';
 
 import {
@@ -274,7 +274,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
+
   },
+  { provide: DEFAULT_TIMEOUT, useValue: 30000 },
   {
     provide: PERFECT_SCROLLBAR_CONFIG,
     useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

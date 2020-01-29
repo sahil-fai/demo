@@ -1,10 +1,13 @@
 import {
   tap,
   map,
-  catchError
+  catchError,
+  timeout
 } from 'rxjs/operators';
 import {
-  Injectable
+  Injectable,
+  InjectionToken,
+  Inject
 } from '@angular/core';
 import {
   environment
@@ -31,16 +34,23 @@ import {
 import {
   ErrorHandlerService
 } from '../services/error-handler-service/error-handler.service';
-import { Router } from '@angular/router';
+import {
+  Router
+} from '@angular/router';
+
+
+export const DEFAULT_TIMEOUT = new InjectionToken < number > ('defaultTimeout');
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(public auth: HelperService, private _loaderService: LoaderService,
-    private _router :Router,
-     private _errHandler: ErrorHandlerService) {}
+  constructor(@Inject(DEFAULT_TIMEOUT) protected defaultTimeout: number, public auth: HelperService, private _loaderService: LoaderService,
+              private _router: Router,
+              private _errHandler: ErrorHandlerService) {}
   intercept(request: HttpRequest < any > , next: HttpHandler): Observable < HttpEvent < any >> {
+    const timeoutValueNumeric = Number(30000);
+
     this._loaderService.showLoader();
-    var token: string = localStorage.getItem('TOKEN');
+    const token: string = localStorage.getItem('TOKEN');
     if (token) {
       request = request.clone({
         headers: request.headers.set(
@@ -58,37 +68,37 @@ export class TokenInterceptor implements HttpInterceptor {
     request = request.clone({
       headers: request.headers.set('Accept', 'application/json')
     });
-    return next.handle(request).pipe(tap((event: HttpEvent < any > ) => {
+    return next.handle(request).pipe(timeout(timeoutValueNumeric), tap((event: HttpEvent < any > ) => {
       if (event instanceof HttpResponse) {
-       // this._loaderService.showLoader();
+        // this._loaderService.showLoader();
         // do stuff with response if you want
       }
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
-        if (err.statusText === "Unknown Error" || err.status == 401)
-        {
-          if (err.statusText === "Unknown Error")
-          {this._errHandler.pushError(err.statusText);}
-      
-            localStorage.clear();
-            
-            if (err.status == 401)
-            {
-              this._router.navigate(['./login']);
-            }
+        if (err.statusText === 'Unknown Error' || err.status == 401) {
+          if (err.statusText === 'Unknown Error') {
+            this._errHandler.pushError(err.statusText);
+          }
+
+          localStorage.clear();
+
+          if (err.status == 401) {
+            this._router.navigate(['./login']);
+          }
           this._loaderService.hideLoader();
-          //this._errHandler.pushError(err.statusText);
-          return
+          return;
         }
         this._loaderService.hideLoader();
         console.log(err)
-        if (err.error && err.error.error && err.error.error.message)
-       {        this._errHandler.pushError(err.error.error.message);}
-       else
-       {
-        this._errHandler.pushError(err.message);}
-       }
-          }, () => {
+        if (err.error && err.error.error && err.error.error.message) {
+          this._errHandler.pushError(err.error.error.message);
+        } else {
+          this._errHandler.pushError(err.message);
+        }
+      }
+    }, () => {
+      // console.log('no response here !');
+      // this._errHandler.pushError('Server is not responding.');
       this._loaderService.hideLoader();
     }));
 

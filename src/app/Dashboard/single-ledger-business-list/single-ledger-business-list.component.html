@@ -19,15 +19,16 @@
     <div class="bussiness-header">
     <h2>{{title|| 'N/A' }}</h2>
       <span class="connectBtn">
-        <app-addbusiness *ngIf="isBusinessLoaded && totalRec > 0" ></app-addbusiness>
+        <app-addbusiness *ngIf="isBusinessLoaded && totalRec > 0 " ></app-addbusiness>
       </span>
     </div>
-    <div class="businesslistAvial"  *ngIf="isBusinessLoaded && totalRec > 0; else nobusiness"  >
+    <div class="businesslistAvial">
       <div class="searchPanel clearfix">
         <form  class="search-panel-form" [formGroup]="formSearch" (ngSubmit)="onFilter()" novalidate autocomplete="off">
           <ul class="floatingList searchBlock">
             <li>
               <label class="labels">Filter For</label>
+
             </li>
             <li>
               <input type="text" placeholder="Business Name " class="fields" formControlName="keywords"
@@ -38,7 +39,7 @@
           </ul>
         </form>
       </div>
-      <ul class="companyList" >
+      <ul class="companyList" *ngIf="isBusinessLoaded && companylist && companylist.length > 0; else nobusiness">
         <li *ngFor="let company of companylist| paginate: config">
 
           <div class="cellWrapper clearfix">
@@ -101,7 +102,7 @@
       </div>
     </div>
     <ng-template #nobusiness>
-        <div class="nobusiness">
+        <div class="nobusiness" *ngIf="companylist && companylist.length == 0">
             <div class="noData">
               <h3>Didn't find any business?</h3>
               <p>You can add new business using add business button below.</p>

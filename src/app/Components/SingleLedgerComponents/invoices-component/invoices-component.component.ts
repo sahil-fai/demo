@@ -134,6 +134,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     this.businessService.getAllInvoices(companyid).subscribe(
       res => {
         this.invoices = res;
+        console.log( this.invoices)
         this.totalRec = this.invoices.length;
         this.handlePage({
           pageSize: this.size,

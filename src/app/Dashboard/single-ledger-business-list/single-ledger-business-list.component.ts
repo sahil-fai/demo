@@ -8,6 +8,7 @@ import {
 import {
   from
 } from 'rxjs';
+
 import {
   HelperService
 } from '../../services/helper-service/helper.service';
@@ -20,6 +21,7 @@ import {
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SocketService } from 'src/app/services/socket.service';
 import { ToastrService } from 'ngx-toastr';
+import { IBusinessModel } from '../../Interface/business/business-model.interface';
 
 @Component({
   selector: 'app-single-ledger-business-list',
@@ -27,7 +29,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./single-ledger-business-list.component.less']
 })
 export class SingleLedgerBusinessListComponent implements OnInit {
+  // CompanyName: string;
+  // keywords: string;
   title = 'Business(s) List';
+  public businessListActual: IBusinessModel[] = [];
+  public businessListFiltered: IBusinessModel[] = [];
   companylist: Array < any > ;
   totalRec: number;
   page = 1;
@@ -59,8 +65,8 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   businesslsist: any;
   switchCompanySubscription: any;
   submitted: boolean;
-  businessListFiltered: any;
-  actualBusinessList: any[];
+  // businessListFiltered: any;
+  // actualBusinessList: any[];
   constructor(public businessService: BusinessService,
               private helper: HelperService, private router: Router,
               private switchCompany: SwitchCompanyService,
@@ -76,17 +82,17 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   ngOnInit() {
 
     const userrid = Number(this.helper.getuserId());
-    this._createForm();
     this.businessService.getListOfbusinesses(userrid).subscribe(res => {
       if (res.length >= 0) {
         this.companylist = this.businessListFiltered = res;
-        this.actualBusinessList =  res;
+        this.businessListActual =  res;
         this.totalRec = this.companylist.length;
         this.isBusinessLoaded = true;
       } else {
         this.companylist = [];
       }
     });
+    this._createForm();
   }
   private _createForm() {
     this.formSearch = this._fb.group({
@@ -98,23 +104,42 @@ export class SingleLedgerBusinessListComponent implements OnInit {
     this.router.navigate(['/business', 'company-info']);
   }
   public openDialog(){}
+  // public onFilter() {
+  //   let self = this;
+  //   this.submitted = true;
+  //   if (this.formSearch.invalid) { return; }
+  //   self.businessListFiltered = [];
+  //   this.businessListActual.forEach(i => {
+  //     if (i.legalName.toLocaleLowerCase().indexOf(self.formSearch.controls['keywords'].value.toLocaleLowerCase()) !== -1) {
+  //       // this.filterBussinessList = true;
+  //       this.businessListFiltered.push(i);
+  //     } else {
+  //         // this.filterBussinessList = true;
+  //     }
+  //   });
+
+  // }
   public onFilter() {
     this.submitted = true;
+
     if (this.formSearch.invalid) { return; }
     this.businessListFiltered = [];
-    this.actualBusinessList =  this.companylist;
-    this.companylist.forEach(i => {
-      if (i.company.legalname.toLocaleLowerCase().indexOf(this.formSearch.controls.keywords.value.toLocaleLowerCase()) !== -1) {
-        this.businessListFiltered.push(i);
+    this.companylist = [];
+    this.isBusinessLoaded = false;
+    this.businessListActual.forEach(i => {
+      if (i['legalName'].toLocaleLowerCase().indexOf(this.formSearch.controls['keywords'].value.toLocaleLowerCase()) !== -1) {
+        this.isBusinessLoaded = true;
+       this.companylist = [i];
       }
     });
-    this.companylist = this.businessListFiltered;
   }
   public onReset() {
     this.pageNumber = 0;
-    this.companylist = this.actualBusinessList;
+    this.isBusinessLoaded = true;
+    this.companylist = this.businessListActual;
     this.formSearch.reset();
     this.submitted = false;
   }
+
   get f() { return this.formSearch.controls; }
 }
