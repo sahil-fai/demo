@@ -85,7 +85,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       password: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
       confirmpassword: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
       isAgree: ['', [Validators.requiredTrue]],
-      recaptcha: ['', Validators.required],
+      recaptcha: [''],
       role: [null, [Validators.required]]
     }, {
       validator: this.checkPasswords

@@ -168,7 +168,7 @@
                       Already have an account? <a [routerLink]="['/login']">Sign In</a>
                     </div>
                   </ng-container>
-                  <ng-template #invalidLinkSection><h2 *ngIf="verifyInviteRes && !showInvalidPage">{{ verifyInviteRes.message }}</h2></ng-template>
+                  <ng-template #invalidLinkSection><h2 style="color:white" *ngIf="verifyInviteRes && !showInvalidPage">{{ verifyInviteRes.message }}</h2></ng-template>
                 </div>
               </div>
             </div>

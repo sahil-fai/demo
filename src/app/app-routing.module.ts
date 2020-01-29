@@ -19,7 +19,7 @@ import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/cha
 import { LoginGuard } from './Guards/login.guard';
 import { BusinessGuard } from './Guards/business.guard';
 import { ForgotPasswordComponent } from './Authentication/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './Authentication/reset-password/reset-password.component';
+import { ResetForgetPasswordComponent } from './Authentication/reset-forget-password/reset-password.component';
 const routes: Routes = [
   {
     path: 'login', component: LoginComponent
@@ -36,7 +36,7 @@ const routes: Routes = [
     path: 'forgot-password', component: ForgotPasswordComponent,
   },
   {
-    path: 'reset-password', component: ResetPasswordComponent,
+    path: 'reset-forget-password', component: ResetForgetPasswordComponent,
   },
   {path: 'signup/:invitetype/:inviteuserid/:invitecompanyid', component:SignupComponent},
 

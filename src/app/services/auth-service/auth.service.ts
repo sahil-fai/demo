@@ -56,7 +56,7 @@ export class AuthService {
   }
 
   verifyInvite(id: number): Observable<any> {
-    return this.http.get<any>('signup?requestId=' + id);
+    return this.http.get<any>('verify-invite?requestId=' + id);
   }
   
 }
