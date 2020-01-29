@@ -7,12 +7,13 @@ import { NotificationsnackbarService } from 'src/app/services/notificationsnackb
 import { HelperService } from 'src/app/services/helper-service/helper.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DialogOverviewExampleDialogComponent } from 'src/app/Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component';
+import { LoaderService } from 'src/app/services/loader-service/loader.service';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.less']
 })
-export class ResetPasswordComponent implements OnInit {
+export class ResetForgetPasswordComponent implements OnInit {
 
   @Input('role') public role: number;
   public submitted = false;
@@ -25,17 +26,26 @@ export class ResetPasswordComponent implements OnInit {
   checkResetPasswordStatus: any;
   showInvalidPage: boolean = true;
 
-  constructor(private router: Router, private route:ActivatedRoute, private _fb: FormBuilder, private authService: AuthService, private helper: HelperService, private sanitizer: DomSanitizer, public dialog: MatDialog, private notification: NotificationsnackbarService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private loaderService:LoaderService, private route:ActivatedRoute, private _fb: FormBuilder, private authService: AuthService, private helper: HelperService, private sanitizer: DomSanitizer, public dialog: MatDialog, private notification: NotificationsnackbarService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this.loaderService.showLoader();
+   // this.checkResetPasswordStatus = {message:"Please wait while validating your request"};
+    this.showInvalidPage = false;
     this._resetCode = this.route.snapshot.queryParams.requestId;
     if(this._resetCode) {
-      this.authService.checkResetPasswordLinkStatus(Number(this._resetCode)).subscribe(res => {
-      if(!res.status){
+      this.authService.checkResetPasswordLinkStatus(Number(this._resetCode)).subscribe(res => 
+        {
+     this.loaderService.hideLoader();
+        if(!res.status){
       this.checkResetPasswordStatus = res;
       this.showInvalidPage = false;
       }
-
+else{
+  this.showInvalidPage = true;
+}
+      },err=>{
+        this.loaderService.hideLoader();
       });
     }
     this.createForm();
