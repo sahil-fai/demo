@@ -1,17 +1,10 @@
-import {
-  tap,
-  map,
-  catchError,
-  timeout
-} from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import {
   Injectable,
   InjectionToken,
   Inject
 } from '@angular/core';
-import {
-  environment
-} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 import {
   HttpInterceptor,
   HttpRequest,
@@ -21,13 +14,8 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 
-import {
-  throwError,
-  Observable
-} from 'rxjs';
-import {
-  HelperService
-} from '../services/helper-service/helper.service';
+import { Observable } from 'rxjs';
+import { HelperService } from '../services/helper-service/helper.service';
 import {
   LoaderService
 } from '../services/loader-service/loader.service';
@@ -47,7 +35,6 @@ export class TokenInterceptor implements HttpInterceptor {
               private _router: Router,
               private _errHandler: ErrorHandlerService) {}
   intercept(request: HttpRequest < any > , next: HttpHandler): Observable < HttpEvent < any >> {
-    const timeoutValueNumeric = Number(30000);
 
     this._loaderService.showLoader();
     const token: string = localStorage.getItem('TOKEN');
@@ -68,7 +55,7 @@ export class TokenInterceptor implements HttpInterceptor {
     request = request.clone({
       headers: request.headers.set('Accept', 'application/json')
     });
-    return next.handle(request).pipe(timeout(timeoutValueNumeric), tap((event: HttpEvent < any > ) => {
+    return next.handle(request).pipe(tap((event: HttpEvent < any > ) => {
       if (event instanceof HttpResponse) {
         // this._loaderService.showLoader();
         // do stuff with response if you want
@@ -89,7 +76,6 @@ export class TokenInterceptor implements HttpInterceptor {
           return;
         }
         this._loaderService.hideLoader();
-        console.log(err)
         if (err.error && err.error.error && err.error.error.message) {
           this._errHandler.pushError(err.error.error.message);
         } else {

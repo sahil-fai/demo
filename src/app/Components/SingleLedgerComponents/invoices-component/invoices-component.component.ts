@@ -1,7 +1,13 @@
 import {
   SelectionModel
 } from '@angular/cdk/collections';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger
+} from '@angular/animations';
 import {
   Component,
   OnInit,
@@ -27,10 +33,12 @@ import {
   MatDialogConfig,
   MatDialog
 } from '@angular/material';
-import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
+import {
+  SwitchCompanyService
+} from 'src/app/services/switch-company-service/switch-company.service';
 
 export interface PeriodicElement {
-  CustomerName:string;
+  CustomerName: string;
   Number: string;
   Date: string;
   DueDate: string;
@@ -48,8 +56,13 @@ export interface PeriodicElement {
   styleUrls: ['./invoices-component.component.less'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({
+        height: '0px',
+        minHeight: '0'
+      })),
+      state('expanded', style({
+        height: '*'
+      })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
@@ -91,9 +104,9 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     screenReaderPageLabel: 'page',
     screenReaderCurrentLabel: `You're on page`
   };
-  public pageNumber = 1;
+  public pageNumber = 5;
   public numberOfpages: number[];
-  public size = 100;
+  public size = 5;
   public pageIndex = 0;
   public config = {
     itemsPerPage: this.size,
@@ -101,9 +114,11 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     totalItems: this.totalRec
   };
   companyCurrency: string;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {
+    static: false
+  }) paginator: MatPaginator;
   displayedColumns: string[] = ['Number',
-  'CustomerName','Date', 'DueDate', 'Customer', 'Total', 'Balance','BlockchainTransactionID', 'star',
+    'CustomerName', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'BlockchainTransactionID', 'star',
   ];
   expandedElement: PeriodicElement | null;
   selection = new SelectionModel < PeriodicElement > (true, []);
@@ -111,20 +126,20 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   switchCompanySubscription: any;
   platformid: number;
   constructor(public businessService: BusinessService,
-              private helper: HelperService,
-              private dialog: MatDialog,
-              private switchCompany: SwitchCompanyService) {
-              this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
-                  () => {
-                    this.ngOnInit();
-                  }
-                );
+    private helper: HelperService,
+    private dialog: MatDialog,
+    private switchCompany: SwitchCompanyService) {
+    this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
+      () => {
+        this.ngOnInit();
+      }
+    );
   }
 
   ngOnInit() {
     const companyid = Number(this.helper.getcompanyId());
     this.platformid = this.helper.getplatformId();
-    if(localStorage.getItem('CompanyCurrency')) {
+    if (localStorage.getItem('CompanyCurrency')) {
       this.companyCurrency = localStorage.getItem('CompanyCurrency');
     }
     this.getinvoices(companyid);
@@ -134,7 +149,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     this.businessService.getAllInvoices(companyid).subscribe(
       res => {
         this.invoices = res;
-        console.log( this.invoices)
+        console.log(this.invoices)
         this.totalRec = this.invoices.length;
         this.handlePage({
           pageSize: this.size,
@@ -145,7 +160,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
 
   Paginator(items, page, per_page) {
     var page = page || 1,
-      per_page = per_page || 10,
+      per_page = per_page || 5,
       offset = (page - 1) * per_page,
       paginatedItems = items.slice(offset).slice(0, per_page),
       total_pages = Math.ceil(items.length / per_page);
@@ -167,7 +182,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
 
   public openBottomSheet(data) {
     const dialogConfig = new MatDialogConfig();
-       //console.log(data);
+    //console.log(data);
     dialogConfig.data = data;
     dialogConfig.disableClose = true;
     dialogConfig.width = '65vw';
