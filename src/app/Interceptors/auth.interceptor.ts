@@ -31,7 +31,7 @@ export const DEFAULT_TIMEOUT = new InjectionToken < number > ('defaultTimeout');
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(@Inject(DEFAULT_TIMEOUT) protected defaultTimeout: number, public auth: HelperService, private _loaderService: LoaderService,
+  constructor(public auth: HelperService, private _loaderService: LoaderService,
               private _router: Router,
               private _errHandler: ErrorHandlerService) {}
   intercept(request: HttpRequest < any > , next: HttpHandler): Observable < HttpEvent < any >> {
