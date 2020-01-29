@@ -223,9 +223,9 @@
 
                             <!-- <mat-paginator appStylePaginator hidePageSize [length]="150"
                             [pageSize]="1" (page)="handlePage($event)"></mat-paginator> -->
-                            <div class="pagination" *ngIf="totalRec > 0">
+                            <!-- <div class="pagination" *ngIf="totalRec < 0">
 
-                                <!-- <pagination-template  #p="paginationApi" (pageChange)="a = $event; handlePage(a)"  [class.disabled]= "length < config.itemsPerPage" > -->
+
                                   <pagination-template  #p="paginationApi" (pageChange)="a = $event; handlePage()"  [class.disabled]= "length < config.itemsPerPage" >
                                   <div class="custom-pagination">
 
@@ -251,7 +251,7 @@
 
                                 </pagination-template>
 
-                            </div>
+                            </div> -->
                             <!-- <pagination-controls (pageChange)="p = $event;paginate(p)"></pagination-controls> -->
                         </div>
                 </div>

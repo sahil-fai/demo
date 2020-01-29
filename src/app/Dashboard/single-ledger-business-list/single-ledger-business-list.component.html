@@ -19,10 +19,10 @@
     <div class="bussiness-header">
     <h2>{{title|| 'N/A' }}</h2>
       <span class="connectBtn">
-        <app-addbusiness *ngIf="isBusinessLoaded && totalRec > 0 " ></app-addbusiness>
+        <app-addbusiness *ngIf="isBusinessLoaded && totalRec > 0" ></app-addbusiness>
       </span>
     </div>
-    <div class="businesslistAvial">
+    <div class="businesslistAvial" >
       <div class="searchPanel clearfix">
         <form  class="search-panel-form" [formGroup]="formSearch" (ngSubmit)="onFilter()" novalidate autocomplete="off">
           <ul class="floatingList searchBlock">

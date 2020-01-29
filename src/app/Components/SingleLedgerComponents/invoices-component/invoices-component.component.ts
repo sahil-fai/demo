@@ -8,12 +8,7 @@ import {
   transition,
   trigger
 } from '@angular/animations';
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  OnDestroy
-} from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, OnChanges} from '@angular/core';
 import {
   MatTableDataSource
 } from '@angular/material/table';
@@ -37,7 +32,7 @@ import {
   SwitchCompanyService
 } from 'src/app/services/switch-company-service/switch-company.service';
 
-export interface PeriodicElement {
+export interface PeriodicElement  {
   CustomerName: string;
   Number: string;
   Date: string;
@@ -91,32 +86,33 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   // ngx pagination setup
   invoices;
   totalRec: number;
-  page: number = 1;
+  // page: number = 1;
   length: number;
-  public maxSize: number = 3;
+  // public maxSize: number = 3;
   public directionLinks: boolean = true;
   public autoHide: boolean = true;
   public responsive: boolean = true;
-  public labels: any = {
-    previousLabel: 'Prev',
-    nextLabel: 'Next',
-    screenReaderPaginationLabel: 'Pagination',
-    screenReaderPageLabel: 'page',
-    screenReaderCurrentLabel: `You're on page`
-  };
-  public pageNumber = 5;
-  public numberOfpages: number[];
-  public size = 5;
-  public pageIndex = 0;
-  public config = {
-    itemsPerPage: this.size,
-    currentPage: 1,
-    totalItems: this.totalRec
-  };
+  // public labels: any = {
+  //   previousLabel: 'Prev',
+  //   nextLabel: 'Next',
+  //   screenReaderPaginationLabel: 'Pagination',
+  //   screenReaderPageLabel: 'page',
+  //   screenReaderCurrentLabel: `You're on page`
+  // };
+  // public pageNumber = 10;
+  // public numberOfpages: number[];
+  // public size = 1000;
+  // public pageIndex = 0;
+  // public config = {
+  //   itemsPerPage: this.size,
+
+  //   currentPage: 1,
+  //   totalItems: this.totalRec
+
+  // };
   companyCurrency: string;
-  @ViewChild(MatPaginator, {
-    static: false
-  }) paginator: MatPaginator;
+  // @ViewChild(MatPaginator, {static: true
+  // }) paginator: MatPaginator;
   displayedColumns: string[] = ['Number',
     'CustomerName', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'BlockchainTransactionID', 'star',
   ];
@@ -143,6 +139,8 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       this.companyCurrency = localStorage.getItem('CompanyCurrency');
     }
     this.getinvoices(companyid);
+    console.log(this.getinvoices)
+
   }
 
   public getinvoices(companyid: number) {
@@ -151,44 +149,59 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
         this.invoices = res;
         console.log(this.invoices)
         this.totalRec = this.invoices.length;
-        this.handlePage({
-          pageSize: this.size,
-          pageIndex: this.pageIndex
-        });
+        console.log(this.totalRec)
+        this.dataSource = new MatTableDataSource < PeriodicElement > (this.invoices);
+        // this.handlePage({
+        //   pageSize: this.size,
+        //   pageIndex: this.pageIndex
+        // });
       });
   }
 
-  Paginator(items, page, per_page) {
-    var page = page || 1,
-      per_page = per_page || 5,
-      offset = (page - 1) * per_page,
-      paginatedItems = items.slice(offset).slice(0, per_page),
-      total_pages = Math.ceil(items.length / per_page);
-    return {
-      page: page,
-      per_page: per_page,
-      pre_page: page - 1 ? page - 1 : null,
-      next_page: (total_pages > page) ? page + 1 : null,
-      total: items.length,
-      total_pages: total_pages,
-      data: paginatedItems
-    };
-  }
-  public handlePage(event: any) {
-    this.pageIndex = event;
-    let data = this.Paginator(this.invoices, this.pageIndex, this.size);
-    this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
-  }
+  // Paginator(items, page, per_page) {
+  //   var page = page || 1,
+  //     per_page = per_page || 5,
+  //     offset = (page - 1) * per_page,
+  //     paginatedItems = items.slice(offset).slice(0, per_page),
 
-  public openBottomSheet(data) {
-    const dialogConfig = new MatDialogConfig();
-    //console.log(data);
-    dialogConfig.data = data;
-    dialogConfig.disableClose = true;
-    dialogConfig.width = '65vw';
-    dialogConfig.panelClass = 'withdrawal-popup';
-    const dialogRef = this.dialog.open(BottomSheetOverviewExampleSheetComponent, dialogConfig);
-  }
+  //     total_pages = Math.ceil(items.length / per_page);
+  //     console.log(total_pages)
+  //   return {
+  //     page: page,
+  //     per_page: per_page,
+  //     pre_page: page - 1 ? page - 1 : null,
+  //     next_page: (total_pages > page) ? page + 1 : null,
+  //     total: items.length,
+  //     total_pages: total_pages,
+  //     data: paginatedItems
+
+
+  //   };
+  // }
+  // public handlePage(event: any) {
+  //   this.pageIndex = event;
+  //   console.log(this.pageIndex)
+  //   let data = this.Paginator(this.invoices, this.pageIndex, this.size);
+  //   console.log(data)
+  //   this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
+  //   console.log(this.dataSource)
+  // }
+
+  // public openBottomSheet(data) {
+  //   const dialogConfig = new MatDialogConfig();
+  //   //console.log(data);
+  //   dialogConfig.data = data;
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.width = '65vw';
+  //   dialogConfig.panelClass = 'withdrawal-popup';
+  //   const dialogRef = this.dialog.open(BottomSheetOverviewExampleSheetComponent, dialogConfig);
+  // }
+//    ngOnChange() {
+//     if (this.size) {
+//       console.log(this.size)
+//     this.config.itemsPerPage = this.size;
+//   }
+// }
   ngOnDestroy() {
     if (this.switchCompanySubscription) {
       this.switchCompanySubscription.unsubscribe();

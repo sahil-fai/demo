@@ -14,12 +14,13 @@ export class LoaderService {
 
   showLoader() {
     this.numberOfRequests++;
-    //console.log(this.numberOfRequests)
+    console.log(this.numberOfRequests)
     this.loaderSubject.next(this.numberOfRequests);
   }
 
   hideLoader() {
     if (this.numberOfRequests > 0) {
+      console.log(this.numberOfRequests)
       this.numberOfRequests--;
     }
     this.loaderSubject.next(this.numberOfRequests);
