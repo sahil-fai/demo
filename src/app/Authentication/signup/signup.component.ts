@@ -24,6 +24,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   private mobileQueryListener: () => void;
   width: string;
+  requestid:string;
   verifyInviteRes: any;
   showInvalidPage: boolean = true;
   invitetype: string;
@@ -61,7 +62,7 @@ export class SignupComponent implements OnInit, OnDestroy {
 
 
     if(this.route.snapshot.queryParams.requestId) {
-
+      this.requestid= this.route.snapshot.queryParams.requestId
       this.authService.verifyInvite(Number(this.route.snapshot.queryParams.requestId)).subscribe(res => {
       if(res.status) {
         this.invitetype = res.source;
@@ -85,7 +86,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       password: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
       confirmpassword: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
       isAgree: ['', [Validators.requiredTrue]],
-      recaptcha: [''],
+      recaptcha: ['', [Validators.required]],
       role: [null, [Validators.required]]
     }, {
       validator: this.checkPasswords
@@ -160,7 +161,7 @@ export class SignupComponent implements OnInit, OnDestroy {
         invitetype: this.invitetype,
         invitecompanyid: this.invitecompanyid ? this.invitecompanyid.toString() : undefined,
         // inviteuserid: this.inviteuserid ? this.inviteuserid.toString() : undefined
-        requestId: this.inviteuserid ? this.inviteuserid.toString() : undefined
+        requestId: this.requestid ? this.requestid.toString() : undefined
       }
       this.authService.enroll(data).subscribe(res => {
         this.isRegistered = true;
