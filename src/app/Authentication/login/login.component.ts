@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
       password: ['', [ Validators.required, Validators.minLength(6) ]]
     });
   }
-  public onLogin() {
+  public onLogin() { 
     this.submitted = true;
     if (this.formLogin.invalid) {return; }
     this.authService.login(this.formLogin.value).subscribe(res => {

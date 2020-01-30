@@ -26,18 +26,20 @@ export class SignupComponent implements OnInit, OnDestroy {
   width: string;
   requestid:string;
   verifyInviteRes: any;
-  showInvalidPage: boolean = true;
+  showInvalidPage: string;
   invitetype: string;
   invitecompanyid: string;
   inviteuserid: string;
   protected aFormGroup: FormGroup;
+  captchaSiteKey: string;
   constructor(private router: Router, private route: ActivatedRoute,private fb: FormBuilder, private authService: AuthService, private sanitizer: DomSanitizer, public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
     this.mobileQuery = media.matchMedia('(max-width: 767px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);
   }
   formRegister: FormGroup;
-  roles = [{
+  roles = [
+    {
       value: 'cpa',
       viewValue: 'CPA'
     },
@@ -60,24 +62,31 @@ export class SignupComponent implements OnInit, OnDestroy {
     //   recaptcha: ['', Validators.required]
     // });
 
+    if(location.origin.indexOf('localhost') > 0) {
+      this.captchaSiteKey = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+    } else {
+      this.captchaSiteKey = '6LdE6c8UAAAAAMN2BRGwbzIEQLh2UwviTtyNZY30';
+    }
 
     if(this.route.snapshot.queryParams.requestId) {
       this.requestid= this.route.snapshot.queryParams.requestId
       this.authService.verifyInvite(Number(this.route.snapshot.queryParams.requestId)).subscribe(res => {
-      if(res.status) {
+      if(res.status) { console.log('hi: ', res);
         this.invitetype = res.source;
         this.invitecompanyid = res.companyid;
         this.inviteuserid = res.userid;
+        this.showInvalidPage = 'signup';
       } else {
-        this.showInvalidPage = false;
+        this.showInvalidPage = 'invalidMessage';
         this.verifyInviteRes = res;
       }
       });
+    } else {
+      this.showInvalidPage = 'signup';
     }
     this.createForm();
-
-
   }
+
   private createForm() {
     this.formRegister = this.fb.group({
       firstName: ['', [Validators.required]],
@@ -93,14 +102,10 @@ export class SignupComponent implements OnInit, OnDestroy {
     });
   }
 
-  public handleSuccess(event)
-  {
+  public handleSuccess(event) { }
 
-  }
   // check for Numbers
-  private hasNumber(control: AbstractControl): {
-    [key: string]: boolean
-  } | null {
+  private hasNumber(control: AbstractControl): { [key: string]: boolean } | null {
     if (control.value && !(/\d/.test(control.value))) {
       return {
         number: true
@@ -110,9 +115,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   // check for Upper Case letters
-  private hasUppercase(control: AbstractControl): {
-    [key: string]: boolean
-  } | null {
+  private hasUppercase(control: AbstractControl): { [key: string]: boolean } | null {
     if (control.value && !(/[A-Z]/.test(control.value))) {
       return {
         uppercase: true
@@ -122,9 +125,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   // check for Lower Case letters
-  private hasLowercase(control: AbstractControl): {
-    [key: string]: boolean
-  } | null {
+  private hasLowercase(control: AbstractControl): { [key: string]: boolean } | null {
     if (control.value && !(/[a-z]/.test(control.value))) {
       return {
         lowercase: true
@@ -134,9 +135,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   // check for Special Characters
-  private hasSpecialCharacter(control: AbstractControl): {
-    [key: string]: boolean
-  } | null {
+  private hasSpecialCharacter(control: AbstractControl): { [key: string]: boolean } | null {
     if (control.value && !(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(control.value))) {
       return {
         specialcharacter: true
@@ -144,46 +143,42 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
     return null;
   }
+
   public onRegister() {
     this.submitted = true;
-    // if (this.formRegister.invalid) {
-    //   return;
-    // }
-    // if(this.verifyInviteRes.status) {
     if (this.formRegister.valid) {
-      const data = {
-        email: this.formRegister.value.username,
-        lastname: this.formRegister.value.lastName,
-        password: this.formRegister.value.password,
-        firstName: this.formRegister.value.firstName,
-        roleType: this.formRegister.value.role,
-        inviteby: this.formRegister.value.inviteby,
-        invitetype: this.invitetype,
-        invitecompanyid: this.invitecompanyid ? this.invitecompanyid.toString() : undefined,
-        // inviteuserid: this.inviteuserid ? this.inviteuserid.toString() : undefined
-        requestId: this.requestid ? this.requestid.toString() : undefined
-      }
+        const data = {
+          email: this.formRegister.value.username,
+          lastname: this.formRegister.value.lastName,
+          password: this.formRegister.value.password,
+          firstName: this.formRegister.value.firstName,
+          roleType: this.formRegister.value.role,
+          inviteby: this.formRegister.value.inviteby,
+          invitetype: this.invitetype,
+          invitecompanyid: this.invitecompanyid ? this.invitecompanyid.toString() : undefined,
+          inviteuserid: this.inviteuserid ? this.inviteuserid.toString() : undefined,
+          requestId: this.requestid ? this.requestid.toString() : undefined
+        }
       this.authService.enroll(data).subscribe(res => {
         this.isRegistered = true;
         this.router.navigate(['/login']);
       });
     }
-
-    // }
-
-
-
   }
+
   public togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
+
   public toggleConfirmPasswordVisibility() {
     this.showConfirmPassword = !this.showConfirmPassword;
   }
+
   /* Login form validations */
   get f() {
     return this.formRegister.controls;
   }
+
   get errors() {
     return this.formRegister.errors;
   }
@@ -196,10 +191,9 @@ export class SignupComponent implements OnInit, OnDestroy {
       },
       width: '70%',
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
+    dialogRef.afterClosed().subscribe(() => {  });
   }
+
   public checkPasswords(group: FormGroup) {
     if (group.controls) {
       let pass = group.controls.password.value;
@@ -209,6 +203,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       };
     }
   }
+
   openTermsConditions() {
     this.width = '90vw';
     const dialogConfig = new MatDialogConfig();

@@ -22,7 +22,7 @@
             <div class="column half-col pl-0">
               <div class="login-right">
                 <div class="inner-sec">
-                  <ng-container *ngIf="showInvalidPage; else invalidLinkSection">
+                  <ng-container *ngIf="showInvalidPage=='signup'">
                     <h1>Sign Up</h1>
                     <p>Sign up below and create your account</p>
                     <form [formGroup]="formRegister" (ngSubmit)="onRegister()" autocomplete="off" class="ng-dirty ng-touched ng-invalid">
@@ -142,7 +142,7 @@
                           formControlName="recaptcha">
                           </ngx-recaptcha2>-->
                           <ngx-recaptcha2 #captchaElem class="dhb"
-                           [siteKey]="'6LdE6c8UAAAAAMN2BRGwbzIEQLh2UwviTtyNZY30'"
+                           [siteKey]='captchaSiteKey'
                           (success)="handleSuccess($event)"
                           [useGlobalDomain]="false"
                           formControlName="recaptcha">
@@ -168,7 +168,7 @@
                       Already have an account? <a [routerLink]="['/login']">Sign In</a>
                     </div>
                   </ng-container>
-                  <ng-template #invalidLinkSection><h2 style="color:white" *ngIf="verifyInviteRes && !showInvalidPage">{{ verifyInviteRes.message }}</h2></ng-template>
+                  <h2 style="color:white" *ngIf="verifyInviteRes && showInvalidPage=='invalidMessage'">{{ verifyInviteRes.message }}</h2>
                 </div>
               </div>
             </div>

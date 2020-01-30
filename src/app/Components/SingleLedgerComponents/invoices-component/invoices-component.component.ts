@@ -135,7 +135,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const companyid = Number(this.helper.getcompanyId());
     this.platformid = this.helper.getplatformId();
-    if (localStorage.getItem('CompanyCurrency')) {
+    if (localStorage.getItem('CompanyCurrency') !== undefined) {
       this.companyCurrency = localStorage.getItem('CompanyCurrency');
     }
     this.getinvoices(companyid);

@@ -47,7 +47,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   ngOnInit() {
       this.getAllBills();
       this.platformid = this.helper.getplatformId();
-      if(localStorage.getItem('CompanyCurrency')) {
+      if(localStorage.getItem('CompanyCurrency') && localStorage.getItem('CompanyCurrency')!== undefined) {
         this.companyCurrency = localStorage.getItem('CompanyCurrency');
       }
   }
