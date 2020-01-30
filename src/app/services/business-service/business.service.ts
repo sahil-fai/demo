@@ -61,7 +61,7 @@ export class BusinessService {
     return this.http.get<any>('business/' +id +'/chartofaccountmappings', {
     });
   }
-  
+
   getGroupChartofAccounts(id: any) {
         return this.http.get<any>('business/'+id +'/groupchartofaccount', {
     });

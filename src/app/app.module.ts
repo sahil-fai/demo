@@ -173,7 +173,7 @@ import { ArraytostringPipe } from './pipe/arraytostring.pipe';
 import { AddresstypePipe } from './pipe/addresstype.pipe';
 import { OrganisationpipePipe } from './pipe/organisationpipe.pipe';
 import { ForgotPasswordComponent } from './Authentication/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './Authentication/reset-password/reset-password.component';
+import { ResetForgetPasswordComponent } from './Authentication/reset-forget-password/reset-password.component';
 import { TransactionTypePipe } from './pipe/transactiontype.pipe';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -221,7 +221,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AddresstypePipe,
     OrganisationpipePipe,
     ForgotPasswordComponent,
-    ResetPasswordComponent,
+    ResetForgetPasswordComponent,
     TransactionTypePipe,
 
   ],
@@ -274,6 +274,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
+
   },
   {
     provide: PERFECT_SCROLLBAR_CONFIG,

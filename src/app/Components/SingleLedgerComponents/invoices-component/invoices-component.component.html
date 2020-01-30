@@ -30,7 +30,7 @@
         <mat-card-content>
                 <div class="Invoice-content">
                         <div class="searchPanel clearfix" *ngIf="invoices && invoices.length >0">
-                        <form  novalidate autocomplete="off">
+                        <!-- <form  novalidate autocomplete="off">
                             <ul class="floatingList searchBlock">
                             <li class="smallFields fliter-for">
                                 <label class="labels">Filter For</label>
@@ -65,7 +65,7 @@
                             </li>
 
                             </ul>
-                        </form>
+                        </form> -->
                         </div>
                         <div class="bills-content mat-elevation-z8">
 
@@ -117,6 +117,7 @@
                                 <ng-container matColumnDef="CustomerName">
                                   <th mat-header-cell *matHeaderCellDef class="table-head"> Customer </th>
                                   <td mat-cell *matCellDef="let element" class="table-head-second"> {{element.department|| 'N/A' }} </td>
+
                                 </ng-container>
 
                                 <!-- Date Column -->
@@ -222,9 +223,9 @@
 
                             <!-- <mat-paginator appStylePaginator hidePageSize [length]="150"
                             [pageSize]="1" (page)="handlePage($event)"></mat-paginator> -->
-                            <div class="pagination" *ngIf="totalRec > 0">
+                            <!-- <div class="pagination" *ngIf="totalRec < 0">
 
-                                <!-- <pagination-template  #p="paginationApi" (pageChange)="a = $event; handlePage(a)"  [class.disabled]= "length < config.itemsPerPage" > -->
+
                                   <pagination-template  #p="paginationApi" (pageChange)="a = $event; handlePage()"  [class.disabled]= "length < config.itemsPerPage" >
                                   <div class="custom-pagination">
 
@@ -250,7 +251,7 @@
 
                                 </pagination-template>
 
-                            </div>
+                            </div> -->
                             <!-- <pagination-controls (pageChange)="p = $event;paginate(p)"></pagination-controls> -->
                         </div>
                 </div>
