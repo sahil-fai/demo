@@ -27,8 +27,6 @@ import {
 } from '@angular/router';
 
 
-export const DEFAULT_TIMEOUT = new InjectionToken < number > ('defaultTimeout');
-
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(public auth: HelperService, private _loaderService: LoaderService,

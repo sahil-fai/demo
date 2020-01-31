@@ -71,7 +71,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
         //   pageSize: '1000',
         //   pageIndex: '0'
         // });
-        this.dataSource = new MatTableDataSource<PeriodicElement>(this.customers); console.log('datasource: ', this.dataSource);
+        this.dataSource = new MatTableDataSource<PeriodicElement>(this.customers);
       }
     });
   }
@@ -147,7 +147,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
        }
 
       this.businessService.postInvite(data).subscribe((res) => {
-        console.log("email sent: ");
+        // console.log("email sent: ");
         if(res) {
           if(res.invite_count == 1) {
            this.getAllCustomer(compid);
@@ -155,7 +155,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
           this._toastr.success(res.message);
         }
       }, (err) => {
-        console.log("email failed")
+        // console.log("email failed")
       })
     } else {
       this._errHandler.pushError('Sorry email is empty');

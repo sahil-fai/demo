@@ -26,8 +26,8 @@ export class CompanyInfoComponentComponent implements OnInit , OnDestroy {
     const filter = '?filter={"include":[{"relation":"all"}]}';
     this.businessService.getCompanyInformation(companyid, filter).subscribe(res => {
       let compinfo = this.helper.convertJsonKeysToLower(res); 
-      if(compinfo && compinfo.currency[0] && compinfo.currency[0].currencyname) {
-          localStorage.setItem('CompanyCurrency', compinfo.currency[0].currencyname);
+      if(compinfo && compinfo.currency[0]) {
+          localStorage.setItem('CompanyCurrency', compinfo.currency[0].currencyname || 'N/A');
       }
       this.companyinfo = compinfo;
       this.helper.setplatformId(compinfo.platformid);
