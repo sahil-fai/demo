@@ -20,6 +20,7 @@ export class ResetForgetPasswordComponent implements OnInit {
   private _resetCode: string;
   formReset: FormGroup;
   public showPassword: boolean = false;
+  public showConfirmPassword = false;
   _authService: any;
   _router: any;
   safeSrc: any;
@@ -34,7 +35,7 @@ export class ResetForgetPasswordComponent implements OnInit {
     this.showInvalidPage = false;
     this._resetCode = this.route.snapshot.queryParams.requestId;
     if(this._resetCode) {
-      this.authService.checkResetPasswordLinkStatus(Number(this._resetCode)).subscribe(res => 
+      this.authService.checkResetPasswordLinkStatus(Number(this._resetCode)).subscribe(res =>
         {
      this.loaderService.hideLoader();
         if(!res.status){
@@ -116,7 +117,9 @@ else{
 
   get f() { return this.formReset.controls;}
 
-
+  get errors() {
+    return this.formReset.errors;
+  }
   openDialog(data: string): void {
     this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(data);
     const dialogRef = this.dialog.open(DialogOverviewExampleDialogComponent, {
@@ -130,6 +133,9 @@ else{
 
   public togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
+  }
+  public toggleConfirmPasswordVisibility() {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 
 }
