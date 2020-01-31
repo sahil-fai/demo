@@ -11,7 +11,7 @@
               <div class="login-left">
                 <div class="inner-sec">
                   <div class="logo-sec">
-                    <img src="/assets/images/SL-logo.svg" alt="Logo">
+                    <img src="/assets/images/SL-logo-new.svg" alt="Logo">
                   </div>
                   <div class="video-wrapper" (click)="openDialog('https://www.youtube.com/embed/J5tWbmD7alE')">
                     <img src="/assets/images/monitor.png" alt="Monitor">
@@ -40,16 +40,16 @@
                         <input [type]="showPassword?'text':'password'" class=""
                           [ngClass]="{error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid)}"
                           formControlName="password" />
-                        <button type="button" (click)="togglePasswordVisibility()"><i
-                            class="icon-eye-hide"></i></button>
+                        <button type="button" (click)="togglePasswordVisibility()"><i class="icon-eye-show" *ngIf="showPassword"></i><i
+                            class="icon-eye-hide" *ngIf="!showPassword"></i></button>
                       </div>
                       <div class="errorMessage"
                         *ngIf="(!!f.password.invalid && !!f.password.dirty && !!f.password.errors.minlength) || (submitted && f.password.invalid && f.password.errors.minlength )">
                         Minimum 6 characters needed.</div>
                     </div>
 
-                    <button type="submit" class="login-btn"  ><i
-                        class="icon-submit"></i>Login</button>
+                    <button type="submit" class="login-btn"><i
+                        class="icon-user-login"> </i>Login</button>
                   </form>
                   <div class="link-sec">
                     <a [routerLink]="['/signup']">Create Account</a>
