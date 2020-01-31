@@ -16,7 +16,6 @@ import { TermsConditionsComponent } from '../../Shared/terms-conditions/terms-co
 export class SignupComponent implements OnInit, OnDestroy {
   public submitted: boolean;
   safeSrc: SafeResourceUrl;
-  private userEmail = '';
   public showPassword = false;
   public showConfirmPassword = false;
   isRegistered = false;
@@ -24,19 +23,13 @@ export class SignupComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   private mobileQueryListener: () => void;
   width: string;
-  requestid:string;
+  requestid: string;
   verifyInviteRes: any;
   showInvalidPage: string;
   invitetype: string;
   invitecompanyid: string;
   inviteuserid: string;
-  protected aFormGroup: FormGroup;
   captchaSiteKey: string;
-  constructor(private router: Router, private route: ActivatedRoute,private fb: FormBuilder, private authService: AuthService, private sanitizer: DomSanitizer, public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
-    this.mobileQuery = media.matchMedia('(max-width: 767px)');
-    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this.mobileQueryListener);
-  }
   formRegister: FormGroup;
   roles = [
     {
@@ -52,26 +45,25 @@ export class SignupComponent implements OnInit, OnDestroy {
       viewValue: 'accountant'
     }
   ];
-  ngOnInit() {
-    // let data = {
-    //   invitetype : this.route.snapshot.queryParams.invitetype,
-    //   invitecompanyid : this.route.snapshot.queryParams.invitecompanyid,
-    //   inviteuserid : this.route.snapshot.queryParams.inviteuserid
-    // };
-    // this.aFormGroup = this.fb.group({
-    //   recaptcha: ['', Validators.required]
-    // });
 
+  constructor(private router: Router, private route: ActivatedRoute,private fb: FormBuilder, private authService: AuthService, private sanitizer: DomSanitizer, public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
+    this.mobileQuery = media.matchMedia('(max-width: 767px)');
+    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this.mobileQueryListener);
+  }
+
+  ngOnInit() {
+    // Enable captcha for local with test site key
     if(location.origin.indexOf('localhost') > 0) {
       this.captchaSiteKey = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     } else {
       this.captchaSiteKey = '6LdE6c8UAAAAAMN2BRGwbzIEQLh2UwviTtyNZY30';
     }
-
+    // Case of Sign up from invite link
     if(this.route.snapshot.queryParams.requestId) {
       this.requestid= this.route.snapshot.queryParams.requestId
       this.authService.verifyInvite(Number(this.route.snapshot.queryParams.requestId)).subscribe(res => {
-      if(res.status) { console.log('hi: ', res);
+      if(res.status) { 
         this.invitetype = res.source;
         this.invitecompanyid = res.companyid;
         this.inviteuserid = res.userid;
@@ -84,6 +76,14 @@ export class SignupComponent implements OnInit, OnDestroy {
     } else {
       this.showInvalidPage = 'signup';
     }
+    
+    // Case of Sign up invitation from Paypie account
+    if(this.route.snapshot.params.invitetype) { 
+      this.invitetype = this.route.snapshot.params.invitetype;
+      this.invitecompanyid = this.route.snapshot.params.invitecompanyid;
+      this.inviteuserid = this.route.snapshot.params.inviteuserid;
+    };
+
     this.createForm();
   }
 
@@ -91,7 +91,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.formRegister = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: [''],
-      username: [this.userEmail, [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
       confirmpassword: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
       isAgree: ['', [Validators.requiredTrue]],
@@ -102,8 +102,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     });
   }
 
-  public handleSuccess(event) { }
-
+ 
   // check for Numbers
   private hasNumber(control: AbstractControl): { [key: string]: boolean } | null {
     if (control.value && !(/\d/.test(control.value))) {
@@ -210,7 +209,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     dialogConfig.autoFocus = true;
     dialogConfig.width = this.width;
     dialogConfig.height = '90%';
-    dialogConfig.maxWidth = '600px';
+    dialogConfig.maxWidth = '700px';
     dialogConfig.position = {
       top: '50px'
     };
@@ -223,7 +222,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.mobileQuery.removeListener(this.mobileQueryListener);
   }
 

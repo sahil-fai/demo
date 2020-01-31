@@ -141,12 +141,7 @@
                           [type]="type"
                           formControlName="recaptcha">
                           </ngx-recaptcha2>-->
-                          <ngx-recaptcha2 #captchaElem class="dhb"
-                           [siteKey]='captchaSiteKey'
-                          (success)="handleSuccess($event)"
-                          [useGlobalDomain]="false"
-                          formControlName="recaptcha">
-                        </ngx-recaptcha2>
+                          <ngx-recaptcha2 #captchaElem [siteKey]='captchaSiteKey' [useGlobalDomain]="false" formControlName="recaptcha"></ngx-recaptcha2>
                         </div>
                         </div>
 
