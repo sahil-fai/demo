@@ -11,7 +11,7 @@
               <div class="login-left">
                 <div class="inner-sec">
                   <div class="logo-sec">
-                    <img src="/assets/images/SL-logo.svg" alt="Logo">
+                    <img src="/assets/images/SL-logo-new.svg" alt="Logo">
                   </div>
                   <div class="video-wrapper" (click)="openVideo('https://www.youtube.com/embed/J5tWbmD7alE')">
                     <img src="/assets/images/monitor.png" alt="Monitor">
@@ -25,14 +25,14 @@
                   <ng-container *ngIf="showInvalidPage=='signup'">
                     <h1>Sign Up</h1>
                     <p>Sign up below and create your account</p>
-                    <form [formGroup]="formRegister" (ngSubmit)="onRegister()" autocomplete="off" novalidate class="ng-dirty ng-touched ng-invalid">
+                    <form [formGroup]="formRegister" (ngSubmit)="onRegister()" autocomplete="off" class="ng-dirty ng-touched ng-invalid">
                       <div class="row">
                         <div class="column half-col">
                           <div class="form-group">
                             <label>Register as</label>
-                            <mat-form-field class="">
+                            <mat-form-field class="" >
                               <mat-select formControlName="role">
-                                <mat-option *ngFor="let role of roles" [value]="role.value">
+                                <mat-option *ngFor="let role of roles" [value]="role.value" >
                                   {{role.viewValue|| 'N/A' }}
                                 </mat-option>
                               </mat-select>
@@ -44,7 +44,7 @@
                             <label>First Name</label>
                             <input type="text" class=""
                               [ngClass]="{error: (f.firstName.invalid && f.firstName.dirty) || (submitted && f.firstName.invalid)}"
-                              formControlName="firstName" formControlName="firstName" />
+                              formControlName="firstName" />
                             <div class="errorMessage"
                               *ngIf="(!!f.firstName.invalid && !!f.firstName.dirty && !!f.firstName.errors.email) || (submitted && !!f.firstName.invalid && !!f.firstName.errors.email) || (!!f.firstName.invalid && !!f.firstName.dirty)|| (submitted && !!f.firstName.invalid) ">
                               Please enter First Name.</div>
@@ -55,7 +55,7 @@
                             <label>Last Name</label>
                             <input type="text" class=""
                               [ngClass]="{error: (f.lastName.invalid && f.lastName.dirty) || (submitted && f.lastName.invalid)}"
-                              formControlName="lastName" formControlName="lastName" />
+                              formControlName="lastName"/>
                             <div class="errorMessage"
                               *ngIf="(!!f.lastName.invalid && !!f.lastName.dirty && !!f.lastName.errors.email) || (submitted && !!f.lastName.invalid && !!f.lastName.errors.email) || (!!f.lastName.invalid && !!f.lastName.dirty)|| (submitted && !!f.lastName.invalid) ">
                               Please enter Last Name.</div>
@@ -80,8 +80,8 @@
                               <input [type]="showPassword?'text':'password'" class=""
                                 [ngClass]="{error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid)}"
                                 formControlName="password" />
-                              <button type="button" (click)="togglePasswordVisibility()"><i
-                                  class="icon-eye-hide"></i></button>
+                              <button type="button" (click)="togglePasswordVisibility()"><i class="icon-eye-show" *ngIf="showPassword"></i><i
+                                class="icon-eye-hide" *ngIf="!showPassword"></i></button>
                             </div>
                             <div class="errorMessage" *ngIf="(submitted && !!f.password.invalid) ">Please enter
                               Password.</div>
@@ -118,8 +118,8 @@
                               <input [type]="showConfirmPassword?'text':'password'" class=""
                                 formControlName="confirmpassword"
                                 [ngClass]="{error: errors && (!f.confirmpassword.pristine)}" />
-                              <button type="button" (click)="toggleConfirmPasswordVisibility()"><i
-                                  class="icon-eye-hide"></i></button>
+                              <button type="button" (click)="toggleConfirmPasswordVisibility()"><i class="icon-eye-show" *ngIf="showConfirmPassword"></i><i
+                                class="icon-eye-hide" *ngIf="!showConfirmPassword"></i></button>
                             </div>
                             <div class="errorMessage"
                               *ngIf="((!f.confirmpassword.pristine) && (errors && !!errors.notSame))">confirm
