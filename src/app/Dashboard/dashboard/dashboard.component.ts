@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
   
   public onConnect() {
     const _self = this;
-     this.connectedToBusiness='QuickBook Online';
+     this.connectedToBusiness='QuickBooks Online';
     var LeftPosition = (screen.width) ? (screen.width-600)/2 : 0;
     var TopPosition = (screen.height) ? (screen.height-700)/2 : 0;
     var settings ='height='+700+',width='+600+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable';
