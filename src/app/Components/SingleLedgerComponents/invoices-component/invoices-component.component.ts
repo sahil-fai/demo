@@ -139,7 +139,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       this.companyCurrency = localStorage.getItem('CompanyCurrency');
     }
     this.getinvoices(companyid);
-    console.log(this.getinvoices)
+    // console.log(this.getinvoices)
 
   }
 
@@ -147,9 +147,9 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     this.businessService.getAllInvoices(companyid).subscribe(
       res => {
         this.invoices = res;
-        console.log(this.invoices)
+        // console.log(this.invoices)
         this.totalRec = this.invoices.length;
-        console.log(this.totalRec)
+        // console.log(this.totalRec)
         this.dataSource = new MatTableDataSource < PeriodicElement > (this.invoices);
         // this.handlePage({
         //   pageSize: this.size,

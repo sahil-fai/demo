@@ -88,7 +88,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
       if (res.length > 0) {
       let response = this.helper.convertJsonKeysToLower(res);
       this.vendors = response;
-      console.log(this.vendors)
+      // console.log(this.vendors)
       this.dataSource = new MatTableDataSource < PeriodicElement > (this.vendors);
 
         // this.handlePage({
@@ -203,9 +203,9 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
             this._toastr.success(res.message);
           }
         },(err)=>{
-          console.log("email failed")
+          // console.log("email failed")
         })
-        console.log(item)
+        // console.log(item)
     } else {
       this._errHandler.pushError('Sorry email is empty');
     }
