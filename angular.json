@@ -66,7 +66,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "singleledgerplugweb:build"
+            "browserTarget": "angular8:build"
           },
           "configurations": {
             "production": {
