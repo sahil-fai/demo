@@ -26,7 +26,6 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('brij request intercept');
     this._loaderService.isLoading.next(true);
     const token: string = localStorage.getItem('TOKEN');
     if (token) {
@@ -48,7 +47,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(tap((event: HttpEvent<any>) => {
       if (event instanceof HttpResponse) {
-        console.log('brij request intercept next', event.type);
       }
       if (event.type === 4) {
         this.removeRequest(request);

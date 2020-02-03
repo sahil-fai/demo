@@ -20,6 +20,7 @@ export class ResetForgetPasswordComponent implements OnInit {
   private _resetCode: string;
   formReset: FormGroup;
   public showPassword: boolean = false;
+  public showConfirmPassword = false;
   _authService: any;
   _router: any;
   safeSrc: any;
@@ -114,7 +115,9 @@ export class ResetForgetPasswordComponent implements OnInit {
 
   get f() { return this.formReset.controls; }
 
-
+  get errors() {
+    return this.formReset.errors;
+  }
   openDialog(data: string): void {
     this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(data);
     const dialogRef = this.dialog.open(DialogOverviewExampleDialogComponent, {
@@ -125,6 +128,9 @@ export class ResetForgetPasswordComponent implements OnInit {
 
   public togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
+  }
+  public toggleConfirmPasswordVisibility() {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 
 }
