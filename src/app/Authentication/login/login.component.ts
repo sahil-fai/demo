@@ -24,11 +24,9 @@ export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
   public notificationserveice: Subscription;
   public message: any = 'Successfully login';
   @ViewChild('email', { static: true }) private elementRef: ElementRef;
-
-  // tslint:disable-next-line: max-line-length
-  constructor(private router: Router, private _fb: FormBuilder,private _errHandler: ErrorHandlerService, private authService: AuthService, private helper: HelperService, private sanitizer: DomSanitizer, public dialog: MatDialog, private notification: NotificationsnackbarService, private snackBar: MatSnackBar) { }
-
   formLogin: FormGroup;
+
+  constructor(private router: Router, private _fb: FormBuilder,private _errHandler: ErrorHandlerService, private authService: AuthService, private helper: HelperService, private sanitizer: DomSanitizer, public dialog: MatDialog, private notification: NotificationsnackbarService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     localStorage.clear();
@@ -39,64 +37,59 @@ export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
       }
     });
   }
+
   private createForm() {
     this.formLogin = this._fb.group({
       username: ['', [ Validators.required, Validators.email ]],
       password: ['', [ Validators.required, Validators.minLength(6) ]]
     });
   }
-  public onLogin() { 
+
+  public onLogin() { console.log('clik on login: ');
     this.submitted = true;
     if (this.formLogin.invalid) {return; }
-    this.authService.login(this.formLogin.value).subscribe(res => {
-        
-       if (res===null)
-       {
-         this.router.navigate(['/login'])
-         console.log(res);
+    this.authService.login(this.formLogin.value).subscribe(res => {      console.log('clik on login: ', res);  
+       if (res===null) {
+         this.router.navigate(['/login']);
          return;
        }
-
         this.helper.userInfo.set(res.user);
         this.helper.set(res.token);
         this.router.navigate(['/businesslist']);       
     },
     err =>  {
-      if (err.status === 401)
-      {
+      if (err.status === 401) {
         this._errHandler.pushError("Invalid Credentials")
-      }
-     else if (err.status === 404)
-      {
-
-      }
-      else {
+      } else if (err.status === 404) {
+      } else {
          this._errHandler.pushError(err.message)
-        }
-      
+        }      
       this.formLogin.patchValue({password: ''});
     }
     );
   }
+
   get f() {
     return this.formLogin.controls;
   }
+
   openDialog(data: string): void {
     this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(data);
     const dialogRef = this.dialog.open(DialogOverviewExampleDialogComponent, {
       data: {safeSrc: this.safeSrc}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-     // console.log('The dialog was closed');
-    });
+    dialogRef.afterClosed().subscribe(result => { });
   }
+
   ngOnChanges(): void {
     console.log(this.formLogin);
   }
+
   ngAfterViewInit(): void {
     this.elementRef.nativeElement.focus();
-}
+  }
+
   public togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }

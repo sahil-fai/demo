@@ -113,9 +113,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   companyCurrency: string;
   // @ViewChild(MatPaginator, {static: true
   // }) paginator: MatPaginator;
-  displayedColumns: string[] = ['Number',
-    'CustomerName', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'BlockchainTransactionID', 'star',
-  ];
+  displayedColumns: string[] = ['Index', 'Number', 'CustomerName', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'BlockchainTransactionID', 'star' ];
   expandedElement: PeriodicElement | null;
   selection = new SelectionModel < PeriodicElement > (true, []);
   invoice: string;

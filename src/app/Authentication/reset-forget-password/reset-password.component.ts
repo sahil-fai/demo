@@ -27,38 +27,36 @@ export class ResetForgetPasswordComponent implements OnInit {
   checkResetPasswordStatus: any;
   showInvalidPage: boolean = true;
 
-  constructor(private router: Router, private loaderService:LoaderService, private route:ActivatedRoute, private _fb: FormBuilder, private authService: AuthService, private helper: HelperService, private sanitizer: DomSanitizer, public dialog: MatDialog, private notification: NotificationsnackbarService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private loaderService: LoaderService, private route: ActivatedRoute, private _fb: FormBuilder, private authService: AuthService, private helper: HelperService, private sanitizer: DomSanitizer, public dialog: MatDialog, private notification: NotificationsnackbarService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.loaderService.showLoader();
-   // this.checkResetPasswordStatus = {message:"Please wait while validating your request"};
+  //  this.loaderService.showLoader();
     this.showInvalidPage = false;
     this._resetCode = this.route.snapshot.queryParams.requestId;
-    if(this._resetCode) {
-      this.authService.checkResetPasswordLinkStatus(Number(this._resetCode)).subscribe(res =>
-        {
-     this.loaderService.hideLoader();
-        if(!res.status){
-      this.checkResetPasswordStatus = res;
-      this.showInvalidPage = false;
-      }
-else{
-  this.showInvalidPage = true;
-}
-      },err=>{
-        this.loaderService.hideLoader();
+    if (this._resetCode) {
+      this.authService.checkResetPasswordLinkStatus(Number(this._resetCode)).subscribe(res => {
+     //   this.loaderService.hideLoader();
+        if (!res.status) {
+          this.checkResetPasswordStatus = res;
+          this.showInvalidPage = false;
+        }
+        else {
+          this.showInvalidPage = true;
+        }
+      }, err => {
+      //  this.loaderService.hideLoader();
       });
     }
     this.createForm();
   }
-  private createForm(){
+  private createForm() {
     this.formReset = this._fb.group({
       password: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
       confirmpassword: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]]
     },
-    {
-      validator: this.checkPasswords
-    });
+      {
+        validator: this.checkPasswords
+      });
   }
   public checkPasswords(group: FormGroup) {
     if (group.controls) {
@@ -101,9 +99,9 @@ else{
     return null;
   }
 
-  public onReset(){
+  public onReset() {
     this.submitted = true;
-    if(this.formReset.valid){ console.log('password', this.formReset.value.password);
+    if (this.formReset.valid) {
       const data = {
         requestId: this._resetCode,
         password: this.formReset.value.password
@@ -115,20 +113,17 @@ else{
   }
 
 
-  get f() { return this.formReset.controls;}
+  get f() { return this.formReset.controls; }
 
   get errors() {
     return this.formReset.errors;
   }
   openDialog(data: string): void {
-    this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(data);
+    this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(data);
     const dialogRef = this.dialog.open(DialogOverviewExampleDialogComponent, {
-      data: {safeSrc: this.safeSrc}
+      data: { safeSrc: this.safeSrc }
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-     // console.log('The dialog was closed');
-    });
+    dialogRef.afterClosed().subscribe(result => { });
   }
 
   public togglePasswordVisibility() {
