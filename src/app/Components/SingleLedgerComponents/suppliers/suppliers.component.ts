@@ -29,48 +29,21 @@ export class SuppliersComponent implements OnInit {
     vendor = [];
     COA = [];
     platfrom = [];
-    mapping = [];
+    public mapping = [
+      { Name: 'VendorBase', ID: 270 },
+      { Name: 'SubjectBase', ID: 271 },
+      { Name: 'ItemBase', ID: 272 },
+    ];
     SubAccount = [];
     opration = [];
 
 
   public title = 'My Suppliers';
   formTransaction: FormGroup;
-  // public COA = [
-  //   // { Name: 'COA-1', ID: 1 },
-  //   // { Name: 'COA-2', ID: 2 },
-  //   // { Name: 'COA-3', ID: 3 },
-  // ];
-  // public mapping = [
-  //   // { Name: 'VendorBase', ID: 270 },
-  //   // { Name: 'SubjectBase', ID: 271 },
-  //   // { Name: 'ItemBase', ID: 272 },
-  // ];
-  // public platfrom = [
-  //   // { Name: 'Platfrom-1', ID: 1 },
-  //   // { Name: 'Platfrom-2', ID: 2 },
-  //   // { Name: 'Platfrom-3', ID: 3 },
-  // ];
-  // public Vendor = [
-  //   // { Name: 'Vendor-1', ID: 1 },
-  //   // { Name: 'Vendor-2', ID: 2 },
-  //   // { Name: 'Vendor-3', ID: 3 },
-  // ];
-  // public SubAccount = [
-  //   // { Name: 'SubAccount-1', ID: 1 },
-  //   // { Name: 'SubAccount-2', ID: 2 },
-  //   // { Name: 'SubAccount-3', ID: 3 },
-  // ];
-  // public opration = [
-  //   // { Name: 'AND', ID: 274 },
-  //   // { Name: 'OR', ID: 275 }
-  // ];
   public transcationList = [];
   public COAMappings: any;
   public isCOAEnabled = true;
   switchCompanySubscription: any;
-
-
   private _createForm() {
     this.formTransaction = this.fb.group({
       Contact: [],
@@ -166,6 +139,7 @@ export class SuppliersComponent implements OnInit {
     return this.opration.find(x => x.ID === operationtypeidl);
   }
   _getMappingByID(chartofaccountmappingtypeidl: any) {
+    console.log(chartofaccountmappingtypeidl)
     return this.mapping.find(x => x.ID === chartofaccountmappingtypeidl);
   }
 

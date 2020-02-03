@@ -5,6 +5,6 @@
 export const environment = {
   //host: 'https://localhost:3000/',
   sockethost:'http://localhost:4444',
-  host: 'https://beta.singleledger.org:3000/',
+ host: 'https://beta.singleledger.org:3000/',
   production: false
 };
