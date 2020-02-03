@@ -29,7 +29,7 @@
                 <tr *ngFor="let item of transcationList">
                   <ng-container *ngIf="item.editable">
                     <td>
-                      <ng-select [items]="Vendor" [loading]="false" bindLabel="companyName" placeholder="Select Vendor"
+                      <ng-select [items]="vendor" [loading]="false" bindLabel="companyName" placeholder="Select Vendor"
                         appendTo="body" formControlName="Contact" required>
                         <ng-template ng-option-tmp let-item="item" let-index="index">
                           <div title="{{item.companyName|| 'N/A' }}">{{item.companyName|| 'N/A' }}</div>
