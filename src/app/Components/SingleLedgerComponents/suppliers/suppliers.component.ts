@@ -26,44 +26,24 @@ export class SuppliersComponent implements OnInit {
     itemDescription3: '',
     opration: 'AND'
   };
+    vendor = [];
+    COA = [];
+    platfrom = [];
+    public mapping = [
+      { Name: 'VendorBase', ID: 270 },
+      { Name: 'SubjectBase', ID: 271 },
+      { Name: 'ItemBase', ID: 272 },
+    ];
+    SubAccount = [];
+    opration = [];
+
 
   public title = 'My Suppliers';
   formTransaction: FormGroup;
-  public COA = [
-    { Name: 'COA-1', ID: 1 },
-    { Name: 'COA-2', ID: 2 },
-    { Name: 'COA-3', ID: 3 },
-  ];
-  public mapping = [
-    { Name: 'VendorBase', ID: 270 },
-    { Name: 'SubjectBase', ID: 271 },
-    { Name: 'ItemBase', ID: 272 },
-  ];
-  public platfrom = [
-    { Name: 'Platfrom-1', ID: 1 },
-    { Name: 'Platfrom-2', ID: 2 },
-    { Name: 'Platfrom-3', ID: 3 },
-  ];
-  public Vendor = [
-    { Name: 'Vendor-1', ID: 1 },
-    { Name: 'Vendor-2', ID: 2 },
-    { Name: 'Vendor-3', ID: 3 },
-  ];
-  public SubAccount = [
-    { Name: 'SubAccount-1', ID: 1 },
-    { Name: 'SubAccount-2', ID: 2 },
-    { Name: 'SubAccount-3', ID: 3 },
-  ];
-  public opration = [
-    { Name: 'AND', ID: 274 },
-    { Name: 'OR', ID: 275 }
-  ];
   public transcationList = [];
   public COAMappings: any;
   public isCOAEnabled = true;
   switchCompanySubscription: any;
-
-
   private _createForm() {
     this.formTransaction = this.fb.group({
       Contact: [],
@@ -82,26 +62,26 @@ export class SuppliersComponent implements OnInit {
 
 
 
-    	
+
      constructor(private helper: HelperService,
-         private businessService: BusinessService, private fb: FormBuilder,
-         private switchCompany: SwitchCompanyService) {
-    	
-         	
+                 private businessService: BusinessService, private fb: FormBuilder,
+                 private switchCompany: SwitchCompanyService) {
+
+
          this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
-    	
+
              () => {
-    
+
                this.transcationList = [];
-    
+
                this.COAMappings=[];
-    	
+
                this.ngOnInit();
-    	
+
              }
-    
+
            );
-    	
+
     }
 
   ngOnInit() {
@@ -119,7 +99,7 @@ export class SuppliersComponent implements OnInit {
   _getChartofAccountMappings() {
 
      const companyid = Number(this.helper.getcompanyId());
-  this.businessService.getchartofaccountmapping(companyid).subscribe(res => {
+     this.businessService.getchartofaccountmapping(companyid).subscribe(res => {
       if (res.length > 0) {
         this.COAMappings = res;
         this._generateCOAMapping();
@@ -149,19 +129,26 @@ export class SuppliersComponent implements OnInit {
     });
 
   }
+  // _getOperationTypeByID(operationtypeidl: any) {
+  //   return this.opration.find(x => x.ID === operationtypeidl).Name;
+  // }
+  // _getMappingByID(chartofaccountmappingtypeidl: any) {
+  //   return this.mapping.find(x => x.ID === chartofaccountmappingtypeidl).Name;
+  // }
   _getOperationTypeByID(operationtypeidl: any) {
-    return this.opration.find(x => x.ID === operationtypeidl).Name;
+    return this.opration.find(x => x.ID === operationtypeidl);
   }
   _getMappingByID(chartofaccountmappingtypeidl: any) {
-    return this.mapping.find(x => x.ID === chartofaccountmappingtypeidl).Name;
+    console.log(chartofaccountmappingtypeidl)
+    return this.mapping.find(x => x.ID === chartofaccountmappingtypeidl);
   }
 
   _getVendors() {
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getAllVendors(companyid).subscribe(res => {
       if (res.length === 0) { this.isCOAEnabled = false; }
-      if (res.length > 0) {
-        this.Vendor = res;
+      if (res.length > 0) { console.log(res);
+        this.vendor = res;
       }
     });
   }
@@ -207,7 +194,7 @@ export class SuppliersComponent implements OnInit {
       subject: formData.Subject,
       companyid: Companyid
     };
-console.log(JSON.stringify(data))
+    console.log(JSON.stringify(data))
     if (this.COAMappings) {
 
       const vendor = this.COAMappings.filter(x => (x.vendorid === formData.Contact.vendorid) &&
@@ -235,10 +222,10 @@ console.log(JSON.stringify(data))
   }
 
 
-  // public editRecord(item) {
+   public editRecord(item) {
   //   console.log(this.formTransaction);
   //   console.log(item);
   //   item.editable = true;
   //   this.formTransaction.controls["Contact"].setValue(item.vendorName);
-  // }
+   }
 }

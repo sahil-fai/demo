@@ -1,21 +1,8 @@
-<!-- <div class="layer" *ngIf="showLoader"></div>
-<mat-progress-bar *ngIf="showLoader" [mode]="'indeterminate'" [color]="'warn'"></mat-progress-bar>
-<div class="loader" *ngIf="showLoader">
-    <div class="dots one"></div>
-    <div class="dots two"></div>
-    <div class="dots three"></div>
-    <div class="dots four"></div>
-    <div class="dots five"></div>
-  </div> -->
-  <!-- <div class="loader" *ngIf="showLoader">
-    <img src="/assets/images/spinnerlight@2x.png" alt="" class="scr">
-  </div> -->
-  <ngx-spinner
-            bdOpacity = 0.9
-            bdColor = "rgba(60,55,55,0.77)"
-            size = "medium"
-            color = "#06bff4"
-            type = "ball-scale-pulse"
-            [fullScreen] = "true">
-  <p style="color: white" > Loading... </p>
-  </ngx-spinner>
+<div class="fixed-wrapper" *ngIf="loaderService.isLoading | async"></div>
+<div class="stretch-progress" *ngIf="loaderService.isLoading | async">
+  <div class="stretch-progress-elem1"></div>
+  <div class="stretch-progress-elem2"></div>
+  <div class="stretch-progress-elem3"></div>
+  <div class="stretch-progress-elem4"></div>
+  <div class="stretch-progress-elem5"></div>
+</div>

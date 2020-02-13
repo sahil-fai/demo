@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { LoginComponent } from './Authentication/login/login.component';
 import { SignupComponent } from './Authentication/signup/signup.component';
 import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
-import { AuthGuard } from './Guards/auth.guard';
 import { SingleLedgerBusinessListComponent } from './Dashboard/single-ledger-business-list/single-ledger-business-list.component';
-import { SingleLedgerMasterComponentComponent
-} from './Components/SingleLedgerComponents/single-ledger-master-component/single-ledger-master-component.component';
+import { SingleLedgerMasterComponentComponent } from './Components/SingleLedgerComponents/single-ledger-master-component/single-ledger-master-component.component';
 import { BillsComponentComponent } from './Components/SingleLedgerComponents/bills-component/bills-component.component';
 import { VendorsComponentComponent } from './Components/SingleLedgerComponents/vendors-component/vendors-component.component';
 import { CustomersComponentComponent } from './Components/SingleLedgerComponents/customers-component/customers-component.component';
@@ -19,37 +16,37 @@ import { ChartOfAccountComponent } from './Components/SingleLedgerComponents/cha
 import { LoginGuard } from './Guards/login.guard';
 import { BusinessGuard } from './Guards/business.guard';
 import { ForgotPasswordComponent } from './Authentication/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './Authentication/reset-password/reset-password.component';
+import { ResetForgetPasswordComponent } from './Authentication/reset-forget-password/reset-password.component';
+
 const routes: Routes = [
   {
     path: 'login', component: LoginComponent
   },
   {
     path: 'signup', component: SignupComponent,
+  },
+  {
+    path: 'verify-invite/:requestId', component: SignupComponent,
 
   },
   {
     path: 'forgot-password', component: ForgotPasswordComponent,
   },
   {
-    path: 'reset-password', component: ResetPasswordComponent,
+    path: 'reset-forget-password', component: ResetForgetPasswordComponent,
   },
-  {path: 'signup/:invitetype/:inviteuserid/:invitecompanyid', component:SignupComponent},
-
+  { 
+    path: 'signup/:invitetype/:inviteuserid/:invitecompanyid', component: SignupComponent
+  },
   {
-   // path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]
-    // path: 'connectbusiness', component: DashboardComponent, canActivate:[LoginGuard],children:[
-    //   {path: '404', component: DashboardComponent},
-    //   {path: '**', redirectTo: 'connectbusiness'},
-    // ]
     path: 'connectbusiness', component: DashboardComponent, canActivate: [LoginGuard]
   },
   {
     path: 'businesslist', component: SingleLedgerBusinessListComponent, canActivate:[LoginGuard]
   },
-
   {
-  path: 'business', component: SingleLedgerMasterComponentComponent, canActivate:[LoginGuard, BusinessGuard],children: [
+  path: 'business', component: SingleLedgerMasterComponentComponent, canActivate:[LoginGuard, BusinessGuard],
+      children: [
           {
             path: 'dashboard', component: DashboardComponetComponent,canActivate:[LoginGuard,BusinessGuard]
           },
@@ -74,17 +71,14 @@ const routes: Routes = [
           {
             path: 'chart-of-account', component: ChartOfAccountComponent,canActivate:[LoginGuard,BusinessGuard]
           },
-          // {path: '404', component: CompanyInfoComponentComponent},
-          // {path: '**', redirectTo: 'company-info'}
         ]
   },
   {
     path: '', redirectTo: 'login', pathMatch: 'full'
   },
-  // {
-  //   path: '**', redirectTo: 'login'
-  // }
-  {path: '**', redirectTo: 'connectbusiness'},
+  {
+    path: '**', redirectTo: 'connectbusiness'
+  }
 ];
 
 @NgModule({

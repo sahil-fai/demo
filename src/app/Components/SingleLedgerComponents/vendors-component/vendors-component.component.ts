@@ -88,12 +88,14 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
       if (res.length > 0) {
       let response = this.helper.convertJsonKeysToLower(res);
       this.vendors = response;
+      // console.log(this.vendors)
+      this.dataSource = new MatTableDataSource < PeriodicElement > (this.vendors);
 
-        this.handlePage({
-          pageSize: '10',
-          pageIndex: '0',
-          data: this.vendors
-        });
+        // this.handlePage({
+        //   pageSize: '0',
+        //   pageIndex: '0',
+        //   data: this.vendors
+        // });
         // this.isBusinessLoaded=true;
       } else {
         // this.companylist=[];
@@ -170,8 +172,8 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
     }
   }
   postInvite(item:any)
-  { 
-    if(item.email) { 
+  {
+    if(item.email) {
         const userid = Number(this.helper.getuserId());
         const compid = Number(this.helper.getcompanyId());
         const email = item.email;
@@ -196,14 +198,14 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
         this.businessService.postInvite(data).subscribe((res)=>{
           if(res) {
             if(res.invite_count == 1) {
-             this.getAllvendors();           
+             this.getAllvendors();
             }
             this._toastr.success(res.message);
           }
         },(err)=>{
-          console.log("email failed")
+          // console.log("email failed")
         })
-        console.log(item)
+        // console.log(item)
     } else {
       this._errHandler.pushError('Sorry email is empty');
     }

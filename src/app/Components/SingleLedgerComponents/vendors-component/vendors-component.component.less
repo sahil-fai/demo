@@ -16,6 +16,9 @@
             padding-bottom: 0px;
           }
         }
+        .reset-filter{
+          display: flex;
+        }
       }
     }
   }
@@ -108,15 +111,18 @@ button:disabled {
 .example-container {
   width: auto;
   overflow: auto;
-  max-height: 500px;
+  // max-height: 500px;
 }
 
 table {
   width: 100%;
   font-weight: 500;
   .table-head{
+    font-family: 'Roboto';
     position: sticky;
     top: 0;
+    background: #e1f1f5;
+    z-index: 1;
 
   }
   td{
@@ -142,7 +148,7 @@ td.mat-column-position {
   }
 
   &:last-child {
-    text-align: right;
+    // text-align: right;
     padding-right: 10px;
   }
 }

@@ -28,7 +28,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   bills: any;
   public dataSource: MatTableDataSource<PeriodicElement>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  displayedColumns: string[] = ['index', 'Number', 'VendorName','Date', 'DueDate', 'Total', 'Balance', 
+  displayedColumns: string[] = ['index', 'Number', 'VendorName','Date', 'DueDate', 'Total', 'Balance',
  // 'star'
 ];
   selection = new SelectionModel<PeriodicElement>(true, []);
@@ -47,7 +47,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   ngOnInit() {
       this.getAllBills();
       this.platformid = this.helper.getplatformId();
-      if(localStorage.getItem('CompanyCurrency')) {
+      if(localStorage.getItem('CompanyCurrency') && localStorage.getItem('CompanyCurrency')!== undefined) {
         this.companyCurrency = localStorage.getItem('CompanyCurrency');
       }
   }
@@ -56,7 +56,8 @@ getAllBills() {
   const filter = '?filter={"include":[{"relation":"all"}]}';
   this.businessService.getAllBills(companyid).subscribe(res => {
     this.bills = res;
-    this.handlePage({pageSize: '10', pageIndex: '0'});
+    // this.handlePage({pageSize: '10', pageIndex: '0'});
+    this.dataSource = new MatTableDataSource<PeriodicElement>(this.bills);
   });
 }
   /** Whether the number of selected elements matches the total number of rows. */

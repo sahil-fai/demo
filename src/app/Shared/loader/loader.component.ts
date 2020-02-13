@@ -1,33 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoaderService } from 'src/app/services/loader-service/loader.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-loader',
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.less']
 })
-export class LoaderComponent implements OnInit, OnDestroy {
+export class LoaderComponent implements OnInit {
+  public showLoader: boolean;
 
-  private subscription;
-  public showLoader = false;
+  constructor(public loaderService: LoaderService) { }
 
-  constructor(private loaderService: LoaderService, private spinner: NgxSpinnerService) { }
+  ngOnInit() { }
 
-  ngOnInit() {
-    this.spinner.show();
-    this.subscription = this.loaderService.loaderState.subscribe((loader) => {
-     // this.showLoader = true;
-     if (loader > 0) {
-        this.spinner.show();
-      } else {
-          this.spinner.hide();
-      }
-    });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
 }
-

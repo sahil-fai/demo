@@ -51,12 +51,12 @@ export class AuthService {
     return this.http.post<any>('users/forget-password/' + username, null);
   }
 
-  checkResetPasswordLinkStatus(id: number): Observable<any> { console.log('check password hit: ', id);
+  checkResetPasswordLinkStatus(id: number): Observable<any> {
     return this.http.get<any>('users/reset-password?requestId=' + id);
   }
 
   verifyInvite(id: number): Observable<any> {
-    return this.http.get<any>('signup?requestId=' + id);
+    return this.http.get<any>('verify-invite?requestId=' + id);
   }
   
 }

@@ -16,7 +16,6 @@ import { TermsConditionsComponent } from '../../Shared/terms-conditions/terms-co
 export class SignupComponent implements OnInit, OnDestroy {
   public submitted: boolean;
   safeSrc: SafeResourceUrl;
-  private userEmail = '';
   public showPassword = false;
   public showConfirmPassword = false;
   isRegistered = false;
@@ -24,19 +23,16 @@ export class SignupComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   private mobileQueryListener: () => void;
   width: string;
+  requestid: string;
   verifyInviteRes: any;
-  showInvalidPage: boolean = true;
+  showInvalidPage: string;
   invitetype: string;
   invitecompanyid: string;
   inviteuserid: string;
-  protected aFormGroup: FormGroup;
-  constructor(private router: Router, private route: ActivatedRoute,private fb: FormBuilder, private authService: AuthService, private sanitizer: DomSanitizer, public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
-    this.mobileQuery = media.matchMedia('(max-width: 767px)');
-    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this.mobileQueryListener);
-  }
+  captchaSiteKey: string;
   formRegister: FormGroup;
-  roles = [{
+  roles = [
+    {
       value: 'cpa',
       viewValue: 'CPA'
     },
@@ -49,57 +45,66 @@ export class SignupComponent implements OnInit, OnDestroy {
       viewValue: 'accountant'
     }
   ];
+
+  constructor(private router: Router, private route: ActivatedRoute,private fb: FormBuilder, private authService: AuthService, private sanitizer: DomSanitizer, public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
+    this.mobileQuery = media.matchMedia('(max-width: 767px)');
+    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this.mobileQueryListener);
+  }
+
   ngOnInit() {
-    // let data = {
-    //   invitetype : this.route.snapshot.queryParams.invitetype,
-    //   invitecompanyid : this.route.snapshot.queryParams.invitecompanyid,
-    //   inviteuserid : this.route.snapshot.queryParams.inviteuserid
-    // };
-    // this.aFormGroup = this.fb.group({
-    //   recaptcha: ['', Validators.required]
-    // });
-
-
+    // Enable captcha for local with test site key
+    if(location.origin.indexOf('localhost') > 0) {
+      this.captchaSiteKey = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+    } else {
+      this.captchaSiteKey = '6LdE6c8UAAAAAMN2BRGwbzIEQLh2UwviTtyNZY30';
+    }
+    // Case of Sign up from invite link
     if(this.route.snapshot.queryParams.requestId) {
-
+      this.requestid= this.route.snapshot.queryParams.requestId
       this.authService.verifyInvite(Number(this.route.snapshot.queryParams.requestId)).subscribe(res => {
-      if(res.status) {
+      if(res.status) { 
         this.invitetype = res.source;
         this.invitecompanyid = res.companyid;
         this.inviteuserid = res.userid;
+        this.showInvalidPage = 'signup';
       } else {
-        this.showInvalidPage = false;
+        this.showInvalidPage = 'invalidMessage';
         this.verifyInviteRes = res;
       }
       });
+    } else {
+      this.showInvalidPage = 'signup';
     }
+    
+    // Case of Sign up invitation from Paypie account
+    if(this.route.snapshot.params.invitetype) { 
+      this.invitetype = this.route.snapshot.params.invitetype;
+      this.invitecompanyid = this.route.snapshot.params.invitecompanyid;
+      this.inviteuserid = this.route.snapshot.params.inviteuserid;
+    };
+
     this.createForm();
-
-
   }
+
   private createForm() {
     this.formRegister = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: [''],
-      username: [this.userEmail, [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
       confirmpassword: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
       isAgree: ['', [Validators.requiredTrue]],
-      recaptcha: ['', Validators.required],
+      recaptcha: ['', [Validators.required]],
       role: [null, [Validators.required]]
     }, {
       validator: this.checkPasswords
     });
   }
 
-  public handleSuccess(event)
-  {
-
-  }
+ 
   // check for Numbers
-  private hasNumber(control: AbstractControl): {
-    [key: string]: boolean
-  } | null {
+  private hasNumber(control: AbstractControl): { [key: string]: boolean } | null {
     if (control.value && !(/\d/.test(control.value))) {
       return {
         number: true
@@ -109,9 +114,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   // check for Upper Case letters
-  private hasUppercase(control: AbstractControl): {
-    [key: string]: boolean
-  } | null {
+  private hasUppercase(control: AbstractControl): { [key: string]: boolean } | null {
     if (control.value && !(/[A-Z]/.test(control.value))) {
       return {
         uppercase: true
@@ -121,9 +124,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   // check for Lower Case letters
-  private hasLowercase(control: AbstractControl): {
-    [key: string]: boolean
-  } | null {
+  private hasLowercase(control: AbstractControl): { [key: string]: boolean } | null {
     if (control.value && !(/[a-z]/.test(control.value))) {
       return {
         lowercase: true
@@ -133,9 +134,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   // check for Special Characters
-  private hasSpecialCharacter(control: AbstractControl): {
-    [key: string]: boolean
-  } | null {
+  private hasSpecialCharacter(control: AbstractControl): { [key: string]: boolean } | null {
     if (control.value && !(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(control.value))) {
       return {
         specialcharacter: true
@@ -143,45 +142,42 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
     return null;
   }
+
   public onRegister() {
     this.submitted = true;
-    // if (this.formRegister.invalid) {
-    //   return;
-    // }
-    // if(this.verifyInviteRes.status) {
-      if(this.formRegister.valid) {
+    if (this.formRegister.valid) {
         const data = {
-            email: this.formRegister.value.username,
-            lastname: this.formRegister.value.lastName,
-            password: this.formRegister.value.password,
-            firstName: this.formRegister.value.firstName,
-            roleType: this.formRegister.value.role,
-            inviteby: this.formRegister.value.inviteby,
-            invitetype: this.invitetype,
-            invitecompanyid: this.invitecompanyid?this.invitecompanyid.toString():undefined,
-            inviteuserid: this.inviteuserid?this.inviteuserid.toString():undefined
+          email: this.formRegister.value.username,
+          lastname: this.formRegister.value.lastName,
+          password: this.formRegister.value.password,
+          firstName: this.formRegister.value.firstName,
+          roleType: this.formRegister.value.role,
+          inviteby: this.formRegister.value.inviteby,
+          invitetype: this.invitetype,
+          invitecompanyid: this.invitecompanyid ? this.invitecompanyid.toString() : undefined,
+          inviteuserid: this.inviteuserid ? this.inviteuserid.toString() : undefined,
+          requestId: this.requestid ? this.requestid.toString() : undefined
         }
-        this.authService.enroll(data).subscribe(res => {
-          this.isRegistered = true;
-          this.router.navigate(['/login']);
-        });
-      }
-
-    // }
-
-
-
+      this.authService.enroll(data).subscribe(res => {
+        this.isRegistered = true;
+        this.router.navigate(['/login']);
+      });
+    }
   }
+
   public togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
+
   public toggleConfirmPasswordVisibility() {
     this.showConfirmPassword = !this.showConfirmPassword;
   }
+
   /* Login form validations */
   get f() {
     return this.formRegister.controls;
   }
+
   get errors() {
     return this.formRegister.errors;
   }
@@ -194,10 +190,9 @@ export class SignupComponent implements OnInit, OnDestroy {
       },
       width: '70%',
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
+    dialogRef.afterClosed().subscribe(() => {  });
   }
+
   public checkPasswords(group: FormGroup) {
     if (group.controls) {
       let pass = group.controls.password.value;
@@ -207,13 +202,14 @@ export class SignupComponent implements OnInit, OnDestroy {
       };
     }
   }
+
   openTermsConditions() {
     this.width = '90vw';
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = this.width;
     dialogConfig.height = '90%';
-    dialogConfig.maxWidth = '600px';
+    dialogConfig.maxWidth = '700px';
     dialogConfig.position = {
       top: '50px'
     };
@@ -226,7 +222,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.mobileQuery.removeListener(this.mobileQueryListener);
   }
 
