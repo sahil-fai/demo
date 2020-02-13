@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { BusinessService } from 'src/app/services/business-service/business.service';
 import { HelperService } from 'src/app/services/helper-service/helper.service.js';
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -36,7 +37,11 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   switchCompanySubscription: any;
   platformid: number;
   companyCurrency: string;
-  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
+  formFilter: FormGroup;
+  private vendorName : FormControl
+  public submitted: boolean = false;
+  
+  constructor(private _fb : FormBuilder,public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
         this.ngOnInit();
@@ -45,13 +50,18 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.vendorName = new FormControl("", [ Validators.required, Validators.minLength(1) ])
+    this.formFilter = this._fb.group({
+      vendorName :this.vendorName
+    });
+
       this.getAllBills();
       this.platformid = this.helper.getplatformId();
       if(localStorage.getItem('CompanyCurrency') && localStorage.getItem('CompanyCurrency')!== undefined) {
         this.companyCurrency = localStorage.getItem('CompanyCurrency');
       }
   }
-getAllBills() {
+getAllBills(vendor = "") {
   const companyid = Number(this.helper.getcompanyId());
   const filter = '?filter={"include":[{"relation":"all"}]}';
   this.businessService.getAllBills(companyid).subscribe(res => {
@@ -59,6 +69,18 @@ getAllBills() {
     // this.handlePage({pageSize: '10', pageIndex: '0'});
     this.dataSource = new MatTableDataSource<PeriodicElement>(this.bills);
   });
+}
+
+
+filterVendor(){
+  this.submitted = true;
+  this.getAllBills(this.vendorName.value);
+}
+
+onReset(){
+  var a = this.submitted;
+  this.submitted = true;
+  this.formFilter.reset();
 }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {

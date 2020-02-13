@@ -31,6 +31,7 @@ import {
 import {
   SwitchCompanyService
 } from 'src/app/services/switch-company-service/switch-company.service';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 export interface PeriodicElement  {
   CustomerName: string;
@@ -119,7 +120,11 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   invoice: string;
   switchCompanySubscription: any;
   platformid: number;
-  constructor(public businessService: BusinessService,
+  formFilter: FormGroup;
+  private invoiceName : FormControl
+  public submitted: boolean = false;
+
+  constructor(private _fb : FormBuilder, public businessService: BusinessService,
     private helper: HelperService,
     private dialog: MatDialog,
     private switchCompany: SwitchCompanyService) {
@@ -131,6 +136,10 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.invoiceName = new FormControl("", [ Validators.required, Validators.minLength(1) ])
+    this.formFilter = this._fb.group({
+      invoiceName :this.invoiceName
+    });
     const companyid = Number(this.helper.getcompanyId());
     this.platformid = this.helper.getplatformId();
     if (localStorage.getItem('CompanyCurrency') !== undefined) {
@@ -154,6 +163,17 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
         //   pageIndex: this.pageIndex
         // });
       });
+  }
+
+  filterInvoices(){
+    this.submitted = true;
+    this.getinvoices(this.invoiceName.value);
+  }
+
+  onReset(){
+    var a = this.submitted;
+    this.submitted = true;
+    this.formFilter.reset();
   }
 
   // Paginator(items, page, per_page) {

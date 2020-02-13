@@ -30,13 +30,13 @@
         <mat-card-content>
                 <div class="Invoice-content">
                         <div class="searchPanel clearfix" *ngIf="invoices && invoices.length >0">
-                        <!-- <form  novalidate autocomplete="off">
+                        <form [formGroup]="formFilter" novalidate (ngSubmit)="filterInvoices()"  novalidate autocomplete="off">
                             <ul class="floatingList searchBlock">
                             <li class="smallFields fliter-for">
                                 <label class="labels">Filter For</label>
-                                <input type="text" class="fields" placeholder="Invoices, Number or Total" />
+                                <input type="text" class="fields" formControlName="invoiceName" id="invoiceName" placeholder="Invoices, Number or Total" />
                             </li>
-                            <li class="smallFields">
+                            <!-- <li class="smallFields">
                                 <label class="labels">From</label>
                                 <input type="text" class="fields calendar" />
                             </li>
@@ -52,20 +52,20 @@
                                     {{status.viewValue|| 'N/A' }}
                                 </option>
                                 </select>
-                            </li>
+                            </li> -->
                             <li>
                               <ul class="reset-filter">
                                 <li>
                                   <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
                               </li>
                               <li>
-                                  <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset"  />
+                                  <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" (click)="onReset()" [class.disable]="!this.submitted" />
                               </li>
                               </ul>
                             </li>
 
                             </ul>
-                        </form> -->
+                        </form>
                         </div>
                         <div class="bills-content mat-elevation-z8">
 

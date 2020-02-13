@@ -27,32 +27,32 @@
     <mat-card-content>
         <div class="bill-content">
             <div class="searchPanel clearfix" *ngIf="bills && bills.length > 0">
-                <!-- <form   novalidate autocomplete="off">
+                <form  [formGroup]="formFilter" novalidate (ngSubmit)="filterVendor()" novalidate autocomplete="off">
                   <ul class="floatingList searchBlock">
                     <li class="filter-for">
                       <label class="labels">Filter For</label>
-                      <input type="text" class="fields" placeholder="Vendor, Number or Total" />
+                      <input type="text" class="fields" formControlName="vendorName" id="vendorName" placeholder="Vendor, Number or Total" />
                     </li>
-                    <li class="smallFields">
+                    <!-- <li class="smallFields">
                         <label class="labels">From</label>
                         <input type="text"  class="fields calendar" />
                       </li>
                       <li class="smallFields">
                         <label class="labels">To</label>
                         <input type="text" class="fields calendar" />
-                      </li>
+                      </li> -->
                       <li>
                         <ul>
                           <li>
                             <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter"/>
                           </li>
                           <li>
-                            <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" />
+                            <input type="Reset" class="btn btn-medium uppercase btn-solid btn-deepblue" (click)="onReset()" [class.disable]="!this.submitted"value="Reset" />
                           </li>
                         </ul>
                       </li>
                   </ul>
-                </form> -->
+                </form>
             </div>
             <div class="bills-content mat-elevation-z8">
             <div class="example-container">

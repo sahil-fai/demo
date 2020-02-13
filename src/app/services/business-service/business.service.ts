@@ -12,28 +12,34 @@ export class BusinessService {
   constructor(private http: HttpClient, private helper:HelperService) { }
 
   getListOfbusinesses(id: number): Observable<any> {
-    return this.http.get<any>('/users/' + id + '/list');
+    return this.http.get<any>('/users/' + id + '/list?offset='+0);
   }
 
-  getAllCustomers(id: number): Observable<any> {
+  getAllCustomers(id: number, filter?: string): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/'+id+'/customers' , {
+    return this.http.get<any>('business/'+id+'/customers?offset='+0+'&displayname='+filter, {
+   });
+  }
+
+  searchCustomer(searchTerm: string, id: number): Observable<any> {
+    // tslint:disable-next-line: max-line-length
+    return this.http.get<any>('customersbyname?displayname='+searchTerm+'&companyId='+id, {
    });
   }
 
   getAllVendors(id: number): Observable<any> {
-    return this.http.get<any>('business/'+id+'/vendors', {
+    return this.http.get<any>('business/'+id+'/vendors?offset='+0, {
    });
   }
 
   getAllInvoices(id: number): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/'+id+'/invoices',{
+    return this.http.get<any>('business/'+id+'/invoices?offset='+0,{
     });
   }
 
-  getAllBills(id: number, filter?:string): Observable<any> {
-    return this.http.get<any>('business/bills/' + id );
+  getAllBills(id: number, vendorname?:string): Observable<any> {
+    return this.http.get<any>('business/' + id +'/invoicebills/?offset='+0+'&vendorname='+vendorname );
   }
 
   getPlatforms(): Observable<any> {
