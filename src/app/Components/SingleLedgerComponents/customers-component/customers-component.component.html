@@ -7,7 +7,7 @@
       <li>
         <label class="labels">Filter For</label>
         <div class="errorMessage"  *ngIf=" (formFilter.controls.name.invalid && formFilter.controls.name.touched || (submitted && formFilter.controls.name.invalid ))">
-           Please enter valid search filter.
+       
         </div>
         <input type="text"  class="fields"  [ngClass]="{error: (formFilter.controls.name.invalid && formFilter.controls.name.touched)}"
            formControlName="name" id="name" placeholder="Name" />

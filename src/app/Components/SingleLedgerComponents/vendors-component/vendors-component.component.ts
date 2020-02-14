@@ -93,6 +93,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
     this.platformid= this.helper.getplatformId()
     this.businessService.getAllVendors(companyid, filter).subscribe(res => {
       //console.log(res);
+      this.vendors = res;
       this.Totalrec = res.length;
       if (res.length > 0) {
       let response = this.helper.convertJsonKeysToLower(res);

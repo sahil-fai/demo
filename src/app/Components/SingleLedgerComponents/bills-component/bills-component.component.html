@@ -32,7 +32,7 @@
                     <li class="filter-for">
                       <label class="labels">Filter For</label>
                       <div class="errorMessage"  *ngIf=" (formFilter.controls.vendorName.invalid && formFilter.controls.vendorName.touched || (submitted && formFilter.controls.vendorName.invalid ))">
-                        Please enter valid search filter.
+                     
                      </div>
                       <input type="text" class="fields" formControlName="vendorName" id="vendorName" placeholder="Vendor, Number or Total" 
                       [ngClass]="{error: (formFilter.controls.vendorName.invalid && formFilter.controls.vendorName.touched)}"/>

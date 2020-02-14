@@ -35,7 +35,7 @@
                             <li class="smallFields fliter-for">
                                 <label class="labels">Filter For</label>
                                 <div class="errorMessage"  *ngIf=" (formFilter.controls.customerName.invalid && formFilter.controls.customerName.touched || (submitted && formFilter.controls.customerName.invalid ))">
-                                  Please enter valid search filter.
+                                
                                </div>
                                 <input type="text" class="fields" formControlName="customerName" id="customerName"
                                 [ngClass]="{error: (formFilter.controls.customerName.invalid && formFilter.controls.customerName.touched)}"  placeholder="Invoices, Number or Total" />
