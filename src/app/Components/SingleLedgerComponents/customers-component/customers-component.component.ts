@@ -85,7 +85,6 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
 
   getAllCustomer(companyid, filter = "") {
     this.businessService.getAllCustomers(companyid, filter).subscribe(res => {
-      debugger
       this.Totalrec = res.length;
       this.customers =  res;
       if (res.length > 0) {
