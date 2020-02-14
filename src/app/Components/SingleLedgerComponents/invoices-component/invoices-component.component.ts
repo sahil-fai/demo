@@ -121,8 +121,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   switchCompanySubscription: any;
   platformid: number;
   formFilter: FormGroup;
-  private invoiceName : FormControl
-  public submitted: boolean = false;
+  private customerName : FormControl
 
   constructor(private _fb : FormBuilder, public businessService: BusinessService,
     private helper: HelperService,
@@ -136,9 +135,9 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.invoiceName = new FormControl("", [ Validators.required, Validators.minLength(1) ])
+    this.customerName = new FormControl("", [ Validators.required, Validators.minLength(1) ])
     this.formFilter = this._fb.group({
-      invoiceName :this.invoiceName
+      customerName :this.customerName
     });
     const companyid = Number(this.helper.getcompanyId());
     this.platformid = this.helper.getplatformId();
@@ -150,8 +149,8 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
 
   }
 
-  public getinvoices(companyid: number) {
-    this.businessService.getAllInvoices(companyid).subscribe(
+  public getinvoices(companyid: number, filter="") {
+    this.businessService.getAllInvoices(companyid, filter).subscribe(
       res => {
         this.invoices = res;
         // console.log(this.invoices)
@@ -165,15 +164,13 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       });
   }
 
-  filterInvoices(){
-    this.submitted = true;
-    this.getinvoices(this.invoiceName.value);
+  filterCustomer(){
+    this.getinvoices(Number(this.helper.getcompanyId()), this.customerName.value);
   }
 
   onReset(){
-    var a = this.submitted;
-    this.submitted = true;
     this.formFilter.reset();
+    this.getinvoices(Number(this.helper.getcompanyId()));
   }
 
   // Paginator(items, page, per_page) {

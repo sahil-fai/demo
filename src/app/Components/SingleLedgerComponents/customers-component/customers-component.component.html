@@ -1,13 +1,17 @@
 <div class="title">
   <h2>{{title|| 'N/A' }}</h2>
 </div>
-<div class="searchPanel clearfix" *ngIf="customers && customers.length>0">
-  {{formFilter.value|json}}
+<div class="searchPanel clearfix" >
   <form [formGroup]="formFilter" novalidate (ngSubmit)="filterCustomer()" autocomplete="off">
     <ul class="floatingList searchBlock">
       <li>
         <label class="labels">Filter For</label>
-        <input type="text"  class="fields" formControlName="name" id="name" placeholder="Name" />
+        <div class="errorMessage"  *ngIf=" (formFilter.controls.name.invalid && formFilter.controls.name.touched || (submitted && formFilter.controls.name.invalid ))">
+           Please enter valid search filter.
+        </div>
+        <input type="text"  class="fields"  [ngClass]="{error: (formFilter.controls.name.invalid && formFilter.controls.name.touched)}"
+           formControlName="name" id="name" placeholder="Name" />
+  
       </li>
       <!-- <li class="smallFields">
         <label class="labels">From</label>
@@ -29,10 +33,11 @@
       <li>
         <ul class="reset-filter">
           <li>
-            <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
+            <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" [disabled]="name.invalid"  value="Filter" />
           </li>
           <li>
-            <input type="Reset" class="btn btn-medium uppercase btn-solid btn-deepblue" (click)="onReset()" [class.disable]="!this.submitted" value="Reset" />
+            <input type="Reset" class="btn btn-medium uppercase btn-solid btn-deepblue btn-disabled" (click)="onReset()" [disabled]="name.invalid" 
+             value="Reset" />
           </li>
         </ul>
       </li>

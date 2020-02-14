@@ -26,12 +26,16 @@
 <mat-card class="example-card">
     <mat-card-content>
         <div class="bill-content">
-            <div class="searchPanel clearfix" *ngIf="bills && bills.length > 0">
+            <div class="searchPanel clearfix" >
                 <form  [formGroup]="formFilter" novalidate (ngSubmit)="filterVendor()" novalidate autocomplete="off">
                   <ul class="floatingList searchBlock">
                     <li class="filter-for">
                       <label class="labels">Filter For</label>
-                      <input type="text" class="fields" formControlName="vendorName" id="vendorName" placeholder="Vendor, Number or Total" />
+                      <div class="errorMessage"  *ngIf=" (formFilter.controls.vendorName.invalid && formFilter.controls.vendorName.touched || (submitted && formFilter.controls.vendorName.invalid ))">
+                        Please enter valid search filter.
+                     </div>
+                      <input type="text" class="fields" formControlName="vendorName" id="vendorName" placeholder="Vendor, Number or Total" 
+                      [ngClass]="{error: (formFilter.controls.vendorName.invalid && formFilter.controls.vendorName.touched)}"/>
                     </li>
                     <!-- <li class="smallFields">
                         <label class="labels">From</label>
@@ -44,10 +48,10 @@
                       <li>
                         <ul>
                           <li>
-                            <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter"/>
+                            <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" [disabled]="vendorName.invalid" value="Filter"/>
                           </li>
                           <li>
-                            <input type="Reset" class="btn btn-medium uppercase btn-solid btn-deepblue" (click)="onReset()" [class.disable]="!this.submitted"value="Reset" />
+                            <input type="Reset" class="btn btn-medium uppercase btn-solid btn-deepblue btn-disabled" (click)="onReset()" [disabled]="vendorName.invalid" value="Reset" />
                           </li>
                         </ul>
                       </li>

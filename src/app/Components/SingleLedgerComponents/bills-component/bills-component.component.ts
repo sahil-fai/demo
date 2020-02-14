@@ -39,7 +39,6 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   companyCurrency: string;
   formFilter: FormGroup;
   private vendorName : FormControl
-  public submitted: boolean = false;
   
   constructor(private _fb : FormBuilder,public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
@@ -61,10 +60,10 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
         this.companyCurrency = localStorage.getItem('CompanyCurrency');
       }
   }
-getAllBills(vendor = "") {
+getAllBills(vendorName = "") {
   const companyid = Number(this.helper.getcompanyId());
   const filter = '?filter={"include":[{"relation":"all"}]}';
-  this.businessService.getAllBills(companyid).subscribe(res => {
+  this.businessService.getAllBills(companyid, vendorName).subscribe(res => {
     this.bills = res;
     // this.handlePage({pageSize: '10', pageIndex: '0'});
     this.dataSource = new MatTableDataSource<PeriodicElement>(this.bills);
@@ -73,14 +72,12 @@ getAllBills(vendor = "") {
 
 
 filterVendor(){
-  this.submitted = true;
   this.getAllBills(this.vendorName.value);
 }
 
 onReset(){
-  var a = this.submitted;
-  this.submitted = true;
   this.formFilter.reset();
+  this.getAllBills();
 }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {

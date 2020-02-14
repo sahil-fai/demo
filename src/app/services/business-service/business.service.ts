@@ -27,19 +27,19 @@ export class BusinessService {
    });
   }
 
-  getAllVendors(id: number): Observable<any> {
-    return this.http.get<any>('business/'+id+'/vendors?offset='+0, {
+  getAllVendors(id: number, filter?: string): Observable<any> {
+    return this.http.get<any>('business/'+id+'/vendors?offset='+0+'&displayname='+filter, {
    });
   }
 
-  getAllInvoices(id: number): Observable<any> {
+  getAllInvoices(id: number, filter?: string): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/'+id+'/invoices?offset='+0,{
+    return this.http.get<any>('business/'+id+'/invoices?offset='+0+'&customername='+filter,{
     });
   }
 
-  getAllBills(id: number, vendorname?:string): Observable<any> {
-    return this.http.get<any>('business/' + id +'/invoicebills/?offset='+0+'&vendorname='+vendorname );
+  getAllBills(id: number, filter?:string): Observable<any> {
+    return this.http.get<any>('business/' + id +'/invoicebills?offset='+0+'&vendorname='+filter );
   }
 
   getPlatforms(): Observable<any> {

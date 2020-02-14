@@ -29,12 +29,16 @@
 <mat-card class="example-card">
         <mat-card-content>
                 <div class="Invoice-content">
-                        <div class="searchPanel clearfix" *ngIf="invoices && invoices.length >0">
-                        <form [formGroup]="formFilter" novalidate (ngSubmit)="filterInvoices()"  novalidate autocomplete="off">
+                        <div class="searchPanel clearfix" >
+                        <form [formGroup]="formFilter" novalidate (ngSubmit)="filterCustomer()"  novalidate autocomplete="off">
                             <ul class="floatingList searchBlock">
                             <li class="smallFields fliter-for">
                                 <label class="labels">Filter For</label>
-                                <input type="text" class="fields" formControlName="invoiceName" id="invoiceName" placeholder="Invoices, Number or Total" />
+                                <div class="errorMessage"  *ngIf=" (formFilter.controls.customerName.invalid && formFilter.controls.customerName.touched || (submitted && formFilter.controls.customerName.invalid ))">
+                                  Please enter valid search filter.
+                               </div>
+                                <input type="text" class="fields" formControlName="customerName" id="customerName"
+                                [ngClass]="{error: (formFilter.controls.customerName.invalid && formFilter.controls.customerName.touched)}"  placeholder="Invoices, Number or Total" />
                             </li>
                             <!-- <li class="smallFields">
                                 <label class="labels">From</label>
@@ -56,10 +60,10 @@
                             <li>
                               <ul class="reset-filter">
                                 <li>
-                                  <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
+                                  <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" [disabled]="customerName.invalid" value="Filter" />
                               </li>
                               <li>
-                                  <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" (click)="onReset()" [class.disable]="!this.submitted" />
+                                  <input type="Reset" class="btn btn-medium uppercase btn-solid btn-deepblue btn-disabled" value="Reset" (click)="onReset()" [disabled]="customerName.invalid" />
                               </li>
                               </ul>
                             </li>

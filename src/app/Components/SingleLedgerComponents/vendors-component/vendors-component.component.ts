@@ -22,6 +22,7 @@ import {
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 import { ErrorHandlerService } from 'src/app/services/error-handler-service/error-handler.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -69,7 +70,11 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
   Totalrec: any;
   switchCompanySubscription: any;
   platformid: number;
-  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
+  formFilter: FormGroup;
+  private name : FormControl
+  
+  constructor(private _fb : FormBuilder,
+    public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
         this.ngOnInit();
@@ -77,12 +82,16 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
     );
   }
   ngOnInit() {
+    this.name = new FormControl("", [ Validators.required, Validators.minLength(1) ])
+    this.formFilter = this._fb.group({
+      name :this.name
+    });
     this.getAllvendors();
   }
-  getAllvendors() {
+  getAllvendors(filter="") {
     const companyid = Number(this.helper.getcompanyId());
     this.platformid= this.helper.getplatformId()
-    this.businessService.getAllVendors(companyid).subscribe(res => {
+    this.businessService.getAllVendors(companyid, filter).subscribe(res => {
       //console.log(res);
       this.Totalrec = res.length;
       if (res.length > 0) {
@@ -101,6 +110,15 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
         // this.companylist=[];
       }
     });
+  }
+
+  filterVendor(){
+    this.getAllvendors(this.name.value);
+  }
+
+  onReset(){
+    this.formFilter.reset();
+    this.getAllvendors();
   }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {

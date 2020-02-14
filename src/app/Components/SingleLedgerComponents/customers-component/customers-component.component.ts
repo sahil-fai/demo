@@ -51,8 +51,8 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   selection = new SelectionModel<PeriodicElement>(true, []);
   platformid: number;
   formFilter: FormGroup;
-  private name : FormControl
-  public submitted: boolean = false;
+  private name : FormControl;
+  public submitted: boolean;
 
   constructor(private _fb : FormBuilder,
     public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
@@ -74,13 +74,13 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
 
   filterCustomer(){
     this.submitted = true;
+    console.log(this.name.value);
     this.getAllCustomer(Number(this.helper.getcompanyId()), this.name.value);
   }
 
   onReset(){
-    var a = this.submitted;
-    this.submitted = true;
     this.formFilter.reset();
+    this.getAllCustomer(Number(this.helper.getcompanyId()));
   }
 
   getAllCustomer(companyid, filter = "") {
@@ -88,7 +88,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
       this.Totalrec = res.length;
       if (res.length > 0) {
         let response = this.helper.convertJsonKeysToLower(res)
-        this.customers = response;
+        this.customers =  response;
         // this.handlePage({
         //   pageSize: '1000',
         //   pageIndex: '0'
