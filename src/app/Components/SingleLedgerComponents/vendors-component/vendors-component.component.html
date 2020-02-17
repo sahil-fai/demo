@@ -1,14 +1,18 @@
 <div class="title">
     <h2>{{title|| 'N/A' }}</h2>
   </div>
-  <div class="searchPanel clearfix" *ngIf= "vendors && vendors.length >0">
-    <!-- <form  novalidate autocomplete="off">
+  <div class="searchPanel clearfix" >
+    <form [formGroup]="formFilter" novalidate (ngSubmit)="filterVendor()" novalidate autocomplete="off">
       <ul class="floatingList searchBlock">
         <li>
           <label class="labels">Filter For</label>
-          <input type="text" class="fields" placeholder="Name" />
+          <div class="errorMessage"  *ngIf=" (formFilter.controls.name.invalid && formFilter.controls.name.touched || (submitted && formFilter.controls.name.invalid ))">
+           
+         </div>
+          <input type="text" class="fields" formControlName="name" id="name" placeholder="Name"
+          [ngClass]="{error: (formFilter.controls.name.invalid && formFilter.controls.name.touched)}" />
         </li>
-        <li class="smallFields">
+        <!-- <li class="smallFields">
           <label class="labels">From</label>
           <input type="text" class="fields calendar" />
         </li>
@@ -24,19 +28,19 @@
               {{status.viewValue|| 'N/A' }}
             </option>
           </select>
-        </li>
+        </li> -->
         <li>
           <ul class="reset-filter">
             <li>
-              <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
+              <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" [disabled]="name.invalid" value="Filter" />
             </li>
             <li>
-              <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" />
+              <input type="Reset" class="btn btn-medium uppercase btn-solid btn-deepblue btn-disabled" (click)="onReset()" [disabled]="name.invalid" value="Reset" />
             </li>
           </ul>
         </li>
       </ul>
-    </form> -->
+    </form>
   </div>
   <div class="customers">
       <!-- <div class="select-box" *ngIf="Totalrec>0">

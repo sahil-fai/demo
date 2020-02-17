@@ -31,6 +31,7 @@ import {
 import {
   SwitchCompanyService
 } from 'src/app/services/switch-company-service/switch-company.service';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 export interface PeriodicElement  {
   CustomerName: string;
@@ -119,7 +120,10 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   invoice: string;
   switchCompanySubscription: any;
   platformid: number;
-  constructor(public businessService: BusinessService,
+  formFilter: FormGroup;
+  private customerName : FormControl
+
+  constructor(private _fb : FormBuilder, public businessService: BusinessService,
     private helper: HelperService,
     private dialog: MatDialog,
     private switchCompany: SwitchCompanyService) {
@@ -131,6 +135,10 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.customerName = new FormControl("", [ Validators.required, Validators.minLength(1) ])
+    this.formFilter = this._fb.group({
+      customerName :this.customerName
+    });
     const companyid = Number(this.helper.getcompanyId());
     this.platformid = this.helper.getplatformId();
     if (localStorage.getItem('CompanyCurrency') !== undefined) {
@@ -141,8 +149,8 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
 
   }
 
-  public getinvoices(companyid: number) {
-    this.businessService.getAllInvoices(companyid).subscribe(
+  public getinvoices(companyid: number, filter="") {
+    this.businessService.getAllInvoices(companyid, filter).subscribe(
       res => {
         this.invoices = res;
         // console.log(this.invoices)
@@ -154,6 +162,15 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
         //   pageIndex: this.pageIndex
         // });
       });
+  }
+
+  filterCustomer(){
+    this.getinvoices(Number(this.helper.getcompanyId()), this.customerName.value);
+  }
+
+  onReset(){
+    this.formFilter.reset();
+    this.getinvoices(Number(this.helper.getcompanyId()));
   }
 
   // Paginator(items, page, per_page) {

@@ -7,6 +7,7 @@ import { HelperService } from '../../../services/helper-service/helper.service';
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 import { ErrorHandlerService } from 'src/app/services/error-handler-service/error-handler.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormGroup, FormControl, FormBuilder, Validators, } from '@angular/forms';
 
 export interface PeriodicElement {
   Number: string;
@@ -49,24 +50,46 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
 ];
   selection = new SelectionModel<PeriodicElement>(true, []);
   platformid: number;
+  formFilter: FormGroup;
+  private name : FormControl;
+  public submitted: boolean;
 
-  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
+  constructor(private _fb : FormBuilder,
+    public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(() => {
         this.ngOnInit();
       }
     );
   }
   ngOnInit() {
+    this.name = new FormControl("", [ Validators.required, Validators.minLength(1) ])
+    this.formFilter = this._fb.group({
+      name :this.name
+    });
+
     const companyid = Number(this.helper.getcompanyId());
     this.platformid = this.helper.getplatformId();
     this.getAllCustomer(companyid);
   }
-  getAllCustomer(companyid) {
-    this.businessService.getAllCustomers(companyid).subscribe(res => {
+
+  filterCustomer(){
+    this.submitted = true;
+    console.log(this.name.value);
+    this.getAllCustomer(Number(this.helper.getcompanyId()), this.name.value);
+  }
+
+  onReset(){
+    this.formFilter.reset();
+    this.getAllCustomer(Number(this.helper.getcompanyId()));
+  }
+
+  getAllCustomer(companyid, filter = "") {
+    this.businessService.getAllCustomers(companyid, filter).subscribe(res => {
       this.Totalrec = res.length;
+      this.customers =  res;
       if (res.length > 0) {
         let response = this.helper.convertJsonKeysToLower(res)
-        this.customers = response;
+        this.customers =  response;
         // this.handlePage({
         //   pageSize: '1000',
         //   pageIndex: '0'
