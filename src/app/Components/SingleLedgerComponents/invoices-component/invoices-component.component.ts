@@ -114,7 +114,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   companyCurrency: string;
   // @ViewChild(MatPaginator, {static: true
   // }) paginator: MatPaginator;
-  displayedColumns: string[] = ['Index', 'Number', 'CustomerName', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'BlockchainTransactionID', 'star' ];
+  displayedColumns: string[] = ['Index', 'Number', 'CustomerName', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'BlockchainTransactionID', 'InvoicePDF',  'star' ];
   expandedElement: PeriodicElement | null;
   selection = new SelectionModel < PeriodicElement > (true, []);
   invoice: string;
@@ -149,6 +149,15 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
 
   }
 
+  getInvoicePDF(element){
+    var platformidl = localStorage.getItem('PlatformId');
+    this.businessService.getInvoicePDF(element.companyid, element.invoiceid, parseInt(platformidl)).subscribe((file: Blob) => {
+      console.log("hello pdf");
+      console.log(window.URL.createObjectURL(file));
+        window.open(window.URL.createObjectURL(file), '_blank');
+      }
+    );
+  }
   public getinvoices(companyid: number, filter="") {
     this.businessService.getAllInvoices(companyid, filter).subscribe(
       res => {
