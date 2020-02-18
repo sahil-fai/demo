@@ -123,6 +123,12 @@
                                  </td>
                                 </ng-container>
 
+                                <ng-container matColumnDef="InvoicePDF">
+                                  <th mat-header-cell *matHeaderCellDef class="table-head"> InvoicePDF </th>
+                                  <td mat-cell *matCellDef="let element" class="table-head-second" > <a  (click)="getInvoicePDF(element)"><img src="http://wwwimages.adobe.com/content/dam/acom/en/legal/images/badges/Adobe_PDF_file_icon_32x32.png" alt="InvoicePDF"/></a></td>
+                                </ng-container>
+                                
+
                                 <!-- customer Column -->
                                 <ng-container matColumnDef="CustomerName">
                                   <th mat-header-cell *matHeaderCellDef class="table-head"> Customer </th>
@@ -157,6 +163,8 @@
                                   <th mat-header-cell *matHeaderCellDef class="table-head"> Balance </th>
                                   <td mat-cell *matCellDef="let element" class="table-head-second" > {{element.total-element.deposit | currency:companyCurrency }} </td>
                                 </ng-container>
+
+                            
                                 <!-- <ng-container matColumnDef="BlockchainStatus">
                                   <th mat-header-cell *matHeaderCellDef> BlockchainStatus </th>
                                   <td mat-cell *matCellDef="let element" [class.paid]="element.BlockchainStatus=='Accepted'" [class.partialy-paid]="element.BlockchainStatus=='Transfered'" [class.open]="element.BlockchainStatus=='Submitted'" [class.declined]="element.BlockchainStatus=='Declined'"> {{element.BlockchainStatus|| 'N/A' }} </td>
