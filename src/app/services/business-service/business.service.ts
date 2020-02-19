@@ -88,7 +88,7 @@ export class BusinessService {
   }
 
   connetDisconnect(id, status){
-      return this.http.get<any>('business/'+id +'/connetDisconnect?status='+status, {
+      return this.http.post<any>('business/'+id +'/connetDisconnect/'+status, {
       });
   }
 }
