@@ -42,6 +42,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   switchCompanySubscription: any;
   submitted: boolean;
   formSearch: FormGroup;
+  userid 
   constructor(public businessService: BusinessService, private helper: HelperService, private router: Router, private switchCompany: SwitchCompanyService, private _fb: FormBuilder) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(() => {
       this.ngOnInit();
@@ -49,21 +50,8 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userrid = Number(this.helper.getuserId());
-    if(userrid) {
-        this.businessService.getListOfbusinesses(userrid).subscribe(res => {
-          if (res && res.length > 0) {
-            this.companylist = res;
-            this.businessListActual = res;
-            this.totalRec = this.companylist.length;
-            this.isBusinessLoaded = true;
-          } else {
-            this.companylist = [];
-            this.totalRec = 0;
-            this.isBusinessLoaded = false;
-          }
-        });
-    }
+    this.userid = Number(this.helper.getuserId());
+    this.getListOfbusinesses(this.userid);
     this._createForm();
   }
 
@@ -74,6 +62,28 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   public viewBusiness(companyid) {
     this.helper.setcompanyId(companyid);
     this.router.navigate(['/business', 'company-info']);
+  }
+
+  getListOfbusinesses(userid){
+    if(userid) {
+      this.businessService.getListOfbusinesses(userid).subscribe(res => {
+        if (res && res.length > 0) {
+          this.companylist = res;
+          this.businessListActual = res;
+          this.totalRec = this.companylist.length;
+          this.isBusinessLoaded = true;
+        } else {
+          this.companylist = [];
+          this.totalRec = 0;
+          this.isBusinessLoaded = false;
+        }
+      });
+  }
+  }
+  public async disconnectBusiness(companyid, status){
+    await this.businessService.connetDisconnect(companyid, status).subscribe(res =>{
+    });
+    this.getListOfbusinesses(this.userid);
   }
 
   public openDialog() { }
