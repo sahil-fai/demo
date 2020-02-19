@@ -43,6 +43,8 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   StatusList = ['Invite', 'Resend Mail'];
   customers: any;
   Totalrec: any;
+  pagelimit: number = 10;
+  public itemsPerPageCount: number = 2;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   switchCompanySubscription: any;
   displayedColumns: string[] = ['select', 'CustomerName', 'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'Invite',
@@ -84,11 +86,11 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   }
 
   getAllCustomer(companyid, filter = "") {
-    this.businessService.getAllCustomers(companyid, filter).subscribe(res => {
-      this.Totalrec = res.length;
-      this.customers =  res;
-      if (res.length > 0) {
-        let response = this.helper.convertJsonKeysToLower(res)
+    this.businessService.getAllCustomers(companyid, filter, this.pagelimit).subscribe(res => {
+      this.Totalrec = res[0].length;
+      this.customers =  res[0];
+      if (res[0].length > 0) {
+        let response = this.helper.convertJsonKeysToLower(res[0])
         this.customers =  response;
         // this.handlePage({
         //   pageSize: '1000',

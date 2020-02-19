@@ -11,13 +11,13 @@ export class BusinessService {
 
   constructor(private http: HttpClient, private helper:HelperService) { }
 
-  getListOfbusinesses(id: number): Observable<any> {
-    return this.http.get<any>('/users/' + id + '/list?offset='+0);
+  getListOfbusinesses(id: number, pageLimit?: number): Observable<any> {
+    return this.http.get<any>('/users/' + id + '/list?offset='+0+'&limit='+pageLimit);
   }
 
-  getAllCustomers(id: number, filter?: string): Observable<any> {
+  getAllCustomers(id: number, filter?: string, pageLimit?: number,): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/'+id+'/customers?offset='+0+'&displayname='+filter, {
+    return this.http.get<any>('business/'+id+'/customers?offset='+0+'&limit='+pageLimit+'&displayname='+filter, {
    });
   }
 
@@ -27,19 +27,19 @@ export class BusinessService {
    });
   }
 
-  getAllVendors(id: number, filter?: string): Observable<any> {
-    return this.http.get<any>('business/'+id+'/vendors?offset='+0+'&displayname='+filter, {
+  getAllVendors(id: number, filter?: string, pageLimit?: number,): Observable<any> {
+    return this.http.get<any>('business/'+id+'/vendors?offset='+0+'&limit='+pageLimit+'&displayname='+filter, {
    });
   }
 
-  getAllInvoices(id: number, filter?: string): Observable<any> {
+  getAllInvoices(id: number, filter?: string, pageLimit? : number): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/'+id+'/invoices?offset='+0+'&customername='+filter,{
+    return this.http.get<any>('business/'+id+'/invoices?offset='+0+'&limit='+pageLimit+'&customername='+filter,{
     });
   }
 
-  getAllBills(id: number, filter?:string): Observable<any> {
-    return this.http.get<any>('business/' + id +'/invoicebills?offset='+0+'&vendorname='+filter );
+  getAllBills(id: number, filter?:string, pageLimit? : number): Observable<any> {
+    return this.http.get<any>('business/' + id +'/invoicebills?offset='+0+'&limit='+pageLimit+'&vendorname='+filter );
   }
 
   getPlatforms(): Observable<any> {

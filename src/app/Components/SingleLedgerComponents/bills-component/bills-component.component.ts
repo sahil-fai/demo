@@ -27,6 +27,8 @@ export interface PeriodicElement {
 export class BillsComponentComponent implements OnInit, OnDestroy {
   title = 'Bills';
   bills: any;
+  pagelimit: number = 10;
+  public itemsPerPageCount: number = 2;
   public dataSource: MatTableDataSource<PeriodicElement>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns: string[] = ['index', 'Number', 'VendorName','Date', 'DueDate', 'Total', 'Balance',
@@ -63,7 +65,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
 getAllBills(vendorName = "") {
   const companyid = Number(this.helper.getcompanyId());
   const filter = '?filter={"include":[{"relation":"all"}]}';
-  this.businessService.getAllBills(companyid, vendorName).subscribe(res => {
+  this.businessService.getAllBills(companyid, vendorName, this.pagelimit).subscribe(res => {
     this.bills = res;
     // this.handlePage({pageSize: '10', pageIndex: '0'});
     this.dataSource = new MatTableDataSource<PeriodicElement>(this.bills);

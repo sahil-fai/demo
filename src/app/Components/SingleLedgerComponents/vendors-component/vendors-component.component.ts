@@ -72,6 +72,8 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
   platformid: number;
   formFilter: FormGroup;
   private name : FormControl
+  pagelimit : number = 10;
+  public itemsPerPageCount: number = 2;
   
   constructor(private _fb : FormBuilder,
     public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
@@ -91,7 +93,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
   getAllvendors(filter="") {
     const companyid = Number(this.helper.getcompanyId());
     this.platformid= this.helper.getplatformId()
-    this.businessService.getAllVendors(companyid, filter).subscribe(res => {
+    this.businessService.getAllVendors(companyid, filter, this.pagelimit).subscribe(res => {
       //console.log(res);
       this.vendors = res;
       this.Totalrec = res.length;

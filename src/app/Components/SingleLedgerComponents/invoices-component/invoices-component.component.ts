@@ -122,6 +122,8 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   platformid: number;
   formFilter: FormGroup;
   private customerName : FormControl
+  pagelimit : number = 10;
+  public itemsPerPageCount: number = 2;
 
   constructor(private _fb : FormBuilder, public businessService: BusinessService,
     private helper: HelperService,
@@ -159,7 +161,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     );
   }
   public getinvoices(companyid: number, filter="") {
-    this.businessService.getAllInvoices(companyid, filter).subscribe(
+    this.businessService.getAllInvoices(companyid, filter, this.pagelimit).subscribe(
       res => {
         this.invoices = res;
         // console.log(this.invoices)
