@@ -76,6 +76,11 @@ export class SingleLedgerBusinessListComponent implements OnInit {
     this.router.navigate(['/business', 'company-info']);
   }
 
+  public disconnectBusiness(companyid, status){
+    this.businessService.connetDisconnect(companyid, status).subscribe(res =>{
+    });
+  }
+
   public openDialog() { }
 
   public onFilter() {

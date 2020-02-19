@@ -87,5 +87,8 @@ export class BusinessService {
     return this.http.get('business/'+id+'/invoice/'+invoiceId+'/platform/'+platformId, { responseType: 'blob' })
   }
 
-  
- }
+  connetDisconnect(id, status){
+      return this.http.get<any>('business/'+id +'/connetDisconnect?status='+status, {
+      });
+  }
+}
