@@ -17,7 +17,7 @@ export class BusinessService {
 
   getAllCustomers(id: number, offset: number, filter?: string, pageLimit?: number): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    var query = filter !== "" ? 'business/'+id+'/customers?offset='+offset+'&limit='+pageLimit+'&displayname='+filter :
+    var query = filter !== "" && filter !== null ? 'business/'+id+'/customers?offset='+offset+'&limit='+pageLimit+'&displayname='+filter :
     'business/'+id+'/customers?offset='+offset+'&limit='+pageLimit;
     return this.http.get<any>(query, {
    });
@@ -30,7 +30,8 @@ export class BusinessService {
   }
 
   getAllVendors(id: number, offset: number, filter?: string, pageLimit?: number,): Observable<any> {
-    var query = filter !== "" ? 'business/'+id+'/vendors?offset='+offset+'&limit='+pageLimit+'&displayname='+filter:
+    debugger
+    var query = filter !== ""  && filter !== null ? 'business/'+id+'/vendors?offset='+offset+'&limit='+pageLimit+'&displayname='+filter:
     'business/'+id+'/vendors?offset='+offset+'&limit='+pageLimit;
     return this.http.get<any>(query, {
    });
@@ -38,14 +39,14 @@ export class BusinessService {
 
   getAllInvoices(id: number, offset: number,  filter?: string, pageLimit? : number): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    var query = filter !==""? 'business/'+id+'/invoices?offset='+offset+'&limit='+pageLimit+'&customername='+filter:
+    var query = filter !=="" && filter !== null ? 'business/'+id+'/invoices?offset='+offset+'&limit='+pageLimit+'&customername='+filter:
     'business/'+id+'/invoices?offset='+offset+'&limit='+pageLimit
     return this.http.get<any>(query,{
     });
   }
 
   getAllBills(id: number, offset: number, filter?:string, pageLimit? : number): Observable<any> {
-    var query = filter !== "" ? 'business/' + id +'/invoicebills?offset='+offset+'&limit='+pageLimit+'&vendorname='+filter :
+    var query = filter !== ""  && filter !== null ? 'business/' + id +'/invoicebills?offset='+offset+'&limit='+pageLimit+'&vendorname='+filter :
     'business/' + id +'/invoicebills?offset='+offset+'&limit='+pageLimit;
     return this.http.get<any>(query);
   }
