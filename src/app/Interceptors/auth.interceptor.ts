@@ -68,10 +68,10 @@ export class TokenInterceptor implements HttpInterceptor {
               this._router.navigate(['./login']);
             }
           } 
-          else if (err.statusText === 'Unknown Error' || err.status == 400) {
-            if (err.statusText === 'Unknown Error') {
-              this._errHandler.pushError(err.statusText);
-            }
+          else if (err.status == 500  || err.status == 400 ) {
+            if (err.status == 500) {
+              this._toastr.error("Internal Server Error");
+             }
             if (err.status == 400) {
              this._toastr.error("Bad Request");
             }
