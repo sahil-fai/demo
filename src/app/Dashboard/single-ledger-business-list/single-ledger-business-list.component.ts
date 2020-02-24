@@ -23,8 +23,6 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   public autoHide = true;
   public responsive = true;
   public selectedValue = 5;
-  pagelimit:number = 10;
-  public itemsPerPageCount: number = 10;
   public labels: any = {
     previousLabel: 'Prev',
     nextLabel: 'Next',
@@ -40,7 +38,6 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   };
   public pageNumber = 1;
   public pageSizeOptions: number[] = [5, 15, 25];
-  public numberOfpages: number[];
   switchCompanySubscription: any;
   submitted: boolean;
   formSearch: FormGroup;
@@ -68,7 +65,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
 
   getListOfbusinesses(userid){
     if(userid) {
-      this.businessService.getListOfbusinesses(userid, this.pagelimit).subscribe(res => {
+      this.businessService.getListOfbusinesses(userid).subscribe(res => {
         if (res && res[0].length > 0) {
           this.companylist = res[0];
           this.businessListActual = res;
@@ -83,6 +80,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
       });
   }
   }
+
   public async disconnectBusiness(companyid, status){
     await this.businessService.connetDisconnect(companyid, status).subscribe(res =>{
     });

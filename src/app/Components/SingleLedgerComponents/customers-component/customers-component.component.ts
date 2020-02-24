@@ -82,7 +82,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
 
   onReset(){
     this.formFilter.reset();
-    this.getAllCustomer(Number(this.helper.getcompanyId()), 0);
+    this.getAllCustomer(Number(this.helper.getcompanyId()));
   }
 
   getAllCustomer(companyid, offset = 0, filter = "", pagelimit = this.pagelimit) {

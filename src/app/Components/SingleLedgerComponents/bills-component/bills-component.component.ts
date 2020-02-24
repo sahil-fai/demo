@@ -77,7 +77,7 @@ getAllBills(offset = 0, vendorName = "") {
 
 
 filterVendor(){
-  this.getAllBills(this.vendorName.value);
+  this.getAllBills(0, this.vendorName.value);
 }
 
 onReset(){

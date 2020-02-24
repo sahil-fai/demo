@@ -69,7 +69,7 @@
                       (click)="viewBusiness(company.id)"><i class="icon-arrow-right"></i><a>Company Info</a></button>
                   </li>
                   <li style="text-align: center;">
-                    <button type="button" class="btn btn-outline btn-icon uppercase redBtn"
+                    <button type="button" class="btn btn-outline btn-icon uppercase redBtn" 
                       (click)="disconnectBusiness(company.id, false)"><i class="icon-arrow-right"></i><a>Disconnect</a></button>
                   </li>
                 </ul>
@@ -78,10 +78,10 @@
           </div>
         </li>
       </ul>
-
+<!-- 
       <div class="list">
            <pagination-controls (pageChange)="p = $event"></pagination-controls>
-    </div>
+    </div> -->
     </div>
       <div class="nobusiness" *ngIf="!isBusinessLoaded && companylist && companylist.length == 0">
         <div class="noData">

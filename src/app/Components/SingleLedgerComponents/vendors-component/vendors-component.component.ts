@@ -116,7 +116,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
   }
 
   filterVendor(){
-    this.getAllvendors(this.name.value);
+    this.getAllvendors(0, this.name.value);
   }
 
   onReset(){

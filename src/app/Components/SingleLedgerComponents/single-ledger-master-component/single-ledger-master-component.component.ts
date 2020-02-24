@@ -30,7 +30,7 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
       this.CurrentCompanyName = res.name;
     });
     this.businessService.getListOfbusinesses(userId).subscribe(res => {
-      this.businessList = res;
+      this.businessList = res[0];
     });
   }
   public closeNav() {

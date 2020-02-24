@@ -176,7 +176,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   }
 
   filterCustomer(){
-    this.getinvoices(Number(this.helper.getcompanyId()), this.customerName.value);
+    this.getinvoices(Number(this.helper.getcompanyId()), 0, this.customerName.value);
   }
 
   onReset(){
