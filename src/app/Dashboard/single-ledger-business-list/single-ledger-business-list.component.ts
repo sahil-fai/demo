@@ -38,10 +38,10 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   };
   public pageNumber = 1;
   public pageSizeOptions: number[] = [5, 15, 25];
-  public numberOfpages: number[];
   switchCompanySubscription: any;
   submitted: boolean;
   formSearch: FormGroup;
+  itemsPerPageCount = 10;
   userid 
   constructor(public businessService: BusinessService, private helper: HelperService, private router: Router, private switchCompany: SwitchCompanyService, private _fb: FormBuilder) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(() => {
@@ -64,14 +64,15 @@ export class SingleLedgerBusinessListComponent implements OnInit {
     this.router.navigate(['/business', 'company-info']);
   }
 
-  getListOfbusinesses(userid){
+  getListOfbusinesses(userid, limit = this.itemsPerPageCount){
     if(userid) {
-      this.businessService.getListOfbusinesses(userid).subscribe(res => {
-        if (res && res.length > 0) {
-          this.companylist = res;
+      this.businessService.getListOfbusinesses(userid, limit).subscribe(res => {
+        if (res && res[0].length > 0) {
+          this.companylist = res[0];
           this.businessListActual = res;
           this.totalRec = this.companylist.length;
           this.isBusinessLoaded = true;
+       
         } else {
           this.companylist = [];
           this.totalRec = 0;
@@ -80,6 +81,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
       });
   }
   }
+
   public async disconnectBusiness(companyid, status){
     await this.businessService.connetDisconnect(companyid, status).subscribe(res =>{
     });

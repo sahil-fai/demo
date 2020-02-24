@@ -122,6 +122,8 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   platformid: number;
   formFilter: FormGroup;
   private customerName : FormControl
+  pagelimit : number = 10;
+  pageNumber : number = 0;
 
   constructor(private _fb : FormBuilder, public businessService: BusinessService,
     private helper: HelperService,
@@ -158,12 +160,12 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       }
     );
   }
-  public getinvoices(companyid: number, filter="") {
-    this.businessService.getAllInvoices(companyid, filter).subscribe(
+  public getinvoices(companyid: number, offset = 0, filter="", pagelimit = this.pagelimit) {
+    this.businessService.getAllInvoices(companyid, offset, filter, pagelimit).subscribe(
       res => {
-        this.invoices = res;
+        this.invoices = res[0];
         // console.log(this.invoices)
-        this.totalRec = this.invoices.length;
+        this.totalRec = res[1].totalItems;
         // console.log(this.totalRec)
         this.dataSource = new MatTableDataSource < PeriodicElement > (this.invoices);
         // this.handlePage({
@@ -174,7 +176,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   }
 
   filterCustomer(){
-    this.getinvoices(Number(this.helper.getcompanyId()), this.customerName.value);
+    this.getinvoices(Number(this.helper.getcompanyId()), 0, this.customerName.value);
   }
 
   onReset(){
@@ -202,14 +204,11 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
 
   //   };
   // }
-  // public handlePage(event: any) {
-  //   this.pageIndex = event;
-  //   console.log(this.pageIndex)
-  //   let data = this.Paginator(this.invoices, this.pageIndex, this.size);
-  //   console.log(data)
-  //   this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
-  //   console.log(this.dataSource)
-  // }
+  public handlePage(e: any) {
+     let skipNumberOfPages = this.pagelimit * e.pageIndex ;
+     this.pageNumber = e.pageIndex * e.pageSize;
+    this.getinvoices(Number(this.helper.getcompanyId()), skipNumberOfPages,this.customerName.value, this.pagelimit);
+  }
 
   // public openBottomSheet(data) {
   //   const dialogConfig = new MatDialogConfig();

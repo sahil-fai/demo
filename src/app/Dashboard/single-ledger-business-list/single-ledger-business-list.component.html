@@ -35,7 +35,7 @@
         </form>
       </div>
       <ul class="companyList" *ngIf="isBusinessLoaded && companylist && companylist.length > 0">
-        <li *ngFor="let company of companylist| paginate: config">
+        <li *ngFor="let company of companylist| paginate: { itemsPerPage: itemsPerPageCount, currentPage: p }">
           <div class="cellWrapper clearfix">
             <div class="whiteWrapper">
               <div class="companyWrapper">
@@ -78,30 +78,10 @@
           </div>
         </li>
       </ul>
-      <div class="pagination" *ngIf="isBusinessLoaded">
-        <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event"
-          [class.disabled]="length < config.itemsPerPage">
-          <div class="custom-pagination">
-            <div style="display:inline-block" *ngIf="!(p.isFirstPage() && p.isLastPage())">
-              <div class="nextprevious" [class.disabled]="p.isFirstPage()">
-                <span (click)="p.previous()">
-                  <i class="icon-arrow-left"></i>
-                </span>
-              </div>
-              <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
-                <span (click)="p.setCurrent(page.value)"
-                  *ngIf="p.getCurrent() !== page.value">{{ page.label || 'N/A' }}</span>
-                <div *ngIf="p.getCurrent() === page.value">
-                  <span>{{ page.label || 'N/A' }}</span>
-                </div>
-              </div>
-              <div class="nextprevious" [class.disabled]="p.isLastPage()">
-                <span (click)="p.next()"><i class="icon-arrow-right"></i> </span>
-              </div>
-            </div>
-          </div>
-        </pagination-template>
-      </div>
+
+      <div class="list">
+           <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
     </div>
       <div class="nobusiness" *ngIf="!isBusinessLoaded && companylist && companylist.length == 0">
         <div class="noData">

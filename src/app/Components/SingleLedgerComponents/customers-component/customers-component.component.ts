@@ -43,6 +43,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   StatusList = ['Invite', 'Resend Mail'];
   customers: any;
   Totalrec: any;
+  pagelimit: number = 10;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   switchCompanySubscription: any;
   displayedColumns: string[] = ['select', 'CustomerName', 'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'Invite',
@@ -53,6 +54,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   formFilter: FormGroup;
   private name : FormControl;
   public submitted: boolean;
+  pageNumber : number = 0;
 
   constructor(private _fb : FormBuilder,
     public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
@@ -75,7 +77,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   filterCustomer(){
     this.submitted = true;
     console.log(this.name.value);
-    this.getAllCustomer(Number(this.helper.getcompanyId()), this.name.value);
+    this.getAllCustomer(Number(this.helper.getcompanyId()), 0, this.name.value);
   }
 
   onReset(){
@@ -83,12 +85,12 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
     this.getAllCustomer(Number(this.helper.getcompanyId()));
   }
 
-  getAllCustomer(companyid, filter = "") {
-    this.businessService.getAllCustomers(companyid, filter).subscribe(res => {
-      this.Totalrec = res.length;
-      this.customers =  res;
-      if (res.length > 0) {
-        let response = this.helper.convertJsonKeysToLower(res)
+  getAllCustomer(companyid, offset = 0, filter = "", pagelimit = this.pagelimit) {
+    this.businessService.getAllCustomers(companyid, offset, filter, pagelimit).subscribe(res => {
+      this.Totalrec = res[1].totalItems;
+      this.customers =  res[0];
+      if (res[0].length > 0) {
+        let response = this.helper.convertJsonKeysToLower(res[0])
         this.customers =  response;
         // this.handlePage({
         //   pageSize: '1000',
@@ -140,13 +142,14 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   //   };
   // }
 
-  // public handlePage(e: any) {
-  //   //console.log(e)
-  //   let pagesize = e.pageSize;
-  //   let pagenumber = e.pageIndex + 1;
-  //   let data = this.Paginator(this.customers, pagenumber, pagesize);
-  //   this.dataSource = new MatTableDataSource<PeriodicElement>(this.customers); console.log('datasource: ', this.dataSource);
-  // }
+  public handlePage(e: any) {
+    //console.log(e)
+    let skipNumberOfPages = this.pagelimit * e.pageIndex ;
+    this.pageNumber = e.pageIndex * e.pageSize;
+    this.getAllCustomer(Number(this.helper.getcompanyId()), skipNumberOfPages, this.name.value, this.pagelimit);
+    //let data = this.Paginator(this.customers, pagenumber, pagesize);
+   // this.dataSource = new MatTableDataSource<PeriodicElement>(this.customers); console.log('datasource: ', this.dataSource);
+  }
 
   postInvite(item: any) {
     if (item.email) {
