@@ -7,11 +7,12 @@ import { HelperService } from '../services/helper-service/helper.service';
 import { LoaderService } from '../services/loader-service/loader.service';
 import { ErrorHandlerService } from '../services/error-handler-service/error-handler.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(public auth: HelperService, private _loaderService: LoaderService, private _router: Router, private _errHandler: ErrorHandlerService) {
+  constructor(public auth: HelperService, private _loaderService: LoaderService, private _router: Router, private _errHandler: ErrorHandlerService,  private _toastr: ToastrService) {
 
   }
 
@@ -66,7 +67,16 @@ export class TokenInterceptor implements HttpInterceptor {
             if (err.status == 401) {
               this._router.navigate(['./login']);
             }
-          } else { console.log('else: ', err);
+          } 
+          else if (err.statusText === 'Unknown Error' || err.status == 400) {
+            if (err.statusText === 'Unknown Error') {
+              this._errHandler.pushError(err.statusText);
+            }
+            if (err.status == 400) {
+             this._toastr.error("Bad Request");
+            }
+          }
+          else { console.log('else: ', err);
             if(err.error && err.error.error && err.error.error.message) {
               this._errHandler.pushError(err.error.error.message);
             }
