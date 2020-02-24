@@ -20,6 +20,7 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
   public isNavOpen = false;
   businessList: any;
   isModal: boolean;
+  pageLimit : number = 10;
 
   constructor(private helper: HelperService, public businessService: BusinessService, private switchCompany: SwitchCompanyService) {}
 
@@ -29,7 +30,7 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
     this.businessService.getCompanyInformation(companyid).subscribe(res => {
       this.CurrentCompanyName = res.name;
     });
-    this.businessService.getListOfbusinesses(userId).subscribe(res => {
+    this.businessService.getListOfbusinesses(userId, this.pageLimit).subscribe(res => {
       this.businessList = res[0];
     });
   }
