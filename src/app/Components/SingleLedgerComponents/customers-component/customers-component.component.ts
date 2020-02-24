@@ -44,7 +44,6 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   customers: any;
   Totalrec: any;
   pagelimit: number = 10;
-  public itemsPerPageCount: number = 2;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   switchCompanySubscription: any;
   displayedColumns: string[] = ['select', 'CustomerName', 'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'Invite',
@@ -77,17 +76,17 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   filterCustomer(){
     this.submitted = true;
     console.log(this.name.value);
-    this.getAllCustomer(Number(this.helper.getcompanyId()), this.name.value);
+    this.getAllCustomer(Number(this.helper.getcompanyId()), 0, this.name.value);
   }
 
   onReset(){
     this.formFilter.reset();
-    this.getAllCustomer(Number(this.helper.getcompanyId()));
+    this.getAllCustomer(Number(this.helper.getcompanyId()), 0);
   }
 
-  getAllCustomer(companyid, filter = "") {
-    this.businessService.getAllCustomers(companyid, filter, this.pagelimit).subscribe(res => {
-      this.Totalrec = res[0].length;
+  getAllCustomer(companyid, offset = 0, filter = "", pagelimit = this.pagelimit) {
+    this.businessService.getAllCustomers(companyid, offset, filter, pagelimit).subscribe(res => {
+      this.Totalrec = res[1].totalItems;
       this.customers =  res[0];
       if (res[0].length > 0) {
         let response = this.helper.convertJsonKeysToLower(res[0])
@@ -142,13 +141,13 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   //   };
   // }
 
-  // public handlePage(e: any) {
-  //   //console.log(e)
-  //   let pagesize = e.pageSize;
-  //   let pagenumber = e.pageIndex + 1;
-  //   let data = this.Paginator(this.customers, pagenumber, pagesize);
-  //   this.dataSource = new MatTableDataSource<PeriodicElement>(this.customers); console.log('datasource: ', this.dataSource);
-  // }
+  public handlePage(e: any) {
+    //console.log(e)
+    let skipPagenumbers = this.pagelimit * e.pageIndex ;
+    this.getAllCustomer(Number(this.helper.getcompanyId()), skipPagenumbers, this.name.value, this.pagelimit);
+    //let data = this.Paginator(this.customers, pagenumber, pagesize);
+   // this.dataSource = new MatTableDataSource<PeriodicElement>(this.customers); console.log('datasource: ', this.dataSource);
+  }
 
   postInvite(item: any) {
     if (item.email) {

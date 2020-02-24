@@ -17,7 +17,7 @@ export class DashboardComponetComponent implements OnInit {
   }
 
   public getCustomers() {
-    this.businessService.getAllCustomers(215).subscribe(
+    this.businessService.getAllCustomers(215, 0).subscribe(
       res => {
         this.value = JSON.stringify(res);
       }
@@ -26,7 +26,7 @@ export class DashboardComponetComponent implements OnInit {
   }
 
   public getVendors() {
-    this.businessService.getAllVendors(200).subscribe(
+    this.businessService.getAllVendors(200, 0).subscribe(
       res => {
         this.value = JSON.stringify(res);
       }
@@ -37,7 +37,7 @@ export class DashboardComponetComponent implements OnInit {
   public getBills() {
     const companyid = Number(this.helper.getcompanyId());
     const filter = '?filter={"include":[{"relation":"all"}]}';
-    this.businessService.getAllBills(companyid, filter).subscribe(
+    this.businessService.getAllBills(companyid, 0, filter).subscribe(
       res => {
         this.value = JSON.stringify(res);
       }
@@ -46,7 +46,7 @@ export class DashboardComponetComponent implements OnInit {
   }
 
   public getinvoices() {
-    this.businessService.getAllInvoices(455).subscribe(
+    this.businessService.getAllInvoices(455, 0).subscribe(
       res => {
         this.value = JSON.stringify(res);
       }

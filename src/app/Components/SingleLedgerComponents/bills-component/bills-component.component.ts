@@ -28,8 +28,9 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   title = 'Bills';
   bills: any;
   pagelimit: number = 10;
-  public itemsPerPageCount: number = 2;
   public dataSource: MatTableDataSource<PeriodicElement>;
+  Totalrec: number;
+
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns: string[] = ['index', 'Number', 'VendorName','Date', 'DueDate', 'Total', 'Balance',
  // 'star'
@@ -62,12 +63,13 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
         this.companyCurrency = localStorage.getItem('CompanyCurrency');
       }
   }
-getAllBills(vendorName = "") {
+getAllBills(offset = 0, vendorName = "") {
   const companyid = Number(this.helper.getcompanyId());
   const filter = '?filter={"include":[{"relation":"all"}]}';
-  this.businessService.getAllBills(companyid, vendorName, this.pagelimit).subscribe(res => {
-    this.bills = res;
-    // this.handlePage({pageSize: '10', pageIndex: '0'});
+  this.businessService.getAllBills(companyid, offset, vendorName, this.pagelimit).subscribe(res => {
+    this.bills = res[0];
+    this.Totalrec = res[1].totalItems;
+;    // this.handlePage({pageSize: '10', pageIndex: '0'});
     this.dataSource = new MatTableDataSource<PeriodicElement>(this.bills);
   });
 }
@@ -103,29 +105,28 @@ onReset(){
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
-  Paginator(items, page, per_page) {
-    var page = page || 1,
-    per_page = per_page || 10,
-    offset = (page - 1) * per_page,
+  // Paginator(items, page, per_page) {
+  //   var page = page || 1,
+  //   per_page = per_page || 10,
+  //   offset = (page - 1) * per_page,
 
-    paginatedItems = items.slice(offset).slice(0, per_page),
-    total_pages = Math.ceil(items.length / per_page);
-    return {
-    page: page,
-    per_page: per_page,
-    pre_page: page - 1 ? page - 1 : null,
-    next_page: (total_pages > page) ? page + 1 : null,
-    total: items.length,
-    total_pages: total_pages,
-    data: paginatedItems
-    };
-  }
+  //   paginatedItems = items.slice(offset).slice(0, per_page),
+  //   total_pages = Math.ceil(items.length / per_page);
+  //   return {
+  //   page: page,
+  //   per_page: per_page,
+  //   pre_page: page - 1 ? page - 1 : null,
+  //   next_page: (total_pages > page) ? page + 1 : null,
+  //   total: items.length,
+  //   total_pages: total_pages,
+  //   data: paginatedItems
+  //   };
+  // }
 
   public handlePage(e: any) {
-    let pagesize = e.pageSize;
-    let pagenumber = e.pageIndex + 1;
-    this.Paginator(this.bills, pagenumber, pagesize);
-    this.dataSource = new MatTableDataSource<PeriodicElement>(this.bills);
+    let skipPagenumbers = this.pagelimit * e.pageIndex ;
+    this.getAllBills(skipPagenumbers);
+    //this.dataSource = new MatTableDataSource<PeriodicElement>(this.bills);
   }
   ngOnDestroy() {
     if (this.switchCompanySubscription) {

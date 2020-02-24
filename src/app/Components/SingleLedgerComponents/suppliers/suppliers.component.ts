@@ -145,7 +145,7 @@ export class SuppliersComponent implements OnInit {
 
   _getVendors() {
     const companyid = Number(this.helper.getcompanyId());
-    this.businessService.getAllVendors(companyid).subscribe(res => {
+    this.businessService.getAllVendors(companyid, 0).subscribe(res => {
       if (res.length === 0) { this.isCOAEnabled = false; }
       if (res.length > 0) { console.log(res);
         this.vendor = res;

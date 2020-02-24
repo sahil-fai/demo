@@ -12,12 +12,12 @@ export class BusinessService {
   constructor(private http: HttpClient, private helper:HelperService) { }
 
   getListOfbusinesses(id: number, pageLimit?: number): Observable<any> {
-    return this.http.get<any>('/users/' + id + '/list?offset='+0+'&limit='+pageLimit);
+    return this.http.get<any>('/users/' + id + '/list?offset='+0+'&limit='+0);
   }
 
-  getAllCustomers(id: number, filter?: string, pageLimit?: number,): Observable<any> {
+  getAllCustomers(id: number, offset: number, filter?: string, pageLimit?: number): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/'+id+'/customers?offset='+0+'&limit='+pageLimit+'&displayname='+filter, {
+    return this.http.get<any>('business/'+id+'/customers?offset='+offset+'&limit='+pageLimit+'&displayname='+filter, {
    });
   }
 
@@ -27,19 +27,19 @@ export class BusinessService {
    });
   }
 
-  getAllVendors(id: number, filter?: string, pageLimit?: number,): Observable<any> {
-    return this.http.get<any>('business/'+id+'/vendors?offset='+0+'&limit='+pageLimit+'&displayname='+filter, {
+  getAllVendors(id: number, offset: number, filter?: string, pageLimit?: number,): Observable<any> {
+    return this.http.get<any>('business/'+id+'/vendors?offset='+offset+'&limit='+pageLimit+'&displayname='+filter, {
    });
   }
 
-  getAllInvoices(id: number, filter?: string, pageLimit? : number): Observable<any> {
+  getAllInvoices(id: number, offset: number,  filter?: string, pageLimit? : number): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/'+id+'/invoices?offset='+0+'&limit='+pageLimit+'&customername='+filter,{
+    return this.http.get<any>('business/'+id+'/invoices?offset='+offset+'&limit='+pageLimit+'&customername='+filter,{
     });
   }
 
-  getAllBills(id: number, filter?:string, pageLimit? : number): Observable<any> {
-    return this.http.get<any>('business/' + id +'/invoicebills?offset='+0+'&limit='+pageLimit+'&vendorname='+filter );
+  getAllBills(id: number, offset: number, filter?:string, pageLimit? : number): Observable<any> {
+    return this.http.get<any>('business/' + id +'/invoicebills?offset='+offset+'&limit='+pageLimit+'&vendorname='+filter );
   }
 
   getPlatforms(): Observable<any> {

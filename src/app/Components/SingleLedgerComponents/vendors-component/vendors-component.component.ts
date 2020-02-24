@@ -73,8 +73,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
   formFilter: FormGroup;
   private name : FormControl
   pagelimit : number = 10;
-  public itemsPerPageCount: number = 2;
-  
+
   constructor(private _fb : FormBuilder,
     public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
@@ -90,15 +89,15 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
     });
     this.getAllvendors();
   }
-  getAllvendors(filter="") {
+  getAllvendors(offset = 0, filter="", pagelimit = this.pagelimit) {
     const companyid = Number(this.helper.getcompanyId());
     this.platformid= this.helper.getplatformId()
-    this.businessService.getAllVendors(companyid, filter, this.pagelimit).subscribe(res => {
+    this.businessService.getAllVendors(companyid, offset, filter, this.pagelimit).subscribe(res => {
       //console.log(res);
-      this.vendors = res;
-      this.Totalrec = res.length;
-      if (res.length > 0) {
-      let response = this.helper.convertJsonKeysToLower(res);
+      this.vendors = res[0];
+      this.Totalrec = res[1].totalItems;
+      if (res[0].length > 0) {
+      let response = this.helper.convertJsonKeysToLower(res[0]);
       this.vendors = response;
       // console.log(this.vendors)
       this.dataSource = new MatTableDataSource < PeriodicElement > (this.vendors);
@@ -160,29 +159,29 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
-  Paginator(items, page, per_page) {
+  // Paginator(items, page, per_page) {
 
-    var page = page || 1,
-      per_page = per_page || 10,
-      offset = (page - 1) * per_page,
-      paginatedItems = items.slice(offset).slice(0, per_page),
-      total_pages = Math.ceil(items.length / per_page);
+  //   var page = page || 1,
+  //     per_page = per_page || 10,
+  //     offset = (page - 1) * per_page,
+  //     paginatedItems = items.slice(offset).slice(0, per_page),
+  //     total_pages = Math.ceil(items.length / per_page);
 
-    return {
-      page: page,
-      per_page: per_page,
-      pre_page: page - 1 ? page - 1 : null,
-      next_page: (total_pages > page) ? page + 1 : null,
-      total: items.length,
-      total_pages: total_pages,
-      data: paginatedItems
-    };
-  }
+  //   return {
+  //     page: page,
+  //     per_page: per_page,
+  //     pre_page: page - 1 ? page - 1 : null,
+  //     next_page: (total_pages > page) ? page + 1 : null,
+  //     total: items.length,
+  //     total_pages: total_pages,
+  //     data: paginatedItems
+  //   };
+  // }
   public handlePage(e: any) {
-    const pagesize = e.pageSize;
-    const pagenumber = e.pageIndex + 1;
-    const data = this.Paginator(this.vendors, pagenumber, pagesize);
-    this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
+    let skipPagenumbers = this.pagelimit * e.pageIndex ;
+    this.getAllvendors(skipPagenumbers, this.name.value, this.pagelimit);
+  //  const data = this.Paginator(this.vendors, pagenumber, pagesize);
+   // this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
   }
   public checkStatus(status) {
     this.masterToggle(status);

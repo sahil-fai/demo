@@ -24,7 +24,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   public responsive = true;
   public selectedValue = 5;
   pagelimit:number = 10;
-  public itemsPerPageCount: number = 2;
+  public itemsPerPageCount: number = 10;
   public labels: any = {
     previousLabel: 'Prev',
     nextLabel: 'Next',
