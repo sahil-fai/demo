@@ -54,6 +54,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   formFilter: FormGroup;
   private name : FormControl;
   public submitted: boolean;
+  pageNumber : number = 0;
 
   constructor(private _fb : FormBuilder,
     public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
@@ -143,8 +144,9 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
 
   public handlePage(e: any) {
     //console.log(e)
-    let skipPagenumbers = this.pagelimit * e.pageIndex ;
-    this.getAllCustomer(Number(this.helper.getcompanyId()), skipPagenumbers, this.name.value, this.pagelimit);
+    let skipNumberOfPages = this.pagelimit * e.pageIndex ;
+    this.pageNumber = e.pageIndex * e.pageSize;
+    this.getAllCustomer(Number(this.helper.getcompanyId()), skipNumberOfPages, this.name.value, this.pagelimit);
     //let data = this.Paginator(this.customers, pagenumber, pagesize);
    // this.dataSource = new MatTableDataSource<PeriodicElement>(this.customers); console.log('datasource: ', this.dataSource);
   }

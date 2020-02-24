@@ -30,6 +30,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   pagelimit: number = 10;
   public dataSource: MatTableDataSource<PeriodicElement>;
   Totalrec: number;
+  pageNumber : number = 0;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns: string[] = ['index', 'Number', 'VendorName','Date', 'DueDate', 'Total', 'Balance',
@@ -124,8 +125,9 @@ onReset(){
   // }
 
   public handlePage(e: any) {
-    let skipPagenumbers = this.pagelimit * e.pageIndex ;
-    this.getAllBills(skipPagenumbers);
+    let skipNumberOfPages = this.pagelimit * e.pageIndex ;
+    this.pageNumber = e.pageIndex * e.pageSize;
+    this.getAllBills(skipNumberOfPages);
     //this.dataSource = new MatTableDataSource<PeriodicElement>(this.bills);
   }
   ngOnDestroy() {

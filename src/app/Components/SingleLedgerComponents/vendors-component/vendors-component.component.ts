@@ -73,6 +73,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
   formFilter: FormGroup;
   private name : FormControl
   pagelimit : number = 10;
+  pageNumber : number = 0;
 
   constructor(private _fb : FormBuilder,
     public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
@@ -178,8 +179,9 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
   //   };
   // }
   public handlePage(e: any) {
-    let skipPagenumbers = this.pagelimit * e.pageIndex ;
-    this.getAllvendors(skipPagenumbers, this.name.value, this.pagelimit);
+    let skipNumberOfPages = this.pagelimit * e.pageIndex ;
+    this.pageNumber = e.pageIndex * e.pageSize;
+    this.getAllvendors(skipNumberOfPages, this.name.value, this.pagelimit);
   //  const data = this.Paginator(this.vendors, pagenumber, pagesize);
    // this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
   }

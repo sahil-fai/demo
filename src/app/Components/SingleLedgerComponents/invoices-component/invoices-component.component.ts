@@ -123,6 +123,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   formFilter: FormGroup;
   private customerName : FormControl
   pagelimit : number = 10;
+  pageNumber : number = 0;
 
   constructor(private _fb : FormBuilder, public businessService: BusinessService,
     private helper: HelperService,
@@ -205,6 +206,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   // }
   public handlePage(e: any) {
      let skipNumberOfPages = this.pagelimit * e.pageIndex ;
+     this.pageNumber = e.pageIndex * e.pageSize;
     this.getinvoices(Number(this.helper.getcompanyId()), skipNumberOfPages,this.customerName.value, this.pagelimit);
   }
 
