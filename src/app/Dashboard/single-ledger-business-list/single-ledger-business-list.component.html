@@ -78,8 +78,7 @@
           </div>
         </li>
       </ul>
-
-      <div class="list">
+      <div class="list" *ngIf="Totalrec>0">
            <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
     </div>
