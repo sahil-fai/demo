@@ -17,7 +17,9 @@ export class BusinessService {
 
   getAllCustomers(id: number, offset: number, filter?: string, pageLimit?: number): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/'+id+'/customers?offset='+offset+'&limit='+pageLimit+'&displayname='+filter, {
+    var query = filter !== "" ? 'business/'+id+'/customers?offset='+offset+'&limit='+pageLimit+'&displayname='+filter :
+    'business/'+id+'/customers?offset='+offset+'&limit='+pageLimit;
+    return this.http.get<any>(query, {
    });
   }
 
@@ -28,18 +30,24 @@ export class BusinessService {
   }
 
   getAllVendors(id: number, offset: number, filter?: string, pageLimit?: number,): Observable<any> {
-    return this.http.get<any>('business/'+id+'/vendors?offset='+offset+'&limit='+pageLimit+'&displayname='+filter, {
+    var query = filter !== "" ? 'business/'+id+'/vendors?offset='+offset+'&limit='+pageLimit+'&displayname='+filter:
+    'business/'+id+'/vendors?offset='+offset+'&limit='+pageLimit;
+    return this.http.get<any>(query, {
    });
   }
 
   getAllInvoices(id: number, offset: number,  filter?: string, pageLimit? : number): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<any>('business/'+id+'/invoices?offset='+offset+'&limit='+pageLimit+'&customername='+filter,{
+    var query = filter !==""? 'business/'+id+'/invoices?offset='+offset+'&limit='+pageLimit+'&customername='+filter:
+    'business/'+id+'/invoices?offset='+offset+'&limit='+pageLimit
+    return this.http.get<any>(query,{
     });
   }
 
   getAllBills(id: number, offset: number, filter?:string, pageLimit? : number): Observable<any> {
-    return this.http.get<any>('business/' + id +'/invoicebills?offset='+offset+'&limit='+pageLimit+'&vendorname='+filter );
+    var query = filter !== "" ? 'business/' + id +'/invoicebills?offset='+offset+'&limit='+pageLimit+'&vendorname='+filter :
+    'business/' + id +'/invoicebills?offset='+offset+'&limit='+pageLimit;
+    return this.http.get<any>(query);
   }
 
   getPlatforms(): Observable<any> {
