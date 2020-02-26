@@ -11,8 +11,10 @@ export class BusinessService {
 
   constructor(private http: HttpClient, private helper:HelperService) { }
 
-  getListOfbusinesses(id: number, pageLimit?: number): Observable<any> {
-    return this.http.get<any>('/users/' + id + '/list?offset='+0+'&limit='+pageLimit);
+  getListOfbusinesses(id: number, offset: number, filter?: string, pageLimit?: number): Observable<any> {
+    var query = filter !== "" && filter !== null ? '/users/' + id + '/list?offset='+offset+'&limit='+pageLimit+ '&customername=' + filter:
+    '/users/' + id + '/list?offset='+offset+'&limit='+pageLimit;
+    return this.http.get<any>(query);
   }
 
   getAllCustomers(id: number, offset: number, filter?: string, pageLimit?: number): Observable<any> {

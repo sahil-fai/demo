@@ -21,6 +21,8 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
   businessList: any;
   isModal: boolean;
   pageLimit : number = 10;
+  offset: number = 0;
+  filter :string = "";
 
   constructor(private helper: HelperService, public businessService: BusinessService, private switchCompany: SwitchCompanyService) {}
 
@@ -30,7 +32,7 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
     this.businessService.getCompanyInformation(companyid).subscribe(res => {
       this.CurrentCompanyName = res.name;
     });
-    this.businessService.getListOfbusinesses(userId, this.pageLimit).subscribe(res => {
+    this.businessService.getListOfbusinesses(userId, this.offset, this.filter, this.pageLimit).subscribe(res => {
       this.businessList = res[0];
     });
   }

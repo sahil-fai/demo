@@ -8,7 +8,7 @@ import {
   transition,
   trigger
 } from '@angular/animations';
-import { Component, OnInit, ViewChild, OnDestroy, OnChanges} from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, OnChanges, ElementRef} from '@angular/core';
 import {
   MatTableDataSource
 } from '@angular/material/table';
@@ -32,6 +32,7 @@ import {
   SwitchCompanyService
 } from 'src/app/services/switch-company-service/switch-company.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
 
 export interface PeriodicElement  {
   CustomerName: string;
@@ -93,6 +94,12 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   public directionLinks: boolean = true;
   public autoHide: boolean = true;
   public responsive: boolean = true;
+
+  @ViewChild("content", null) modal: ElementRef;
+  @ViewChild(JsonEditorComponent, { static: true }) editor: JsonEditorComponent;
+  public editorOptions: JsonEditorOptions;
+
+  data: any ;
   // public labels: any = {
   //   previousLabel: 'Prev',
   //   nextLabel: 'Next',
@@ -124,6 +131,8 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   private customerName : FormControl
   pagelimit : number = 10;
   pageNumber : number = 0;
+  options: JsonEditorOptions;
+  
 
   constructor(private _fb : FormBuilder, public businessService: BusinessService,
     private helper: HelperService,
@@ -134,6 +143,24 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
         this.ngOnInit();
       }
     );
+
+
+  this.options = new JsonEditorOptions();
+  this.data = {
+    products: [{
+      name: 'car',
+      product: [{
+        name: 'ddddddd',
+        model: [
+          { id: 'civic', name: 'civic' },
+          { id: 'accord', name: 'accord' },
+          { id: 'crv', name: 'crv' },
+          { id: 'pilot', name: 'pilot' },
+          { id: 'odyssey', name: 'odyssey' }
+        ]
+      }]
+    }]
+  };
   }
 
   ngOnInit() {
@@ -147,6 +174,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       this.companyCurrency = localStorage.getItem('CompanyCurrency');
     }
     this.getinvoices(companyid);
+ 
     // console.log(this.getinvoices)
 
   }
@@ -230,6 +258,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       this.switchCompanySubscription.unsubscribe();
     }
   }
-
+  OpenDialog(element){
+  }
 
 }

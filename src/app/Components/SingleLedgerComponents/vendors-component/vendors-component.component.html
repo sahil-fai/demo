@@ -152,11 +152,13 @@
           </perfect-scrollbar>
           <div class="no-record" *ngIf="Totalrec === 0"> <span class="norecord-text"> No records found</span></div>
         </div>
+  
         <div class="paginator-container" *ngIf="Totalrec > 0">
-            <mat-paginator appStylePaginator hidePageSize [length]=Totalrec
+            <mat-paginator #paginator appStylePaginator hidePageSize [length]=Totalrec
           [pageSize]= pagelimit (page)="handlePage($event)"></mat-paginator>
         </div>
 
       </div>
+     
   </div>
 

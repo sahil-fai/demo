@@ -181,7 +181,8 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgJsonEditorModule } from 'ang-jsoneditor' 
+import { DisconnectBusinessModalComponent} from './modals/disconnect-business-modal/disconnect-business-modal.component'
 
 const config: SocketIoConfig = { url: environment.sockethost, options: {} };
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -224,6 +225,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ForgotPasswordComponent,
     ResetForgetPasswordComponent,
     TransactionTypePipe,
+    DisconnectBusinessModalComponent
 
   ],
   imports: [
@@ -254,7 +256,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgxSpinnerModule,
     PerfectScrollbarModule,
     NgxCaptchaModule,
-    NgbModule,
+    NgJsonEditorModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-center',

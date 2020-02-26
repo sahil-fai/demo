@@ -19,7 +19,7 @@
       </span>
     </div>
     <div class="businesslistAvial">
-      <div class="searchPanel clearfix" *ngIf="isBusinessLoaded">
+      <div class="searchPanel clearfix">
         <form class="search-panel-form" [formGroup]="formSearch" (ngSubmit)="onFilter()" novalidate autocomplete="off">
           <ul class="floatingList searchBlock">
             <li>
@@ -28,12 +28,13 @@
             <li>
               <input type="text" placeholder="Business Name " class="fields" formControlName="keywords"
                 [ngClass]="{error: (f.keywords.invalid && f.keywords.dirty) || (submitted && f.keywords.invalid)}" />
-              <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
-              <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" (click)="onReset()" />
+              <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" [disabled]="f.keywords.invalid" value="Filter" />
+              <input type="Reset" class="btn btn-medium uppercase btn-solid btn-deepblue btn-disabled" value="Reset" [disabled]="f.keywords.invalid" (click)="onReset()" />
             </li>
           </ul>
         </form>
       </div>
+    
       <ul class="companyList" *ngIf="isBusinessLoaded && companylist && companylist.length > 0">
         <li *ngFor="let company of companylist| paginate: { itemsPerPage: itemsPerPageCount, currentPage: p }">
           <div class="cellWrapper clearfix">
@@ -78,7 +79,7 @@
           </div>
         </li>
       </ul>
-      <div class="list" *ngIf="Totalrec>0">
+      <div class="list" *ngIf="totalRec>0">
            <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
     </div>
@@ -100,37 +101,5 @@
         </div>
       </div>
   </div>
-  <div>
-    <ng-template #content let-c="close" let-d="dismiss">
-      <div class="modal-header">
-          <h4 class="modal-title">Disconnect Company</h4>
-          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body" form>
-               <div class="form-group" >
-                    <div class="d-flex align-items-center justify-content-between flex-wrap radio-with-icon grow-width">
-                        <div class="form-check-inline">
-                            <label class="form-check-label">
-                                <span class="custom-radio">
-                                    <i class="icon-cross-square"></i>
-                                    <i class="icon-tick-square"></i>
-                                   Are you sure, you want to disconnect the company?
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                </div>                 
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer justify-content-center">
-         <button type="button" class="btn btn-primary btn-green" [class.disabled]="!consent" (click)="DisconnectBusiness()"
-           data-dismiss="modal">Yes</button>
-           <button type="button" class="btn btn-primary btn-green" [class.disabled]="!consent" (click)="DismissDialog()"
-           data-dismiss="modal">No</button>
-       </div>
-  </ng-template>
-  </div>
+ 
 </div>
