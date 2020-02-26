@@ -30,7 +30,6 @@ export class BusinessService {
   }
 
   getAllVendors(id: number, offset: number, filter?: string, pageLimit?: number,): Observable<any> {
-    debugger
     var query = filter !== ""  && filter !== null ? 'business/'+id+'/vendors?offset='+offset+'&limit='+pageLimit+'&displayname='+filter:
     'business/'+id+'/vendors?offset='+offset+'&limit='+pageLimit;
     return this.http.get<any>(query, {

@@ -70,7 +70,7 @@
                   </li>
                   <li style="text-align: center;">
                     <button type="button" class="btn btn-outline btn-icon uppercase redBtn"
-                      (click)="disconnectBusiness(company.id, false)"><i class="icon-arrow-right"></i><a>Disconnect</a></button>
+                      (click)="OpenDialog(company.id, false)"><i class="icon-arrow-right"></i><a>Disconnect</a></button>
                   </li>
                 </ul>
               </div>
@@ -99,5 +99,38 @@
           <h3>Didn't find any business?</h3>
         </div>
       </div>
+  </div>
+  <div>
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header">
+          <h4 class="modal-title">Disconnect Company</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" form>
+               <div class="form-group" >
+                    <div class="d-flex align-items-center justify-content-between flex-wrap radio-with-icon grow-width">
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <span class="custom-radio">
+                                    <i class="icon-cross-square"></i>
+                                    <i class="icon-tick-square"></i>
+                                   Are you sure, you want to disconnect the company?
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>                 
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer justify-content-center">
+         <button type="button" class="btn btn-primary btn-green" [class.disabled]="!consent" (click)="DisconnectBusiness()"
+           data-dismiss="modal">Yes</button>
+           <button type="button" class="btn btn-primary btn-green" [class.disabled]="!consent" (click)="DismissDialog()"
+           data-dismiss="modal">No</button>
+       </div>
+  </ng-template>
   </div>
 </div>

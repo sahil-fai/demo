@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { BusinessService } from '../../services/business-service/business.service';
 import { HelperService } from '../../services/helper-service/helper.service';
 import { Router } from '@angular/router';
 import { SwitchCompanyService } from '../../services/switch-company-service/switch-company.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IBusinessModel } from '../../Interface/business/business-model.interface';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-single-ledger-business-list',
@@ -23,7 +24,10 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   public autoHide = true;
   public responsive = true;
   public selectedValue = 5;
+  DisconectCompanyID: any;
+  DisconectCompanyStatus: any;
   Totalrec: number;
+  @ViewChild("content", null) modal: ElementRef;
   public labels: any = {
     previousLabel: 'Prev',
     nextLabel: 'Next',
@@ -44,7 +48,8 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   formSearch: FormGroup;
   itemsPerPageCount = 10;
   userid 
-  constructor(public businessService: BusinessService, private helper: HelperService, private router: Router, private switchCompany: SwitchCompanyService, private _fb: FormBuilder) {
+  constructor(public businessService: BusinessService,
+    private modalService: NgbModal, private helper: HelperService, private router: Router, private switchCompany: SwitchCompanyService, private _fb: FormBuilder) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(() => {
       this.ngOnInit();
     });
@@ -84,10 +89,10 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   }
   }
 
-  public async disconnectBusiness(companyid, status){
-    await this.businessService.connetDisconnect(companyid, status).subscribe(res =>{
-    });
-    this.getListOfbusinesses(this.userid);
+  public OpenDialog(companyid, status){
+    this.DisconectCompanyID = companyid;
+    this.DisconectCompanyStatus = status;
+    this.modalService.open(this.modal);
   }
 
   public openDialog() { }
@@ -112,4 +117,15 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   }
 
   get f() { return this.formSearch.controls; }
+
+  DisconnectBusiness(){
+    //  this.businessService.connetDisconnect(this.DisconectCompanyID, this.DisconectCompanyStatus).subscribe(res =>{
+    //    this.getListOfbusinesses(this.userid);
+    // });
+    this.modalService.dismissAll();
+  }
+
+  DismissDialog(){
+    this.modalService.dismissAll();
+  }
 }
