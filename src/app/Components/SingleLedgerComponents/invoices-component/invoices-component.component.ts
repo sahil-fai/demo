@@ -33,6 +33,7 @@ import {
 } from 'src/app/services/switch-company-service/switch-company.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
+import { JsonEditorModalComponent } from 'src/app/modals/json-editor-modal/json-editor-modal.component';
 
 export interface PeriodicElement  {
   CustomerName: string;
