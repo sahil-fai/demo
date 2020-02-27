@@ -19,7 +19,7 @@
       </span>
     </div>
     <div class="businesslistAvial">
-      <div class="searchPanel clearfix" *ngIf="isBusinessLoaded">
+      <div class="searchPanel clearfix">
         <form class="search-panel-form" [formGroup]="formSearch" (ngSubmit)="onFilter()" novalidate autocomplete="off">
           <ul class="floatingList searchBlock">
             <li>
@@ -28,12 +28,13 @@
             <li>
               <input type="text" placeholder="Business Name " class="fields" formControlName="keywords"
                 [ngClass]="{error: (f.keywords.invalid && f.keywords.dirty) || (submitted && f.keywords.invalid)}" />
-              <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
-              <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset" (click)="onReset()" />
+              <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" [disabled]="f.keywords.invalid" value="Filter" />
+              <input type="Reset" class="btn btn-medium uppercase btn-solid btn-deepblue btn-disabled" value="Reset" [disabled]="f.keywords.invalid" (click)="onReset()" />
             </li>
           </ul>
         </form>
       </div>
+    
       <ul class="companyList" *ngIf="isBusinessLoaded && companylist && companylist.length > 0">
         <li *ngFor="let company of companylist| paginate: { itemsPerPage: itemsPerPageCount, currentPage: p }">
           <div class="cellWrapper clearfix">
@@ -70,7 +71,7 @@
                   </li>
                   <li style="text-align: center;">
                     <button type="button" class="btn btn-outline btn-icon uppercase redBtn"
-                      (click)="disconnectBusiness(company.id, false)"><i class="icon-arrow-right"></i><a>Disconnect</a></button>
+                      (click)="OpenDialog(company.id, false)"><i class="icon-arrow-right"></i><a>Disconnect</a></button>
                   </li>
                 </ul>
               </div>
@@ -78,8 +79,7 @@
           </div>
         </li>
       </ul>
-
-      <div class="list">
+      <div class="list" *ngIf="totalRec>0">
            <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
     </div>
@@ -101,4 +101,5 @@
         </div>
       </div>
   </div>
+ 
 </div>

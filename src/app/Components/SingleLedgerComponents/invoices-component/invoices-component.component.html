@@ -35,10 +35,10 @@
                             <li class="smallFields fliter-for">
                                 <label class="labels">Filter For</label>
                                 <div class="errorMessage"  *ngIf=" (formFilter.controls.customerName.invalid && formFilter.controls.customerName.touched || (submitted && formFilter.controls.customerName.invalid ))">
-                                
+
                                </div>
                                 <input type="text" class="fields" formControlName="customerName" id="customerName"
-                                [ngClass]="{error: (formFilter.controls.customerName.invalid && formFilter.controls.customerName.touched)}"  placeholder="Invoices, Number or Total" />
+                                [ngClass]="{error: (formFilter.controls.customerName.invalid && formFilter.controls.customerName.touched)}"  placeholder="Customer Name" />
                             </li>
                             <!-- <li class="smallFields">
                                 <label class="labels">From</label>
@@ -124,10 +124,10 @@
                                 </ng-container>
 
                                 <ng-container matColumnDef="InvoicePDF">
-                                  <th mat-header-cell *matHeaderCellDef class="table-head"> InvoicePDF </th>
-                                  <td mat-cell *matCellDef="let element" class="table-head-second" > <a  (click)="getInvoicePDF(element)"><img src="http://wwwimages.adobe.com/content/dam/acom/en/legal/images/badges/Adobe_PDF_file_icon_32x32.png" alt="InvoicePDF"/></a></td>
+                                  <th mat-header-cell *matHeaderCellDef class="table-head"> Actions </th>
+                                  <td mat-cell *matCellDef="let element" class="table-head-second" > <a  (click)="getInvoicePDF(element)"data-toggle="tooltip"  title="Invoice PDF"><img src="http://wwwimages.adobe.com/content/dam/acom/en/legal/images/badges/Adobe_PDF_file_icon_32x32.png" alt="InvoicePDF"/></a></td>
                                 </ng-container>
-                                
+
 
                                 <!-- customer Column -->
                                 <ng-container matColumnDef="CustomerName">
@@ -164,7 +164,7 @@
                                   <td mat-cell *matCellDef="let element" class="table-head-second" > {{element.total-element.deposit | currency:companyCurrency }} </td>
                                 </ng-container>
 
-                            
+
                                 <!-- <ng-container matColumnDef="BlockchainStatus">
                                   <th mat-header-cell *matHeaderCellDef> BlockchainStatus </th>
                                   <td mat-cell *matCellDef="let element" [class.paid]="element.BlockchainStatus=='Accepted'" [class.partialy-paid]="element.BlockchainStatus=='Transfered'" [class.open]="element.BlockchainStatus=='Submitted'" [class.declined]="element.BlockchainStatus=='Declined'"> {{element.BlockchainStatus|| 'N/A' }} </td>
@@ -206,9 +206,9 @@
                                                   </thead>
                                                   <tbody>
                                                       <tr *ngFor="let varriable of element.blockchainhistories">
-                                                          <td >{{varriable.description|| 'N/A' }}</td>
+                                                          <td ><a (click)="OpenDialog(varriable.description)" >{{varriable.description|| 'N/A' }}</a></td>
                                                           <!-- <td class="td-width">{{varriable.entityid|| 'N/A' }}</td> -->
-                                                          <td class="td-width">{{varriable.blocknumber|| 'N/A' }}</td>
+                                                          <td class="td-width"> {{varriable.blocknumber|| 'N/A' }}</td>
                                                           <td class="td-width">{{varriable.historyactiontypeidl | transactionTypePipe }}</td>
                                                           <td class="td-width">{{varriable.timestamp| date:'mediumDate' || 'N/A' }}</td>
                                                           <td class="td-width">{{varriable.chaincodename|| 'N/A' }}</td>
@@ -277,7 +277,9 @@
                             </div> -->
                             <!-- <pagination-controls (pageChange)="p = $event;paginate(p)"></pagination-controls> -->
                         </div>
+                        <!-- <json-editor #editor [options]="options" [data]="data"></json-editor> -->
                 </div>
         </mat-card-content>
 </mat-card>
+
 

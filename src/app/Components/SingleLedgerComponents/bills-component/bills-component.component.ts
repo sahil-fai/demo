@@ -31,6 +31,9 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   public dataSource: MatTableDataSource<PeriodicElement>;
   Totalrec: number;
   pageNumber : number = 0;
+  offset : number= 0;
+  isFilterSearch : boolean = false;
+  isResetSearch: boolean = false;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns: string[] = ['index', 'Number', 'VendorName','Date', 'DueDate', 'Total', 'Balance',
@@ -64,26 +67,32 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
         this.companyCurrency = localStorage.getItem('CompanyCurrency');
       }
   }
-getAllBills(offset = 0, vendorName = "") {
-  const companyid = Number(this.helper.getcompanyId());
-  const filter = '?filter={"include":[{"relation":"all"}]}';
-  this.businessService.getAllBills(companyid, offset, vendorName, this.pagelimit).subscribe(res => {
-    this.bills = res[0];
-    this.Totalrec = res[1].totalItems;
-;    // this.handlePage({pageSize: '10', pageIndex: '0'});
-    this.dataSource = new MatTableDataSource<PeriodicElement>(this.bills);
-  });
-}
+    getAllBills(offset = this.offset, vendorName = "") {
+      if(this.isFilterSearch || this.isResetSearch){
+        this.Totalrec = 0;
+        this.pageNumber = 0;
+      }
+      const companyid = Number(this.helper.getcompanyId());
+      const filter = '?filter={"include":[{"relation":"all"}]}';
+      this.businessService.getAllBills(companyid, offset, vendorName, this.pagelimit).subscribe(res => {
+        this.bills = res[0];
+        this.Totalrec = res[1].totalItems;
+    ;    // this.handlePage({pageSize: '10', pageIndex: '0'});
+        this.dataSource = new MatTableDataSource<PeriodicElement>(this.bills);
+      });
+    }
 
 
-filterVendor(){
-  this.getAllBills(0, this.vendorName.value);
-}
+    filterVendor(){
+      this.isFilterSearch = true;
+      this.getAllBills(this.offset, this.vendorName.value);
+    }
 
-onReset(){
-  this.formFilter.reset();
-  this.getAllBills();
-}
+    onReset(){
+      this.isResetSearch = true;
+      this.formFilter.reset();
+      this.getAllBills();
+    }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -125,6 +134,8 @@ onReset(){
   // }
 
   public handlePage(e: any) {
+    this.isFilterSearch = false;
+    this.isResetSearch = false;
     let skipNumberOfPages = this.pagelimit * e.pageIndex ;
     this.pageNumber = e.pageIndex * e.pageSize;
     this.getAllBills(skipNumberOfPages);

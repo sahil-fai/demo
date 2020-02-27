@@ -44,6 +44,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   customers: any;
   Totalrec: any;
   pagelimit: number = 10;
+  offset : number = 0;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   switchCompanySubscription: any;
   displayedColumns: string[] = ['select', 'CustomerName', 'ContactEmail', 'RegisterDate', 'Organizaton', 'Status', 'Invite',
@@ -55,6 +56,8 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   private name : FormControl;
   public submitted: boolean;
   pageNumber : number = 0;
+  isFilterSearch : boolean = false;
+  isResetSearch: boolean = false;
 
   constructor(private _fb : FormBuilder,
     public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
@@ -76,26 +79,28 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
 
   filterCustomer(){
     this.submitted = true;
+    this.isFilterSearch = true;
     console.log(this.name.value);
     this.getAllCustomer(Number(this.helper.getcompanyId()), 0, this.name.value);
   }
 
   onReset(){
+    this.isResetSearch = true;
     this.formFilter.reset();
     this.getAllCustomer(Number(this.helper.getcompanyId()));
   }
 
-  getAllCustomer(companyid, offset = 0, filter = "", pagelimit = this.pagelimit) {
+  getAllCustomer(companyid, offset = this.offset, filter = "", pagelimit = this.pagelimit) {
+    if(this.isFilterSearch || this.isResetSearch){
+      this.Totalrec = 0;
+      this.pageNumber = 0;
+    }
     this.businessService.getAllCustomers(companyid, offset, filter, pagelimit).subscribe(res => {
       this.Totalrec = res[1].totalItems;
       this.customers =  res[0];
       if (res[0].length > 0) {
         let response = this.helper.convertJsonKeysToLower(res[0])
         this.customers =  response;
-        // this.handlePage({
-        //   pageSize: '1000',
-        //   pageIndex: '0'
-        // });
         this.dataSource = new MatTableDataSource<PeriodicElement>(this.customers);
       }
     });
@@ -143,7 +148,8 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   // }
 
   public handlePage(e: any) {
-    //console.log(e)
+    this.isFilterSearch = false;
+    this.isResetSearch = false;
     let skipNumberOfPages = this.pagelimit * e.pageIndex ;
     this.pageNumber = e.pageIndex * e.pageSize;
     this.getAllCustomer(Number(this.helper.getcompanyId()), skipNumberOfPages, this.name.value, this.pagelimit);

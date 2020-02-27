@@ -8,7 +8,7 @@ import {
   transition,
   trigger
 } from '@angular/animations';
-import { Component, OnInit, ViewChild, OnDestroy, OnChanges} from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, OnChanges, ElementRef} from '@angular/core';
 import {
   MatTableDataSource
 } from '@angular/material/table';
@@ -32,6 +32,8 @@ import {
   SwitchCompanyService
 } from 'src/app/services/switch-company-service/switch-company.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
+import { JsonEditorModalComponent } from 'src/app/modals/json-editor-modal/json-editor-modal.component';
 
 export interface PeriodicElement  {
   CustomerName: string;
@@ -93,6 +95,12 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   public directionLinks: boolean = true;
   public autoHide: boolean = true;
   public responsive: boolean = true;
+
+  @ViewChild("content", null) modal: ElementRef;
+  @ViewChild(JsonEditorComponent, { static: true }) editor: JsonEditorComponent;
+  public editorOptions: JsonEditorOptions;
+
+  data: any ;
   // public labels: any = {
   //   previousLabel: 'Prev',
   //   nextLabel: 'Next',
@@ -124,6 +132,9 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   private customerName : FormControl
   pagelimit : number = 10;
   pageNumber : number = 0;
+  offset : number= 0;
+  isFilterSearch: boolean = false;
+  isResetSearch: boolean = false;
 
   constructor(private _fb : FormBuilder, public businessService: BusinessService,
     private helper: HelperService,
@@ -147,6 +158,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       this.companyCurrency = localStorage.getItem('CompanyCurrency');
     }
     this.getinvoices(companyid);
+ 
     // console.log(this.getinvoices)
 
   }
@@ -160,26 +172,29 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       }
     );
   }
-  public getinvoices(companyid: number, offset = 0, filter="", pagelimit = this.pagelimit) {
+  public getinvoices(companyid: number, offset = this.offset, filter="", pagelimit = this.pagelimit) {
+    debugger
+    var a = this.pageNumber;
+   if(this.isFilterSearch || this.isResetSearch){
+      this.totalRec = 0;
+      this.pageNumber = 0;
+  }
+  var b = this.pageNumber;
     this.businessService.getAllInvoices(companyid, offset, filter, pagelimit).subscribe(
       res => {
         this.invoices = res[0];
-        // console.log(this.invoices)
         this.totalRec = res[1].totalItems;
-        // console.log(this.totalRec)
         this.dataSource = new MatTableDataSource < PeriodicElement > (this.invoices);
-        // this.handlePage({
-        //   pageSize: this.size,
-        //   pageIndex: this.pageIndex
-        // });
       });
   }
 
   filterCustomer(){
-    this.getinvoices(Number(this.helper.getcompanyId()), 0, this.customerName.value);
+    this.isFilterSearch = true;
+    this.getinvoices(Number(this.helper.getcompanyId()), this.offset, this.customerName.value, this.pagelimit);
   }
 
   onReset(){
+    this.isResetSearch = true;
     this.formFilter.reset();
     this.getinvoices(Number(this.helper.getcompanyId()));
   }
@@ -205,6 +220,9 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   //   };
   // }
   public handlePage(e: any) {
+    debugger
+    this.isFilterSearch = false;
+    this.isResetSearch = false;
      let skipNumberOfPages = this.pagelimit * e.pageIndex ;
      this.pageNumber = e.pageIndex * e.pageSize;
     this.getinvoices(Number(this.helper.getcompanyId()), skipNumberOfPages,this.customerName.value, this.pagelimit);
@@ -230,6 +248,16 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       this.switchCompanySubscription.unsubscribe();
     }
   }
+  OpenDialog(transactionID){
+    const dialogRef = this.dialog.open(JsonEditorModalComponent, {
+      data: {
+        currentUserID : Number(this.helper.getuserId()),
+        TransactionID : transactionID
+      },
+      panelClass: 'json-modal'
+    });
 
+    dialogRef.beforeClose().subscribe(() => {});
+  }
 
 }

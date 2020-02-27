@@ -11,13 +11,15 @@ export class BusinessService {
 
   constructor(private http: HttpClient, private helper:HelperService) { }
 
-  getListOfbusinesses(id: number, pageLimit?: number): Observable<any> {
-    return this.http.get<any>('/users/' + id + '/list?offset='+0+'&limit='+pageLimit);
+  getListOfbusinesses(id: number, offset: number, filter?: string, pageLimit?: number): Observable<any> {
+    var query = filter !== "" && filter !== null ? '/users/' + id + '/list?offset='+offset+'&limit='+pageLimit+ '&customername=' + filter:
+    '/users/' + id + '/list?offset='+offset+'&limit='+pageLimit;
+    return this.http.get<any>(query);
   }
 
   getAllCustomers(id: number, offset: number, filter?: string, pageLimit?: number): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    var query = filter !== "" ? 'business/'+id+'/customers?offset='+offset+'&limit='+pageLimit+'&displayname='+filter :
+    var query = filter !== "" && filter !== null ? 'business/'+id+'/customers?offset='+offset+'&limit='+pageLimit+'&displayname='+filter :
     'business/'+id+'/customers?offset='+offset+'&limit='+pageLimit;
     return this.http.get<any>(query, {
    });
@@ -30,7 +32,7 @@ export class BusinessService {
   }
 
   getAllVendors(id: number, offset: number, filter?: string, pageLimit?: number,): Observable<any> {
-    var query = filter !== "" ? 'business/'+id+'/vendors?offset='+offset+'&limit='+pageLimit+'&displayname='+filter:
+    var query = filter !== ""  && filter !== null ? 'business/'+id+'/vendors?offset='+offset+'&limit='+pageLimit+'&displayname='+filter:
     'business/'+id+'/vendors?offset='+offset+'&limit='+pageLimit;
     return this.http.get<any>(query, {
    });
@@ -38,14 +40,14 @@ export class BusinessService {
 
   getAllInvoices(id: number, offset: number,  filter?: string, pageLimit? : number): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    var query = filter !==""? 'business/'+id+'/invoices?offset='+offset+'&limit='+pageLimit+'&customername='+filter:
+    var query = filter !=="" && filter !== null ? 'business/'+id+'/invoices?offset='+offset+'&limit='+pageLimit+'&customername='+filter:
     'business/'+id+'/invoices?offset='+offset+'&limit='+pageLimit
     return this.http.get<any>(query,{
     });
   }
 
   getAllBills(id: number, offset: number, filter?:string, pageLimit? : number): Observable<any> {
-    var query = filter !== "" ? 'business/' + id +'/invoicebills?offset='+offset+'&limit='+pageLimit+'&vendorname='+filter :
+    var query = filter !== ""  && filter !== null ? 'business/' + id +'/invoicebills?offset='+offset+'&limit='+pageLimit+'&vendorname='+filter :
     'business/' + id +'/invoicebills?offset='+offset+'&limit='+pageLimit;
     return this.http.get<any>(query);
   }
@@ -98,5 +100,10 @@ export class BusinessService {
   connetDisconnect(id, status){
       return this.http.post<any>('business/'+id +'/connetDisconnect/'+status, {
       });
+  }
+
+  getTransactionById(data)
+  {
+      return this.http.post<any>('/getTransactionById', data);
   }
 }

@@ -34,7 +34,7 @@
                       <div class="errorMessage"  *ngIf=" (formFilter.controls.vendorName.invalid && formFilter.controls.vendorName.touched || (submitted && formFilter.controls.vendorName.invalid ))">
                      
                      </div>
-                      <input type="text" class="fields" formControlName="vendorName" id="vendorName" placeholder="Vendor, Number or Total" 
+                      <input type="text" class="fields" formControlName="vendorName" id="vendorName" placeholder="Vendor Name" 
                       [ngClass]="{error: (formFilter.controls.vendorName.invalid && formFilter.controls.vendorName.touched)}"/>
                     </li>
                     <!-- <li class="smallFields">

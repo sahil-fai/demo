@@ -17,6 +17,7 @@ import { LoginGuard } from './Guards/login.guard';
 import { BusinessGuard } from './Guards/business.guard';
 import { ForgotPasswordComponent } from './Authentication/forgot-password/forgot-password.component';
 import { ResetForgetPasswordComponent } from './Authentication/reset-forget-password/reset-password.component';
+import { Error401Component } from './Shared/errors/401.component';
 
 const routes: Routes = [
   {
@@ -78,7 +79,8 @@ const routes: Routes = [
   },
   {
     path: '**', redirectTo: 'connectbusiness'
-  }
+  },
+  { path: '401' , component : Error401Component},
 ];
 
 @NgModule({
