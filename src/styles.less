@@ -1,3 +1,5 @@
+@import '~jsoneditor/dist/jsoneditor.min.css';
+
 @laptopsMin: 1200px;
 @laptopsMax: 1399px;
 @tabletsLandscapeMin: 980px;
@@ -3456,3 +3458,93 @@ mat-checkbox{
 //     height: 74px;
 //     width: 100%;
 // }
+
+// Disconnect Business Confirmation Modal Style Include Here
+.disconnect-business{
+    mat-dialog-container{
+        overflow: visible;
+        width: 450px;
+        max-width: 100%;
+        margin: auto;
+        .disconnect-business{
+            .mat-dialog-title{
+                font-size: 21px;
+                font-weight: 700;
+                line-height: normal;
+                color: #00add8;
+                text-align: center;
+                letter-spacing: 0.02em;
+                margin-bottom: 10px;
+            }
+            .mat-dialog-content{
+                p{
+                    font-family: Roboto,"Helvetica Neue",sans-serif;
+                    font-size: 19px;
+                    font-weight: 300;
+                    text-align: center;
+                    margin-bottom: 50px;
+                }
+            }
+            .mat-dialog-actions{
+                justify-content: center;
+                margin: 0;
+                button{
+                    font-family: Roboto,"Helvetica Neue",sans-serif;
+                    font-size: 0.9rem;
+                    font-weight: 700;
+                    color: #ffffff;
+                    padding: 0.593em 1.2em;
+                    background-color: #00add8;
+                    border: none;
+                    border-radius: 0.3em;
+                    margin: 0px 2px;
+                    &:last-child{
+                        background-color: #e76d59;
+                    }
+                }   
+            }
+        }
+    }
+}
+
+// JSON Modal Style Include Here
+.json-modal{
+    mat-dialog-container{
+        overflow: visible;
+        width: 750px;
+        max-width: 100%;
+        margin: auto;
+        .close{
+            display: block;
+            border: none;
+            background-color: transparent;
+            font-size: 16px;
+            color: #e76d59;
+            margin-left: auto;
+            cursor: pointer;
+        }
+        .mat-dialog-title{
+            font-size: 21px;
+            font-weight: 700;
+            line-height: normal;
+            color: #00add8;
+            text-align: center;
+            letter-spacing: 0.02em;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+// You can't upload images to stackblitz
+div{
+    .jsoneditor-menu{
+        & > {
+            button {
+                background-image: url('https://jsoneditoronline.org/img/jsoneditor-icons.svg');
+            }
+        }
+    }
+    .jsoneditor-poweredBy{
+        display: none;
+    }
+}

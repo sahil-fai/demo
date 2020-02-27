@@ -80,6 +80,8 @@ export class VendorsComponentComponent implements OnInit, OnDestroy   {
   pageNumber : number = 0;
   offset: number = 0;
   isFilterSearch: boolean = false;
+  isResetSearch: boolean = false;
+  
   constructor(private _fb : FormBuilder,
     public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
@@ -97,8 +99,9 @@ export class VendorsComponentComponent implements OnInit, OnDestroy   {
   }
 
   getAllvendors(offset = this.offset, filter="", pagelimit = this.pagelimit) {
-    if(this.isFilterSearch){
-      this.Totalrec = 0
+    if(this.isFilterSearch || this.isResetSearch){
+      this.Totalrec = 0;
+      this.pageNumber = 0;
     }
     const companyid = Number(this.helper.getcompanyId());
     this.platformid= this.helper.getplatformId()
@@ -125,6 +128,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy   {
   }
 
   onReset(){
+    this.isResetSearch = true;
     this.formFilter.reset();
     this.getAllvendors();
   }
@@ -185,6 +189,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy   {
   // }
   public handlePage(e: any) {
     this.isFilterSearch = false;
+    this.isResetSearch = false;
     let skipNumberOfPages = this.pagelimit * e.pageIndex ;
     this.pageNumber = e.pageIndex * e.pageSize;
     this.getAllvendors(skipNumberOfPages, this.name.value, this.pagelimit);

@@ -33,6 +33,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   pageNumber : number = 0;
   offset : number= 0;
   isFilterSearch : boolean = false;
+  isResetSearch: boolean = false;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns: string[] = ['index', 'Number', 'VendorName','Date', 'DueDate', 'Total', 'Balance',
@@ -67,8 +68,9 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
       }
   }
     getAllBills(offset = this.offset, vendorName = "") {
-      if(this.isFilterSearch){
-        this.Totalrec = 0
+      if(this.isFilterSearch || this.isResetSearch){
+        this.Totalrec = 0;
+        this.pageNumber = 0;
       }
       const companyid = Number(this.helper.getcompanyId());
       const filter = '?filter={"include":[{"relation":"all"}]}';
@@ -87,6 +89,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
     }
 
     onReset(){
+      this.isResetSearch = true;
       this.formFilter.reset();
       this.getAllBills();
     }
@@ -132,6 +135,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
 
   public handlePage(e: any) {
     this.isFilterSearch = false;
+    this.isResetSearch = false;
     let skipNumberOfPages = this.pagelimit * e.pageIndex ;
     this.pageNumber = e.pageIndex * e.pageSize;
     this.getAllBills(skipNumberOfPages);

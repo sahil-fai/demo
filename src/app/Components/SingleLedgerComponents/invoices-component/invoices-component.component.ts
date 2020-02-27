@@ -134,6 +134,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   pageNumber : number = 0;
   offset : number= 0;
   isFilterSearch: boolean = false;
+  isResetSearch: boolean = false;
 
   constructor(private _fb : FormBuilder, public businessService: BusinessService,
     private helper: HelperService,
@@ -172,9 +173,13 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     );
   }
   public getinvoices(companyid: number, offset = this.offset, filter="", pagelimit = this.pagelimit) {
-   if(this.isFilterSearch){
-      this.totalRec = 0
+    debugger
+    var a = this.pageNumber;
+   if(this.isFilterSearch || this.isResetSearch){
+      this.totalRec = 0;
+      this.pageNumber = 0;
   }
+  var b = this.pageNumber;
     this.businessService.getAllInvoices(companyid, offset, filter, pagelimit).subscribe(
       res => {
         this.invoices = res[0];
@@ -189,6 +194,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   }
 
   onReset(){
+    this.isResetSearch = true;
     this.formFilter.reset();
     this.getinvoices(Number(this.helper.getcompanyId()));
   }
@@ -214,7 +220,9 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   //   };
   // }
   public handlePage(e: any) {
+    debugger
     this.isFilterSearch = false;
+    this.isResetSearch = false;
      let skipNumberOfPages = this.pagelimit * e.pageIndex ;
      this.pageNumber = e.pageIndex * e.pageSize;
     this.getinvoices(Number(this.helper.getcompanyId()), skipNumberOfPages,this.customerName.value, this.pagelimit);

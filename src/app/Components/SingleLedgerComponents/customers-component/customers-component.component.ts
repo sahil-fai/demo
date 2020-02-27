@@ -57,6 +57,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   public submitted: boolean;
   pageNumber : number = 0;
   isFilterSearch : boolean = false;
+  isResetSearch: boolean = false;
 
   constructor(private _fb : FormBuilder,
     public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
@@ -84,13 +85,15 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   }
 
   onReset(){
+    this.isResetSearch = true;
     this.formFilter.reset();
     this.getAllCustomer(Number(this.helper.getcompanyId()));
   }
 
   getAllCustomer(companyid, offset = this.offset, filter = "", pagelimit = this.pagelimit) {
-    if(this.isFilterSearch){
-      this.Totalrec = 0
+    if(this.isFilterSearch || this.isResetSearch){
+      this.Totalrec = 0;
+      this.pageNumber = 0;
     }
     this.businessService.getAllCustomers(companyid, offset, filter, pagelimit).subscribe(res => {
       this.Totalrec = res[1].totalItems;
@@ -146,6 +149,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
 
   public handlePage(e: any) {
     this.isFilterSearch = false;
+    this.isResetSearch = false;
     let skipNumberOfPages = this.pagelimit * e.pageIndex ;
     this.pageNumber = e.pageIndex * e.pageSize;
     this.getAllCustomer(Number(this.helper.getcompanyId()), skipNumberOfPages, this.name.value, this.pagelimit);
