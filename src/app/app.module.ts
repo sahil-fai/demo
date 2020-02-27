@@ -183,6 +183,8 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
 import { NgJsonEditorModule } from 'ang-jsoneditor' 
 import { DisconnectBusinessModalComponent} from './modals/disconnect-business-modal/disconnect-business-modal.component'
+import { JsonEditorModalComponent } from './modals/json-editor-modal/json-editor-modal.component';
+import { Error401Component } from './Shared/errors/401.component';
 
 const config: SocketIoConfig = { url: environment.sockethost, options: {} };
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -225,7 +227,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ForgotPasswordComponent,
     ResetForgetPasswordComponent,
     TransactionTypePipe,
-    DisconnectBusinessModalComponent
+    DisconnectBusinessModalComponent,
+    JsonEditorModalComponent,
+    Error401Component
 
   ],
   imports: [
@@ -293,7 +297,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TermsConditionsComponent,
     BusinessReloadComponent,
     NotificationSnackbarComponent,
-    DisconnectBusinessModalComponent
+    DisconnectBusinessModalComponent,
+    JsonEditorModalComponent
   ]
 })
 export class AppModule {}

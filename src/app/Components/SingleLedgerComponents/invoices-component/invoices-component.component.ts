@@ -131,8 +131,8 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   private customerName : FormControl
   pagelimit : number = 10;
   pageNumber : number = 0;
-  options: JsonEditorOptions;
-  
+  offset : number= 0;
+  isFilterSearch: boolean = false;
 
   constructor(private _fb : FormBuilder, public businessService: BusinessService,
     private helper: HelperService,
@@ -143,24 +143,6 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
         this.ngOnInit();
       }
     );
-
-
-  this.options = new JsonEditorOptions();
-  this.data = {
-    products: [{
-      name: 'car',
-      product: [{
-        name: 'ddddddd',
-        model: [
-          { id: 'civic', name: 'civic' },
-          { id: 'accord', name: 'accord' },
-          { id: 'crv', name: 'crv' },
-          { id: 'pilot', name: 'pilot' },
-          { id: 'odyssey', name: 'odyssey' }
-        ]
-      }]
-    }]
-  };
   }
 
   ngOnInit() {
@@ -188,23 +170,22 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       }
     );
   }
-  public getinvoices(companyid: number, offset = 0, filter="", pagelimit = this.pagelimit) {
+  public getinvoices(companyid: number, offset = this.offset, filter="", pagelimit = this.pagelimit) {
+   
+   if(this.isFilterSearch){
+   this.totalRec = 0
+  }
     this.businessService.getAllInvoices(companyid, offset, filter, pagelimit).subscribe(
       res => {
         this.invoices = res[0];
-        // console.log(this.invoices)
         this.totalRec = res[1].totalItems;
-        // console.log(this.totalRec)
         this.dataSource = new MatTableDataSource < PeriodicElement > (this.invoices);
-        // this.handlePage({
-        //   pageSize: this.size,
-        //   pageIndex: this.pageIndex
-        // });
       });
   }
 
   filterCustomer(){
-    this.getinvoices(Number(this.helper.getcompanyId()), 0, this.customerName.value);
+    this.isFilterSearch = true;
+    this.getinvoices(Number(this.helper.getcompanyId()), this.offset, this.customerName.value, this.pagelimit);
   }
 
   onReset(){
@@ -259,6 +240,15 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     }
   }
   OpenDialog(element){
+    const dialogRef = this.dialog.open(JsonEditorModalComponent, {
+      data: {
+    
+      },
+      width: '50%',
+      height: '50%',
+    });
+
+    dialogRef.beforeClose().subscribe(() => {});
   }
 
 }

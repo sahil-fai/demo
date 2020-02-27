@@ -7,6 +7,7 @@ import {
   ViewChild,
   OnDestroy,
   ElementRef,
+  ChangeDetectorRef,
 } from '@angular/core';
 import {
   MatTableDataSource
@@ -78,6 +79,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy   {
   pagelimit : number = 10;
   pageNumber : number = 0;
   offset: number = 0;
+  isFilterSearch: boolean = false;
   constructor(private _fb : FormBuilder,
     public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
@@ -94,36 +96,31 @@ export class VendorsComponentComponent implements OnInit, OnDestroy   {
     this.getAllvendors();
   }
 
-  getAllvendors(offset = this.offset, filter="", pagelimit = this.pagelimit, totalRec = this.Totalrec) {
+  getAllvendors(offset = this.offset, filter="", pagelimit = this.pagelimit) {
+    if(this.isFilterSearch){
+      this.Totalrec = 0
+    }
     const companyid = Number(this.helper.getcompanyId());
     this.platformid= this.helper.getplatformId()
-    this.businessService.getAllVendors(companyid, offset, filter, this.pagelimit).subscribe(res => {
+   //setTimeout(()=>{
+    this.businessService.getAllVendors(companyid, offset, filter, pagelimit).subscribe(res => {
       //console.log(res);
       this.vendors = res[0];
-      //this.paginator.length = res[1].totalItems;
       this.Totalrec = res[1].totalItems;
-      if(this.paginator){
-        this.paginator.length = res[1].totalItems
-      }
       if (res[0].length > 0) {
       let response = this.helper.convertJsonKeysToLower(res[0]);
       this.vendors = response;
-      // console.log(this.vendors)
       this.dataSource = new MatTableDataSource < PeriodicElement > (this.vendors);
 
-        // this.handlePage({
-        //   pageSize: '0',
-        //   pageIndex: '0',
-        //   data: this.vendors
-        // });
-        // this.isBusinessLoaded=true;
       } else {
         // this.companylist=[];
       }
     });
+  // },300)
   }
  
   filterVendor(){
+    this.isFilterSearch = true;
     this.getAllvendors(this.offset, this.name.value);
   }
 

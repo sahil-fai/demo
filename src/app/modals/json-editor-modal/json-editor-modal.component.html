@@ -1,0 +1,11 @@
+<div  width="440" height="415" frameborder="0" webkitallowfullscreen mozallowfullscreen
+allowfullscreen>
+  <h1 mat-dialog-title >Json</h1>
+  <div mat-dialog-content>
+    <json-editor #editor [options]="options" [data]="jsonData" ></json-editor>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No</button>
+  </div>
+  </div>

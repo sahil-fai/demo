@@ -206,7 +206,7 @@
                                                   </thead>
                                                   <tbody>
                                                       <tr *ngFor="let varriable of element.blockchainhistories">
-                                                          <td ><a (click)="OpenDialog(element)" href="#">{{varriable.description|| 'N/A' }}</a></td>
+                                                          <td ><a (click)="OpenDialog(varriable.description)" >{{varriable.description|| 'N/A' }}</a></td>
                                                           <!-- <td class="td-width">{{varriable.entityid|| 'N/A' }}</td> -->
                                                           <td class="td-width"> {{varriable.blocknumber|| 'N/A' }}</td>
                                                           <td class="td-width">{{varriable.historyactiontypeidl | transactionTypePipe }}</td>
@@ -282,26 +282,4 @@
         </mat-card-content>
 </mat-card>
 
-<div>
-  <ng-template #content let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title">Disconnect Company</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body" form>
-             <div class="form-group" >
-
-              <json-editor #editor [options]="options" [data]="data" ></json-editor>
-
-              </div>
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer justify-content-center">
-
-     </div>
-</ng-template>
-</div>
 

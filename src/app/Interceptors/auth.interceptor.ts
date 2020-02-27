@@ -57,16 +57,17 @@ export class TokenInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         this._loaderService.isLoading.next(false);
         if (err instanceof HttpErrorResponse) {
-          this.removeRequest(request);
-          localStorage.clear();
+          this.removeRequest(request);      
           console.log('if: ', err);
           if (err.statusText === 'Unknown Error' || err.status == 401) {
             if (err.statusText === 'Unknown Error') {
               this._errHandler.pushError(err.statusText);
+              this._router.navigate(['./401']);
             }
             if (err.status == 401) {
               this._router.navigate(['./login']);
             }
+            localStorage.clear();
           } 
           else if (err.status == 500  || err.status == 400 ) {
             if (err.status == 500) {
