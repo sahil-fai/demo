@@ -145,7 +145,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   // }
 
   public handlePage(e: any) {
-    //console.log(e)
+    this.isFilterSearch = false;
     let skipNumberOfPages = this.pagelimit * e.pageIndex ;
     this.pageNumber = e.pageIndex * e.pageSize;
     this.getAllCustomer(Number(this.helper.getcompanyId()), skipNumberOfPages, this.name.value, this.pagelimit);

@@ -184,6 +184,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy   {
   //   };
   // }
   public handlePage(e: any) {
+    this.isFilterSearch = false;
     let skipNumberOfPages = this.pagelimit * e.pageIndex ;
     this.pageNumber = e.pageIndex * e.pageSize;
     this.getAllvendors(skipNumberOfPages, this.name.value, this.pagelimit);

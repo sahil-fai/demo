@@ -131,6 +131,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   // }
 
   public handlePage(e: any) {
+    this.isFilterSearch = false;
     let skipNumberOfPages = this.pagelimit * e.pageIndex ;
     this.pageNumber = e.pageIndex * e.pageSize;
     this.getAllBills(skipNumberOfPages);

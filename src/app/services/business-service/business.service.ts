@@ -101,4 +101,9 @@ export class BusinessService {
       return this.http.post<any>('business/'+id +'/connetDisconnect/'+status, {
       });
   }
+
+  getTransactionById(data)
+  {
+      return this.http.post<any>('/getTransactionById', data);
+  }
 }

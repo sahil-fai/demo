@@ -172,9 +172,8 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     );
   }
   public getinvoices(companyid: number, offset = this.offset, filter="", pagelimit = this.pagelimit) {
-   
    if(this.isFilterSearch){
-   this.totalRec = 0
+      this.totalRec = 0
   }
     this.businessService.getAllInvoices(companyid, offset, filter, pagelimit).subscribe(
       res => {
@@ -215,6 +214,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   //   };
   // }
   public handlePage(e: any) {
+    this.isFilterSearch = false;
      let skipNumberOfPages = this.pagelimit * e.pageIndex ;
      this.pageNumber = e.pageIndex * e.pageSize;
     this.getinvoices(Number(this.helper.getcompanyId()), skipNumberOfPages,this.customerName.value, this.pagelimit);
@@ -240,10 +240,11 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       this.switchCompanySubscription.unsubscribe();
     }
   }
-  OpenDialog(element){
+  OpenDialog(transactionID){
     const dialogRef = this.dialog.open(JsonEditorModalComponent, {
       data: {
-    
+        currentUserID : Number(this.helper.getuserId()),
+        TransactionID : transactionID
       },
       width: '50%',
       height: '50%',
