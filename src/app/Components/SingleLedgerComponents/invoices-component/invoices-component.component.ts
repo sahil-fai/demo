@@ -173,7 +173,6 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     );
   }
   public getinvoices(companyid: number, offset = this.offset, filter="", pagelimit = this.pagelimit) {
-    debugger
     var a = this.pageNumber;
    if(this.isFilterSearch || this.isResetSearch){
       this.totalRec = 0;
@@ -220,7 +219,6 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   //   };
   // }
   public handlePage(e: any) {
-    debugger
     this.isFilterSearch = false;
     this.isResetSearch = false;
      let skipNumberOfPages = this.pagelimit * e.pageIndex ;

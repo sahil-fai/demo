@@ -104,7 +104,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
     },
     panelClass: 'disconnect-business'
   });
-  dialogRef.beforeClose().subscribe(() => {this.getListOfbusinesses(this.userid);});
+  dialogRef.afterClosed().subscribe(() => {this.getListOfbusinesses(this.userid);});
   }
 
   public onFilter() {
