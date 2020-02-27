@@ -25,7 +25,7 @@ export class JsonEditorModalComponent implements OnInit {
         public dialogRef: MatDialogRef<JsonEditorModalComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData) {
             this.options = new JsonEditorOptions();
-            this.options.mode = 'text';
+            this.options.mode = 'code';
            this.getJsonData();
         }
 

@@ -246,8 +246,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
         currentUserID : Number(this.helper.getuserId()),
         TransactionID : transactionID
       },
-      width: '50%',
-      height: '50%',
+      panelClass: 'json-modal'
     });
 
     dialogRef.beforeClose().subscribe(() => {});

@@ -102,8 +102,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
       disconectCompanyStatus :this.DisconectCompanyStatus,
       currentUserid : this.userid
     },
-    width: '30%',
-    height: '30%',
+    panelClass: 'disconnect-business'
   });
   dialogRef.beforeClose().subscribe(() => {this.getListOfbusinesses(this.userid);});
   }
