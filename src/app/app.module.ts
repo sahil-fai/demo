@@ -292,7 +292,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BottomSheetOverviewExampleSheetComponent,
     TermsConditionsComponent,
     BusinessReloadComponent,
-    NotificationSnackbarComponent
+    NotificationSnackbarComponent,
+    DisconnectBusinessModalComponent
   ]
 })
 export class AppModule {}

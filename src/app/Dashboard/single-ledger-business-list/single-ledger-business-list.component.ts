@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IBusinessModel } from '../../Interface/business/business-model.interface';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { DisconnectBusinessModalComponent} from '../../modals/disconnect-business-modal/disconnect-business-modal.component';
+import { DialogOverviewExampleDialogComponent } from 'src/app/Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component';
 
 @Component({
   selector: 'app-single-ledger-business-list',
@@ -28,6 +29,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   DisconectCompanyID: any;
   DisconectCompanyStatus: any;
   offset : number = 0;
+  safeSrc: any;
   @ViewChild("content", null) modal: ElementRef;
   public labels: any = {
     previousLabel: 'Prev',
@@ -94,8 +96,16 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   public OpenDialog(companyid, status){
     this.DisconectCompanyID = companyid;
     this.DisconectCompanyStatus = status;
-   // this.modalService.open(this.modal);
-   const dialogRef = this.dialog.open(DisconnectBusinessModalComponent);
+   const dialogRef = this.dialog.open(DisconnectBusinessModalComponent, {
+    data: {
+      disconectCompanyID: this.DisconectCompanyID, 
+      disconectCompanyStatus :this.DisconectCompanyStatus,
+      currentUserid : this.userid
+    },
+    width: '30%',
+    height: '30%',
+  });
+  dialogRef.beforeClose().subscribe(() => {this.getListOfbusinesses(this.userid);});
   }
 
   public onFilter() {
@@ -112,9 +122,6 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   }
 
   public onReset() {
-    // this.pageNumber = 0;
-    // this.isBusinessLoaded = true;
-    // this.companylist = this.businessListActual;
     this.formSearch.reset();
     this.getListOfbusinesses(Number(this.helper.getuserId()));
     this.submitted = false;
@@ -122,14 +129,4 @@ export class SingleLedgerBusinessListComponent implements OnInit {
 
   get f() { return this.formSearch.controls; }
 
-  DisconnectBusiness(){
-    //  this.businessService.connetDisconnect(this.DisconectCompanyID, this.DisconectCompanyStatus).subscribe(res =>{
-    //    this.getListOfbusinesses(this.userid);
-    // });
-  //  this.modalService.dismissAll();
-  }
-
-  DismissDialog(){
-    //this.modalService.dismissAll();
-  }
 }

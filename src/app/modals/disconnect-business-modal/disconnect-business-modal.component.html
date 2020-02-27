@@ -1,12 +1,18 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field>
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.animal">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
-</div>
+<!-- <div class="youtube">
+  <iframe [src]=data.safeSrc  width="560" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen
+  allowfullscreen></iframe>
+</div> -->
+
+
+<div  width="260" height="215" frameborder="0" webkitallowfullscreen mozallowfullscreen
+allowfullscreen>
+  <h1 mat-dialog-title >Disconnect Business Confirmation</h1>
+  <div mat-dialog-content>
+    <p>Are you sure that you want to disconnect the business?</p>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="diconnectBusiness()" cdkFocusInitial>Ok</button>
+    <button mat-button (click)="onNoClick()">No</button>
+  </div>
+  </div>
