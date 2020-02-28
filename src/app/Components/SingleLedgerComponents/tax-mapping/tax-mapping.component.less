@@ -1,29 +1,93 @@
-mat-card{
-    mat-card-content{
-        .floatBoxesWrapper{
-            .floatBox{
-                .defaultTable{
-                    overflow: visible;
-                    table{
-                        tbody{
-                            tr{
-                                td{
-                                    width: 25%;
-                                    table{
-                                        margin-top: 30px;
+mat-card {
+  mat-card-content {
+    .floatBoxesWrapper {
+      .floatBox {
+        .defaultTable {
+          overflow: visible;
+
+          table {
+            tbody {
+              tr {
+                td {
+                  width: 25%;
+
+                  table {
+                    margin-top: 30px;
+                    border: 1px solid #ccc;
+                    tbody{
+                        tr{
+                            td{
+                                button {
+                                    &.edit-options {
+                                        color: #e76d59;
+                                        float: right;
+                                      i {
+                                        padding: 0px;
+                                      }
+                                      &:hover {
+                                        background: #e76d59;
+                                        color: #fff;
+                                      }
+                                      &.editable {
+                                        background: #e76d59;
+                                        color: #fff;
+                                        padding: 0.5rem;
+                                      }
+                                      &.disabled {
+                                        opacity: 0.5;
+                                        pointer-events: none;
+                                      }
                                     }
-                                    .no-record{
-                                        .norecord-text{
-                                            border: none;
-                                            cursor: pointer;
-                                        }
-                                    }
-                                }
+                                  }
                             }
                         }
                     }
+                  }
+
+                  .no-record {
+                    .norecord-text {
+                      border: none;
+                      cursor: pointer;
+                    }
+                  }
+
+                  button {
+                    &.edit-options {
+                      background: transparent;
+                      height: 35px;
+                      border-radius: 0;
+                      font-size: 19px;
+                      text-align: center;
+                      color: #cccccc;
+
+                      i {
+                        padding: 0px;
+                      }
+
+                      &:hover {
+                        background: #00add8;
+                        ;
+                        color: #fff;
+                      }
+
+                      &.editable {
+                        background: #00add8;
+                        color: #fff;
+                        padding: 0.5rem;
+                      }
+
+                      &.disabled {
+                        opacity: 0.5;
+                        pointer-events: none;
+                      }
+                    }
+                  }
                 }
+              }
             }
+          }
         }
+      }
     }
+  }
 }

@@ -9,7 +9,7 @@
             <table class="dataTable">
               <thead>
                 <tr>
-                    <th colspan="1">&nbsp;</th>
+                  <th colspan="1">&nbsp;</th>
                   <th>Single Ledger Tax</th>
                   <th>Company's Tax</th>
                   <th colspan="1">&nbsp;</th>
@@ -34,7 +34,11 @@
                                         [(ngModel)]="companyies">
                         </ng-select>
                     </td>
-                    <td colspan="1">&nbsp;</td>
+                    <td colspan="1">
+                      <button class="btn icon-dots-vertical edit-options" title="Tax Mapping">
+                        <mat-icon>add</mat-icon>
+                      </button>
+                    </td>
                 </tr>
                 <tr>
                     <td></td>
@@ -44,12 +48,18 @@
                                 <tr>
                                     <th>Single Ledger Tax Record</th>
                                     <th>Company Tax Record</th>
+                                    <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>Single Ledger Tax1</td>
                                     <td>Company Tax1</td>
+                                    <td>
+                                      <button class="btn icon-dots-vertical edit-options" title="Delete">
+                                        <mat-icon>delete</mat-icon>
+                                      </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
