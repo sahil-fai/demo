@@ -122,7 +122,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   companyCurrency: string;
   // @ViewChild(MatPaginator, {static: true
   // }) paginator: MatPaginator;
-  displayedColumns: string[] = ['Index', 'Number', 'CustomerName', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'BlockchainTransactionID', 'InvoicePDF',  'star' ];
+  displayedColumns: string[] = ['Index', 'Number', 'CustomerName', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'BlockchainTransactionID', 'Actions',  'star' ];
   expandedElement: PeriodicElement | null;
   selection = new SelectionModel < PeriodicElement > (true, []);
   invoice: string;
@@ -250,7 +250,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(JsonEditorModalComponent, {
       data: {
         currentUserID : Number(this.helper.getuserId()),
-        TransactionID : transactionID
+        transactionID : transactionID
       },
       panelClass: 'json-modal'
     });

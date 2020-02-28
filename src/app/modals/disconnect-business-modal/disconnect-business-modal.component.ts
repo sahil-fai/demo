@@ -3,8 +3,6 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { BusinessService } from 'src/app/services/business-service/business.service';
 
 export interface DialogData {
-  disconectCompanyID: any,
-  disconectCompanyStatus: any,
   currentUserid: any
   }
 
@@ -14,7 +12,7 @@ export interface DialogData {
 })
 export class DisconnectBusinessModalComponent implements OnInit {
 
-
+  public SelectedData:any;
     constructor(public businessService: BusinessService,
         public dialogRef: MatDialogRef<DisconnectBusinessModalComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
@@ -27,9 +25,9 @@ export class DisconnectBusinessModalComponent implements OnInit {
     }
 
     diconnectBusiness(): void{
-      this.businessService.connetDisconnect(this.data.disconectCompanyID, this.data.disconectCompanyStatus).subscribe(res =>{
-          // this.getListOfbusinesses(this.userid);
-        });
-      this.dialogRef.close();
+       this.SelectedData={
+        Disconnect: true
+      };
+      this.dialogRef.close({ data:  this.SelectedData});
     }
 }
