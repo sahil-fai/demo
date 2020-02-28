@@ -1,6 +1,6 @@
 <button class="close" mat-button (click)="onNoClick()">X</button>
 <div frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
-  <h1 mat-dialog-title >Json</h1>
+  <h1 mat-dialog-title >Transaction ID : <span>{{data.transactionID}}</span></h1>
   <div mat-dialog-content>
     <json-editor #editor [options]="options" [data]="jsonResponse" ></json-editor>
   </div>

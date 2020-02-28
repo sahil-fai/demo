@@ -26,8 +26,6 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   public autoHide = true;
   public responsive = true;
   public selectedValue = 5;
-  DisconectCompanyID: any;
-  DisconectCompanyStatus: any;
   offset : number = 0;
   safeSrc: any;
   @ViewChild("content", null) modal: ElementRef;
@@ -94,17 +92,21 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   }
 
   public OpenDialog(companyid, status){
-    this.DisconectCompanyID = companyid;
-    this.DisconectCompanyStatus = status;
    const dialogRef = this.dialog.open(DisconnectBusinessModalComponent, {
     data: {
-      disconectCompanyID: this.DisconectCompanyID, 
-      disconectCompanyStatus :this.DisconectCompanyStatus,
       currentUserid : this.userid
     },
     panelClass: 'disconnect-business'
   });
-  dialogRef.beforeClose().subscribe(() => {this.getListOfbusinesses(this.userid);});
+  dialogRef.afterClosed().subscribe(result => {
+    if (result && result.data.Disconnect) 
+      {
+          // this.businessService.connetDisconnect(companyid, status).subscribe(res =>
+          //   {
+          //     this.getListOfbusinesses(this.userid);
+          //   });
+      }
+  });
   }
 
   public onFilter() {
