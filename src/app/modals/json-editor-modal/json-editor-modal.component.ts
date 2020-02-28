@@ -5,7 +5,7 @@ import { BusinessService } from 'src/app/services/business-service/business.serv
 
 export interface DialogData {
   currentUserID: any
-  TransactionID: any,
+  transactionID: any,
   }
 
 

@@ -11,7 +11,7 @@ import { Component } from '@angular/core'
       text-align: center; 
     }`]
 })
-export class Error401Component{
+export class Error404Component{
   constructor() {
 
   }
