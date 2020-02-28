@@ -1,0 +1,68 @@
+<div class="title">
+  <h2>Tax Mapping</h2>
+</div>
+<mat-card class="example-card">
+  <mat-card-content>
+      <div class="floatBoxesWrapper">
+        <div class="floatBox" id="tableData">
+          <div class="defaultTable">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                    <th colspan="1">&nbsp;</th>
+                  <th>Single Ledger Tax</th>
+                  <th>Company's Tax</th>
+                  <th colspan="1">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td colspan="1">&nbsp;</td>
+                    <td>
+                        <ng-select [items]="singletax"
+                                        bindLabel="name"
+                                        bindValue="name"
+                                        groupBy="title"
+                                        [(ngModel)]="singleLedger">
+                        </ng-select>
+                    </td>
+                    <td>
+                        <ng-select [items]="companytax"
+                                        bindLabel="Name"
+                                        bindValue="id"
+                                        groupBy="title"
+                                        [(ngModel)]="companyies">
+                        </ng-select>
+                    </td>
+                    <td colspan="1">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Single Ledger Tax Record</th>
+                                    <th>Company Tax Record</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Single Ledger Tax1</td>
+                                    <td>Company Tax1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="no-record">
+                            <button type="button" class="norecord-text">Submit</button>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  </mat-card-content>
+</mat-card>

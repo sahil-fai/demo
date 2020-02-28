@@ -185,6 +185,7 @@ import { NgJsonEditorModule } from 'ang-jsoneditor'
 import { DisconnectBusinessModalComponent} from './modals/disconnect-business-modal/disconnect-business-modal.component'
 import { JsonEditorModalComponent } from './modals/json-editor-modal/json-editor-modal.component';
 import { Error401Component } from './Shared/errors/401.component';
+import { TaxMappingComponent } from './Components/SingleLedgerComponents/tax-mapping/tax-mapping.component';
 
 const config: SocketIoConfig = { url: environment.sockethost, options: {} };
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -229,7 +230,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TransactionTypePipe,
     DisconnectBusinessModalComponent,
     JsonEditorModalComponent,
-    Error401Component
+    Error401Component,
+    TaxMappingComponent
 
   ],
   imports: [
