@@ -19,23 +19,35 @@
                 <tr>
                     <td colspan="1">&nbsp;</td>
                     <td>
-                        <ng-select [items]="singletax"
-                                        bindLabel="name"
-                                        bindValue="name"
+                        <ng-select 
+                                        bindLabel="Name"
                                         groupBy="title"
-                                        [(ngModel)]="singleLedger">
+                                        [(ngModel)]="singleLedger"
+                                        (change)="getMasterTaxValues($event)">
+                                        <ng-option [value]="item.id"  [disabled]="item.disabled" *ngFor="let item of singleLedgerTax">
+                                          {{item.Name}}
+                                      </ng-option>
                         </ng-select>
                     </td>
                     <td>
-                        <ng-select [items]="companytax"
+                      <ng-select 
+                        bindLabel="Name"
+                        groupBy="title"
+                        [(ngModel)]="companyies"
+                        (change)="getCompanyTaxValues($event)">
+                          <ng-option [value]="item.id"  [disabled]="item.disabled" *ngFor="let item of taxratesforcompanyMappings">
+                            {{item.Name}}
+                        </ng-option>
+                 </ng-select>
+                        <!-- <ng-select [items]="companytax"
                                         bindLabel="Name"
                                         bindValue="id"
                                         groupBy="title"
                                         [(ngModel)]="companyies">
-                        </ng-select>
+                        </ng-select> -->
                     </td>
                     <td colspan="1">
-                      <button class="btn icon-dots-vertical edit-options" title="Tax Mapping">
+                      <button class="btn icon-dots-vertical edit-options" (click) = "addMapping()" title="Tax Mapping">
                         <mat-icon>add</mat-icon>
                       </button>
                     </td>
@@ -53,8 +65,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Single Ledger Tax1</td>
-                                    <td>Company Tax1</td>
+                                 {{singleLedgerTaxRecord}}
+                                    <td *ngFor="let record of singleLedgerTaxRecord">{{record.Name || 'N/A' }}</td>
+                                    <td *ngFor="let record of companyTaxRecord">{{record.Name || 'N/A' }}</td>
                                     <td>
                                       <button class="btn icon-dots-vertical edit-options" title="Delete">
                                         <mat-icon>delete</mat-icon>
@@ -64,7 +77,7 @@
                             </tbody>
                         </table>
                         <div class="no-record">
-                            <button type="button" class="norecord-text">Submit</button>
+                            <button type="button" (click) ="submit()" class="norecord-text">Submit</button>
                         </div>
                     </td>
                     <td></td>

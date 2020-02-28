@@ -106,4 +106,9 @@ export class BusinessService {
   {
       return this.http.post<any>('/getTransactionById', data);
   }
+
+  getTaxes(id: number): Observable<any> {
+     return this.http.get('business/'+id+'/taxes', {
+     });
+   }
 }

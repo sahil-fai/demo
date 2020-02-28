@@ -69,7 +69,7 @@ export class TokenInterceptor implements HttpInterceptor {
             if (err.status == 404) {
               this._router.navigate(['./404']);
             }
-            localStorage.clear();
+            //localStorage.clear();
           } 
           else if (err.status == 500  || err.status == 400 ) {
             if (err.status == 500) {

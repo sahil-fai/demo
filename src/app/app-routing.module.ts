@@ -81,13 +81,13 @@ const routes: Routes = [
           }
         ]
   },
+  { path: '404' , component : Error404Component},
   {
     path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {
     path: '**', redirectTo: 'connectbusiness'
   },
-  { path: '404' , component : Error404Component},
 ];
 
 @NgModule({
