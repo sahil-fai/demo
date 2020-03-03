@@ -114,12 +114,12 @@ export class BusinessService {
 
   taxRateMapping(data)
   {
-      return this.http.post<any>('/company/taxrate-mapping', data);
+      return this.http.post<any>('company/taxrate-mapping', data);
   }
 
   deleteTaxMapping(id)
   {
-      return this.http.delete<any>('/company/delete-tax-mapping/'+id, {});
+      return this.http.delete<any>('company/delete-tax-mapping/'+id, {});
   }
 
 }

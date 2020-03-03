@@ -135,6 +135,7 @@ export class TaxMappingComponent implements OnInit {
 
   addMapping()
   {
+    debugger
     if(this.taxRatesforCompany && this.singleLedger)
     {
       let singleLedgerValues = this.singleLedgerTax.filter( x => x.id === this.singleLedger)
@@ -170,7 +171,7 @@ export class TaxMappingComponent implements OnInit {
       taxmapping:{
         CompanyId:companyID,
         MasterTaxRateId: masterTaxId,
-        CompanyTaxRateId: companyTaxId,
+        CompanyTaxComponentId: companyTaxId,
         PlateFormTaxCode:""
       }};
      
