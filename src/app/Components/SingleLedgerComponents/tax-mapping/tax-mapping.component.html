@@ -19,38 +19,27 @@
                 <tr>
                     <td colspan="1">&nbsp;</td>
                     <td>
-                        <!-- <ng-select 
-                                        bindLabel="Name"
-                                        groupBy="title"
-                                        [(ngModel)]="singleLedger"
-                                        (change)="getMasterTaxValues($event)" >
-                                        <ng-option [value]="item.id"  [disabled]="item.disabled" *ngFor="let item of singleLedgerTax">
-                                          {{item.Name}}
-                                      </ng-option>
-                        </ng-select> -->
-
                        <ng-select [items]="singleLedgerTax"
                                         bindLabel="Name"
                                         bindValue="id"
                                         groupBy="title"
-                                        
-                                        [(ngModel)]="singleLedger"
-                                        (change)="getMasterTaxValues($event)" >
+                                        placeholder="Select SingleLedger Tax"
+                                        [(ngModel)]="singleLedger" >
                         </ng-select>
               
 
                     </td>
                     <td>
-                        <ng-select [items]="taxratesforcompanyMappings"
+                        <ng-select [items]="companytax"
                                         bindLabel="Name"
                                         bindValue="id"
                                         groupBy="title"
-                                        [(ngModel)]="companyies"
-                                        (change)="getCompanyTaxValues($event)">
+                                        placeholder="Select Company Tax"
+                                        [(ngModel)]="taxRatesforCompany">
                         </ng-select>
                     </td>
                     <td colspan="1">
-                      <button class="btn icon-dots-vertical edit-options" (click) = "addMapping()" title="Tax Mapping">
+                      <button class="btn icon-dots-vertical edit-options" (click)="addMapping()" title="Tax Mapping">
                         <mat-icon>add</mat-icon>
                       </button>
                     </td>
