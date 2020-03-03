@@ -31,6 +31,7 @@ export class CompanyInfoComponentComponent implements OnInit , OnDestroy {
       }
       this.companyinfo = compinfo;
       this.helper.setplatformId(compinfo.platformid);
+      this.helper.setTaxMapping(compinfo.istaxmapped);
     });
   }
   ngOnDestroy() {

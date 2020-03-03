@@ -135,7 +135,6 @@ export class TaxMappingComponent implements OnInit {
 
   addMapping()
   {
-    debugger
     if(this.taxRatesforCompany && this.singleLedger)
     {
       let singleLedgerValues = this.singleLedgerTax.filter( x => x.id === this.singleLedger)
@@ -152,7 +151,7 @@ export class TaxMappingComponent implements OnInit {
   deleteTaxMapping(id){
      if (id) {
         // Delete recorde from server
-        this.businessService.deleteTaxMapping(id).subscribe(res =>
+        this.businessService.deleteTaxMapping(Number(localStorage.getItem('CompanyId')), id).subscribe(res =>
           {
             let list = this.taxRecord.filter( x=> x.id == id)
             this.taxRecord.splice(this.taxRecord.indexOf(list), 1);

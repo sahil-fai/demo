@@ -117,9 +117,9 @@ export class BusinessService {
       return this.http.post<any>('company/taxrate-mapping', data);
   }
 
-  deleteTaxMapping(id)
+  deleteTaxMapping(compantId, taxMappingId)
   {
-      return this.http.delete<any>('company/delete-tax-mapping/'+id, {});
+      return this.http.delete<any>('business/' + compantId+ '/delete-mapping/'+taxMappingId, {});
   }
 
 }
