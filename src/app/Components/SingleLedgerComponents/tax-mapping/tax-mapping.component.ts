@@ -60,7 +60,7 @@ export class TaxMappingComponent implements OnInit {
     this.mastertaxMappings.forEach(element => {
       const mastertaxData = {
         id : element.id,
-        Name: element.Name+ ' , '+ element.TaxPercentage + ' %',
+        Name: element.Name+ '-'+ element.TaxPercentage + '%, ' + element.ProvinceFullName,
         ProvinceFullName: element.ProvinceFullName,
         ProvinceShortName: element.ProvinceShortName,
         Country: element.Country,
@@ -78,7 +78,7 @@ export class TaxMappingComponent implements OnInit {
     this.othertaxMappings.forEach(element => {
       const othertaxData = {
         id : element.id,
-        Name: element.Name+ ' , '+ element.TaxPercentage + ' %',
+        Name: element.Name+ '-'+ element.TaxPercentage + '%, ' + element.ProvinceFullName,
         ProvinceFullName: element.ProvinceFullName,
         ProvinceShortName: element.ProvinceShortName,
         Country: element.Country,
@@ -95,7 +95,7 @@ export class TaxMappingComponent implements OnInit {
     this.taxratesforcompanyMappings.forEach(element => {
       const taxratesforcompanyData = {
         id : element.id,
-        Name: element.Name + ' , '+ element.Rate + ' %',
+        Name: element.Name + '-'+ element.Rate + '%',
         Rate: element.Rate,
         IsCompund: element.IsCompund,
         Isrecoverable: element.Isrecoverable,
