@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BusinessService } from 'src/app/services/business-service/business.service';
 import { HelperService } from 'src/app/services/helper-service/helper.service';
+import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 
 @Component({
   selector: 'app-tax-mapping',
@@ -24,14 +25,22 @@ export class TaxMappingComponent implements OnInit {
   public taxMapping : any =[];
   selectedMasterTaxID;
   selectedCompanyTaxID;
+  switchCompanySubscription: any;
   
   taxRatesforCompany;
 
-  constructor(public businessService: BusinessService, private helper: HelperService) { 
+  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) { 
+    this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
+      () => {
+        this.ngOnInit();
+      }
+    );
   }
 
   ngOnInit() {
     this.getTaxes();
+    this.taxRecord.length = 0;
+    this.taxRecord= []; 
   }
  
   getTaxes(){
@@ -127,9 +136,10 @@ export class TaxMappingComponent implements OnInit {
       taxMappingData.SingleLedgerTaxList = singleLedgerData;
       taxMappingData.CompanyTaxList =  companyData;
       let isRecordNotMatched = this.taxRecord.filter( x => x.id === element.id).length == 0;
-      if(this.taxRecord.length  == 0){
-      this.taxRecord.push(taxMappingData);
-      }
+
+      // if(this.taxRecord.length  == 0){
+      // this.taxRecord.push(taxMappingData);
+      // }
       if(isRecordNotMatched){
         this.taxRecord.push(taxMappingData);
       }
