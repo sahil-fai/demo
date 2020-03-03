@@ -126,8 +126,12 @@ export class TaxMappingComponent implements OnInit {
       taxMappingData.id = element.id;
       taxMappingData.SingleLedgerTaxList = singleLedgerData;
       taxMappingData.CompanyTaxList =  companyData;
-      if(this.taxRecord.length  == 0  || this.taxRecord[0].id !== element.id){
+      let isRecordNotMatched = this.taxRecord.filter( x => x.id === element.id).length == 0;
+      if(this.taxRecord.length  == 0){
       this.taxRecord.push(taxMappingData);
+      }
+      if(isRecordNotMatched){
+        this.taxRecord.push(taxMappingData);
       }
     });
   }
