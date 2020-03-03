@@ -86,7 +86,7 @@ const routes: Routes = [
     path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {
-    path: '**', redirectTo: 'connectbusiness'
+    path: '**', redirectTo: '404'
   },
 ];
 
