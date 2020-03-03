@@ -101,10 +101,10 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   dialogRef.afterClosed().subscribe(result => {
     if (result && result.data.Disconnect) 
       {
-          // this.businessService.connetDisconnect(companyid, status).subscribe(res =>
-          //   {
-          //     this.getListOfbusinesses(this.userid);
-          //   });
+          this.businessService.connetDisconnect(companyid, status).subscribe(res =>
+            {
+              this.getListOfbusinesses(this.userid);
+            });
       }
   });
   }

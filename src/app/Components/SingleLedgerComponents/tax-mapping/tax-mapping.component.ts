@@ -10,340 +10,26 @@ import { HelperService } from 'src/app/services/helper-service/helper.service';
 export class TaxMappingComponent implements OnInit {
 
   singleLedger = 'Single Ledger Tax'
-  mastertax = [];
-  othertax = [];
+  mastertax : any = [];
+  othertax :any =[];
   companytax = [];
   singleLedgerTax = [];
   public mastertaxMappings: any;
   public othertaxMappings: any;
   public taxratesforcompanyMappings: any;
-  public singleLedgerTaxRecord  = [];
-  public otherTaxRecord : any;
+  public singleLedgerTaxRecord  : any =[];
+  public taxRecord  : any =[];
+  public otherTaxRecord : any =[];
   public companyTaxRecord  = [];
-  public taxMapping : any;
+  public taxMapping : any =[];
   selectedMasterTaxID;
   selectedCompanyTaxID;
   
-  singletax2 = [
-    {
-      id: 3,
-      Name: "PST",
-      ProvinceFullName: "British Columbia",
-      ProvinceShortName: "BC",
-      Country: "CANADA",
-      Status: true,
-      title: "Other Tax"
-    },
-    {
-      id: 4,
-      Name: "AST",
-      ProvinceFullName: "British Columbia",
-      ProvinceShortName: "BC",
-      Country: "CANADA",
-      Status: true,
-      title: "Master Tax"
-    }];
-  //   {
-  //     name: 'Single Ledger Tax 5', title: 'Heading 1'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 6', title: 'Heading 1'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 7', title: 'Heading 1'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 8', title: 'Heading 2'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 9', title: 'Heading 2'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 10', title: 'Heading 2'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 11', title: 'Heading 2'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 12', title: 'Heading 2'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 13', title: 'Heading 2'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 14', title: 'Heading 2'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 15', title: 'Heading 3'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 16', title: 'Heading 3'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 17', title: 'Heading 3'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 18', title: 'Heading 3'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 19', title: 'Heading 3'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 20', title: 'Heading 3'
-  //   },
-  //   {
-  //     name: 'Single Ledger Tax 21', title: 'Heading 3'
-  //   },
-  // ];
-
-
   companyies = 'Single Ledger Tax 1'
-  companytax1 = [
-    {
-      Name: 'Company Tax 1', title: 'Heading 1'
-    },
-    {
-      Name: 'Company Tax 6', title: 'Heading 1'
-    },
-    {
-      Name: 'Company Tax 7', title: 'Heading 1'
-    },
-    {
-      Name: 'Company Tax 8', title: 'Heading 2'
-    },
-    {
-      Name: 'Company Tax 9', title: 'Heading 2'
-    },
-   
-  ];
-  Res = {
-    "taxratesforthecompany": [
-      {
-        "id": 1059,
-        "Name": "Canada Revenue Agency",
-        "TaxType": "",
-        "DisplayTaxRate": 0,
-        "EffectiveTaxRate": 0,
-        "Status": false,
-        "CanApplyToAssets": false,
-        "CanApplyToExpenses": true,
-        "CanApplyToLiabilities": false,
-        "CanApplyToRevenue": false,
-        "platform_owner_id": "1",
-        "companyid": 240
-      },
-      {
-        "id": 1060,
-        "Name": "Minister of Finance",
-        "TaxType": "",
-        "DisplayTaxRate": 0,
-        "EffectiveTaxRate": 0,
-        "Status": false,
-        "CanApplyToAssets": false,
-        "CanApplyToExpenses": true,
-        "CanApplyToLiabilities": false,
-        "CanApplyToRevenue": false,
-        "platform_owner_id": "2",
-        "companyid": 240
-      },
-      {
-        "id": 1061,
-        "Name": "California Department of Tax and Fee Administration",
-        "TaxType": "",
-        "DisplayTaxRate": 17.5,
-        "EffectiveTaxRate": 17.5,
-        "Status": false,
-        "CanApplyToAssets": false,
-        "CanApplyToExpenses": false,
-        "CanApplyToLiabilities": false,
-        "CanApplyToRevenue": false,
-        "platform_owner_id": "3",
-        "companyid": 240
-      },
-      {
-        "id": 1062,
-        "Name": "No Tax Agency",
-        "TaxType": "",
-        "DisplayTaxRate": 0,
-        "EffectiveTaxRate": 0,
-        "Status": false,
-        "CanApplyToAssets": false,
-        "CanApplyToExpenses": true,
-        "CanApplyToLiabilities": false,
-        "CanApplyToRevenue": false,
-        "platform_owner_id": "4",
-        "companyid": 240
-      }
-    ],
-    "mastertax": [
-      {
-        "id": 3,
-        "Name": "PSTT",
-        "ProvinceFullName": "British Columbia",
-        "ProvinceShortName": "BC",
-        "Country": "CANADA",
-        "TaxPercentage": 7,
-        "Status": true
-      },
-      {
-        "id": 4,
-        "Name": "GST",
-        "ProvinceFullName": "British Columbia",
-        "ProvinceShortName": "BC",
-        "Country": "CANADA",
-        "TaxPercentage": 5,
-        "Status": true
-      }
-    ],
-    "otherstax": [
-      {
-        "id": 1,
-        "Name": "GST",
-        "ProvinceFullName": "Alberta",
-        "ProvinceShortName": "AB",
-        "Country": "CANADA",
-        "TaxPercentage": 12,
-        "Status": true
-      },
-      {
-        "id": 3,
-        "Name": "PST",
-        "ProvinceFullName": "British Columbia",
-        "ProvinceShortName": "BC",
-        "Country": "CANADA",
-        "TaxPercentage": 7,
-        "Status": true
-      },
-      {
-        "id": 4,
-        "Name": "GST",
-        "ProvinceFullName": "British Columbia",
-        "ProvinceShortName": "BC",
-        "Country": "CANADA",
-        "TaxPercentage": 5,
-        "Status": true
-      },
-      {
-        "id": 5,
-        "Name": "GST",
-        "ProvinceFullName": "Manitoba",
-        "ProvinceShortName": "MB",
-        "Country": "CANADA",
-        "TaxPercentage": 5,
-        "Status": true
-      },
-      {
-        "id": 6,
-        "Name": "PST",
-        "ProvinceFullName": "Manitoba",
-        "ProvinceShortName": "MB",
-        "Country": "CANADA",
-        "TaxPercentage": 7,
-        "Status": true
-      },
-      {
-        "id": 7,
-        "Name": "HST",
-        "ProvinceFullName": "New Brunswick",
-        "ProvinceShortName": "NB",
-        "Country": "CANADA",
-        "TaxPercentage": 15,
-        "Status": true
-      },
-      {
-        "id": 8,
-        "Name": "HST",
-        "ProvinceFullName": "Newfoundland and Labrador",
-        "ProvinceShortName": "NL",
-        "Country": "CANADA",
-        "TaxPercentage": 15,
-        "Status": true
-      },
-      {
-        "id": 9,
-        "Name": "GST",
-        "ProvinceFullName": "Northwest Territories",
-        "ProvinceShortName": "NT",
-        "Country": "CANADA",
-        "TaxPercentage": 5,
-        "Status": true
-      },
-      {
-        "id": 10,
-        "Name": "HST",
-        "ProvinceFullName": "Nova Scotia",
-        "ProvinceShortName": "AB",
-        "Country": "CANADA",
-        "TaxPercentage": 15,
-        "Status": true
-      },
-      {
-        "id": 11,
-        "Name": "GST",
-        "ProvinceFullName": "Nunavut",
-        "ProvinceShortName": "NU",
-        "Country": "CANADA",
-        "TaxPercentage": 5,
-        "Status": true
-      },
-      {
-        "id": 12,
-        "Name": "HST",
-        "ProvinceFullName": "Ontario",
-        "ProvinceShortName": "ON",
-        "Country": "CANADA",
-        "TaxPercentage": 13,
-        "Status": true
-      },
-      {
-        "id": 14,
-        "Name": "GST",
-        "ProvinceFullName": "Quebec",
-        "ProvinceShortName": "QC",
-        "Country": "CANADA",
-        "TaxPercentage": 5,
-        "Status": true
-      },
-      {
-        "id": 15,
-        "Name": "PST",
-        "ProvinceFullName": "Quebec",
-        "ProvinceShortName": "QC",
-        "Country": "CANADA",
-        "TaxPercentage": 10,
-        "Status": true
-      },
-      {
-        "id": 16,
-        "Name": "GST",
-        "ProvinceFullName": "Saskatchewan",
-        "ProvinceShortName": "SK",
-        "Country": "CANADA",
-        "TaxPercentage": 5,
-        "Status": true
-      },
-      {
-        "id": 17,
-        "Name": "PST",
-        "ProvinceFullName": "Saskatchewan",
-        "ProvinceShortName": "SK",
-        "Country": "CANADA",
-        "TaxPercentage": 6,
-        "Status": true
-      },
-      {
-        "id": 18,
-        "Name": "GST",
-        "ProvinceFullName": "Yukon",
-        "ProvinceShortName": "YK",
-        "Country": "CANADA",
-        "TaxPercentage": 5,
-        "Status": true
-      }
-    ]
-  };
 
-  constructor(public businessService: BusinessService, private helper: HelperService) { }
+  constructor(public businessService: BusinessService, private helper: HelperService) { 
+
+  }
 
   ngOnInit() {
     this.getTaxes();
@@ -352,20 +38,20 @@ export class TaxMappingComponent implements OnInit {
   getTaxes(){
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getTaxes(companyid).subscribe(res => {
+      this.mastertaxMappings =  res.mastertax;
+      this.othertaxMappings = res.otherstax;
+      this.taxratesforcompanyMappings = res.taxratesforthecompany;
       debugger
-      this.mastertaxMappings =  this.Res.mastertax;
-      this.othertaxMappings = this.Res.otherstax;
-      this.taxratesforcompanyMappings = this.Res.taxratesforthecompany;
-        this.generateMastertaxMapping();
-        this.generateOthertaxMapping();
-      console.log(this.mastertax);
-      console.log(this.singletax2);
+      this.taxMapping = res.taxmapping;
+      this.filterTaxMappingData();
+      debugger
+      var abc = this.taxRecord;
    }
    );
   }
 
   generateMastertaxMapping(){
-    this.mastertax.length = 0;
+   this.mastertax.length = 0;
     this.mastertaxMappings.forEach(element => {
       const mastertaxData = {
         id : element.id,
@@ -376,10 +62,11 @@ export class TaxMappingComponent implements OnInit {
         Status: element.Status,
         title : 'Recommended Tax'
       }
-      this.singleLedgerTax.push(mastertaxData);
+      this.singleLedgerTax=[...this.singleLedgerTax, mastertaxData];
+    // .push();
     });
   }
-
+  
   generateOthertaxMapping(){
     this.othertax.length = 0;
     this.othertaxMappings.forEach(element => {
@@ -392,8 +79,46 @@ export class TaxMappingComponent implements OnInit {
         Status: element.Status,
         title : 'Other Tax'
       }
-      this.singleLedgerTax.push(othertaxData);
+      this.singleLedgerTax=[...this.singleLedgerTax, othertaxData];
+      //this.singleLedgerTax.push(othertaxData);
     });
+  }
+
+  filterTaxMappingData(){
+    this.generateMastertaxMapping();
+    this.generateOthertaxMapping();
+    this.fillTaxaMappingData();
+    debugger
+    if(this.taxRecord){
+    this.taxRecord.forEach(element => {
+      debugger
+      this.singleLedgerTax = this.singleLedgerTax.filter( x => x.id !== element.SingleLedgerTaxList[0].id);
+      this.taxratesforcompanyMappings = this.taxratesforcompanyMappings.filter( x => x.id !== element.CompanyTaxList[0].id);
+     });
+    }
+  }
+
+  fillTaxaMappingData(){
+    debugger
+    if(this.taxMapping){
+    this.taxMapping.forEach(element => {
+      const taxMappingData = {
+        id : 0,
+        SingleLedgerTaxList: [],
+        CompanyTaxList: [],
+      }
+      let singleLedgerData = this.singleLedgerTax.filter( x => x.id === element.master_tax_rate_id)
+      let companyData = this.taxratesforcompanyMappings.filter( x => x.id === element.company_tax_component_id)
+      taxMappingData.id = element.id;
+      taxMappingData.SingleLedgerTaxList = singleLedgerData;
+      taxMappingData.CompanyTaxList =  companyData;
+      debugger
+      if(this.taxRecord.length  == 0  || this.taxRecord[0].id !== element.id){
+      this.taxRecord.push(taxMappingData);
+      }
+      //this.addrecords(element.id, singleLedgerData[0], companyData[0]);
+    });
+  }
   }
 
   // generateTaxRatesforCompanyMapping(){
@@ -417,58 +142,96 @@ export class TaxMappingComponent implements OnInit {
   //   });
   // }
 
-  getMasterTaxValues(selectedMasterTaxID){
-    debugger
-    console.log(selectedMasterTaxID.selected);
-    this.selectedMasterTaxID = selectedMasterTaxID;
-    this.mapTaxValues();
+  getMasterTaxValues(event){
+    this.selectedMasterTaxID = event.id;
   }
 
-  getCompanyTaxValues(selectedCompanyTaxID){
-    console.log(selectedCompanyTaxID.selected);
-    this.selectedCompanyTaxID = selectedCompanyTaxID
-    this.mapTaxValues();
-  }
-
-  mapTaxValues(){
-    
+  getCompanyTaxValues(event){
+    this.selectedCompanyTaxID = event.id;
   }
 
   addMapping(){
-    debugger
-    var a = this.singleLedgerTax;
-    var b = this.taxratesforcompanyMappings;
-    if(this.selectedCompanyTaxID && this.selectedMasterTaxID){
-      let data =this.singleLedgerTax.filter( x => x.id === this.selectedMasterTaxID)
-      this.singleLedgerTaxRecord.push(data);
-     // this.otherTaxRecord = this.othertax.filter( x => x.id === this.selectedMasterTaxID);
-      this.companyTaxRecord.push(this.taxratesforcompanyMappings.filter( x => x.id === this.selectedCompanyTaxID));
-      this.singleLedgerTax = this.singleLedgerTax.filter( x => x.id !== this.selectedMasterTaxID);
-     // this.othertax = this.othertax.filter( x => x.id !== this.selectedMasterTaxID);
-      this.taxratesforcompanyMappings = this.taxratesforcompanyMappings.filter( x => x.id !== this.selectedCompanyTaxID);
+    if(this.selectedCompanyTaxID && this.selectedMasterTaxID)
+    {
+      debugger
+      let singleLedgerValues = this.singleLedgerTax.filter( x => x.id === this.selectedMasterTaxID)
+      let companyValues = this.taxratesforcompanyMappings.filter( x => x.id === this.selectedCompanyTaxID)
+      
+      if(singleLedgerValues && companyValues){
+        //let id = Math.random().toString(10).substr(2, 4);
+        //this.addrecords(0, singleLedgerData[0], companyData[0]);
+        const taxRecordData = {
+          SingleLedgerTaxList: [],
+          CompanyTaxList: [],
+        }
+        debugger
+  
+        taxRecordData.SingleLedgerTaxList = singleLedgerValues[0];
+        taxRecordData.CompanyTaxList =  companyValues[0];
+       // this.taxRecord.push(taxRecordData);
+        //this.taxRecord = [...this.taxRecord, this.taxRecordData];
+        console.log(this.taxRecord);
+
+        //Save Mapping
+        this.saveTaxMapping(singleLedgerValues[0].id, companyValues[0].id);
       }
-
-      var aa = this.singleLedgerTaxRecord;
-  }
-
-  submit(){
-    const data = {
-    CompanyId:localStorage.getItem('CompanyCurrency'),
-    MasterTaxRateId: 1,
-    CompanyTaxRateId:14,
-    PlateFormTaxCode:""
-    };
-    if(this.singleLedgerTaxRecord){
-      this.singleLedgerTaxRecord.forEach(element => {
-        data.MasterTaxRateId = element.id;
-    });
     }
+   }
 
-    if(this.companyTaxRecord){
-      this.companyTaxRecord.forEach(element => {
-        data.CompanyTaxRateId = element.id;
-    });
+  // addrecords(id = 0, singleLedgerTaxListValues, companyTaxListvalues){
+  //   const taxRecordData = {
+  //     id : 0,
+  //     SingleLedgerTaxList: [],
+  //     CompanyTaxList: [],
+  //   }
+  //   debugger
+  //   taxRecordData.id = id;
+  //   taxRecordData.SingleLedgerTaxList = singleLedgerTaxListValues;
+  //   taxRecordData.CompanyTaxList =  companyTaxListvalues;
+  //   this.taxRecord.push(taxRecordData);
+  // }
+  
+
+  deleteTaxMapping(id){
+    debugger
+    //this.taxRecord.forEach(element => {
+     if (id) {
+        debugger
+        // Delete recorde from server
+        this.businessService.deleteTaxMapping(id).subscribe(res =>
+          {
+            debugger
+            let list = this.taxRecord.filter( x=> x.id == id)
+            // this.singleLedgerTax = [...this.singleLedgerTax, list[0].SingleLedgerTaxList];
+            // this.taxratesforcompanyMappings = [...this.taxratesforcompanyMappings, list[0].CompanyTaxList];
+            this.taxRecord.splice(this.taxRecord.indexOf(list), 1);
+            this.getTaxes();
+            console.log("Record Deleted");
+        });
+      }
+    //});
   }
 
-}
+  saveTaxMapping(masterTaxRateId, companyTaxRateId){
+    debugger
+    let companyID = Number(localStorage.getItem('CompanyId'));
+    let masterTaxId = masterTaxRateId;
+    let companyTaxId = companyTaxRateId;
+    const saveMappingData = {
+      companyid:companyID,
+      taxmapping:{
+        CompanyId:companyID,
+        MasterTaxRateId: masterTaxId,
+        CompanyTaxRateId: companyTaxId,
+        PlateFormTaxCode:""
+      }};
+     
+     this.businessService.taxRateMapping(saveMappingData).subscribe(res => {
+       debugger
+      this.getTaxes();
+      // this.singleLedgerTax = this.singleLedgerTax.filter( x => x.id !== this.selectedMasterTaxID);
+       //this.taxratesforcompanyMappings = this.taxratesforcompanyMappings.filter( x => x.id !== this.selectedCompanyTaxID);
+       console.log("submitted" + res);
+      });
+  }
 }

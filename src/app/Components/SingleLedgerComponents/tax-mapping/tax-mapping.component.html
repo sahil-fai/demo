@@ -19,32 +19,35 @@
                 <tr>
                     <td colspan="1">&nbsp;</td>
                     <td>
-                        <ng-select 
+                        <!-- <ng-select 
                                         bindLabel="Name"
                                         groupBy="title"
                                         [(ngModel)]="singleLedger"
-                                        (change)="getMasterTaxValues($event)">
+                                        (change)="getMasterTaxValues($event)" >
                                         <ng-option [value]="item.id"  [disabled]="item.disabled" *ngFor="let item of singleLedgerTax">
                                           {{item.Name}}
                                       </ng-option>
-                        </ng-select>
-                    </td>
-                    <td>
-                      <ng-select 
-                        bindLabel="Name"
-                        groupBy="title"
-                        [(ngModel)]="companyies"
-                        (change)="getCompanyTaxValues($event)">
-                          <ng-option [value]="item.id"  [disabled]="item.disabled" *ngFor="let item of taxratesforcompanyMappings">
-                            {{item.Name}}
-                        </ng-option>
-                 </ng-select>
-                        <!-- <ng-select [items]="companytax"
+                        </ng-select> -->
+
+                       <ng-select [items]="singleLedgerTax"
                                         bindLabel="Name"
                                         bindValue="id"
                                         groupBy="title"
-                                        [(ngModel)]="companyies">
-                        </ng-select> -->
+                                        
+                                        [(ngModel)]="singleLedger"
+                                        (change)="getMasterTaxValues($event)" >
+                        </ng-select>
+              
+
+                    </td>
+                    <td>
+                        <ng-select [items]="taxratesforcompanyMappings"
+                                        bindLabel="Name"
+                                        bindValue="id"
+                                        groupBy="title"
+                                        [(ngModel)]="companyies"
+                                        (change)="getCompanyTaxValues($event)">
+                        </ng-select>
                     </td>
                     <td colspan="1">
                       <button class="btn icon-dots-vertical edit-options" (click) = "addMapping()" title="Tax Mapping">
@@ -64,12 +67,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                 {{singleLedgerTaxRecord}}
-                                    <td *ngFor="let record of singleLedgerTaxRecord">{{record.Name || 'N/A' }}</td>
-                                    <td *ngFor="let record of companyTaxRecord">{{record.Name || 'N/A' }}</td>
+                                <tr *ngFor="let record of taxRecord">
+                                    <td>{{record.SingleLedgerTaxList[0]?.Name || 'N/A' }}</td>
+                                    <td>{{record.CompanyTaxList[0]?.Name || 'N/A' }}</td>
                                     <td>
-                                      <button class="btn icon-dots-vertical edit-options" title="Delete">
+                                      <button class="btn icon-dots-vertical edit-options" (click) ="deleteTaxMapping(record.id)" title="Delete">
                                         <mat-icon>delete</mat-icon>
                                       </button>
                                     </td>
@@ -77,7 +79,7 @@
                             </tbody>
                         </table>
                         <div class="no-record">
-                            <button type="button" (click) ="submit()" class="norecord-text">Submit</button>
+                            <!-- <button type="button" (click) ="submit()" class="norecord-text">Submit</button> -->
                         </div>
                     </td>
                     <td></td>
