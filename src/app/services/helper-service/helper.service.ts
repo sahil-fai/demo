@@ -61,6 +61,14 @@ export class HelperService {
     return localStorage.getItem(TOKEN) != null;
   }
 
+  getTaxMapping(){
+    return localStorage.getItem("isTaxMapped");
+   }
+
+   setTaxMapping(val:any):void {
+    localStorage.setItem('isTaxMapped', val);
+  }
+
   convertJsonKeysToLower(obj:any)
   {
     var json = JSON.stringify(obj);

@@ -106,4 +106,20 @@ export class BusinessService {
   {
       return this.http.post<any>('/getTransactionById', data);
   }
+
+  getTaxes(id: number): Observable<any> {
+     return this.http.get('business/'+id+'/taxes', {
+     });
+   }
+
+  taxRateMapping(data)
+  {
+      return this.http.post<any>('company/taxrate-mapping', data);
+  }
+
+  deleteTaxMapping(compantId, taxMappingId)
+  {
+      return this.http.delete<any>('business/' + compantId+ '/delete-mapping/'+taxMappingId, {});
+  }
+
 }

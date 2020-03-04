@@ -1,0 +1,82 @@
+<div class="title">
+  <h2>Tax Mapping</h2>
+</div>
+<mat-card class="example-card">
+  <mat-card-content>
+      <div class="floatBoxesWrapper">
+        <div class="floatBox" id="tableData">
+          <div class="defaultTable">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th colspan="1">&nbsp;</th>
+                  <th>Single Ledger Tax</th>
+                  <th>Company's Tax</th>
+                  <th colspan="1">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td colspan="1">&nbsp;</td>
+                    <td>
+                       <ng-select [items]="singleLedgerTax"
+                                        bindLabel="Name"
+                                        bindValue="id"
+                                        groupBy="title"
+                                        placeholder="Select SingleLedger Tax"
+                                        [(ngModel)]="singleLedger" >
+                        </ng-select>
+              
+
+                    </td>
+                    <td>
+                        <ng-select [items]="companytax"
+                                        bindLabel="Name"
+                                        bindValue="id"
+                                        groupBy="title"
+                                        placeholder="Select Company Tax"
+                                        [(ngModel)]="taxRatesforCompany">
+                        </ng-select>
+                    </td>
+                    <td colspan="1">
+                      <button class="btn icon-dots-vertical edit-options" (click)="addMapping()" title="Tax Mapping">
+                        <mat-icon>add</mat-icon>
+                      </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Single Ledger Tax Record</th>
+                                    <th>Company Tax Record</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let record of taxRecord">
+                                    <td>{{record.SingleLedgerTaxList[0]?.Name || 'N/A' }}</td>
+                                    <td>{{record.CompanyTaxList[0]?.Name || 'N/A' }}</td>
+                                    <td>
+                                      <button class="btn icon-dots-vertical edit-options" (click) ="deleteTaxMapping(record.id)" title="Delete">
+                                        <mat-icon>delete</mat-icon>
+                                      </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="no-record">
+                            <!-- <button type="button" (click) ="submit()" class="norecord-text">Submit</button> -->
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  </mat-card-content>
+</mat-card>
