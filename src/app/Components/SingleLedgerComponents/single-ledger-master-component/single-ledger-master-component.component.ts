@@ -67,7 +67,6 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
 
   sortBusinessList(businessID){
     this.businessListMapping.forEach(element => {
-      debugger
       if(element.id == businessID){
         element.isSelected = 0
       }
