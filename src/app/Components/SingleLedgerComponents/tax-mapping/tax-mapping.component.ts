@@ -41,6 +41,8 @@ export class TaxMappingComponent implements OnInit {
     this.getTaxes();
     this.taxRecord.length = 0;
     this.taxRecord= []; 
+    this.taxRatesforCompany= null;
+    this.singleLedger= null;
     this.isTaxMapped = JSON.parse(this.helper.getTaxMapping());
   }
  
