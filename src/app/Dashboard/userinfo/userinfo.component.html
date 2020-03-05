@@ -1,10 +1,10 @@
 <div class="user-info" [matMenuTriggerFor]="menu"><i class="icon-profile"></i></div>
 <mat-menu #menu="matMenu" class="user-profile" xPosition="before">
-  <button mat-menu-item>
+  <button mat-menu-item disabled>
     <mat-icon>account_circle</mat-icon>
     <span>{{userinfo?.firstname || 'N/A' }} {{userinfo?.lastname|| 'N/A' }}</span>
   </button>
-  <button mat-menu-item>
+  <button mat-menu-item disabled>
     <mat-icon>email</mat-icon>
     <span>{{userinfo.email|| 'N/A' }}</span>
   </button>

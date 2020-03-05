@@ -45,7 +45,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   platformid: number;
   companyCurrency: string;
   formFilter: FormGroup;
-  private vendorName : FormControl
+  public vendorName : FormControl
   
   constructor(private _fb : FormBuilder,public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(

@@ -19,6 +19,7 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
   CurrentCompanyName: any;
   public isNavOpen = false;
   businessList: any;
+  businessListMapping: any;
   isModal: boolean;
   pageLimit : number = 10;
   offset: number = 0;
@@ -33,9 +34,20 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
       this.CurrentCompanyName = res.name;
     });
     this.businessService.getListOfbusinesses(userId, this.offset, this.filter, this.pageLimit).subscribe(res => {
-      this.businessList = res[0];
+      //this.businessList = res[0];
+      this.businessListMapping =res[0];
+      this.appendNewElement();
+      this.sortBusinessList(companyid);
     });
   }
+
+  appendNewElement(){
+    this.businessListMapping.forEach(element => {
+      element.isSelected = 1
+    });
+    console.log(this.businessListMapping);
+  }
+
   public closeNav() {
     this.isNavOpen = !this.isNavOpen;
   }
@@ -48,9 +60,18 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
     {
         return;
     }
-
     this.helper.setcompanyId(businessID);
     this.switchCompany.switchCompany();
     this.ngOnInit();
+  }
+
+  sortBusinessList(businessID){
+    this.businessListMapping.forEach(element => {
+      if(element.id == businessID){
+        element.isSelected = 0
+      }
+    });
+
+    this.businessList = this.businessListMapping.sort(function(a, b) { return a.isSelected - b.isSelected; })
   }
 }

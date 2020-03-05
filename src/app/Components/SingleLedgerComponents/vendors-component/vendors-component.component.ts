@@ -75,7 +75,7 @@ export class VendorsComponentComponent implements OnInit, OnDestroy   {
   switchCompanySubscription: any;
   platformid: number;
   formFilter: FormGroup;
-  private name : FormControl
+  public name : FormControl
   pagelimit : number = 10;
   pageNumber : number = 0;
   offset: number = 0;

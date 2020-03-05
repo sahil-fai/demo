@@ -26,7 +26,7 @@ export class TaxMappingComponent implements OnInit {
   selectedMasterTaxID;
   selectedCompanyTaxID;
   switchCompanySubscription: any;
-  
+  isTaxMapped
   taxRatesforCompany;
 
   constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) { 
@@ -34,13 +34,16 @@ export class TaxMappingComponent implements OnInit {
       () => {
         this.ngOnInit();
       }
-    );
+      );
   }
 
   ngOnInit() {
     this.getTaxes();
     this.taxRecord.length = 0;
     this.taxRecord= []; 
+    this.taxRatesforCompany= null;
+    this.singleLedger= null;
+    this.isTaxMapped = JSON.parse(this.helper.getTaxMapping());
   }
  
   getTaxes(){

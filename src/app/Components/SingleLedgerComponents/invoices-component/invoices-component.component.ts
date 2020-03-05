@@ -129,7 +129,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   switchCompanySubscription: any;
   platformid: number;
   formFilter: FormGroup;
-  private customerName : FormControl
+  public customerName : FormControl
   pagelimit : number = 10;
   pageNumber : number = 0;
   offset : number= 0;

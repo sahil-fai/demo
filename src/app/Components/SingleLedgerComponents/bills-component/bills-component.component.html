@@ -31,7 +31,7 @@
                   <ul class="floatingList searchBlock">
                     <li class="filter-for">
                       <label class="labels">Filter For</label>
-                      <div class="errorMessage"  *ngIf=" (formFilter.controls.vendorName.invalid && formFilter.controls.vendorName.touched || (submitted && formFilter.controls.vendorName.invalid ))">
+                      <div class="errorMessage"  *ngIf=" (formFilter.controls.vendorName.invalid && formFilter.controls.vendorName.touched || (formFilter.controls.vendorName.invalid ))">
                      
                      </div>
                       <input type="text" class="fields" formControlName="vendorName" id="vendorName" placeholder="Vendor Name" 

@@ -53,7 +53,7 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   selection = new SelectionModel<PeriodicElement>(true, []);
   platformid: number;
   formFilter: FormGroup;
-  private name : FormControl;
+  public name : FormControl;
   public submitted: boolean;
   pageNumber : number = 0;
   isFilterSearch : boolean = false;

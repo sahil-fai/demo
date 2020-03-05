@@ -1,6 +1,9 @@
 <div class="title">
   <h2>Tax Mapping</h2>
 </div>
+<div class="importantNote" *ngIf = "!isTaxMapped">
+  <p>*Important note: - you must have to map the tax.</p>
+</div>
 <mat-card class="example-card">
   <mat-card-content>
       <div class="floatBoxesWrapper">
