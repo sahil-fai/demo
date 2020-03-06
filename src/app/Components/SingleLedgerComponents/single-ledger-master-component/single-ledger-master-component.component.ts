@@ -73,5 +73,7 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
     });
 
     this.businessList = this.businessListMapping.sort(function(a, b) { return a.isSelected - b.isSelected; })
+    var selectedBusiness = this.businessList.filter( x=> x.isSelected == 0)
+    this.helper.setSelectedBusinessName(selectedBusiness[0].legalName);
   }
 }
