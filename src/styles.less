@@ -852,6 +852,16 @@ textarea.fields.newFormatting{
     }
 }
 
+.blink_me {
+    animation: blinker 1s ;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
 
 
 
@@ -3223,9 +3233,12 @@ mat-dialog-container{
 .importantNote{
     padding-bottom: 5px;
     padding-top: 5px;
+    padding-left: 15px;
     background-color: #F5AD9D;
     color: #d82000;
-    font-size: 16px;
+    font-size: 14px;
+    margin-right: 15px;
+    margin-left: 17px;
 }
 .mat-bottom-sheet-container{
         position: relative !important;

@@ -69,6 +69,15 @@ export class HelperService {
     localStorage.setItem('isTaxMapped', val);
   }
 
+  getSelectedBusinessName(){
+    return localStorage.getItem("businessName");
+   }
+
+   setSelectedBusinessName(val:any):void {
+    localStorage.setItem('businessName', val);
+  }
+
+
   convertJsonKeysToLower(obj:any)
   {
     var json = JSON.stringify(obj);

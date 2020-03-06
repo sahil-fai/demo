@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { BusinessService } from 'src/app/services/business-service/business.service';
 import { HelperService } from 'src/app/services/helper-service/helper.service';
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
@@ -28,8 +28,9 @@ export class TaxMappingComponent implements OnInit {
   switchCompanySubscription: any;
   isTaxMapped
   taxRatesforCompany;
+  selectedBusinessName : string = '';
 
-  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) { 
+  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private cdr: ChangeDetectorRef) { 
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
         this.ngOnInit();
@@ -37,7 +38,8 @@ export class TaxMappingComponent implements OnInit {
       );
   }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
     this.getTaxes();
     this.taxRecord.length = 0;
     this.taxRecord= []; 
@@ -45,10 +47,17 @@ export class TaxMappingComponent implements OnInit {
     this.singleLedger= null;
     this.isTaxMapped = JSON.parse(this.helper.getTaxMapping());
   }
+  
+  ngAfterViewChecked(){
+    this.selectedBusinessName = this.helper.getSelectedBusinessName();
+    this.cdr.detectChanges();
+  }
  
   getTaxes(){
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getTaxes(companyid).subscribe(res => {
+      this.helper.setTaxMapping(res.isTaxMapped);
+      this.isTaxMapped = JSON.parse(this.helper.getTaxMapping());
       this.mastertaxMappings =  res.mastertax;
       this.othertaxMappings = res.otherstax;
       this.taxratesforcompanyMappings = res.taxratesforthecompany;
@@ -165,13 +174,15 @@ export class TaxMappingComponent implements OnInit {
     }
    }
 
-  deleteTaxMapping(id){
+  deleteTaxMapping(id, index){
      if (id) {
         // Delete recorde from server
         this.businessService.deleteTaxMapping(Number(localStorage.getItem('CompanyId')), id).subscribe(res =>
           {
-            let list = this.taxRecord.filter( x=> x.id == id)
-            this.taxRecord.splice(this.taxRecord.indexOf(list), 1);
+            //let list = this.taxRecord.filter( x=> x.id == id)
+           // var indexof = this.taxRecord.indexOf(list);
+            //this.taxRecord.splice(this.taxRecord.indexOf(list), 1);
+            this.taxRecord.splice(index, 1);
             this.getTaxes();
             console.log("Record Deleted");
         });
