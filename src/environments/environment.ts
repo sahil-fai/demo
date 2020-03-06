@@ -5,6 +5,6 @@
 export const environment = {
   //host: 'https://localhost:3000/',
   sockethost: "http://localhost:4444",
-  host: "https://192.168.1.33:8084/",
+  host: "https://192.168.1.33:3000/",
   production: false
 };
