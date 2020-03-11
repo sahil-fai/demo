@@ -107,7 +107,7 @@ export class TaxMappingComponent implements OnInit {
     this.taxratesforcompanyMappings.forEach(element => {
       const taxratesforcompanyData = {
         id : element.id,
-        Name: element.Name + '-'+ element.Rate + '%',
+        Name: element.Name + '-'+ element.Rate + '%' + ',' + element.TaxRateName,
         Rate: element.Rate,
         IsCompund: element.IsCompund,
         Isrecoverable: element.Isrecoverable,
