@@ -34,6 +34,7 @@ import {
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
 import { JsonEditorModalComponent } from 'src/app/modals/json-editor-modal/json-editor-modal.component';
+import { parse } from 'querystring';
 
 export interface PeriodicElement  {
   CustomerName: string;
@@ -158,14 +159,15 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       this.companyCurrency = localStorage.getItem('CompanyCurrency');
     }
     this.getinvoices(companyid);
- 
+
     // console.log(this.getinvoices)
 
   }
 
   getInvoicePDF(element){
     var platformidl = localStorage.getItem('PlatformId');
-    this.businessService.getInvoicePDF(element.companyid, element.platformownerinvoiceid, parseInt(platformidl)).subscribe((file: Blob) => {
+
+    this.businessService.getInvoicePDF(element.companyid,element.invoiceid,platformidl as unknown as number,element.userid,element.platformownerinvoiceid,element.companyid).subscribe((file: Blob) => {
       console.log("hello pdf");
       console.log(window.URL.createObjectURL(file));
         window.open(window.URL.createObjectURL(file), '_blank');

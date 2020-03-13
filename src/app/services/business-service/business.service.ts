@@ -92,9 +92,14 @@ export class BusinessService {
     return this.http.post<any>('/users/invite', data);
   }
 
-  getInvoicePDF(id: number, invoiceId: string, platformId: number): Observable<any> {
+  getInvoicePDF(id: number, invoiceId: string, platformId: number, userId:number,platforminvoiceId:string,companyId:number): Observable<any> {
+
    // return this.http.get('business/240/invoice/a1a64ff4-76a4-48d0-a2f8-5b5ce8a81f74/platform/126', { responseType: 'blob' })
-    return this.http.get('business/'+id+'/invoice/'+invoiceId+'/platform/'+platformId, { responseType: 'blob' })
+
+    var model={"companyid":companyId,"platforminvoiceid":platforminvoiceId,"platformid":Number(platformId),"userid":userId,"invoiceid":invoiceId};
+
+    return this.http.post('business/invoice/pdf/',model, { responseType: 'blob' })
+    //return this.http.post('business/invoice/pdf/'+companyId+'/'+platforminvoiceId+'/'+platformId+'/'+userId+'/'+invoiceId,null, { responseType: 'blob' });
   }
 
   connetDisconnect(id, status){
@@ -104,7 +109,7 @@ export class BusinessService {
 
   getTransactionById(data)
   {
-      return this.http.post<any>('/getTransactionById', data);
+      return this.http.post<any>('getTransactionById', data);
   }
 
   getTaxes(id: number): Observable<any> {

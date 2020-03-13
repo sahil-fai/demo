@@ -35,7 +35,7 @@ export class HelperService {
     {
         return companyid;
     }
-    
+
   }
   getplatformId(){
     let platformid =  localStorage.getItem('PlatformId');
