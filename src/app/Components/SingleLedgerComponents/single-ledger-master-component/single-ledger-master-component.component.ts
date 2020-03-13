@@ -66,6 +66,10 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
     this.switchCompany.switchCompany();
     this.ngOnInit();
   }
+  ngDoCheck(){
+    console.log("hiiii");
+    this.textmap=JSON.parse(this.helper.getTaxMapping());
+  }
 
   sortBusinessList(businessID){
     this.businessListMapping.forEach(element => {
