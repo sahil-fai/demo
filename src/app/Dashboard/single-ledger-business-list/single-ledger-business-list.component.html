@@ -34,12 +34,13 @@
           </ul>
         </form>
       </div>
-    
+
       <ul class="companyList" *ngIf="isBusinessLoaded && companylist && companylist.length > 0">
         <li *ngFor="let company of companylist| paginate: { itemsPerPage: itemsPerPageCount, currentPage: p }">
           <div class="cellWrapper clearfix">
             <div class="whiteWrapper">
-              <div class="companyWrapper">
+              <div class="companyWrapper" >
+
                 <ul class="dataList">
                   <li>
                     <div class="company-name">Company Name</div>
@@ -74,6 +75,8 @@
                       (click)="OpenDialog(company.id, false)"><i class="icon-arrow-right"></i><a>Disconnect</a></button>
                   </li>
                 </ul>
+                <img src="../../../assets/images/wraning-icon.png" alt="wraning-icon" *ngIf="!company.isTaxMapped">
+
               </div>
             </div>
           </div>
@@ -101,5 +104,5 @@
         </div>
       </div>
   </div>
- 
+
 </div>

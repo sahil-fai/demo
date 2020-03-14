@@ -10,7 +10,7 @@ import { SwitchCompanyService } from 'src/app/services/switch-company-service/sw
 })
 export class TaxMappingComponent implements OnInit {
 
-  singleLedger 
+  singleLedger
   mastertax : any = [];
   othertax :any =[];
   companytax = [];
@@ -30,7 +30,7 @@ export class TaxMappingComponent implements OnInit {
   taxRatesforCompany;
   selectedBusinessName : string = '';
 
-  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private cdr: ChangeDetectorRef) { 
+  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private cdr: ChangeDetectorRef) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
         this.ngOnInit();
@@ -38,21 +38,21 @@ export class TaxMappingComponent implements OnInit {
       );
   }
 
-  ngOnInit() 
+  ngOnInit()
   {
     this.getTaxes();
     this.taxRecord.length = 0;
-    this.taxRecord= []; 
+    this.taxRecord= [];
     this.taxRatesforCompany= null;
     this.singleLedger= null;
     this.isTaxMapped = JSON.parse(this.helper.getTaxMapping());
   }
-  
+
   ngAfterViewChecked(){
     this.selectedBusinessName = this.helper.getSelectedBusinessName();
     this.cdr.detectChanges();
   }
- 
+
   getTaxes(){
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getTaxes(companyid).subscribe(res => {
@@ -83,7 +83,7 @@ export class TaxMappingComponent implements OnInit {
       this.singleLedgerTax=[...this.singleLedgerTax, mastertaxData];
     });
   }
-  
+
   generateOthertaxMapping(){
 
     this.othertax.length = 0;
@@ -107,7 +107,7 @@ export class TaxMappingComponent implements OnInit {
     this.taxratesforcompanyMappings.forEach(element => {
       const taxratesforcompanyData = {
         id : element.id,
-        Name: element.Name + '-'+ element.Rate + '%' + ',' + element.TaxRateName,
+        Name: element.Name + '-'+ element.Rate + '%' + ' (' + element.TaxRateName + ')',
         Rate: element.Rate,
         IsCompund: element.IsCompund,
         Isrecoverable: element.Isrecoverable,
@@ -165,7 +165,7 @@ export class TaxMappingComponent implements OnInit {
     {
       let singleLedgerValues = this.singleLedgerTax.filter( x => x.id === this.singleLedger)
       let companyValues = this.companytax.filter( x => x.id === this.taxRatesforCompany)
-      
+
       if(singleLedgerValues && companyValues){
         this.saveTaxMapping(singleLedgerValues[0].id, companyValues[0].id);
         this.taxRatesforCompany= null;
@@ -201,7 +201,7 @@ export class TaxMappingComponent implements OnInit {
         CompanyTaxComponentId: companyTaxId,
         PlateFormTaxCode:""
       }};
-     
+
      this.businessService.taxRateMapping(saveMappingData).subscribe(res => {
         this.getTaxes();
         console.log("submitted");

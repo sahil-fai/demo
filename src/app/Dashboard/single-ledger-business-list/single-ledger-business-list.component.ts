@@ -28,6 +28,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   public selectedValue = 5;
   offset : number = 0;
   safeSrc: any;
+
   @ViewChild("content", null) modal: ElementRef;
   public labels: any = {
     previousLabel: 'Prev',
@@ -48,7 +49,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   submitted: boolean;
   formSearch: FormGroup;
   itemsPerPageCount = 10;
-  userid 
+  userid
   filter = "";
   constructor(public businessService: BusinessService,
     public dialog: MatDialog,
@@ -81,7 +82,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
           this.businessListActual = res;
           this.totalRec = res[1].totalItems;
           this.isBusinessLoaded = true;
-       
+
         } else {
           this.companylist = [];
           this.totalRec = 0;
@@ -99,7 +100,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
     panelClass: 'disconnect-business'
   });
   dialogRef.afterClosed().subscribe(result => {
-    if (result && result.data.Disconnect) 
+    if (result && result.data.Disconnect)
       {
           this.businessService.connetDisconnect(companyid, status).subscribe(res =>
             {
