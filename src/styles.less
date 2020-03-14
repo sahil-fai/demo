@@ -407,6 +407,7 @@ table{
 
             &:first-child{
                 border-left: none;
+                padding-right: 51px;
             }
 
             &:last-child{
@@ -855,7 +856,7 @@ textarea.fields.newFormatting{
 .blink_me {
     animation: blinker 1s ;
   }
-  
+
   @keyframes blinker {
     50% {
       opacity: 0;
@@ -3524,15 +3525,15 @@ mat-checkbox{
                     font-size: 0.9rem;
                     font-weight: 700;
                     color: #ffffff;
-                    padding: 0.593em 1.2em;
+                    padding: 0.893em 1.3em;
                     background-color: #00add8;
                     border: none;
                     border-radius: 0.3em;
-                    margin: 0px 2px;
+                    margin: 0px 9px;
                     &:last-child{
                         background-color: #e76d59;
                     }
-                }   
+                }
             }
         }
     }
@@ -3545,6 +3546,7 @@ mat-checkbox{
         width: 750px;
         max-width: 100%;
         margin: auto;
+        height: 65vh;
         .close{
             display: block;
             border: none;
@@ -3563,7 +3565,7 @@ mat-checkbox{
             letter-spacing: 0.02em;
             margin-bottom: 10px;
         }
-        .mat-dialog-title span{ 
+        .mat-dialog-title span{
             color: #0d0d0e;
             font-size: 14px;
         }
@@ -3583,4 +3585,18 @@ div{
     .jsoneditor-poweredBy{
         display: none;
     }
+}
+.jsoneditor-outer.has-main-menu-bar.has-status-bar {
+  height: 55vh;
+}
+h1{
+.disconnect-model{
+  text-align: center;
+}
+}
+h1#mat-dialog-title-0 {
+  text-align: center;
+}
+.message-model{
+  font-size: 17px !important;
 }

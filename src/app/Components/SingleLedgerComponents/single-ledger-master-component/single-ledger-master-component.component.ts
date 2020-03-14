@@ -24,7 +24,7 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
   pageLimit : number = 10;
   offset: number = 0;
   filter :string = "";
-
+ textmap:boolean;
   constructor(private helper: HelperService, public businessService: BusinessService, private switchCompany: SwitchCompanyService) {}
 
   ngOnInit() {
@@ -32,10 +32,12 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
     const userId = Number(this.helper.getuserId());
     this.businessService.getCompanyInformation(companyid).subscribe(res => {
       this.CurrentCompanyName = res.name;
+      this.textmap=JSON.parse(this.helper.getTaxMapping());
     });
     this.businessService.getListOfbusinesses(userId, this.offset, this.filter, this.pageLimit).subscribe(res => {
       //this.businessList = res[0];
       this.businessListMapping =res[0];
+      // this.helper.setTaxMapping(res.isTaxMapped);
       this.appendNewElement();
       this.sortBusinessList(companyid);
     });
@@ -63,6 +65,10 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
     this.helper.setcompanyId(businessID);
     this.switchCompany.switchCompany();
     this.ngOnInit();
+  }
+  ngDoCheck(){
+    console.log("hiiii");
+    this.textmap=JSON.parse(this.helper.getTaxMapping());
   }
 
   sortBusinessList(businessID){

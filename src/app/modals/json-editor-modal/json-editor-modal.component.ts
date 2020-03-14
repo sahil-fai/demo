@@ -30,9 +30,14 @@ export class JsonEditorModalComponent implements OnInit {
         }
 
 
+
     ngOnInit(){
     }
-
+    // onEditable(){
+    //   field: string,
+    //   value: string,
+    //   path: string[]
+    // }
     getJsonData(){
       this.businessService.getTransactionById(this.data).subscribe(res =>{
         console.log(res);
