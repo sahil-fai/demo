@@ -111,7 +111,7 @@ export class TaxMappingComponent implements OnInit {
         Rate: element.Rate,
         IsCompund: element.IsCompund,
         Isrecoverable: element.Isrecoverable,
-        paltform_owner_id: element.paltform_owner_id,
+        PlateFormTaxCode: element.PlateFormTaxCode,
         TaxRateId: element.TaxRateId,
         CompanyId: element.CompanyId
       }
@@ -165,9 +165,9 @@ export class TaxMappingComponent implements OnInit {
     {
       let singleLedgerValues = this.singleLedgerTax.filter( x => x.id === this.singleLedger)
       let companyValues = this.companytax.filter( x => x.id === this.taxRatesforCompany)
-
+      console.log("companyValues[0]"+JSON.stringify(this.companytax))
       if(singleLedgerValues && companyValues){
-        this.saveTaxMapping(singleLedgerValues[0].id, companyValues[0].id);
+        this.saveTaxMapping(singleLedgerValues[0].id, companyValues[0].id,companyValues[0].PlateFormTaxCode);
         this.taxRatesforCompany= null;
         this.singleLedger= null;
       }
@@ -189,7 +189,7 @@ export class TaxMappingComponent implements OnInit {
       }
   }
 
-  saveTaxMapping(masterTaxRateId, companyTaxRateId){
+  saveTaxMapping(masterTaxRateId, companyTaxRateId,platformTaxCode){
     let companyID = Number(localStorage.getItem('CompanyId'));
     let masterTaxId = masterTaxRateId;
     let companyTaxId = companyTaxRateId;
@@ -199,8 +199,11 @@ export class TaxMappingComponent implements OnInit {
         CompanyId:companyID,
         MasterTaxRateId: masterTaxId,
         CompanyTaxComponentId: companyTaxId,
-        PlateFormTaxCode:""
+        PlateFormTaxCode:platformTaxCode
       }};
+      console.log("TAXMAPPING")
+      console.log(JSON.stringify("platformTaxCode"+platformTaxCode))
+
 
      this.businessService.taxRateMapping(saveMappingData).subscribe(res => {
         this.getTaxes();
