@@ -8,6 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { NotificationsnackbarService } from 'src/app/services/notificationsnackbar.service';
 import { DialogOverviewExampleDialogComponent } from 'src/app/Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component';
+import { ErrorHandlerService } from 'src/app/services/error-handler-service/error-handler.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -24,7 +25,8 @@ export class ForgotPasswordComponent implements OnInit {
   safeSrc: any;
 
  // tslint:disable-next-line: max-line-length
-  constructor(private router: Router, private _fb: FormBuilder, private authService: AuthService, private helper: HelperService, private sanitizer: DomSanitizer, public dialog: MatDialog, private notification: NotificationsnackbarService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private _fb: FormBuilder, private authService: AuthService, private helper: HelperService, private _errHandler: ErrorHandlerService,
+    private sanitizer: DomSanitizer, public dialog: MatDialog, private notification: NotificationsnackbarService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.createForm();
@@ -48,7 +50,9 @@ export class ForgotPasswordComponent implements OnInit {
     if (this.formLogin.valid) {
      this.authService.forgotPassword(this.formLogin.value["username"]).subscribe((res)=>{
       this.isMailSent = true;
-     });
+     },err => {
+      this._errHandler.pushError(err.error.message)
+    });
     }
     }
 
