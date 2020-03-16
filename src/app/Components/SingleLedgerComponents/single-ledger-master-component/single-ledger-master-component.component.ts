@@ -68,7 +68,7 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
   }
   ngDoCheck(){
     console.log("hiiii");
-    this.textmap=JSON.parse(this.helper.getTaxMapping());
+    this.textmap= JSON.parse(this.helper.getTaxMapping());
   }
 
   sortBusinessList(businessID){
