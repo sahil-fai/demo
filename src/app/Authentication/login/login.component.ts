@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
   private createForm() {
     this.formLogin = this._fb.group({
       username: ['', [ Validators.required, Validators.email ]],
-      password: ['', [ Validators.required, Validators.minLength(6) ]]
+      password: ['', [ Validators.required, Validators.minLength(8) ]]
     });
   }
 

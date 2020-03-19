@@ -110,6 +110,7 @@ export class SuppliersComponent implements OnInit {
     });
   }
   _generateCOAMapping() {
+    debugger;
     this.transcationList.length = 0;
     this.addRecord();
     this.COAMappings.forEach(element => {
@@ -129,8 +130,9 @@ export class SuppliersComponent implements OnInit {
         opration: 274
       };
       this.transcationList.push(data);
+      
     });
-
+    
   }
   // _getOperationTypeByID(operationtypeidl: any) {
   //   return this.opration.find(x => x.ID === operationtypeidl).Name;
@@ -181,6 +183,7 @@ export class SuppliersComponent implements OnInit {
   }
 
   public saveRecord() {
+    debugger;
     const Companyid = Number(this.helper.getcompanyId());
     const formData = this.formTransaction.value;
     const data = {
