@@ -57,7 +57,16 @@
               <mat-expansion-panel-header>
                   <i class="icon-connect-business"></i><a [routerLink]="['/connectbusiness']" >Connect Business</a>
               </mat-expansion-panel-header>
+
+    </mat-expansion-panel>
+        <mat-expansion-panel routerLinkActive="active" [@.disabled]="true" class="warining">
+              <mat-expansion-panel-header>
+                <img src="../../../assets/images/wraning-icon.png" alt="wraning-icon" *ngIf="!textmap">
+                  <i class="icon-connect-business"></i><a [routerLink]="['./tax-mapping']" >Tax Mapping</a>
+              </mat-expansion-panel-header>
+
         </mat-expansion-panel>
+
       </mat-accordion>
   </div>
 <!-- NAVIGATION ENDS HERE -->
@@ -82,7 +91,7 @@
               </table>
               <ul>
                 <li *ngFor="let business of businessList">
-                               <a href="javascript:void(0)" (click)="viewBusiness(business.id)">- {{business.legalName|| 'N/A' }} </a>
+                  <a href="javascript:void(0)" [ngStyle]="business.isSelected == 0 && {'font-weight': '800'}" (click)="viewBusiness(business.id)">- {{business.legalName|| 'N/A' }} </a>
                 </li>
               </ul>
             </li>

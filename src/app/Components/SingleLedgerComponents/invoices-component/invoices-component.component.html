@@ -29,14 +29,18 @@
 <mat-card class="example-card">
         <mat-card-content>
                 <div class="Invoice-content">
-                        <div class="searchPanel clearfix" *ngIf="invoices && invoices.length >0">
-                        <!-- <form  novalidate autocomplete="off">
+                        <div class="searchPanel clearfix" >
+                        <form [formGroup]="formFilter" novalidate (ngSubmit)="filterCustomer()"  novalidate autocomplete="off">
                             <ul class="floatingList searchBlock">
                             <li class="smallFields fliter-for">
                                 <label class="labels">Filter For</label>
-                                <input type="text" class="fields" placeholder="Invoices, Number or Total" />
+                                <div class="errorMessage"  *ngIf=" (formFilter.controls.customerName.invalid && formFilter.controls.customerName.touched || (formFilter.controls.customerName.invalid ))">
+
+                               </div>
+                                <input type="text" class="fields" formControlName="customerName" id="customerName"
+                                [ngClass]="{error: (formFilter.controls.customerName.invalid && formFilter.controls.customerName.touched)}"  placeholder="Customer Name" />
                             </li>
-                            <li class="smallFields">
+                            <!-- <li class="smallFields">
                                 <label class="labels">From</label>
                                 <input type="text" class="fields calendar" />
                             </li>
@@ -52,20 +56,20 @@
                                     {{status.viewValue|| 'N/A' }}
                                 </option>
                                 </select>
-                            </li>
+                            </li> -->
                             <li>
                               <ul class="reset-filter">
                                 <li>
-                                  <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" value="Filter" />
+                                  <input type="submit" class="btn btn-medium uppercase btn-solid btn-deepblue" [disabled]="customerName.invalid" value="Filter" />
                               </li>
                               <li>
-                                  <input type="Reset" class="btn btn-medium uppercase btn-solid" value="Reset"  />
+                                  <input type="Reset" class="btn btn-medium uppercase btn-solid btn-deepblue btn-disabled" value="Reset" (click)="onReset()" [disabled]="customerName.invalid" />
                               </li>
                               </ul>
                             </li>
 
                             </ul>
-                        </form> -->
+                        </form>
                         </div>
                         <div class="bills-content mat-elevation-z8">
 
@@ -91,7 +95,7 @@
 
                                 <ng-container matColumnDef="Index">
                                   <th mat-header-cell *matHeaderCellDef class="table-head"> # </th>
-                                  <td mat-cell *matCellDef="let row; let i = dataIndex;"> {{i+1}} </td>
+                                  <td mat-cell *matCellDef="let row; let i = dataIndex;"> {{i+1+ pageNumber}} </td>
                                 </ng-container>
 
                                 <!-- Number Column -->
@@ -103,7 +107,10 @@
                                 <!-- Block chain Id Column -->
                                 <ng-container matColumnDef="BlockchainTransactionID">
                                   <th mat-header-cell *matHeaderCellDef class="table-head"> Blockchain Transaction ID </th>
-                                  <td mat-cell *matCellDef="let element" class="table-head-second" [title]="element.companyblockchainid || 'N/A' "> {{ element.companyblockchainid || 'N/A' }}
+                                  <td mat-cell *matCellDef="let element" 
+                                      class="example-element-row table-head-second" [class.example-expanded-row]="expandedElement === element"
+                                      (click)="expandedElement = expandedElement === element ? null : element"
+                                      [title]="element.companyblockchainid || 'N/A' "> {{ element.companyblockchainid || 'N/A' }}
                                     <!-- <button class="btn btn-solid btn-deepblue"  (click)="openBottomSheet()">
                                     <span class="dot"></span>
                                     <span class="dot"></span>
@@ -118,6 +125,12 @@
                                   </button> -->
                                  </td>
                                 </ng-container>
+
+                                <ng-container matColumnDef="Actions">
+                                  <th mat-header-cell *matHeaderCellDef class="table-head"> Actions </th>
+                                  <td mat-cell *matCellDef="let element" class="table-head-second example-element-row" > <a  (click)="getInvoicePDF(element)"data-toggle="tooltip"  title="Invoice PDF"><img src="http://wwwimages.adobe.com/content/dam/acom/en/legal/images/badges/Adobe_PDF_file_icon_32x32.png" alt="InvoicePDF"/></a></td>
+                                </ng-container>
+
 
                                 <!-- customer Column -->
                                 <ng-container matColumnDef="CustomerName">
@@ -153,6 +166,8 @@
                                   <th mat-header-cell *matHeaderCellDef class="table-head"> Balance </th>
                                   <td mat-cell *matCellDef="let element" class="table-head-second" > {{element.total-element.deposit | currency:companyCurrency }} </td>
                                 </ng-container>
+
+
                                 <!-- <ng-container matColumnDef="BlockchainStatus">
                                   <th mat-header-cell *matHeaderCellDef> BlockchainStatus </th>
                                   <td mat-cell *matCellDef="let element" [class.paid]="element.BlockchainStatus=='Accepted'" [class.partialy-paid]="element.BlockchainStatus=='Transfered'" [class.open]="element.BlockchainStatus=='Submitted'" [class.declined]="element.BlockchainStatus=='Declined'"> {{element.BlockchainStatus|| 'N/A' }} </td>
@@ -194,9 +209,9 @@
                                                   </thead>
                                                   <tbody>
                                                       <tr *ngFor="let varriable of element.blockchainhistories">
-                                                          <td >{{varriable.description|| 'N/A' }}</td>
+                                                          <td ><a (click)="OpenDialog(varriable.description)" class= "example-element-row">{{varriable.description|| 'N/A' }}</a></td>
                                                           <!-- <td class="td-width">{{varriable.entityid|| 'N/A' }}</td> -->
-                                                          <td class="td-width">{{varriable.blocknumber|| 'N/A' }}</td>
+                                                          <td class="td-width"> {{varriable.blocknumber|| 'N/A' }}</td>
                                                           <td class="td-width">{{varriable.historyactiontypeidl | transactionTypePipe }}</td>
                                                           <td class="td-width">{{varriable.timestamp| date:'mediumDate' || 'N/A' }}</td>
                                                           <td class="td-width">{{varriable.chaincodename|| 'N/A' }}</td>
@@ -215,10 +230,10 @@
                                   </td>
                                 </ng-container>
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumns| paginate: {itemsPerPage: size, currentPage: a, totalItems: this.totalRec}"
-                                     [class.selected]="selection.isSelected(row)"  class="example-element-row"
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                                     <!-- [class.selected]="selection.isSelected(row)"  class="example-element-row"
                                      [class.example-expanded-row]="expandedElement === row"
-                                     (click)="expandedElement = expandedElement === row ? null : row">
+                                     (click)="expandedElement = expandedElement === row ? null : row"> -->
                                 </tr>
                                 <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
                               </table>
@@ -226,6 +241,11 @@
                               <div class="no-record" *ngIf="totalRec === 0"> <span class="norecord-text"> No records found</span></div>
 
                             </div>
+
+                            <div class="paginator-container" *ngIf="totalRec > 0">
+                              <mat-paginator appStylePaginator hidePageSize [length]=totalRec
+                            [pageSize]= pagelimit (page)="handlePage($event)"></mat-paginator>
+                          </div>
 
                             <!-- <mat-paginator appStylePaginator hidePageSize [length]="150"
                             [pageSize]="1" (page)="handlePage($event)"></mat-paginator> -->
@@ -260,7 +280,9 @@
                             </div> -->
                             <!-- <pagination-controls (pageChange)="p = $event;paginate(p)"></pagination-controls> -->
                         </div>
+                        <!-- <json-editor #editor [options]="options" [data]="data"></json-editor> -->
                 </div>
         </mat-card-content>
 </mat-card>
+
 

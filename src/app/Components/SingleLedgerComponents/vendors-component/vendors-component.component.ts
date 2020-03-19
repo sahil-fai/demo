@@ -6,6 +6,8 @@ import {
   OnInit,
   ViewChild,
   OnDestroy,
+  ElementRef,
+  ChangeDetectorRef,
 } from '@angular/core';
 import {
   MatTableDataSource
@@ -22,6 +24,8 @@ import {
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 import { ErrorHandlerService } from 'src/app/services/error-handler-service/error-handler.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -38,7 +42,7 @@ export interface PeriodicElement {
   templateUrl: './vendors-component.component.html',
   styleUrls: ['./vendors-component.component.less']
 })
-export class VendorsComponentComponent implements OnInit, OnDestroy {
+export class VendorsComponentComponent implements OnInit, OnDestroy   {
   title = 'Vendors';
   displayedColumns: string[] = ['select',
                                 'CustomerName',
@@ -65,11 +69,21 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
   ];
   StatusList = ['Invite', 'Resend Mail'];
   vendors: any;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild('paginator', { static: false }) paginator: MatPaginator;
+
   Totalrec: any;
   switchCompanySubscription: any;
   platformid: number;
-  constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
+  formFilter: FormGroup;
+  public name : FormControl
+  pagelimit : number = 10;
+  pageNumber : number = 0;
+  offset: number = 0;
+  isFilterSearch: boolean = false;
+  isResetSearch: boolean = false;
+  
+  constructor(private _fb : FormBuilder,
+    public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService, private _errHandler: ErrorHandlerService, private _toastr: ToastrService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
         this.ngOnInit();
@@ -77,30 +91,46 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
     );
   }
   ngOnInit() {
+    this.name = new FormControl("", [ Validators.required, Validators.minLength(1) ])
+    this.formFilter = this._fb.group({
+      name :this.name
+    });
     this.getAllvendors();
   }
-  getAllvendors() {
+
+  getAllvendors(offset = this.offset, filter="", pagelimit = this.pagelimit) {
+    if(this.isFilterSearch || this.isResetSearch){
+      this.Totalrec = 0;
+      this.pageNumber = 0;
+    }
     const companyid = Number(this.helper.getcompanyId());
     this.platformid= this.helper.getplatformId()
-    this.businessService.getAllVendors(companyid).subscribe(res => {
+   //setTimeout(()=>{
+    this.businessService.getAllVendors(companyid, offset, filter, pagelimit).subscribe(res => {
       //console.log(res);
-      this.Totalrec = res.length;
-      if (res.length > 0) {
-      let response = this.helper.convertJsonKeysToLower(res);
+      this.vendors = res[0];
+      this.Totalrec = res[1].totalItems;
+      if (res[0].length > 0) {
+      let response = this.helper.convertJsonKeysToLower(res[0]);
       this.vendors = response;
-      // console.log(this.vendors)
       this.dataSource = new MatTableDataSource < PeriodicElement > (this.vendors);
 
-        // this.handlePage({
-        //   pageSize: '0',
-        //   pageIndex: '0',
-        //   data: this.vendors
-        // });
-        // this.isBusinessLoaded=true;
       } else {
         // this.companylist=[];
       }
     });
+  // },300)
+  }
+ 
+  filterVendor(){
+    this.isFilterSearch = true;
+    this.getAllvendors(this.offset, this.name.value);
+  }
+
+  onReset(){
+    this.isResetSearch = true;
+    this.formFilter.reset();
+    this.getAllvendors();
   }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -139,29 +169,32 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
-  Paginator(items, page, per_page) {
+  // Paginator(items, page, per_page) {
 
-    var page = page || 1,
-      per_page = per_page || 10,
-      offset = (page - 1) * per_page,
-      paginatedItems = items.slice(offset).slice(0, per_page),
-      total_pages = Math.ceil(items.length / per_page);
+  //   var page = page || 1,
+  //     per_page = per_page || 10,
+  //     offset = (page - 1) * per_page,
+  //     paginatedItems = items.slice(offset).slice(0, per_page),
+  //     total_pages = Math.ceil(items.length / per_page);
 
-    return {
-      page: page,
-      per_page: per_page,
-      pre_page: page - 1 ? page - 1 : null,
-      next_page: (total_pages > page) ? page + 1 : null,
-      total: items.length,
-      total_pages: total_pages,
-      data: paginatedItems
-    };
-  }
+  //   return {
+  //     page: page,
+  //     per_page: per_page,
+  //     pre_page: page - 1 ? page - 1 : null,
+  //     next_page: (total_pages > page) ? page + 1 : null,
+  //     total: items.length,
+  //     total_pages: total_pages,
+  //     data: paginatedItems
+  //   };
+  // }
   public handlePage(e: any) {
-    const pagesize = e.pageSize;
-    const pagenumber = e.pageIndex + 1;
-    const data = this.Paginator(this.vendors, pagenumber, pagesize);
-    this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
+    this.isFilterSearch = false;
+    this.isResetSearch = false;
+    let skipNumberOfPages = this.pagelimit * e.pageIndex ;
+    this.pageNumber = e.pageIndex * e.pageSize;
+    this.getAllvendors(skipNumberOfPages, this.name.value, this.pagelimit);
+  //  const data = this.Paginator(this.vendors, pagenumber, pagesize);
+   // this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
   }
   public checkStatus(status) {
     this.masterToggle(status);
@@ -210,4 +243,6 @@ export class VendorsComponentComponent implements OnInit, OnDestroy {
       this._errHandler.pushError('Sorry email is empty');
     }
   }
+
+  
 }

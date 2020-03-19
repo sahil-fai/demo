@@ -19,8 +19,12 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
   CurrentCompanyName: any;
   public isNavOpen = false;
   businessList: any;
+  businessListMapping: any;
   isModal: boolean;
-
+  pageLimit : number = 10;
+  offset: number = 0;
+  filter :string = "";
+ textmap:boolean;
   constructor(private helper: HelperService, public businessService: BusinessService, private switchCompany: SwitchCompanyService) {}
 
   ngOnInit() {
@@ -28,11 +32,24 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
     const userId = Number(this.helper.getuserId());
     this.businessService.getCompanyInformation(companyid).subscribe(res => {
       this.CurrentCompanyName = res.name;
+      this.textmap=JSON.parse(this.helper.getTaxMapping());
     });
-    this.businessService.getListOfbusinesses(userId).subscribe(res => {
-      this.businessList = res;
+    this.businessService.getListOfbusinesses(userId, this.offset, this.filter, this.pageLimit).subscribe(res => {
+      //this.businessList = res[0];
+      this.businessListMapping =res[0];
+      // this.helper.setTaxMapping(res.isTaxMapped);
+      this.appendNewElement();
+      this.sortBusinessList(companyid);
     });
   }
+
+  appendNewElement(){
+    this.businessListMapping.forEach(element => {
+      element.isSelected = 1
+    });
+    console.log(this.businessListMapping);
+  }
+
   public closeNav() {
     this.isNavOpen = !this.isNavOpen;
   }
@@ -45,9 +62,24 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
     {
         return;
     }
-
     this.helper.setcompanyId(businessID);
     this.switchCompany.switchCompany();
     this.ngOnInit();
+  }
+  ngDoCheck(){
+    console.log("hiiii");
+    this.textmap= JSON.parse(this.helper.getTaxMapping());
+  }
+
+  sortBusinessList(businessID){
+    this.businessListMapping.forEach(element => {
+      if(element.id == businessID){
+        element.isSelected = 0
+      }
+    });
+
+    this.businessList = this.businessListMapping.sort(function(a, b) { return a.isSelected - b.isSelected; })
+    var selectedBusiness = this.businessList.filter( x=> x.isSelected == 0)
+    this.helper.setSelectedBusinessName(selectedBusiness[0].legalName);
   }
 }

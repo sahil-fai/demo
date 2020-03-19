@@ -1,3 +1,5 @@
+@import '~jsoneditor/dist/jsoneditor.min.css';
+
 @laptopsMin: 1200px;
 @laptopsMax: 1399px;
 @tabletsLandscapeMin: 980px;
@@ -405,6 +407,7 @@ table{
 
             &:first-child{
                 border-left: none;
+                padding-right: 51px;
             }
 
             &:last-child{
@@ -748,6 +751,9 @@ textarea.fields.newFormatting{
     height: 2px;
 }
 
+.btn-disabled:disabled{
+    opacity: 0.3;
+  }
 
 
 
@@ -846,6 +852,16 @@ textarea.fields.newFormatting{
         display: block;
     }
 }
+
+.blink_me {
+    animation: blinker 1s ;
+  }
+
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
 
 
 
@@ -3212,7 +3228,18 @@ mat-dialog-container{
     }
 }
 .title{
-    padding-bottom: 25px;
+    padding-bottom: 5px;
+}
+
+.importantNote{
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 15px;
+    background-color: #F5AD9D;
+    color: #d82000;
+    font-size: 14px;
+    margin-right: 15px;
+    margin-left: 17px;
 }
 .mat-bottom-sheet-container{
         position: relative !important;
@@ -3453,3 +3480,123 @@ mat-checkbox{
 //     height: 74px;
 //     width: 100%;
 // }
+
+// Disconnect Business Confirmation Modal Style Include Here
+.disconnect-business{
+    mat-dialog-container{
+        overflow: visible;
+        width: 450px;
+        max-width: 100%;
+        margin: auto;
+        .close{
+            display: block;
+            border: none;
+            background-color: transparent;
+            font-size: 16px;
+            color: #00add8;
+            margin-left: auto;
+            cursor: pointer;
+        }
+        .disconnect-business{
+            .mat-dialog-title{
+                font-size: 21px;
+                font-weight: 700;
+                line-height: normal;
+                color: #00add8;
+                text-align: left;
+                letter-spacing: 0.02em;
+                margin-bottom: 10px;
+            }
+            .mat-dialog-content{
+                p{
+                    font-family: Roboto,"Helvetica Neue",sans-serif;
+                    font-size: 19px;
+                    font-weight: 300;
+                    text-align: center;
+                    margin-bottom: 30px;
+                    margin-top: 20px;
+                }
+            }
+            .mat-dialog-actions{
+                justify-content: center;
+                margin: 0;
+                button{
+                    font-family: Roboto,"Helvetica Neue",sans-serif;
+                    font-size: 0.9rem;
+                    font-weight: 700;
+                    color: #ffffff;
+                    padding: 0.893em 1.3em;
+                    background-color: #00add8;
+                    border: none;
+                    border-radius: 0.3em;
+                    margin: 0px 9px;
+                    &:last-child{
+                        background-color: #e76d59;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// JSON Modal Style Include Here
+.json-modal{
+    mat-dialog-container{
+        overflow: visible;
+        width: 750px;
+        max-width: 100%;
+        margin: auto;
+        height: 65vh;
+        .close{
+            display: block;
+            border: none;
+            background-color: transparent;
+            font-size: 16px;
+            color: #00add8;
+            margin-left: auto;
+            cursor: pointer;
+        }
+        .mat-dialog-title{
+            font-size: 17px;
+            font-weight: 700;
+            line-height: normal;
+            color: #00add8;
+            text-align: left;
+            letter-spacing: 0.02em;
+            margin-bottom: 10px;
+        }
+        .mat-dialog-title span{
+            color: #0d0d0e;
+            font-size: 14px;
+        }
+
+    }
+}
+
+// You can't upload images to stackblitz
+div{
+    .jsoneditor-menu{
+        & > {
+            button {
+                background-image: url('https://jsoneditoronline.org/img/jsoneditor-icons.svg');
+            }
+        }
+    }
+    .jsoneditor-poweredBy{
+        display: none;
+    }
+}
+.jsoneditor-outer.has-main-menu-bar.has-status-bar {
+  height: 55vh;
+}
+h1{
+.disconnect-model{
+  text-align: center;
+}
+}
+h1#mat-dialog-title-0 {
+  text-align: center;
+}
+.message-model{
+  font-size: 17px !important;
+}

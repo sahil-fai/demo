@@ -181,6 +181,14 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
+import { NgJsonEditorModule } from 'ang-jsoneditor' 
+import { DisconnectBusinessModalComponent} from './modals/disconnect-business-modal/disconnect-business-modal.component'
+import { JsonEditorModalComponent } from './modals/json-editor-modal/json-editor-modal.component';
+
+import { TaxMappingComponent } from './Components/SingleLedgerComponents/tax-mapping/tax-mapping.component';
+
+import { Error404Component } from './Shared/errors/404.component';
+
 
 const config: SocketIoConfig = { url: environment.sockethost, options: {} };
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -223,7 +231,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ForgotPasswordComponent,
     ResetForgetPasswordComponent,
     TransactionTypePipe,
-
+    DisconnectBusinessModalComponent,
+    JsonEditorModalComponent,
+    TaxMappingComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
@@ -253,6 +264,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgxSpinnerModule,
     PerfectScrollbarModule,
     NgxCaptchaModule,
+    NgJsonEditorModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-center',
@@ -288,7 +300,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BottomSheetOverviewExampleSheetComponent,
     TermsConditionsComponent,
     BusinessReloadComponent,
-    NotificationSnackbarComponent
+    NotificationSnackbarComponent,
+    DisconnectBusinessModalComponent,
+    JsonEditorModalComponent
   ]
 })
 export class AppModule {}

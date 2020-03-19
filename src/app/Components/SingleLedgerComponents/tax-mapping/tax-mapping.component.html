@@ -1,0 +1,85 @@
+<div class="title">
+  <h2>Tax Mapping</h2>
+</div>
+<div class="importantNote blink_me" *ngIf = "!isTaxMapped">
+  <p>*Important Note: - Please map {{selectedBusinessName || 'your company'}} tax rates with standard tax rates.</p>
+</div>
+<mat-card class="example-card">
+  <mat-card-content>
+      <div class="floatBoxesWrapper">
+        <div class="floatBox" id="tableData">
+          <div class="defaultTable">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th colspan="1">&nbsp;</th>
+                  <th>Standard Tax Rates</th>
+                  <th>{{selectedBusinessName || 'your company'}}'s Tax Rates</th>
+                  <th colspan="1">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td colspan="1">&nbsp;</td>
+                    <td>
+                       <ng-select [items]="singleLedgerTax"
+                                        bindLabel="Name"
+                                        bindValue="id"
+                                        groupBy="title"
+                                        placeholder="Select Standard Tax Rates"
+                                        [(ngModel)]="singleLedger" >
+                        </ng-select>
+              
+
+                    </td>
+                    <td>
+                        <ng-select [items]="companytax"
+                                        bindLabel="Name"
+                                        bindValue="id"
+                                        groupBy="title"
+                                        placeholder="Select {{selectedBusinessName || 'your company'}} Tax Rates"
+                                        [(ngModel)]="taxRatesforCompany">
+                        </ng-select>
+                    </td>
+                    <td colspan="1">
+                      <button class="btn icon-dots-vertical edit-options" (click)="addMapping()" title="Tax Mapping">
+                        <mat-icon>add</mat-icon>
+                      </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Standard Tax Rates</th>
+                                    <th>{{selectedBusinessName || 'your company'}} Tax Rates</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let record of taxRecord; let i = index">
+                                    <td>{{record.SingleLedgerTaxList[0]?.Name || 'N/A' }}</td>
+                                    <td>{{record.CompanyTaxList[0]?.Name || 'N/A' }}</td>
+                                    <td>
+                                      <button class="btn icon-dots-vertical edit-options" (click) ="deleteTaxMapping(record.id, i)" title="Delete">
+                                        <mat-icon>delete</mat-icon>
+                                      </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="no-record">
+                            <!-- <button type="button" (click) ="submit()" class="norecord-text">Submit</button> -->
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  </mat-card-content>
+</mat-card>

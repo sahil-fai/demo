@@ -18,6 +18,12 @@ import { BusinessGuard } from './Guards/business.guard';
 import { ForgotPasswordComponent } from './Authentication/forgot-password/forgot-password.component';
 import { ResetForgetPasswordComponent } from './Authentication/reset-forget-password/reset-password.component';
 
+import { TaxMappingComponent } from './Components/SingleLedgerComponents/tax-mapping/tax-mapping.component';
+
+import { Error404Component } from './Shared/errors/404.component';
+import { TaxMappingGuard } from './Guards/taxMapping.guard';
+
+
 const routes: Routes = [
   {
     path: 'login', component: LoginComponent
@@ -51,34 +57,38 @@ const routes: Routes = [
             path: 'dashboard', component: DashboardComponetComponent,canActivate:[LoginGuard,BusinessGuard]
           },
           {
-            path: 'customers', component: CustomersComponentComponent,canActivate:[LoginGuard,BusinessGuard]
+            path: 'customers', component: CustomersComponentComponent,canActivate:[LoginGuard,BusinessGuard, TaxMappingGuard]
           },
           {
-            path: 'vendors', component: VendorsComponentComponent,canActivate:[LoginGuard,BusinessGuard]
+            path: 'vendors', component: VendorsComponentComponent,canActivate:[LoginGuard,BusinessGuard, TaxMappingGuard]
           },
           {
-            path: 'invoices', component: InvoicesComponentComponent,canActivate:[LoginGuard,BusinessGuard]
+            path: 'invoices', component: InvoicesComponentComponent,canActivate:[LoginGuard,BusinessGuard, TaxMappingGuard]
           },
           {
-            path: 'bills', component: BillsComponentComponent,canActivate:[LoginGuard,BusinessGuard]
+            path: 'bills', component: BillsComponentComponent,canActivate:[LoginGuard,BusinessGuard, TaxMappingGuard]
           },
           {
             path: 'company-info', component: CompanyInfoComponentComponent,canActivate:[LoginGuard,BusinessGuard]
           },
           {
-            path: 'suppliers', component: SuppliersComponent,canActivate:[LoginGuard,BusinessGuard]
+            path: 'suppliers', component: SuppliersComponent,canActivate:[LoginGuard,BusinessGuard, TaxMappingGuard]
           },
           {
-            path: 'chart-of-account', component: ChartOfAccountComponent,canActivate:[LoginGuard,BusinessGuard]
+            path: 'chart-of-account', component: ChartOfAccountComponent,canActivate:[LoginGuard,BusinessGuard, TaxMappingGuard]
           },
+          {
+            path: 'tax-mapping', component: TaxMappingComponent,
+          }
         ]
   },
+  { path: '404' , component : Error404Component},
   {
     path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {
-    path: '**', redirectTo: 'connectbusiness'
-  }
+    path: '**', redirectTo: '404'
+  },
 ];
 
 @NgModule({

@@ -7,11 +7,12 @@ import { HelperService } from '../services/helper-service/helper.service';
 import { LoaderService } from '../services/loader-service/loader.service';
 import { ErrorHandlerService } from '../services/error-handler-service/error-handler.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(public auth: HelperService, private _loaderService: LoaderService, private _router: Router, private _errHandler: ErrorHandlerService) {
+  constructor(public auth: HelperService, private _loaderService: LoaderService, private _router: Router, private _errHandler: ErrorHandlerService,  private _toastr: ToastrService) {
 
   }
 
@@ -56,21 +57,37 @@ export class TokenInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         this._loaderService.isLoading.next(false);
         if (err instanceof HttpErrorResponse) {
-          this.removeRequest(request);
-          localStorage.clear();
-          if (err.statusText === 'Unknown Error' || err.status == 401) {
+          this.removeRequest(request);      
+          console.log('if: ', err);
+          if (err.statusText === 'Unknown Error' || err.status == 401 || err.status == 404) {
             if (err.statusText === 'Unknown Error') {
               this._errHandler.pushError(err.statusText);
             }
             if (err.status == 401) {
               this._router.navigate(['./login']);
             }
-          } else {
-            if (err.error && err.error.error && err.error.error.message) {
-              this._errHandler.pushError(err.error.error.message);
-            } else {
-              this._errHandler.pushError(err.message);
+            if (err.status == 404) {
+              this._router.navigate(['./404']);
             }
+            localStorage.clear();
+          } 
+          else if (err.status == 500  || err.status == 400 ) {
+            if (err.status == 500) {
+              this._toastr.error("Internal Server Error");
+             }
+            if (err.status == 400) {
+             this._toastr.error("Bad Request");
+            }
+          }
+          else { console.log('else: ', err);
+            if(err.error && err.error.error && err.error.error.message) {
+              this._errHandler.pushError(err.error.error.message);
+            }
+            // if (err.error && err.error.error && err.error.error.message) {
+            //   this._errHandler.pushError(err.error.error.message);
+            // } else {
+            //   this._errHandler.pushError(err.message);
+            // }
           }
           return throwError(err);
         }

@@ -35,7 +35,7 @@ export class HelperService {
     {
         return companyid;
     }
-    
+
   }
   getplatformId(){
     let platformid =  localStorage.getItem('PlatformId');
@@ -60,6 +60,23 @@ export class HelperService {
   isLogged() {
     return localStorage.getItem(TOKEN) != null;
   }
+
+  getTaxMapping(){
+    return localStorage.getItem("isTaxMapped");
+   }
+
+   setTaxMapping(val:any):void {
+    localStorage.setItem('isTaxMapped', val);
+  }
+
+  getSelectedBusinessName(){
+    return localStorage.getItem("businessName");
+   }
+
+   setSelectedBusinessName(val:any):void {
+    localStorage.setItem('businessName', val);
+  }
+
 
   convertJsonKeysToLower(obj:any)
   {

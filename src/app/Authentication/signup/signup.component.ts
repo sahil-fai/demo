@@ -7,6 +7,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { DialogOverviewExampleDialogComponent } from '../../Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component';
 import { TermsConditionsComponent } from '../../Shared/terms-conditions/terms-conditions.component';
+import { ErrorHandlerService } from 'src/app/services/error-handler-service/error-handler.service';
 
 @Component({
   selector: 'app-signup',
@@ -46,7 +47,8 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
   ];
 
-  constructor(private router: Router, private route: ActivatedRoute,private fb: FormBuilder, private authService: AuthService, private sanitizer: DomSanitizer, public dialog: MatDialog, media: MediaMatcher, changeDetectorRef: ChangeDetectorRef) {
+  constructor(private router: Router, private route: ActivatedRoute,private fb: FormBuilder, private authService: AuthService, private sanitizer: DomSanitizer, public dialog: MatDialog, 
+    media: MediaMatcher, changeDetectorRef: ChangeDetectorRef, private _errHandler: ErrorHandlerService) {
     this.mobileQuery = media.matchMedia('(max-width: 767px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);
@@ -161,6 +163,8 @@ export class SignupComponent implements OnInit, OnDestroy {
       this.authService.enroll(data).subscribe(res => {
         this.isRegistered = true;
         this.router.navigate(['/login']);
+      }, err => {
+        this._errHandler.pushError(err.error.message)
       });
     }
   }
