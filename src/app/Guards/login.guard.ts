@@ -11,13 +11,24 @@ export class LoginGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    var token = this._helper.getToken();
-    if(token){
-       return true;
+
+
+      try {
+        debugger;
+        var token = this._helper.getToken();
+        if(token){
+        return true;
       } else{
         this._router.navigate(['/users/login'])
-        return false;
-      }      
+        return true;
+      }
+    
+      } catch (error) {
+        
+        this._router.navigate(['/users/login'])
+        //return true
+        
+      }
     }
   }
 

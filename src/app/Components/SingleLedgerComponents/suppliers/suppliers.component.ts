@@ -110,11 +110,11 @@ export class SuppliersComponent implements OnInit {
     });
   }
   _generateCOAMapping() {
-    debugger;
     this.transcationList.length = 0;
     this.addRecord();
     this.COAMappings.forEach(element => {
       const data = {
+        displayName: element.vendor.displayName,
         vendorName: element.vendor.companyName,
         vendorEmail: element.emailonthebill,
         platfrom: element.organization,
@@ -132,6 +132,7 @@ export class SuppliersComponent implements OnInit {
       this.transcationList.push(data);
       
     });
+    console.log({"transcationList" : this.transcationList});
     
   }
   // _getOperationTypeByID(operationtypeidl: any) {
@@ -186,6 +187,7 @@ export class SuppliersComponent implements OnInit {
     debugger;
     const Companyid = Number(this.helper.getcompanyId());
     const formData = this.formTransaction.value;
+    console.log({"formData": formData});
     const data = {
       vendorid: formData.Contact.id,
       chartofaccountmappingtypeidl: formData.Mapping.ID,
@@ -203,7 +205,8 @@ export class SuppliersComponent implements OnInit {
     console.log(JSON.stringify(data))
     if (this.COAMappings) {
 
-      const vendor = this.COAMappings.filter(x => (x.vendorid === formData.Contact.vendorid) &&
+      const vendor = this.COAMappings.filter(x => 
+        (x.vendorid === formData.Contact.vendorid) &&
         (x.organization === formData.Platform.name) &&
         (x.chartofaccountmappingtypeidl === formData.Mapping.ID) &&
         (x.chartofaccountId === formData.COA.chartofaccountid)
@@ -216,18 +219,14 @@ export class SuppliersComponent implements OnInit {
     }
     this.businessService.postchartofaccountmapping(data).subscribe((res) => {
       this._getChartofAccountMappings();
-      this.formTransaction.reset();
+      this.formTransaction.patchValue({Contact : null, Platform : null, Mapping : null, COA : null});
     });
-
   }
-
   public cancelRecord() {
     if (this.transcationList) {
       this.transcationList.splice(this.transcationList.length - 1, 1);
     }
   }
-
-
    public editRecord(item) {
   //   console.log(this.formTransaction);
   //   console.log(item);
