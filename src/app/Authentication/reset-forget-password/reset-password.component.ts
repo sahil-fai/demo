@@ -28,7 +28,7 @@ export class ResetForgetPasswordComponent implements OnInit {
   _authService: any;
   _router: any;
   safeSrc: any;
-  public showUpdatePasswordMassage : any;
+  public showUpdatePasswordMassage = true;
   checkResetPasswordStatus: any;
   showInvalidPage: boolean = true;
 
@@ -105,7 +105,6 @@ export class ResetForgetPasswordComponent implements OnInit {
   }
 
   public onReset() {
-    this.showUpdatePasswordMassage = false;
     this.submitted = true;
     if (this.formReset.valid) {
       const data = {
@@ -113,15 +112,15 @@ export class ResetForgetPasswordComponent implements OnInit {
         password: this.formReset.value.password
       }
       this.authService.resetPassword(data).subscribe(res => {
-       
-        this.showUpdatePasswordMassage = true;
+
+        this.showUpdatePasswordMassage = false;
+      });
+      
         setTimeout(()=>{
           this.showUpdatePasswordMassage = false; 
-        }, 5000);
+        }, 10000);
         
         this.router.navigate(['/login'])
-       
-      });
     }
   }
 

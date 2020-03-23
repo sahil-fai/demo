@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { BusinessService } from '../../../services/business-service/business.service';
 import { HelperService } from 'src/app/services/helper-service/helper.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -28,6 +28,9 @@ export class SuppliersComponent implements OnInit {
   };
     vendor = [];
     COA = [];
+    public CoaItem = [
+      
+    ];
     platfrom = [];
     public mapping = [
       { Name: 'VendorBase', ID: 270 },
@@ -86,14 +89,16 @@ export class SuppliersComponent implements OnInit {
            );
 
     }
+ 
 
   ngOnInit() {
     this.transcationList.length = 0;
     this.transcationList = [];
-    this._getChartofAccounts();
+    this._getChartofAccountMappings();
+    
     this._getplatforms();
     this._getVendors();
-    this._getChartofAccountMappings();
+    
     this._createForm();
 
     this.addRecord();
@@ -132,7 +137,7 @@ export class SuppliersComponent implements OnInit {
       this.transcationList.push(data);
       
     });
-    console.log({"transcationList" : this.transcationList});
+    this._getChartofAccounts();
     
   }
   // _getOperationTypeByID(operationtypeidl: any) {
@@ -167,10 +172,21 @@ export class SuppliersComponent implements OnInit {
   }
 
   _getChartofAccounts() {
+    
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getCompanyChartOfAccounts(companyid).subscribe(res => {
       if (res.length === 0) { this.isCOAEnabled = false; }
       this.COA = res;
+     
+    for (let index = 0; index < this.transcationList.length; index++) {
+      const element = this.transcationList[index];
+      var indexOfItem=this.COA.findIndex(x=>x.chartofaccountname==element.COA);
+      if(indexOfItem>-1)
+      {
+        this.COA.splice(indexOfItem,1);
+      }
+    }
+      
     });
   }
 
@@ -184,7 +200,6 @@ export class SuppliersComponent implements OnInit {
   }
 
   public saveRecord() {
-    debugger;
     const Companyid = Number(this.helper.getcompanyId());
     const formData = this.formTransaction.value;
     console.log({"formData": formData});

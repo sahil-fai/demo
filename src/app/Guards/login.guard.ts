@@ -14,7 +14,6 @@ export class LoginGuard implements CanActivate {
 
 
       try {
-        debugger;
         var token = this._helper.getToken();
         if(token){
         return true;
@@ -22,12 +21,9 @@ export class LoginGuard implements CanActivate {
         this._router.navigate(['/users/login'])
         return true;
       }
-    
-      } catch (error) {
-        
+      } catch (error) { 
         this._router.navigate(['/users/login'])
         //return true
-        
       }
     }
   }
