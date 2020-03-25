@@ -3,6 +3,8 @@ import { BusinessService } from '../../../services/business-service/business.ser
 import { HelperService } from 'src/app/services/helper-service/helper.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
+import { throwToolbarMixedModesError } from '@angular/material';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-suppliers',
@@ -28,9 +30,7 @@ export class SuppliersComponent implements OnInit {
   };
     vendor = [];
     COA = [];
-    public CoaItem = [
-      
-    ];
+    CoaItem = [];
     platfrom = [];
     public mapping = [
       { Name: 'VendorBase', ID: 270 },
@@ -138,6 +138,7 @@ export class SuppliersComponent implements OnInit {
       
     });
     this._getChartofAccounts();
+
     
   }
   // _getOperationTypeByID(operationtypeidl: any) {
@@ -172,22 +173,39 @@ export class SuppliersComponent implements OnInit {
   }
 
   _getChartofAccounts() {
-    
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getCompanyChartOfAccounts(companyid).subscribe(res => {
       if (res.length === 0) { this.isCOAEnabled = false; }
       this.COA = res;
-     
-    for (let index = 0; index < this.transcationList.length; index++) {
-      const element = this.transcationList[index];
-      var indexOfItem=this.COA.findIndex(x=>x.chartofaccountname==element.COA);
-      if(indexOfItem>-1)
-      {
-        this.COA.splice(indexOfItem,1);
-      }
-    }
+      
+
+    // for (let index = 0; index < this.transcationList.length; index++) {
+    //   const element = this.transcationList[index];
+    //   var indexOfItem=this.COA.findIndex(x=>x.chartofaccountname==element.COA);
+    //   if(indexOfItem>-1)
+    //   {
+    //     this.COA.splice(indexOfItem,1);
+    //   }
+    // }
       
     });
+  
+  }
+
+  removeCOA(index)
+  {
+    
+    
+   // var indexOfItem = this.transcationList.findIndex(x=>x.displayName== index.displayName);
+    var cOAName = this.transcationList.find(x=>x.displayName== index.displayName).COA;
+    var indexOf = this.COA.findIndex(x=>x.chartofaccountname == cOAName);
+    if(indexOf>-1)
+    {
+      this.COA.splice(indexOf,1);
+    }
+     this.CoaItem = this.COA;
+     
+     //this.COA = [...this.COA, {}];
   }
 
   public addRecord() {
