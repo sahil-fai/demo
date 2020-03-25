@@ -6,8 +6,10 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { NotificationsnackbarService } from 'src/app/services/notificationsnackbar.service';
 import { HelperService } from 'src/app/services/helper-service/helper.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import Message from  '../../Shared/constant';
 import { DialogOverviewExampleDialogComponent } from 'src/app/Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component';
 import { LoaderService } from 'src/app/services/loader-service/loader.service';
+//import { constants } from 'os';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
@@ -16,14 +18,17 @@ import { LoaderService } from 'src/app/services/loader-service/loader.service';
 export class ResetForgetPasswordComponent implements OnInit {
 
   @Input('role') public role: number;
+  public messages = Message;
   public submitted = false;
   private _resetCode: string;
   formReset: FormGroup;
+  message: any;
   public showPassword: boolean = false;
   public showConfirmPassword = false;
   _authService: any;
   _router: any;
   safeSrc: any;
+  public showUpdatePasswordMassage = true;
   checkResetPasswordStatus: any;
   showInvalidPage: boolean = true;
 
@@ -107,8 +112,15 @@ export class ResetForgetPasswordComponent implements OnInit {
         password: this.formReset.value.password
       }
       this.authService.resetPassword(data).subscribe(res => {
-        this.router.navigate(['/login'])
+
+        this.showUpdatePasswordMassage = false;
       });
+      
+        setTimeout(()=>{
+          this.showUpdatePasswordMassage = false; 
+        }, 10000);
+        
+        this.router.navigate(['/login'])
     }
   }
 

@@ -47,6 +47,12 @@ public title=  'Chart Of Account';
   getAllChartOfAccount(companyid) {
      this.businessService.getGroupChartofAccounts(companyid).subscribe(res => {
       this.COA = res;
+      this.COA.Expense.sort(function (x, y) {
+        // true values first
+        return (x.isdefault === y.isdefault) ? 0 : x ? -1 : 1;
+        // false values first
+        // return (x === y)? 0 : x? 1 : -1;
+    });
     });
   }
   updateCheckedOptions(id, event) {

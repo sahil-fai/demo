@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { BusinessService } from '../../../services/business-service/business.service';
 import { HelperService } from 'src/app/services/helper-service/helper.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
+import { throwToolbarMixedModesError } from '@angular/material';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-suppliers',
@@ -28,6 +30,7 @@ export class SuppliersComponent implements OnInit {
   };
     vendor = [];
     COA = [];
+    CoaItem = [];
     platfrom = [];
     public mapping = [
       { Name: 'VendorBase', ID: 270 },
@@ -86,14 +89,16 @@ export class SuppliersComponent implements OnInit {
            );
 
     }
+ 
 
   ngOnInit() {
     this.transcationList.length = 0;
     this.transcationList = [];
-    this._getChartofAccounts();
+    this._getChartofAccountMappings();
+    
     this._getplatforms();
     this._getVendors();
-    this._getChartofAccountMappings();
+    
     this._createForm();
 
     this.addRecord();
@@ -114,6 +119,7 @@ export class SuppliersComponent implements OnInit {
     this.addRecord();
     this.COAMappings.forEach(element => {
       const data = {
+        displayName: element.vendor.displayName,
         vendorName: element.vendor.companyName,
         vendorEmail: element.emailonthebill,
         platfrom: element.organization,
@@ -129,8 +135,11 @@ export class SuppliersComponent implements OnInit {
         opration: 274
       };
       this.transcationList.push(data);
+      
     });
+    this._getChartofAccounts();
 
+    
   }
   // _getOperationTypeByID(operationtypeidl: any) {
   //   return this.opration.find(x => x.ID === operationtypeidl).Name;
@@ -168,7 +177,35 @@ export class SuppliersComponent implements OnInit {
     this.businessService.getCompanyChartOfAccounts(companyid).subscribe(res => {
       if (res.length === 0) { this.isCOAEnabled = false; }
       this.COA = res;
+      
+
+    // for (let index = 0; index < this.transcationList.length; index++) {
+    //   const element = this.transcationList[index];
+    //   var indexOfItem=this.COA.findIndex(x=>x.chartofaccountname==element.COA);
+    //   if(indexOfItem>-1)
+    //   {
+    //     this.COA.splice(indexOfItem,1);
+    //   }
+    // }
+      
     });
+  
+  }
+
+  removeCOA(index)
+  {
+    
+    
+   // var indexOfItem = this.transcationList.findIndex(x=>x.displayName== index.displayName);
+    var cOAName = this.transcationList.find(x=>x.displayName== index.displayName).COA;
+    var indexOf = this.COA.findIndex(x=>x.chartofaccountname == cOAName);
+    if(indexOf>-1)
+    {
+      this.COA.splice(indexOf,1);
+    }
+     this.CoaItem = this.COA;
+     
+     //this.COA = [...this.COA, {}];
   }
 
   public addRecord() {
@@ -183,6 +220,7 @@ export class SuppliersComponent implements OnInit {
   public saveRecord() {
     const Companyid = Number(this.helper.getcompanyId());
     const formData = this.formTransaction.value;
+    console.log({"formData": formData});
     const data = {
       vendorid: formData.Contact.id,
       chartofaccountmappingtypeidl: formData.Mapping.ID,
@@ -200,7 +238,8 @@ export class SuppliersComponent implements OnInit {
     console.log(JSON.stringify(data))
     if (this.COAMappings) {
 
-      const vendor = this.COAMappings.filter(x => (x.vendorid === formData.Contact.vendorid) &&
+      const vendor = this.COAMappings.filter(x => 
+        (x.vendorid === formData.Contact.vendorid) &&
         (x.organization === formData.Platform.name) &&
         (x.chartofaccountmappingtypeidl === formData.Mapping.ID) &&
         (x.chartofaccountId === formData.COA.chartofaccountid)
@@ -213,18 +252,14 @@ export class SuppliersComponent implements OnInit {
     }
     this.businessService.postchartofaccountmapping(data).subscribe((res) => {
       this._getChartofAccountMappings();
-      this.formTransaction.reset();
+      this.formTransaction.patchValue({Contact : null, Platform : null, Mapping : null, COA : null});
     });
-
   }
-
   public cancelRecord() {
     if (this.transcationList) {
       this.transcationList.splice(this.transcationList.length - 1, 1);
     }
   }
-
-
    public editRecord(item) {
   //   console.log(this.formTransaction);
   //   console.log(item);

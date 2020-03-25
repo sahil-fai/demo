@@ -82,12 +82,14 @@ const routes: Routes = [
           }
         ]
   },
-  { path: '404' , component : Error404Component},
-  {
-    path: '', redirectTo: 'login', pathMatch: 'full'
+  { 
+    path: '404' , component : Error404Component,canActivate:[LoginGuard],
   },
   {
-    path: '**', redirectTo: '404'
+    path: '', redirectTo: '404', pathMatch: 'full'
+  },
+  {
+    path: '**', redirectTo: 'login'
   },
 ];
 
