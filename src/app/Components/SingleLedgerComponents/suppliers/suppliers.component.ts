@@ -28,20 +28,21 @@ export class SuppliersComponent implements OnInit {
     itemDescription3: '',
     opration: 'AND'
   };
-    vendor = [];
-    COA = [];
-    CoaItem = [];
-    platfrom = [];
-    public mapping = [
-      { Name: 'VendorBase', ID: 270 },
-      { Name: 'SubjectBase', ID: 271 },
-      { Name: 'ItemBase', ID: 272 },
-    ];
-    SubAccount = [];
-    opration = [];
-    offset: number = 0;
-    filter : string = "";
-    limit : number = 1000;
+  vendor = [];
+  COA = [];
+  filteredCOA = [];
+  CoaItem = [];
+  platfrom = [];
+  public mapping = [
+    { Name: 'VendorBase', ID: 270 },
+    { Name: 'SubjectBase', ID: 271 },
+    { Name: 'ItemBase', ID: 272 },
+  ];
+  SubAccount = [];
+  opration = [];
+  offset: number = 0;
+  filter: string = "";
+  limit: number = 1000;
 
 
   public title = 'My Suppliers';
@@ -69,36 +70,36 @@ export class SuppliersComponent implements OnInit {
 
 
 
-     constructor(private helper: HelperService,
-                 private businessService: BusinessService, private fb: FormBuilder,
-                 private switchCompany: SwitchCompanyService) {
+  constructor(private helper: HelperService,
+    private businessService: BusinessService, private fb: FormBuilder,
+    private switchCompany: SwitchCompanyService) {
 
 
-         this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
+    this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
 
-             () => {
+      () => {
 
-               this.transcationList = [];
+        this.transcationList = [];
 
-               this.COAMappings=[];
+        this.COAMappings = [];
 
-               this.ngOnInit();
+        this.ngOnInit();
 
-             }
+      }
 
-           );
+    );
 
-    }
- 
+  }
+
 
   ngOnInit() {
     this.transcationList.length = 0;
     this.transcationList = [];
     this._getChartofAccountMappings();
-    
+
     this._getplatforms();
     this._getVendors();
-    
+
     this._createForm();
 
     this.addRecord();
@@ -106,8 +107,8 @@ export class SuppliersComponent implements OnInit {
   }
   _getChartofAccountMappings() {
 
-     const companyid = Number(this.helper.getcompanyId());
-     this.businessService.getchartofaccountmapping(companyid).subscribe(res => {
+    const companyid = Number(this.helper.getcompanyId());
+    this.businessService.getchartofaccountmapping(companyid).subscribe(res => {
       if (res.length > 0) {
         this.COAMappings = res;
         this._generateCOAMapping();
@@ -135,18 +136,14 @@ export class SuppliersComponent implements OnInit {
         opration: 274
       };
       this.transcationList.push(data);
-      
+
     });
+
     this._getChartofAccounts();
 
-    
+
   }
-  // _getOperationTypeByID(operationtypeidl: any) {
-  //   return this.opration.find(x => x.ID === operationtypeidl).Name;
-  // }
-  // _getMappingByID(chartofaccountmappingtypeidl: any) {
-  //   return this.mapping.find(x => x.ID === chartofaccountmappingtypeidl).Name;
-  // }
+
   _getOperationTypeByID(operationtypeidl: any) {
     return this.opration.find(x => x.ID === operationtypeidl);
   }
@@ -159,7 +156,8 @@ export class SuppliersComponent implements OnInit {
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getAllVendors(companyid, this.offset, this.filter, this.limit).subscribe(res => {
       if (res[0].length === 0) { this.isCOAEnabled = false; }
-      if (res[0].length > 0) { console.log(res);
+      if (res[0].length > 0) {
+        console.log(res);
         this.vendor = res[0];
       }
     });
@@ -176,36 +174,35 @@ export class SuppliersComponent implements OnInit {
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getCompanyChartOfAccounts(companyid).subscribe(res => {
       if (res.length === 0) { this.isCOAEnabled = false; }
-      this.COA = res;
-      
+      this.COA = res
+      this.filteredCOA = [...this.COA];
 
-    // for (let index = 0; index < this.transcationList.length; index++) {
-    //   const element = this.transcationList[index];
-    //   var indexOfItem=this.COA.findIndex(x=>x.chartofaccountname==element.COA);
-    //   if(indexOfItem>-1)
-    //   {
-    //     this.COA.splice(indexOfItem,1);
-    //   }
-    // }
-      
     });
-  
+
   }
 
-  removeCOA(index)
-  {
-    
-    
-   // var indexOfItem = this.transcationList.findIndex(x=>x.displayName== index.displayName);
-    var cOAName = this.transcationList.find(x=>x.displayName== index.displayName).COA;
-    var indexOf = this.COA.findIndex(x=>x.chartofaccountname == cOAName);
-    if(indexOf>-1)
-    {
-      this.COA.splice(indexOf,1);
+  removeCOA(index) {
+    try {
+      if (index) {
+        this.COA;
+        this.filteredCOA.length = 0;
+        this.filteredCOA = []
+        this.filteredCOA = [...this.COA];
+        var vendors = this.transcationList.filter(x => x.displayName == index.displayName);
+        if (vendors && vendors.length > 0) {
+          vendors.forEach(vendor => {
+            let cOAName = vendor.COA;
+            var indexOf = this.filteredCOA.findIndex(x => x.chartofaccountname == cOAName);
+            if (indexOf > -1) {
+              this.filteredCOA.splice(indexOf, 1);
+            }
+          });
+          this.filteredCOA = [...this.filteredCOA];
+        }
+      }
+    } catch (error) {
+      alert(JSON.stringify(error));
     }
-     this.CoaItem = this.COA;
-     
-     //this.COA = [...this.COA, {}];
   }
 
   public addRecord() {
@@ -220,7 +217,7 @@ export class SuppliersComponent implements OnInit {
   public saveRecord() {
     const Companyid = Number(this.helper.getcompanyId());
     const formData = this.formTransaction.value;
-    console.log({"formData": formData});
+    console.log({ "formData": formData });
     const data = {
       vendorid: formData.Contact.id,
       chartofaccountmappingtypeidl: formData.Mapping.ID,
@@ -238,7 +235,7 @@ export class SuppliersComponent implements OnInit {
     console.log(JSON.stringify(data))
     if (this.COAMappings) {
 
-      const vendor = this.COAMappings.filter(x => 
+      const vendor = this.COAMappings.filter(x =>
         (x.vendorid === formData.Contact.vendorid) &&
         (x.organization === formData.Platform.name) &&
         (x.chartofaccountmappingtypeidl === formData.Mapping.ID) &&
@@ -252,7 +249,7 @@ export class SuppliersComponent implements OnInit {
     }
     this.businessService.postchartofaccountmapping(data).subscribe((res) => {
       this._getChartofAccountMappings();
-      this.formTransaction.patchValue({Contact : null, Platform : null, Mapping : null, COA : null});
+      this.formTransaction.patchValue({ Contact: null, Platform: null, Mapping: null, COA: null });
     });
   }
   public cancelRecord() {
@@ -260,10 +257,10 @@ export class SuppliersComponent implements OnInit {
       this.transcationList.splice(this.transcationList.length - 1, 1);
     }
   }
-   public editRecord(item) {
-  //   console.log(this.formTransaction);
-  //   console.log(item);
-  //   item.editable = true;
-  //   this.formTransaction.controls["Contact"].setValue(item.vendorName);
-   }
+  public editRecord(item) {
+    //   console.log(this.formTransaction);
+    //   console.log(item);
+    //   item.editable = true;
+    //   this.formTransaction.controls["Contact"].setValue(item.vendorName);
+  }
 }
