@@ -29,7 +29,8 @@
                 <tr *ngFor="let item of transcationList">
                   <ng-container *ngIf="item.editable">
                     <td>
-                      <ng-select [items]="vendor" (change)="removeCOA($event)" [loading]="false" bindLabel="displayName" placeholder="Select Vendor" appendTo="body" formControlName="Contact" required>
+                      <ng-select [items]="vendor" (change)="removeCOA($event)" [loading]="false" bindLabel="displayName"
+                        placeholder="Select Vendor" appendTo="body" formControlName="Contact" required>
                         <ng-template ng-option-tmp let-item="item" let-index="index">
                           <div title="{{item.displayName || 'N/A'}}">{{item.displayName || 'N/A'}}</div>
                         </ng-template>
@@ -37,7 +38,7 @@
                     </td>
                   </ng-container>
                   <ng-container *ngIf="!item.editable">
-                    <td >
+                    <td>
                       {{item.displayName|| 'N/A' }}
                     </td>
                   </ng-container>
@@ -118,8 +119,8 @@
 
                   <ng-container *ngIf="item.editable">
                     <td>
-                      <ng-select [items]="COA" [loading]="false" bindLabel="chartofaccountname" placeholder="Select COA"
-                        appendTo="body" formControlName="COA" required>
+                      <ng-select [items]="filteredCOA" [loading]="false" bindLabel="chartofaccountname"
+                        placeholder="Select COA" appendTo="body" formControlName="COA" required>
                         <ng-template ng-option-tmp let-item="item" let-index="index">
                           <div title="{{item.chartofaccountname|| 'N/A' }}">{{item.chartofaccountname|| 'N/A' }}</div>
                         </ng-template>
@@ -189,11 +190,11 @@
                     <mat-icon>toc</mat-icon>
                   </button> -->
                   <td>
-                  <button class="btn icon-dots-vertical edit-options" *ngIf="item.editable" (click)="saveRecord(item)"
-                    title="Add Transaction">
-                    <mat-icon>add</mat-icon>
-                  </button>
-                </td>
+                    <button class="btn icon-dots-vertical edit-options" *ngIf="item.editable" (click)="saveRecord(item)"
+                      title="Add Transaction">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </td>
                   <!-- <button class="btn icon-dots-vertical edit-options" *ngIf="!item.editable"  title="Actions" [matMenuTriggerFor]="menu"
                     [matMenuTriggerData]="{item:item}">
                     <mat-icon>toc</mat-icon>
