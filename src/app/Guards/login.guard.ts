@@ -7,24 +7,24 @@ import { HelperService } from '../services/helper-service/helper.service';
   providedIn: 'root'
 })
 export class LoginGuard implements CanActivate {
-  constructor(private _router: Router, private _helper: HelperService){ }
+  constructor(private _router: Router, private _helper: HelperService) { }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
 
-      try {
-        var token = this._helper.getToken();
-        if(token){
+    try {
+      var token = this._helper.getToken();
+      if (token) {
         return true;
-      } else{
-        this._router.navigate(['/users/login'])
+      } else {
+        this._router.navigate(['/login'])
         return true;
       }
-      } catch (error) { 
-        this._router.navigate(['/users/login'])
-        //return true
-      }
+    } catch (error) {
+      this._router.navigate(['/login'])
+      //return true
     }
   }
+}
 

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core'
+import { Router } from '@angular/router';
+import { HelperService } from 'src/app/services/helper-service/helper.service';
 
 @Component({
   template: `
@@ -52,8 +54,18 @@ body{
 }`]
 })
 export class Error404Component {
-  constructor() {
+  constructor(private _router: Router, private _helper: HelperService) { }
+  // ngOnInit() {
+  //   try {
+  //     var token = this._helper.getToken();
+  //     if (token) {
+  //     } else {
+  //       this._router.navigate(['/login'])
 
-  }
-
+  //     }
+  //   } catch (error) {
+  //     this._router.navigate(['/login'])
+  //     //return true
+  //   }
+  // }
 }
