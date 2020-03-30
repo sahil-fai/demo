@@ -60,8 +60,8 @@ export class TokenInterceptor implements HttpInterceptor {
           this.removeRequest(request);      
           console.log('if: ', err);
           if (err.statusText === 'Unknown Error' || err.status == 401 || err.status == 404) {
-            if (err.statusText === 'Unknown Error') {
-              this._errHandler.pushError(err.statusText);
+            if (err.statusText === 'Unknown Error' || err.status == 0) {
+              this._toastr.error("Server Not Responding");
             }
             if (err.status == 401) {
               this._router.navigate(['./login']);
@@ -71,7 +71,7 @@ export class TokenInterceptor implements HttpInterceptor {
             }
             localStorage.clear();
           } 
-          else if (err.status == 500  || err.status == 400 ) {
+          else if (err.status == 500  || err.status == 400 ) { 
             if (err.status == 500) {
               this._toastr.error("Internal Server Error");
              }
@@ -79,9 +79,9 @@ export class TokenInterceptor implements HttpInterceptor {
              this._toastr.error("Bad Request");
             }
           }
-          else { console.log('else: ', err);
+          else { 
             if(err.error && err.error.error && err.error.error.message) {
-              this._errHandler.pushError(err.error.error.message);
+             this._toastr.error(err.error.error.message);
             }
             // if (err.error && err.error.error && err.error.error.message) {
             //   this._errHandler.pushError(err.error.error.message);
