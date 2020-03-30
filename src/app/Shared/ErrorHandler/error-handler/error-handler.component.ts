@@ -33,8 +33,9 @@ export class ErrorHandlerComponent implements OnInit {
     var self = this;
     self._subscribeError = self._errHandler.isCaughtError.subscribe(err => {
       console.log(err);
-      self._toastr.error(err || "something went wrong!!")
-
+      if(err != 'Unknown Error'){
+        self._toastr.error(err || "something went wrong!!");
+      }
     });
   }
 

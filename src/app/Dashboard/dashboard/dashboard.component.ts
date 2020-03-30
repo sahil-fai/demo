@@ -28,11 +28,12 @@ export class DashboardComponent implements OnInit {
       }
       else if(message === "stop")
       {
-        this._reloadingDialog.close();
-        this._reloadingDialog.afterClosed().subscribe(data=>{
-        this.router.navigate(['/businesslist']);
-        })
-     
+        if(this._reloadingDialog) {
+          this._reloadingDialog.close();
+          this._reloadingDialog.afterClosed().subscribe(data=>{
+          this.router.navigate(['/businesslist']);
+          })
+        }     
       }
     })
    

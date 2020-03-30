@@ -34,16 +34,16 @@ export class SignupComponent implements OnInit, OnDestroy {
   formRegister: FormGroup;
   roles = [
     {
-      value: 'cpa',
-      viewValue: 'CPA'
+      value: 'accountant',
+      viewValue: 'Accountant'
     },
     {
       value: 'businessowner',
       viewValue: 'Business Owner'
     },
     {
-      value: 'accountant',
-      viewValue: 'accountant'
+      value: 'other',
+      viewValue: 'Other'
     }
   ];
 
