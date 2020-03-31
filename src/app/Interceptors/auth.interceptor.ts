@@ -64,9 +64,19 @@ export class TokenInterceptor implements HttpInterceptor {
               this._toastr.error("Server Not Responding");
             }
             if (err.status == 401) {
+              if(err.error && err.error.error && err.error.error.message) { 
+                this._toastr.error(err.error.error.message); 
+              } else {
+                this._toastr.error('Unauthorize'); 
+              }
               this._router.navigate(['./login']);
             }
             if (err.status == 404) {
+              if(err.error && err.error.error && err.error.error.message) { 
+                this._toastr.error(err.error.error.message); 
+              } else {
+                this._toastr.error('Unauthorize'); 
+              }
               this._router.navigate(['./404']);
             }
             localStorage.clear();

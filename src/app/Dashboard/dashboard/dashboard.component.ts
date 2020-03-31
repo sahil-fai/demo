@@ -48,22 +48,16 @@ export class DashboardComponent implements OnInit {
     var settings ='height='+700+',width='+600+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable';
     const windowObjectReference = window.open("","qb_window",settings);
     this.quickbookconnect.connect().subscribe(
-      res => {
-        const path = res['url'];
-        windowObjectReference.location.href = path;
+      res => { 
+        windowObjectReference.location.href = res['url'];
         windowObjectReference.focus();
         const message = function receiveMessage(event) {
           let data;
-          if (true) {
-            data = JSON.parse(event["data"]);
-            _self.reloadBusiness();
-            if (true) {
-              window.removeEventListener("message", message, false);
-            }
-          }
+          data = JSON.parse(event["data"]);
+          _self.reloadBusiness();
+          window.removeEventListener("message", message, false);
         };
         window.addEventListener("message", message, false);
-       // this.reloadBusiness();
         // For IE browser
         const myTimer = setInterval(function () {
           if (windowObjectReference.closed) {
@@ -74,7 +68,7 @@ export class DashboardComponent implements OnInit {
             }
           }
         }, 100);
-      }, err => {
+      }, err => { console.log('error:', err);
         windowObjectReference.close();
       });
   }
@@ -87,19 +81,15 @@ export class DashboardComponent implements OnInit {
     var settings ='height='+700+',width='+600+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable';
     const windowObjectReference = window.open("","qb_window",settings);
     this.xeroconnect.connect().subscribe(
-      res => {
-        const path = res['url'];
-        windowObjectReference.location.href = path;
+      res => {      
+        windowObjectReference.location.href = res['url'];
         windowObjectReference.focus();
         const message = function receiveMessage(event) {
           let data;
-          if (true) {
             data = JSON.parse(event["data"]);
             _self.reloadBusiness();
-            if (true) {
-              window.removeEventListener("message", message, false);
-            }
-          }
+            window.removeEventListener("message", message, false);
+    
         };
         window.addEventListener("message", message, false);
        // this.reloadBusiness();
