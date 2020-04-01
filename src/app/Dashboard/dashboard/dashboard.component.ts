@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
     this.socketService.newUser();
     this.socketService.messages.subscribe((msg)=>{
       let message = String(msg);
-      alert('brij here');
+      alert('test');
       
       if (message === "start") {
           this.reloadBusiness();
