@@ -21,13 +21,11 @@ export class DashboardComponent implements OnInit {
     this.socketService.newUser();
     this.socketService.messages.subscribe((msg)=>{
       let message = String(msg);
-     // alert(message)
-      if (message === "start")
-      {
-          this.reloadBusiness()
-      }
-      else if(message === "stop")
-      {
+      alert('brij here');
+      
+      if (message === "start") {
+          this.reloadBusiness();
+      } else if(message === "stop") { alert(this._reloadingDialog); 
         if(this._reloadingDialog) {
           this._reloadingDialog.close();
           this._reloadingDialog.afterClosed().subscribe(data=>{
@@ -81,15 +79,14 @@ export class DashboardComponent implements OnInit {
     var settings ='height='+700+',width='+600+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable';
     const windowObjectReference = window.open("","qb_window",settings);
     this.xeroconnect.connect().subscribe(
-      res => {      
+      res => {     console.log('res: ', res);  
         windowObjectReference.location.href = res['url'];
         windowObjectReference.focus();
-        const message = function receiveMessage(event) {
+        const message = function receiveMessage(event) { console.log('event: ', event);
           let data;
             data = JSON.parse(event["data"]);
             _self.reloadBusiness();
-            window.removeEventListener("message", message, false);
-    
+            window.removeEventListener("message", message, false);    
         };
         window.addEventListener("message", message, false);
        // this.reloadBusiness();
@@ -110,7 +107,7 @@ export class DashboardComponent implements OnInit {
 
   public reloadBusiness() {
     const _self = this;
-
+console.log('reload popup');
     this._reloadingDialog = this.dialog.open(BusinessReloadComponent, {
       width: '450px',
       disableClose: true,

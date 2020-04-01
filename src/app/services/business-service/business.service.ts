@@ -62,7 +62,6 @@ export class BusinessService {
   }
 
   getCompanyChartOfAccounts(id: number, filter?:string): Observable<any> {
-    // tslint:disable-next-line: max-line-length
     return this.http.get<any>('business/'+id +'/chartofaccounts' + '?type=expense', {
     });
   }
@@ -73,7 +72,6 @@ export class BusinessService {
   }
 
   getchartofaccountmapping(id): Observable<any> {
-    // tslint:disable-next-line: max-line-length
     return this.http.get<any>('business/' +id +'/chartofaccountmappings', {
     });
   }

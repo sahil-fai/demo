@@ -41,146 +41,77 @@
                         <div class="column half-col">
                           <div class="form-group">
                             <label>First Name</label>
-                            <input
-                              type="text"
-                              class=""
-                              [ngClass]="{
-                                error: (f.firstName.invalid && f.firstName.dirty) || (submitted && f.firstName.invalid)
-                              }"
-                              formControlName="firstName"
-                            />
-                            <div
-                              class="errorMessage"
-                              *ngIf="
-                                (!!f.firstName.invalid && !!f.firstName.dirty && !!f.firstName.errors.email) ||
-                                (submitted && !!f.firstName.invalid && !!f.firstName.errors.email) ||
-                                (!!f.firstName.invalid && !!f.firstName.dirty) ||
-                                (submitted && !!f.firstName.invalid)
-                              "
-                            >
-                              Please enter First Name.
+                            <input type="text" [ngClass]="{error: (f.firstName.invalid && f.firstName.dirty) || (submitted && f.firstName.invalid)  }"
+                              formControlName="firstName"/>
+                            <div class="errorMessage" *ngIf="(!!f.firstName.invalid && !!f.firstName.dirty && !!f.firstName.errors.email) || (submitted && !!f.firstName.invalid && !!f.firstName.errors.email) || (!!f.firstName.invalid && !!f.firstName.dirty) ||
+                            (submitted && !!f.firstName.invalid)">
+                               <div *ngIf="f.firstName.errors?.required">Please enter First Name.</div>
+                               <div *ngIf="f.firstName.errors?.minlength">First Name must be at least 3 characters long.</div> 
+                               <div *ngIf="f.firstName.errors?.maxlength">First Name should be at less than 20 characters.</div> 
                             </div>
                           </div>
                         </div>
                         <div class="column half-col">
                           <div class="form-group">
                             <label>Last Name</label>
-                            <input
-                              type="text"
-                              class=""
-                              [ngClass]="{
-                                error: (f.lastName.invalid && f.lastName.dirty) || (submitted && f.lastName.invalid)
-                              }"
-                              formControlName="lastName"
-                            />
-                            <div
-                              class="errorMessage"
-                              *ngIf="
-                                (!!f.lastName.invalid && !!f.lastName.dirty && !!f.lastName.errors.email) ||
-                                (submitted && !!f.lastName.invalid && !!f.lastName.errors.email) ||
-                                (!!f.lastName.invalid && !!f.lastName.dirty) ||
-                                (submitted && !!f.lastName.invalid)
-                              "
-                            >
-                              Please enter Last Name.
-                            </div>
+                            <input type="text" [ngClass]="{error: (f.lastName.invalid && f.lastName.dirty) || (submitted && f.lastName.invalid) }" formControlName="lastName"/>
+                     
+                            <div class="errorMessage" *ngIf="(!!f.lastName.invalid && !!f.lastName.dirty && !!f.lastName.errors.email) || (submitted && !!f.lastName.invalid && !!f.lastName.errors.email) || (!!f.lastName.invalid && !!f.lastName.dirty) ||
+                            (submitted && !!f.lastName.invalid)">
+                              <div *ngIf="f.lastName.errors?.minlength">Last Name must be at least 3 characters long.</div> 
+                              <div *ngIf="f.lastName.errors?.maxlength">Last Name should be at less than 20 characters.</div> 
+                          </div>
                           </div>
                         </div>
                         <div class="column half-col">
                           <div class="form-group">
                             <label>Email Address</label>
-                            <input
-                              type="email"
-                              class=""
-                              [ngClass]="{
-                                error: (f.username.invalid && f.username.dirty) || (submitted && f.username.invalid)
-                              }"
-                              formControlName="username"
-                            />
-                            <div
-                              class="errorMessage"
-                              *ngIf="
+                            <input type="email" [ngClass]="{error: (f.username.invalid && f.username.dirty) || (submitted && f.username.invalid)}" formControlName="username" />
+                            <div  class="errorMessage" *ngIf="
                                 (!!f.username.invalid && !!f.username.dirty && !!f.username.errors.email) ||
                                 (submitted && !!f.username.invalid && !!f.username.errors.email) ||
-                                (!!f.username.invalid && !!f.username.dirty) ||
-                                (submitted && !!f.username.invalid)
-                              "
-                            >
+                                (!!f.username.invalid && !!f.username.dirty) || (submitted && !!f.username.invalid)">
                               Please enter a valid email address.
                             </div>
                           </div>
                         </div>
                         <div class="column half-col">
-                          <div
-                            class="form-group"
-                            [ngClass]="{ error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid) }"
-                          >
+                          <div  class="form-group" [ngClass]="{ error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid) }">
                             <label>Password</label>
                             <div class="input-group">
-                              <input
-                                [type]="showPassword ? 'text' : 'password'"
-                                class=""
-                                [ngClass]="{
-                                  error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid)
-                                }"
-                                formControlName="password"
-                              />
+                              <input [type]="showPassword ? 'text' : 'password'" [ngClass]="{error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid) }" formControlName="password"/>
                               <button type="button" (click)="togglePasswordVisibility()">
-                                <i class="icon-eye-show" *ngIf="showPassword"></i
-                                ><i class="icon-eye-hide" *ngIf="!showPassword"></i>
+                                <i class="icon-eye-show" *ngIf="showPassword"></i>
+                                <i class="icon-eye-hide" *ngIf="!showPassword"></i>
                               </button>
                             </div>
                             <div class="errorMessage" *ngIf="submitted && !!f.password.invalid">Please enter Password.</div>
                             <div class="condition">
                               <ul class="conditionList">
-                                <li
-                                  [ngClass]="{
-                                    notValidated:
-                                      f.password.pristine ||
-                                      (f.password.errors && f.password.errors.required) ||
-                                      (f.password.dirty && f.password.errors && f.password.errors.minlength)
-                                  }"
-                                >
+                                <li [ngClass]="{notValidated:f.password.pristine || (f.password.errors && f.password.errors.required) ||
+                                      (f.password.dirty && f.password.errors && f.password.errors.minlength)}">
                                   <mat-icon>radio_button_checked</mat-icon>Contains minimum of 6 characters.
                                 </li>
-                                <li
-                                  [ngClass]="{
-                                    notValidated:
-                                      f.password.pristine ||
-                                      (f.password.errors && f.password.errors.required) ||
-                                      (f.password.errors && f.password.errors.number)
-                                  }"
-                                >
+                                <li [ngClass]="{notValidated:f.password.pristine || (f.password.errors && f.password.errors.required) ||
+                                  (f.password.dirty && f.password.errors && f.password.errors.maxlength)}">
+                              <mat-icon>radio_button_checked</mat-icon>Contains less then 20 characters.
+                               </li>
+                                <li [ngClass]="{notValidated:f.password.pristine || (f.password.errors && f.password.errors.required) ||
+                                      (f.password.errors && f.password.errors.number)}">
                                   <mat-icon>radio_button_checked</mat-icon>Contains a number.
                                 </li>
-                                <li
-                                  [ngClass]="{
-                                    notValidated:
-                                      f.password.pristine ||
-                                      (f.password.errors && f.password.errors.required) ||
-                                      (f.password.errors && f.password.errors.uppercase)
-                                  }"
-                                >
+                                <li [ngClass]="{notValidated: f.password.pristine || (f.password.errors && f.password.errors.required) ||
+                                      (f.password.errors && f.password.errors.uppercase) }" >
                                   <mat-icon>radio_button_checked</mat-icon>Contains an upper case letter.
                                 </li>
-                                <li
-                                  [ngClass]="{
-                                    notValidated:
-                                      f.password.pristine ||
+                                <li  [ngClass]="{notValidated: f.password.pristine ||
                                       (f.password.errors && f.password.errors.required) ||
-                                      (f.password.errors && f.password.errors.lowercase)
-                                  }"
-                                >
+                                      (f.password.errors && f.password.errors.lowercase)}" >
                                   <mat-icon>radio_button_checked</mat-icon>Contains a lower case letter.
                                 </li>
-                                <li
-                                  [ngClass]="{
-                                    notValidated:
-                                      f.password.pristine ||
+                                <li [ngClass]="{notValidated: f.password.pristine ||
                                       (f.password.errors && f.password.errors.required) ||
-                                      (f.password.errors && f.password.errors.specialcharacter)
-                                  }"
-                                >
+                                      (f.password.errors && f.password.errors.specialcharacter)}" >
                                   <mat-icon>radio_button_checked</mat-icon>Contains a special character.
                                 </li>
                               </ul>
@@ -191,12 +122,8 @@
                           <div class="form-group">
                             <label>Confirm Password</label>
                             <div class="input-group">
-                              <input
-                                [type]="showConfirmPassword ? 'text' : 'password'"
-                                class=""
-                                formControlName="confirmpassword"
-                                [ngClass]="{ error: errors && !f.confirmpassword.pristine }"
-                              />
+                              <input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmpassword"
+                                [ngClass]="{ error: errors && !f.confirmpassword.pristine }"                              />
                               <button type="button" (click)="toggleConfirmPasswordVisibility()">
                                 <i class="icon-eye-show" *ngIf="showConfirmPassword"></i
                                 ><i class="icon-eye-hide" *ngIf="!showConfirmPassword"></i>

@@ -47,7 +47,6 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
     this.businessListMapping.forEach(element => {
       element.isSelected = 1
     });
-    console.log(this.businessListMapping);
   }
 
   public closeNav() {
@@ -68,7 +67,6 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
     this.ngOnInit();
   }
   ngDoCheck(){
-    console.log("hiiii");
     this.textmap= JSON.parse(this.helper.getTaxMapping());
   }
 
