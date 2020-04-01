@@ -21,11 +21,11 @@ export class DashboardComponent implements OnInit {
     this.socketService.newUser();
     this.socketService.messages.subscribe((msg)=>{
       let message = String(msg);
-      alert('test');
+      console.log('socketService', message);
       
       if (message === "start") {
           this.reloadBusiness();
-      } else if(message === "stop") { alert(this._reloadingDialog); 
+      } else if(message === "stop") { console.log(this._reloadingDialog); 
         if(this._reloadingDialog) {
           this._reloadingDialog.close();
           this._reloadingDialog.afterClosed().subscribe(data=>{
