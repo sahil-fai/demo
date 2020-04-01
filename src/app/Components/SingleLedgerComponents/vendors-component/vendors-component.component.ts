@@ -190,9 +190,9 @@ export class VendorsComponentComponent implements OnInit, OnDestroy   {
   public handlePage(e: any) {
     this.isFilterSearch = false;
     this.isResetSearch = false;
-    let skipNumberOfPages = this.pagelimit * e.pageIndex ;
+    this.offset = this.pagelimit * e.pageIndex ;
     this.pageNumber = e.pageIndex * e.pageSize;
-    this.getAllvendors(skipNumberOfPages, this.name.value, this.pagelimit);
+    this.getAllvendors(this.offset, this.name.value, this.pagelimit);
   //  const data = this.Paginator(this.vendors, pagenumber, pagesize);
    // this.dataSource = new MatTableDataSource < PeriodicElement > (data.data);
   }
