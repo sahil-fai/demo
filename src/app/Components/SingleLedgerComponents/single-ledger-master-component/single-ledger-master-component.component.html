@@ -91,7 +91,7 @@
               </table>
               <ul>
                 <li *ngFor="let business of businessList">
-                  <a href="javascript:void(0)" [ngStyle]="business.isSelected == 0 && {'font-weight': '800'}" (click)="viewBusiness(business.id)">- {{business.legalName|| 'N/A' }} </a>
+                  <a href="javascript:void(0)" [ngStyle]="business.isSelected == 0 && {'font-weight': '800'}" (click)="viewBusiness(business.id, business.platformId)">- {{business.legalName|| 'N/A' }} </a>
                 </li>
               </ul>
             </li>

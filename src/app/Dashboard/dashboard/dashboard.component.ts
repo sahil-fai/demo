@@ -21,18 +21,17 @@ export class DashboardComponent implements OnInit {
     this.socketService.newUser();
     this.socketService.messages.subscribe((msg)=>{
       let message = String(msg);
-     // alert(message)
-      if (message === "start")
-      {
-          this.reloadBusiness()
-      }
-      else if(message === "stop")
-      {
-        this._reloadingDialog.close();
-        this._reloadingDialog.afterClosed().subscribe(data=>{
-        this.router.navigate(['/businesslist']);
-        })
-     
+      console.log('socketService', message);
+      
+      if (message === "start") {
+          this.reloadBusiness();
+      } else if(message === "stop") { console.log(this._reloadingDialog); 
+        if(this._reloadingDialog) {
+          this._reloadingDialog.close();
+          this._reloadingDialog.afterClosed().subscribe(data=>{
+          this.router.navigate(['/businesslist']);
+          })
+        }     
       }
     })
    
@@ -47,22 +46,16 @@ export class DashboardComponent implements OnInit {
     var settings ='height='+700+',width='+600+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable';
     const windowObjectReference = window.open("","qb_window",settings);
     this.quickbookconnect.connect().subscribe(
-      res => {
-        const path = res['url'];
-        windowObjectReference.location.href = path;
+      res => { 
+        windowObjectReference.location.href = res['url'];
         windowObjectReference.focus();
         const message = function receiveMessage(event) {
           let data;
-          if (true) {
-            data = JSON.parse(event["data"]);
-            _self.reloadBusiness();
-            if (true) {
-              window.removeEventListener("message", message, false);
-            }
-          }
+          data = JSON.parse(event["data"]);
+          _self.reloadBusiness();
+          window.removeEventListener("message", message, false);
         };
         window.addEventListener("message", message, false);
-       // this.reloadBusiness();
         // For IE browser
         const myTimer = setInterval(function () {
           if (windowObjectReference.closed) {
@@ -73,7 +66,7 @@ export class DashboardComponent implements OnInit {
             }
           }
         }, 100);
-      }, err => {
+      }, err => { console.log('error:', err);
         windowObjectReference.close();
       });
   }
@@ -86,19 +79,14 @@ export class DashboardComponent implements OnInit {
     var settings ='height='+700+',width='+600+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable';
     const windowObjectReference = window.open("","qb_window",settings);
     this.xeroconnect.connect().subscribe(
-      res => {
-        const path = res['url'];
-        windowObjectReference.location.href = path;
+      res => {     console.log('res: ', res);  
+        windowObjectReference.location.href = res['url'];
         windowObjectReference.focus();
-        const message = function receiveMessage(event) {
+        const message = function receiveMessage(event) { console.log('event: ', event);
           let data;
-          if (true) {
             data = JSON.parse(event["data"]);
             _self.reloadBusiness();
-            if (true) {
-              window.removeEventListener("message", message, false);
-            }
-          }
+            window.removeEventListener("message", message, false);    
         };
         window.addEventListener("message", message, false);
        // this.reloadBusiness();
@@ -119,7 +107,7 @@ export class DashboardComponent implements OnInit {
 
   public reloadBusiness() {
     const _self = this;
-
+console.log('reload popup');
     this._reloadingDialog = this.dialog.open(BusinessReloadComponent, {
       width: '450px',
       disableClose: true,

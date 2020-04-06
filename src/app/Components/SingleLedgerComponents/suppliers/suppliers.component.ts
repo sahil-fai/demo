@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { BusinessService } from '../../../services/business-service/business.service';
 import { HelperService } from 'src/app/services/helper-service/helper.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
+
 
 @Component({
   selector: 'app-suppliers',
@@ -26,27 +27,50 @@ export class SuppliersComponent implements OnInit {
     itemDescription3: '',
     opration: 'AND'
   };
-    vendor = [];
-    COA = [];
-    platfrom = [];
-    public mapping = [
-      { Name: 'VendorBase', ID: 270 },
-      { Name: 'SubjectBase', ID: 271 },
-      { Name: 'ItemBase', ID: 272 },
-    ];
-    SubAccount = [];
-    opration = [];
-    offset: number = 0;
-    filter : string = "";
-    limit : number = 1000;
-
-
+  vendor = [];
+  COA = [];
+  filteredCOA = [];
+  CoaItem = [];
+  platfrom = [];
+  public mapping = [
+    { Name: 'VendorBase', ID: 270 },
+    { Name: 'SubjectBase', ID: 271 },
+    { Name: 'ItemBase', ID: 272 },
+  ];
+  SubAccount = [];
+  opration = [];
+  offset: number = 0;
+  filter: string = "";
+  limit: number = 1000;
   public title = 'My Suppliers';
   formTransaction: FormGroup;
   public transcationList = [];
   public COAMappings: any;
   public isCOAEnabled = true;
   switchCompanySubscription: any;
+
+
+  constructor(private helper: HelperService, private businessService: BusinessService, private fb: FormBuilder,
+    private switchCompany: SwitchCompanyService) {
+    this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe( () => {
+        this.transcationList = [];
+        this.COAMappings = [];
+        this.ngOnInit();
+      }
+    );
+  }
+
+  ngOnInit() {
+    this.transcationList.length = 0;
+    this.transcationList = [];
+    this._getChartofAccountMappings();
+    this._getplatforms();
+    this._getVendors();
+    this._getChartofAccounts();
+    this._createForm();
+    this.addRecord();
+  }
+
   private _createForm() {
     this.formTransaction = this.fb.group({
       Contact: [],
@@ -63,57 +87,22 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
-
-
-
-     constructor(private helper: HelperService,
-                 private businessService: BusinessService, private fb: FormBuilder,
-                 private switchCompany: SwitchCompanyService) {
-
-
-         this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
-
-             () => {
-
-               this.transcationList = [];
-
-               this.COAMappings=[];
-
-               this.ngOnInit();
-
-             }
-
-           );
-
-    }
-
-  ngOnInit() {
-    this.transcationList.length = 0;
-    this.transcationList = [];
-    this._getChartofAccounts();
-    this._getplatforms();
-    this._getVendors();
-    this._getChartofAccountMappings();
-    this._createForm();
-
-    this.addRecord();
-
-  }
   _getChartofAccountMappings() {
-
-     const companyid = Number(this.helper.getcompanyId());
-     this.businessService.getchartofaccountmapping(companyid).subscribe(res => {
+    const companyid = Number(this.helper.getcompanyId());
+    this.businessService.getchartofaccountmapping(companyid).subscribe(res => { 
       if (res.length > 0) {
         this.COAMappings = res;
         this._generateCOAMapping();
       }
     });
   }
+
   _generateCOAMapping() {
     this.transcationList.length = 0;
     this.addRecord();
     this.COAMappings.forEach(element => {
       const data = {
+        displayName: element.vendor.displayName,
         vendorName: element.vendor.companyName,
         vendorEmail: element.emailonthebill,
         platfrom: element.organization,
@@ -128,21 +117,15 @@ export class SuppliersComponent implements OnInit {
         itemDescription3: element.itemdescription3,
         opration: 274
       };
-      this.transcationList.push(data);
+      this.transcationList.push(data); 
     });
-
+    //this._getChartofAccounts();
   }
-  // _getOperationTypeByID(operationtypeidl: any) {
-  //   return this.opration.find(x => x.ID === operationtypeidl).Name;
-  // }
-  // _getMappingByID(chartofaccountmappingtypeidl: any) {
-  //   return this.mapping.find(x => x.ID === chartofaccountmappingtypeidl).Name;
-  // }
+
   _getOperationTypeByID(operationtypeidl: any) {
     return this.opration.find(x => x.ID === operationtypeidl);
   }
   _getMappingByID(chartofaccountmappingtypeidl: any) {
-    console.log(chartofaccountmappingtypeidl)
     return this.mapping.find(x => x.ID === chartofaccountmappingtypeidl);
   }
 
@@ -150,7 +133,7 @@ export class SuppliersComponent implements OnInit {
     const companyid = Number(this.helper.getcompanyId());
     this.businessService.getAllVendors(companyid, this.offset, this.filter, this.limit).subscribe(res => {
       if (res[0].length === 0) { this.isCOAEnabled = false; }
-      if (res[0].length > 0) { console.log(res);
+      if (res[0].length > 0) {
         this.vendor = res[0];
       }
     });
@@ -165,10 +148,38 @@ export class SuppliersComponent implements OnInit {
 
   _getChartofAccounts() {
     const companyid = Number(this.helper.getcompanyId());
-    this.businessService.getCompanyChartOfAccounts(companyid).subscribe(res => {
-      if (res.length === 0) { this.isCOAEnabled = false; }
-      this.COA = res;
+    this.businessService.getCompanyChartOfAccounts(companyid).subscribe(res => { 
+      if (res.length === 0) { 
+        this.isCOAEnabled = false; 
+      }
+      this.COA = res
+      this.filteredCOA = [...this.COA];
     });
+
+  }
+
+  removeCOA(index) {
+    try {
+      if (index) {
+        this.COA;
+        this.filteredCOA.length = 0;
+        this.filteredCOA = []
+        this.filteredCOA = [...this.COA];
+        var vendors = this.transcationList.filter(x => x.displayName == index.displayName);
+        if (vendors && vendors.length > 0) {
+          vendors.forEach(vendor => {
+            let cOAName = vendor.COA;
+            var indexOf = this.filteredCOA.findIndex(x => x.chartofaccountname == cOAName);
+            if (indexOf > -1) {
+              this.filteredCOA.splice(indexOf, 1);
+            }
+          });
+          this.filteredCOA = [...this.filteredCOA];
+        }
+      }
+    } catch (error) {
+      alert(JSON.stringify(error));
+    }
   }
 
   public addRecord() {
@@ -200,7 +211,8 @@ export class SuppliersComponent implements OnInit {
     console.log(JSON.stringify(data))
     if (this.COAMappings) {
 
-      const vendor = this.COAMappings.filter(x => (x.vendorid === formData.Contact.vendorid) &&
+      const vendor = this.COAMappings.filter(x =>
+        (x.vendorid === formData.Contact.vendorid) &&
         (x.organization === formData.Platform.name) &&
         (x.chartofaccountmappingtypeidl === formData.Mapping.ID) &&
         (x.chartofaccountId === formData.COA.chartofaccountid)
@@ -213,22 +225,16 @@ export class SuppliersComponent implements OnInit {
     }
     this.businessService.postchartofaccountmapping(data).subscribe((res) => {
       this._getChartofAccountMappings();
-      this.formTransaction.reset();
+      this.formTransaction.patchValue({ Contact: null, Platform: null, Mapping: null, COA: null });
     });
-
   }
-
   public cancelRecord() {
     if (this.transcationList) {
       this.transcationList.splice(this.transcationList.length - 1, 1);
     }
   }
-
-
-   public editRecord(item) {
-  //   console.log(this.formTransaction);
-  //   console.log(item);
-  //   item.editable = true;
-  //   this.formTransaction.controls["Contact"].setValue(item.vendorName);
-   }
+  public editRecord(item) {
+    //   item.editable = true;
+    //   this.formTransaction.controls["Contact"].setValue(item.vendorName);
+  }
 }

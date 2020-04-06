@@ -41,14 +41,14 @@ export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
   private createForm() {
     this.formLogin = this._fb.group({
       username: ['', [ Validators.required, Validators.email ]],
-      password: ['', [ Validators.required, Validators.minLength(6) ]]
+      password: ['', [ Validators.required, Validators.minLength(8) ]]
     });
   }
 
-  public onLogin() { console.log('clik on login: ');
+  public onLogin() {
     this.submitted = true;
     if (this.formLogin.invalid) {return; }
-    this.authService.login(this.formLogin.value).subscribe(res => {      console.log('clik on login: ', res);  
+    this.authService.login(this.formLogin.value).subscribe(res => {
        if (res===null) {
          this.router.navigate(['/login']);
          return;
@@ -57,13 +57,14 @@ export class LoginComponent implements OnInit, OnChanges, AfterViewInit {
         this.helper.set(res.token);
         this.router.navigate(['/businesslist']);       
     },
-    err =>  {
-      if (err.status === 401) {
-        this._errHandler.pushError("Invalid Credentials")
-      } else if (err.status === 404) {
-      } else {
-         this._errHandler.pushError(err.message)
-        }      
+    err =>  { 
+      // if (err.status === 401) {
+        // this._errHandler.pushError("Invalid Credentials")
+      //  } 
+      // else if (err.status === 404) {
+      // } else {
+      //    this._errHandler.pushError(err.message)
+      //   }      
       this.formLogin.patchValue({password: ''});
     }
     );

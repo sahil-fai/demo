@@ -150,9 +150,9 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
   public handlePage(e: any) {
     this.isFilterSearch = false;
     this.isResetSearch = false;
-    let skipNumberOfPages = this.pagelimit * e.pageIndex ;
+    this.offset = this.pagelimit * e.pageIndex ;
     this.pageNumber = e.pageIndex * e.pageSize;
-    this.getAllCustomer(Number(this.helper.getcompanyId()), skipNumberOfPages, this.name.value, this.pagelimit);
+    this.getAllCustomer(Number(this.helper.getcompanyId()), this.offset, this.name.value, this.pagelimit);
     //let data = this.Paginator(this.customers, pagenumber, pagesize);
    // this.dataSource = new MatTableDataSource<PeriodicElement>(this.customers); console.log('datasource: ', this.dataSource);
   }

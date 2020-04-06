@@ -34,16 +34,16 @@ export class SignupComponent implements OnInit, OnDestroy {
   formRegister: FormGroup;
   roles = [
     {
-      value: 'cpa',
-      viewValue: 'CPA'
+      value: 'accountant',
+      viewValue: 'Accountant'
     },
     {
       value: 'businessowner',
       viewValue: 'Business Owner'
     },
     {
-      value: 'accountant',
-      viewValue: 'accountant'
+      value: 'other',
+      viewValue: 'Other'
     }
   ];
 
@@ -91,11 +91,11 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   private createForm() {
     this.formRegister = this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: [''],
+      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      lastName: ['', [Validators.minLength(3),Validators.maxLength(20)]],
       username: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
-      confirmpassword: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
+      confirmpassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
       isAgree: ['', [Validators.requiredTrue]],
       recaptcha: ['', [Validators.required]],
       role: [null, [Validators.required]]

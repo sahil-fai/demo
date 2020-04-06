@@ -161,8 +161,7 @@
 
       <div class="paginator-container" *ngIf="Totalrec>0">
           <!-- <button class="btn btn-small uppercase btn-solid btn-deepblue invite"><i class="icon-arrow-curve-right"></i>INVITE</button> -->
-          <mat-paginator appStylePaginator hidePageSize [length]=Totalrec
-          [pageSize]= pagelimit (page)="handlePage($event)"></mat-paginator>
+          <mat-paginator appStylePaginator hidePageSize [length]=Totalrec [pageSize]= pagelimit (page)="handlePage($event)"></mat-paginator>
       </div>
 
     </div>

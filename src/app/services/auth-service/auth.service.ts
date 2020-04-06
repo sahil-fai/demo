@@ -35,7 +35,6 @@ export class AuthService {
   }
 
   login(data): Observable<any> {
-    const env = environment;
     return this.http.post<any>('users/login', {
       email: data.username,
       password: data.password,

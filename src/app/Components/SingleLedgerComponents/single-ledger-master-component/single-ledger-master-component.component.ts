@@ -47,7 +47,6 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
     this.businessListMapping.forEach(element => {
       element.isSelected = 1
     });
-    console.log(this.businessListMapping);
   }
 
   public closeNav() {
@@ -56,18 +55,18 @@ export class SingleLedgerMasterComponentComponent implements OnInit {
   public openNav() {
     this.isNavOpen = !this.isNavOpen;
   }
-  public viewBusiness(businessID) {
+  public viewBusiness(businessID, platformId) {
     let companyid = this.helper.getcompanyId();
     if (companyid === String(businessID))
     {
         return;
     }
+    this.helper.setplatformId(platformId);
     this.helper.setcompanyId(businessID);
     this.switchCompany.switchCompany();
     this.ngOnInit();
   }
   ngDoCheck(){
-    console.log("hiiii");
     this.textmap= JSON.parse(this.helper.getTaxMapping());
   }
 

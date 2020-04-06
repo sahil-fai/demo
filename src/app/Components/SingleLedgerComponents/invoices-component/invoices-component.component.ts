@@ -166,7 +166,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
 
   getInvoicePDF(element){
     var platformidl = localStorage.getItem('PlatformId');
-
+    
     this.businessService.getInvoicePDF(element.companyid,element.invoiceid,platformidl as unknown as number,element.userid,element.platformownerinvoiceid,element.companyid).subscribe((file: Blob) => {
       console.log("hello pdf");
       console.log(window.URL.createObjectURL(file));

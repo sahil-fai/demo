@@ -26,6 +26,9 @@ import { TaxMappingGuard } from './Guards/taxMapping.guard';
 
 const routes: Routes = [
   {
+    path: '', redirectTo: 'login', pathMatch: 'full'
+  },
+  {
     path: 'login', component: LoginComponent
   },
   {
@@ -41,58 +44,57 @@ const routes: Routes = [
   {
     path: 'reset-forget-password', component: ResetForgetPasswordComponent,
   },
-  { 
+  {
     path: 'signup/:invitetype/:inviteuserid/:invitecompanyid', component: SignupComponent
   },
   {
     path: 'connectbusiness', component: DashboardComponent, canActivate: [LoginGuard]
   },
   {
-    path: 'businesslist', component: SingleLedgerBusinessListComponent, canActivate:[LoginGuard]
+    path: 'businesslist', component: SingleLedgerBusinessListComponent, canActivate: [LoginGuard]
   },
   {
-  path: 'business', component: SingleLedgerMasterComponentComponent, canActivate:[LoginGuard, BusinessGuard],
-      children: [
-          {
-            path: 'dashboard', component: DashboardComponetComponent,canActivate:[LoginGuard,BusinessGuard]
-          },
-          {
-            path: 'customers', component: CustomersComponentComponent,canActivate:[LoginGuard,BusinessGuard, TaxMappingGuard]
-          },
-          {
-            path: 'vendors', component: VendorsComponentComponent,canActivate:[LoginGuard,BusinessGuard, TaxMappingGuard]
-          },
-          {
-            path: 'invoices', component: InvoicesComponentComponent,canActivate:[LoginGuard,BusinessGuard, TaxMappingGuard]
-          },
-          {
-            path: 'bills', component: BillsComponentComponent,canActivate:[LoginGuard,BusinessGuard, TaxMappingGuard]
-          },
-          {
-            path: 'company-info', component: CompanyInfoComponentComponent,canActivate:[LoginGuard,BusinessGuard]
-          },
-          {
-            path: 'suppliers', component: SuppliersComponent,canActivate:[LoginGuard,BusinessGuard, TaxMappingGuard]
-          },
-          {
-            path: 'chart-of-account', component: ChartOfAccountComponent,canActivate:[LoginGuard,BusinessGuard, TaxMappingGuard]
-          },
-          {
-            path: 'tax-mapping', component: TaxMappingComponent,
-          }
-        ]
-  },
-  { path: '404' , component : Error404Component},
-  {
-    path: '', redirectTo: 'login', pathMatch: 'full'
+    path: 'business', component: SingleLedgerMasterComponentComponent, canActivate: [LoginGuard, BusinessGuard],
+    children: [
+      {
+        path: 'dashboard', component: DashboardComponetComponent, canActivate: [LoginGuard, BusinessGuard]
+      },
+      {
+        path: 'customers', component: CustomersComponentComponent, canActivate: [LoginGuard, BusinessGuard, TaxMappingGuard]
+      },
+      {
+        path: 'vendors', component: VendorsComponentComponent, canActivate: [LoginGuard, BusinessGuard, TaxMappingGuard]
+      },
+      {
+        path: 'invoices', component: InvoicesComponentComponent, canActivate: [LoginGuard, BusinessGuard, TaxMappingGuard]
+      },
+      {
+        path: 'bills', component: BillsComponentComponent, canActivate: [LoginGuard, BusinessGuard, TaxMappingGuard]
+      },
+      {
+        path: 'company-info', component: CompanyInfoComponentComponent, canActivate: [LoginGuard, BusinessGuard]
+      },
+      {
+        path: 'suppliers', component: SuppliersComponent, canActivate: [LoginGuard, BusinessGuard, TaxMappingGuard]
+      },
+      {
+        path: 'chart-of-account', component: ChartOfAccountComponent, canActivate: [LoginGuard, BusinessGuard, TaxMappingGuard]
+      },
+      {
+        path: 'tax-mapping', component: TaxMappingComponent,
+      }
+    ]
   },
   {
-    path: '**', redirectTo: '404'
+    path: '404', component: Error404Component,
+  },
+  {
+    path: '**', redirectTo: '404', canActivate: [LoginGuard]
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{useHash:true})],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
