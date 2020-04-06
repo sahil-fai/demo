@@ -5,9 +5,9 @@ import { HelperService } from './helper-service/helper.service';
 @Injectable({
   providedIn: 'root'
 })
-export class SocketService {
-  messages = this.socket.fromEvent<SocketMessage>('users');
+export class SocketService { 
   constructor(private socket: Socket, private helper_Service:HelperService ) { }
+  messages = this.socket.fromEvent<SocketMessage>('users');
   newUser() {
     this.socket.emit('adduser',this.helper_Service.getuserId() );
   }
