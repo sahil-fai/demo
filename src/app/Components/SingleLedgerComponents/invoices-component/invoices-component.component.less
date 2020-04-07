@@ -66,6 +66,11 @@ mat-card {
   border-radius: 0 0 7px 7px;
 }
 
+.defaultTable{
+  overflow: unset;
+  border-top: none;;
+}
+
 .defaultTable .dataTable th.tick-checkbox {
   text-align: center;
 }
@@ -91,13 +96,6 @@ mat-card {
     background: #e1f1f5;
     z-index: 1 !important;
   }
-//   .table-head-second {
-//     position: sticky;
-//     top: 33px;
-//     left: 0;
-//     z-index: 1;
-//     background: #ffff;
-// }
 
   .example-element-row {
     cursor: pointer;
@@ -119,6 +117,7 @@ table {
  &.table-inner-head{
    position: sticky;
    top: 0;
+   z-index: 1;
    background-color: #dfeaf5;
 
  }
@@ -166,7 +165,7 @@ tr {
         background: #e3f8fd;
       }
     }
-  }
+  } 
 }
 
 td.mat-column-Number {

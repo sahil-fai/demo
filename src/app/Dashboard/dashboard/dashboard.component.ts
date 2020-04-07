@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
       res => { 
         windowObjectReference.location.href = res['url'];
         windowObjectReference.focus();
-        const message = function receiveMessage(event) {
+        const message = function receiveMessage(event) { console.log('message: ', message);
           let data;
           data = JSON.parse(event["data"]);
           _self.reloadBusiness();
