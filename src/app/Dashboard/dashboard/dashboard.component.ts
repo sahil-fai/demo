@@ -20,16 +20,14 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.socketService.newUser();
     this.socketService.messages.subscribe((msg)=>{
-      let message = String(msg);
-      console.log('socketService', message);
-      
-      if (message === "start") {
+      let message = String(msg);      
+      if (message === "start") { console.log('start', message);
           this.reloadBusiness();
-      } else if(message === "stop") { console.log(this._reloadingDialog); 
+      } else if(message === "stop") {  console.log('stop:', message); 
         if(this._reloadingDialog) {
           this._reloadingDialog.close();
           this._reloadingDialog.afterClosed().subscribe(data=>{
-          this.router.navigate(['/businesslist']);
+            this.router.navigate(['/businesslist']);
           })
         }     
       }
@@ -49,7 +47,7 @@ export class DashboardComponent implements OnInit {
       res => { 
         windowObjectReference.location.href = res['url'];
         windowObjectReference.focus();
-        const message = function receiveMessage(event) { console.log('message: ', message);
+        const message = function receiveMessage(event) { 
           let data;
           data = JSON.parse(event["data"]);
           _self.reloadBusiness();
@@ -82,7 +80,7 @@ export class DashboardComponent implements OnInit {
       res => {     console.log('res: ', res);  
         windowObjectReference.location.href = res['url'];
         windowObjectReference.focus();
-        const message = function receiveMessage(event) { console.log('event: ', event);
+        const message = function receiveMessage(event) { 
           let data;
             data = JSON.parse(event["data"]);
             _self.reloadBusiness();
@@ -106,8 +104,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public reloadBusiness() {
-    const _self = this;
-console.log('reload popup');
+    console.log('reload popup',  this.connectedToBusiness);
     this._reloadingDialog = this.dialog.open(BusinessReloadComponent, {
       width: '450px',
       disableClose: true,

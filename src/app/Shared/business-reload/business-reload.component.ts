@@ -39,19 +39,18 @@ export class BusinessReloadComponent implements OnInit {
       this.establishingConnection.isProcessing = false;
       this.establishingConnection.isDone = true;
       this.fetchingTransactions.isProcessing = true;
-    }, 3000);
+    }, 1000);
     setTimeout(() => {
       this.fetchingTransactions.isProcessing = false;
       this.fetchingTransactions.isDone = true;
       this.generatingReports.isProcessing = true;
-    }, 15000);
+    }, 2000);
     setTimeout(() => {
       this.generatingReports.isProcessing = false;
       this.generatingReports.isDone = true;
-      this.settingUpProjects.isProcessing = true;
+      this.settingUpProjects.isProcessing = true;    
       this.dialogRef.close();
-    }, 160000);
-
-
+    }, 3500);
+    
   }
 }
