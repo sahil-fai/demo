@@ -96,11 +96,11 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   public directionLinks: boolean = true;
   public autoHide: boolean = true;
   public responsive: boolean = true;
+  public invoiceStatusArray = [{id:1,value:'Submit '},{id:2,value:'Approved '},{id:3,value:'Void by customer'},{id:4,value:'Void by supplier'},{id:5,value:'Deleted '}];
 
   @ViewChild("content", null) modal: ElementRef;
   @ViewChild(JsonEditorComponent, { static: true }) editor: JsonEditorComponent;
   public editorOptions: JsonEditorOptions;
-
   data: any ;
   // public labels: any = {
   //   previousLabel: 'Prev',
@@ -123,7 +123,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   companyCurrency: string;
   // @ViewChild(MatPaginator, {static: true
   // }) paginator: MatPaginator;
-  displayedColumns: string[] = ['Index', 'Number', 'CustomerName', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'BlockchainTransactionID', 'Actions',  'star' ];
+  displayedColumns: string[] = ['Index', 'Number', 'CustomerName', 'Date', 'DueDate', 'Customer', 'Total', 'Balance', 'BlockchainTransactionID', 'Status', 'Actions',  'star' ];
   expandedElement: PeriodicElement | null;
   selection = new SelectionModel < PeriodicElement > (true, []);
   invoice: string;
@@ -159,21 +159,24 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
       this.companyCurrency = localStorage.getItem('CompanyCurrency');
     }
     this.getinvoices(companyid);
-
-    // console.log(this.getinvoices)
-
   }
 
   getInvoicePDF(element){
-    var platformidl = localStorage.getItem('PlatformId');
-    
+    var platformidl = localStorage.getItem('PlatformId');    
     this.businessService.getInvoicePDF(element.companyid,element.invoiceid,platformidl as unknown as number,element.userid,element.platformownerinvoiceid,element.companyid).subscribe((file: Blob) => {
-      console.log("hello pdf");
-      console.log(window.URL.createObjectURL(file));
+      // console.log("hello pdf");
+      // console.log(window.URL.createObjectURL(file));
         window.open(window.URL.createObjectURL(file), '_blank');
       }
     );
   }
+
+  public getInvoiceStatus(invoiceId) { 
+        let data = this.invoiceStatusArray.filter(res => res.id == invoiceId);
+        if(data.length>0)
+           return data[0].value;     
+  }
+
   public getinvoices(companyid: number, offset = this.offset, filter="", pagelimit = this.pagelimit) {
     var a = this.pageNumber;
    if(this.isFilterSearch || this.isResetSearch){

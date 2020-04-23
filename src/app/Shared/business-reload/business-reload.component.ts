@@ -44,13 +44,13 @@ export class BusinessReloadComponent implements OnInit {
       this.fetchingTransactions.isProcessing = false;
       this.fetchingTransactions.isDone = true;
       this.generatingReports.isProcessing = true;
-    }, 2000);
+    }, 2500);
     setTimeout(() => {
       this.generatingReports.isProcessing = false;
       this.generatingReports.isDone = true;
       this.settingUpProjects.isProcessing = true;    
       this.dialogRef.close();
-    }, 3500);
+    }, 4000);
     
   }
 }
