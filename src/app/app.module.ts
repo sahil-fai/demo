@@ -192,7 +192,7 @@ import { Error404Component } from './Shared/errors/404.component';
 
 const config: SocketIoConfig = { url: environment.sockethost, options: {} };
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
+  useBothWheelAxes: true
 };
 
 @NgModule({
