@@ -19,7 +19,7 @@
                   <th>itemDesc2</th>
                   <th>itemDesc3</th> -->
                   <th>COA</th>
-                  <th></th>
+                  <th style="text-align: center;">Action</th>
                   <!-- <th>Operation</th>
                   <th>Subject</th>
                    <th></th> -->
@@ -189,12 +189,21 @@
                     title="Actions" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{item:item}" title="Actions">
                     <mat-icon>toc</mat-icon>
                   </button> -->
+                  <ng-container *ngIf="item.editable">
                   <td>
                     <button class="btn icon-dots-vertical edit-options" *ngIf="item.editable" (click)="saveRecord(item)"
                       title="Add Transaction">
                       <mat-icon>add</mat-icon>
                     </button>
                   </td>
+                </ng-container>
+                  <!-- <ng-container *ngIf="!item.editable">
+                    <td>
+                      <button class="btn icon-dots-vertical edit-options" (click) ="deleteCOAMapping(item.mappingtype.ID)" title="Delete">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container> -->
                   <!-- <button class="btn icon-dots-vertical edit-options" *ngIf="!item.editable"  title="Actions" [matMenuTriggerFor]="menu"
                     [matMenuTriggerData]="{item:item}">
                     <mat-icon>toc</mat-icon>
