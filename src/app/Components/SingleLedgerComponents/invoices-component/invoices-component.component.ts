@@ -96,7 +96,7 @@ export class InvoicesComponentComponent implements OnInit, OnDestroy {
   public directionLinks: boolean = true;
   public autoHide: boolean = true;
   public responsive: boolean = true;
-  public invoiceStatusArray = [{id:1,value:'Submit '},{id:2,value:'Approved '},{id:3,value:'Void by customer'},{id:4,value:'Void by supplier'},{id:5,value:'Deleted '}];
+  public invoiceStatusArray = [{id:1,value:'Submit '},{id:2,value:'Approved '},{id:3,value:'Void by customer'},{id:4,value:'Void by supplier'},{id:5,value:'Deleted by customer '},{id:6,value:'Deleted by supplier '}];
 
   @ViewChild("content", null) modal: ElementRef;
   @ViewChild(JsonEditorComponent, { static: true }) editor: JsonEditorComponent;
