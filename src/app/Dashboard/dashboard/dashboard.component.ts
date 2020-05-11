@@ -47,6 +47,7 @@ export class DashboardComponent implements OnInit {
 
   public OpenInviteDialog(data) { console.log('open dialoge', data);
     const dialogRef = this.dialog.open(InvitationModalComponent, {
+      disableClose: true,
       data: data
     });
     dialogRef.afterClosed().subscribe();

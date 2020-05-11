@@ -52,7 +52,7 @@ export class BusinessReloadComponent implements OnInit {
       this.generatingReports.isDone = true;
       this.settingUpProjects.isProcessing = true;
       this.dialogRef.close();
-    }, 25000);
+    }, 3000);
 
 
   }

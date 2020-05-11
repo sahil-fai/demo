@@ -119,6 +119,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   }
 
   public OpenDialog(companyid, status) {
+    
     const dialogRef = this.dialog.open(DisconnectBusinessModalComponent, {
       data: {
         currentUserid: this.userid
