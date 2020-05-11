@@ -12,22 +12,35 @@ export class HelperService {
     'set': function(session) {localStorage.setItem('session', JSON.stringify(session)); },
     'remove': function() {localStorage.removeItem('session'); }
   };
+
    public userInfo = {
     'get': function() {return JSON.parse(localStorage.getItem('userInfo'));},
     'set': function(userinfo) {localStorage.setItem('userInfo', JSON.stringify(userinfo)); },
     'remove': function() {localStorage.removeItem('userInfo'); }
   };
+
   set(token: string): void {
     localStorage.setItem(TOKEN, token);
   }
+
   setcompanyId(id:any):void {
     localStorage.setItem('CompanyId', id);
+  }
+
+  setcompanyName(companyName:any):void {
+    localStorage.setItem('companyName', companyName);
+  }
+
+  getcompanyName(){
+    let companyName =  localStorage.getItem('companyName');
+    if (companyName && companyName.length > 0) {
+        return companyName;
+    }
   }
 
   setplatformId(id:any):void {
     localStorage.setItem('PlatformId', id);
   }
-
 
   getcompanyId(){
     let companyid =  localStorage.getItem('CompanyId');
@@ -35,13 +48,12 @@ export class HelperService {
     {
         return companyid;
     }
-
   }
+
   getplatformId(){
     let platformid =  localStorage.getItem('PlatformId');
     return Number(platformid);
   }
-
 
   getuserId(){
     let userinfo:userInfo = JSON.parse(localStorage.getItem('userInfo'));

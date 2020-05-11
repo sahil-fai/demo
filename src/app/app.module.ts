@@ -188,7 +188,8 @@ import { JsonEditorModalComponent } from './modals/json-editor-modal/json-editor
 import { TaxMappingComponent } from './Components/SingleLedgerComponents/tax-mapping/tax-mapping.component';
 
 import { Error404Component } from './Shared/errors/404.component';
-
+import { InvitationModalComponent } from './modals/invitation-modal/invitation-modal.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 const config: SocketIoConfig = { url: environment.sockethost, options: {} };
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -234,7 +235,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DisconnectBusinessModalComponent,
     JsonEditorModalComponent,
     TaxMappingComponent,
-    Error404Component
+    Error404Component,
+    InvitationModalComponent
   ],
   imports: [
     BrowserModule,
@@ -265,6 +267,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     NgxCaptchaModule,
     NgJsonEditorModule,
+    InfiniteScrollModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-center',
@@ -302,6 +305,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BusinessReloadComponent,
     NotificationSnackbarComponent,
     DisconnectBusinessModalComponent,
+    InvitationModalComponent,
     JsonEditorModalComponent
   ]
 })
