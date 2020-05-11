@@ -77,7 +77,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
       this.businessService.getAllBills(companyid, offset, vendorName, this.pagelimit).subscribe(res => {
         this.bills = res[0];
         this.Totalrec = res[1].totalItems;
-    ;    // this.handlePage({pageSize: '10', pageIndex: '0'});
+        // this.handlePage({pageSize: '10', pageIndex: '0'});
         this.dataSource = new MatTableDataSource<PeriodicElement>(this.bills);
       });
     }

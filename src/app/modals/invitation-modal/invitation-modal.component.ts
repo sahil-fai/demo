@@ -21,20 +21,24 @@ export class InvitationModalComponent {
   pagelimit: number = 10;
   offset: number = 0;
   pageNumber: number = 1;
-  totalPage: number;
+  customerTotalPage: number;
+  vendorTotalPage: number;
+  vendorPageNumber: number = 1;
+  vendorOffset: number = 0;
 
   constructor(private dialogRef: MatDialogRef<InvitationModalComponent>,
     @Inject(MAT_DIALOG_DATA) private data, private _fb: FormBuilder, private helper: HelperService, private businessService: BusinessService, private cd: ChangeDetectorRef, private zone: NgZone, private _toastr: ToastrService) {
-
+    console.log('data : ', this.data);
     if (this.data) {
       this.userid = Number(this.helper.getuserId());
       this.searchResults = this.data;
       if (this.data && this.data['company']) {
         this.businessId = this.data['company'].id;
         this.companyName = this.data['company'].name;
-        this.totalPage = this.data['total'];
-      } 
-      this.getLists();      
+        this.customerTotalPage = this.data['customer_total'];
+        this.vendorTotalPage = this.data['vendor_total'];
+      }
+      this.getLists('allList', 0);
     }
   }
 
@@ -42,26 +46,48 @@ export class InvitationModalComponent {
     this.onChanges();
   }
 
-  onScroll() {
+  onScrollCustomer() {
     this.pageNumber++
-    this.offset = (this.pageNumber - 1) * this.pagelimit + 1;
-    if (this.offset < this.totalPage) {
-      this.getLists();
+    const offset = (this.pageNumber - 1) * this.pagelimit + 1;
+    if (this.offset < this.customerTotalPage) {
+      this.getLists('customers', offset);
     }
   }
 
+  onScrollVendor() {
+    this.vendorPageNumber++
+    const vendorOffset = (this.vendorPageNumber - 1) * this.pagelimit + 1;
+    if (this.vendorOffset < this.vendorTotalPage) {
+      this.getLists('vendors', vendorOffset);
+    }
+  }
 
-  public getLists() {
-    this.businessService.getAllInviteCustomersAndVendors(this.businessId, this.offset, this.pagelimit).subscribe((res) => { 
-      if (res['customers'] && res['customers'].length > 0) { 
-        this.searchResults['customers'] = [...this.searchResults['customers'], ...res['customers']]
-        this.searchResults = this.searchResults;
-      } else if (res['vendors'] && res['vendors'].length > 0) {
-        this.searchResults['vendors'] = [...this.searchResults['vendors'], ...res['vendors']];
-        this.searchResults = this.searchResults;
+  public getLists(name, offset) {
+    this.businessService.getAllInviteCustomersAndVendors(this.businessId, offset, this.pagelimit).subscribe((res) => {
+      if (name === 'customers') {
+        if (res['customers'] && res['customers'].length > 0) {
+          this.searchResults['customers'] = [...this.searchResults['customers'], ...res['customers']];
+          this.searchResults = this.searchResults;
+        }
       }
-    }); 
-    if(this.searchResults && ((this.searchResults['customers'] && this.searchResults['customers'].length > 0) || (this.searchResults['vendors'] && this.searchResults['vendors'].length > 0))) {
+      if (name === 'vendors') {
+        if (res['vendors'] && res['vendors'].length > 0) {
+          this.searchResults['vendors'] = [...this.searchResults['vendors'], ...res['vendors']];
+          this.searchResults = this.searchResults;
+        }
+      }
+      if(name === 'allList') {
+        if (res['customers'] && res['customers'].length > 0) {
+          this.searchResults['customers'] = [...this.searchResults['customers'], ...res['customers']];
+          this.searchResults = this.searchResults;
+        } 
+        if (res['vendors'] && res['vendors'].length > 0) {
+          this.searchResults['vendors'] = [...this.searchResults['vendors'], ...res['vendors']];
+          this.searchResults = this.searchResults;
+        }
+      }
+    });
+    if (this.searchResults && ((this.searchResults['customers'] && this.searchResults['customers'].length > 0) || (this.searchResults['vendors'] && this.searchResults['vendors'].length > 0))) {
       this.createInviteForm();
       this.onChanges();
     }
@@ -158,7 +184,7 @@ export class InvitationModalComponent {
       .filter(value => value !== null);
 
     if (selectedCustomersPreferences != undefined && selectedVendorsPreferences != undefined) {
-      this.searchResultCheckedArray = [...selectedCustomersPreferences,...selectedVendorsPreferences];
+      this.searchResultCheckedArray = [...selectedCustomersPreferences, ...selectedVendorsPreferences];
     } else if (selectedCustomersPreferences != undefined && selectedVendorsPreferences === undefined) {
       this.searchResultCheckedArray = selectedCustomersPreferences;
     } else if (selectedVendorsPreferences != undefined && selectedCustomersPreferences === undefined) {

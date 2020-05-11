@@ -31,8 +31,12 @@ export class DashboardComponent implements OnInit {
       if (res.message === "start") {
           this.reloadBusiness();
       } else if(res.message === "stop") { 
-        if((res['data'].customers != undefined || res['data'].vendors != undefined) && (res['data'].customers.length > 0 || res['data'].vendors.length > 0)) {
-          this.OpenInviteDialog(res['data']);
+        // if((res['data'].customers != undefined || res['data'].vendors != undefined) && (res['data'].customers.length > 0 || res['data'].vendors.length > 0)) {
+        //   this.OpenInviteDialog(res['data']);
+        // }
+        console.log('data:', res);
+        if((res['data'].customer_total != undefined || res['data'].vendor_total != undefined ) && (res['data'].customer_total > 0 || res['data'].vendor_total > 0 )) { 
+           this.OpenInviteDialog(res['data']);
         }
         if(this._reloadingDialog) {
           this._reloadingDialog.close();

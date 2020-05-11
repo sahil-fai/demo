@@ -11,7 +11,7 @@
                         </label>
                     </div>
                     <div class="col-body" *ngIf='searchResults.customers && searchResults.customers.length > 0'>
-                        <div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
+                        <div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollCustomer()" [scrollWindow]="false">
                             <label formArrayName="customers"
                                 *ngFor="let customer of inviteForm.controls.customers.controls; let i = index">
                                 <input type="checkbox" [formControlName]="i"> <span class="custome-checkbox"></span>
@@ -33,7 +33,7 @@
                     <div class="col-body">
                     </div>
                      <div class="col-body" *ngIf='searchResults.vendors && searchResults.vendors.length > 0'>
-                        <div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
+                        <div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollVendor()" [scrollWindow]="false">
                             <label class="list" formArrayName="vendors"
                                 *ngFor="let vendor of inviteForm.controls.vendors.controls; let i = index">
                                 <input type="checkbox" [formControlName]="i" (change)="changeListByChecked('vendors', i, $event.target.checked,2)">
