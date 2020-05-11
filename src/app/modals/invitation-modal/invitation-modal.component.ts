@@ -29,18 +29,12 @@ export class InvitationModalComponent {
     if (this.data) {
       this.userid = Number(this.helper.getuserId());
       this.searchResults = this.data;
-      if (this.searchResults['customers'] && this.searchResults['customers'][0]) {
-        this.businessId = this.searchResults['customers'][0].companyId;
-        this.companyName = this.searchResults['company'].name;
-        this.totalPage = this.searchResults['total'];
-      } else if (this.searchResults['vendors'] && this.searchResults['vendors'][0]) {
-        this.businessId = this.searchResults['vendors'][0].companyId;
-        this.companyName = this.searchResults['company'].name;
-        this.totalPage = this.searchResults['total'];
-      }
-      this.getLists();
-      this.createInviteForm();
-
+      if (this.data && this.data['company']) {
+        this.businessId = this.data['company'].id;
+        this.companyName = this.data['company'].name;
+        this.totalPage = this.data['total'];
+      } 
+      this.getLists();      
     }
   }
 
@@ -51,25 +45,26 @@ export class InvitationModalComponent {
   onScroll() {
     this.pageNumber++
     this.offset = (this.pageNumber - 1) * this.pagelimit + 1;
-    console.log('total p: ', this.totalPage, '-', this.offset);
     if (this.offset < this.totalPage) {
       this.getLists();
-      this.createInviteForm();
-      this.onChanges();
     }
   }
 
 
   public getLists() {
-    this.businessService.getAllInviteCustomersAndVendors(this.businessId, this.offset, this.pagelimit).subscribe((res) => {
-      if (res['customers'] && res['customers'].length > 0) {
+    this.businessService.getAllInviteCustomersAndVendors(this.businessId, this.offset, this.pagelimit).subscribe((res) => { 
+      if (res['customers'] && res['customers'].length > 0) { 
         this.searchResults['customers'] = [...this.searchResults['customers'], ...res['customers']]
         this.searchResults = this.searchResults;
       } else if (res['vendors'] && res['vendors'].length > 0) {
         this.searchResults['vendors'] = [...this.searchResults['vendors'], ...res['vendors']];
         this.searchResults = this.searchResults;
       }
-    });
+    }); 
+    if(this.searchResults && ((this.searchResults['customers'] && this.searchResults['customers'].length > 0) || (this.searchResults['vendors'] && this.searchResults['vendors'].length > 0))) {
+      this.createInviteForm();
+      this.onChanges();
+    }
   }
 
   private createInviteForm() {
