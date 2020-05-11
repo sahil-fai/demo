@@ -25,6 +25,7 @@ export class InvitationModalComponent {
   vendorTotalPage: number;
   vendorPageNumber: number = 1;
   vendorOffset: number = 0;
+  inviteSendStatus: boolean = false;
 
   constructor(private dialogRef: MatDialogRef<InvitationModalComponent>,
     @Inject(MAT_DIALOG_DATA) private data, private _fb: FormBuilder, private helper: HelperService, private businessService: BusinessService, private cd: ChangeDetectorRef, private zone: NgZone, private _toastr: ToastrService) {
@@ -140,6 +141,7 @@ export class InvitationModalComponent {
 
 
   sendInvite() {
+    this.inviteSendStatus = true;
     const selectedCustomersPreferences = this.inviteForm.value.customers
       .map((checked, index) => {
         if (checked) {
