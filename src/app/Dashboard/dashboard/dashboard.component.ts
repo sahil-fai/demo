@@ -18,6 +18,7 @@ import { Subject } from 'rxjs';
 export class DashboardComponent implements OnInit {
   public _reloadingDialog: MatDialogRef<BusinessReloadComponent>;
   public connectedToBusiness:string;
+  public connectedToCompany:string;
   private unsubscribe$: Subject<void> = new Subject();
   constructor(public socketService: SocketService, public quickbookconnect:QuickBookConnectService,public xeroconnect:XeroConnectService, public dialog: MatDialog, private router: Router) { }
 
@@ -26,15 +27,11 @@ export class DashboardComponent implements OnInit {
     this.socketService.messages.pipe(
       filter(val => val !== undefined),
       takeUntil(this.unsubscribe$),
-    ).subscribe((res)=>{ 
-    //this.socketService.messages.subscribe((res)=>{         
+    ).subscribe((res)=>{  console.log('data:', res);      
       if (res.message === "start") {
+          this.connectedToCompany = ''; // wait for dhiraj response
           this.reloadBusiness();
-      } else if(res.message === "stop") { 
-        // if((res['data'].customers != undefined || res['data'].vendors != undefined) && (res['data'].customers.length > 0 || res['data'].vendors.length > 0)) {
-        //   this.OpenInviteDialog(res['data']);
-        // }
-        console.log('data:', res);
+      } else if(res.message === "stop") {         
         if((res['data'].customer_total != undefined || res['data'].vendor_total != undefined ) && (res['data'].customer_total > 0 || res['data'].vendor_total > 0 )) { 
            this.OpenInviteDialog(res['data']);
         }
@@ -52,13 +49,7 @@ export class DashboardComponent implements OnInit {
     const dialogRef = this.dialog.open(InvitationModalComponent, {
       data: data
     });
-    dialogRef.afterClosed().subscribe(result => { console.log('after invite send: ', result);
-      //if (result && result) {
-        // this.businessService.connetDisconnect(companyid, status).subscribe(res => {
-        //   this.getListOfbusinesses(this.userid);
-        // });
-      //}
-    });
+    dialogRef.afterClosed().subscribe();
   }
 
   
@@ -138,7 +129,8 @@ export class DashboardComponent implements OnInit {
         top: '80px'
       },
       data: {
-        connectedSource: this.connectedToBusiness
+        connectedSource: this.connectedToBusiness,
+        companyName: this.connectedToCompany
       }
     });
    

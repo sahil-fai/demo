@@ -142,7 +142,6 @@ export class InvitationModalComponent {
   sendInvite() {
     const selectedCustomersPreferences = this.inviteForm.value.customers
       .map((checked, index) => {
-        console.log('sendinvite::', checked, '-', index);
         if (checked) {
           const customerData = {
             userId: this.userid,
