@@ -31,7 +31,7 @@ export class InvitationModalComponent {
     console.log('data : ', this.data);
     if (this.data) {
       this.userid = Number(this.helper.getuserId());
-      this.searchResults = this.data;
+      this.searchResults = this.data; console.log('searchResults : ',  this.searchResults);
       if (this.data && this.data['company']) {
         this.businessId = this.data['company'].id;
         this.companyName = this.data['company'].name;

@@ -10,7 +10,7 @@
                             <span class="custome-checkbox"></span> All Customers
                         </label>
                     </div>
-                    <div class="col-body" *ngIf='searchResults.customers && searchResults.customers.length > 0'>
+                    <div class="col-body" *ngIf='searchResults && customerTotalPage > 0'>
                         <div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollCustomer()" [scrollWindow]="false">
                             <label formArrayName="customers"
                                 *ngFor="let customer of inviteForm.controls.customers.controls; let i = index">
@@ -19,7 +19,7 @@
                             </label> 
                         </div>    
                     </div>
-                    <div class="col-body" *ngIf='searchResults.customers && searchResults.customers.length == 0'>
+                    <div class="col-body" *ngIf='searchResults && customerTotalPage == 0'>
                         <label>No Record Found!</label>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-body">
                     </div>
-                     <div class="col-body" *ngIf='searchResults.vendors && searchResults.vendors.length > 0'>
+                     <div class="col-body" *ngIf='searchResults && vendorTotalPage > 0'>
                         <div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollVendor()" [scrollWindow]="false">
                             <label class="list" formArrayName="vendors"
                                 *ngFor="let vendor of inviteForm.controls.vendors.controls; let i = index">
@@ -41,7 +41,7 @@
                             </label>
                         </div>
                     </div> 
-                    <div class="col-body" *ngIf='searchResults.vendors && searchResults.vendors.length == 0'>
+                    <div class="col-body" *ngIf='searchResults && vendorTotalPage == 0'>
                         <label>No Record Found!</label>
                     </div>
                 </div>
