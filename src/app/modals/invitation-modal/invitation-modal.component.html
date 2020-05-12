@@ -18,7 +18,7 @@
                             <label formArrayName="customers"
                                 *ngFor="let customer of inviteForm.controls.customers.controls; let i = index">
                                 <input type="checkbox" [formControlName]="i"> <span class="custome-checkbox"></span>
-                                {{searchResults.customers[i].companyName || searchResults.customers[i].displayName || 'N/A'}}
+                                {{searchResults.customers[i].companyName || searchResults.customers[i].displayName || 'None'}}
                             </label> 
                         </div>    
                     </div>
@@ -40,7 +40,7 @@
                             <label class="list" formArrayName="vendors"
                                 *ngFor="let vendor of inviteForm.controls.vendors.controls; let i = index">
                                 <input type="checkbox" [formControlName]="i"><span class="custome-checkbox"></span> 
-                                {{searchResults.vendors[i].companyName || searchResults.vendors[i].displayName || 'N/A'}}
+                                {{searchResults.vendors[i].companyName || searchResults.vendors[i].displayName || 'None'}}
                             </label>
                         </div>
                     </div> 

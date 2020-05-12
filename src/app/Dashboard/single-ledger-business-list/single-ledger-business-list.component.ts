@@ -108,6 +108,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
           this.businessListActual = res;
           this.totalRec = res[1].totalItems;
           this.isBusinessLoaded = true;
+          console.log(res)
 
         } else {
           this.companylist = [];
