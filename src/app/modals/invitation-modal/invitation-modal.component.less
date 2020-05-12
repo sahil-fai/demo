@@ -73,6 +73,10 @@ section{
                 }
             }
             .col-body{
+                .infinite-scroll{
+                    height: 350px;
+                    overflow-y: scroll;
+                  }
                 label{
                     height: auto;
                     padding: 10px 15px 10px 42px;
@@ -90,7 +94,8 @@ section{
     }
 }
 
-.infinite-scroll{
-    height: 350px;
-    overflow-y: scroll;
-  }
+.invitation-dialog-action button:disabled,
+button[disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+}
