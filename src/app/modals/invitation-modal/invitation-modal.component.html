@@ -3,7 +3,7 @@
     <app-loader></app-loader>
   </div>
 <mat-dialog-content class="invitation-dialog">
-    <section *ngIf="!showLoader">
+    <section>
         <form [formGroup]="inviteForm" (ngSubmit)="sendInvite()">
             <div class="row">
                 <div class="col-half">
