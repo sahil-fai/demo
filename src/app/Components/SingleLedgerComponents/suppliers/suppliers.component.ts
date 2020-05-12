@@ -117,7 +117,7 @@ export class SuppliersComponent implements OnInit {
         itemDescription3: element.itemdescription3,
         opration: 274
       };
-      this.transcationList.push(data); 
+      this.transcationList.push(data); console.log('transaction: ', data);
     });
     //this._getChartofAccounts();
   }
@@ -181,6 +181,13 @@ export class SuppliersComponent implements OnInit {
       alert(JSON.stringify(error));
     }
   }
+  public deleteCOAMapping(coaMappingId){ console.log('coa id:', coaMappingId);
+    const companyId = Number(this.helper.getcompanyId());
+    this.businessService.deleteCoaMapping(companyId,coaMappingId).subscribe((res) => { console.log('delete res: ', res);
+      this._getChartofAccountMappings();
+      this.formTransaction.patchValue({ Contact: null, Platform: null, Mapping: null, COA: null });
+    });
+  }
 
   public addRecord() {
     if (this.transcationList.length > 0 && !this.transcationList[this.transcationList.length - 1].editable) {
@@ -208,9 +215,7 @@ export class SuppliersComponent implements OnInit {
       subject: formData.Subject,
       companyid: Companyid
     };
-    console.log(JSON.stringify(data))
     if (this.COAMappings) {
-
       const vendor = this.COAMappings.filter(x =>
         (x.vendorid === formData.Contact.vendorid) &&
         (x.organization === formData.Platform.name) &&

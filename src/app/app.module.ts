@@ -193,7 +193,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 const config: SocketIoConfig = { url: environment.sockethost, options: {} };
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
+  useBothWheelAxes: true
 };
 
 @NgModule({

@@ -50,7 +50,7 @@ export class BusinessReloadComponent implements OnInit {
     setTimeout(() => {
       this.generatingReports.isProcessing = false;
       this.generatingReports.isDone = true;
-      this.settingUpProjects.isProcessing = true;
+      this.settingUpProjects.isProcessing = true;    
       this.dialogRef.close();
     }, 3000);
 

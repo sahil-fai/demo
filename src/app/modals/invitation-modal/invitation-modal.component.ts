@@ -26,25 +26,34 @@ export class InvitationModalComponent {
   vendorPageNumber: number = 1;
   vendorOffset: number = 0;
   inviteSendStatus: boolean = false;
+  showLoader: boolean;
 
   constructor(private dialogRef: MatDialogRef<InvitationModalComponent>,
     @Inject(MAT_DIALOG_DATA) private data, private _fb: FormBuilder, private helper: HelperService, private businessService: BusinessService, private cd: ChangeDetectorRef, private zone: NgZone, private _toastr: ToastrService) {
     console.log('data : ', this.data);
     if (this.data) {
       this.userid = Number(this.helper.getuserId());
-      this.searchResults = this.data; console.log('searchResults : ',  this.searchResults);
+     // this.searchResults = this.data; console.log('searchResults : ',  this.searchResults);
       if (this.data && this.data['company']) {
         this.businessId = this.data['company'].id;
         this.companyName = this.data['company'].name;
         this.customerTotalPage = this.data['customer_total'];
         this.vendorTotalPage = this.data['vendor_total'];
       }
+      this.showLoader = true;
       this.getLists('allList', 0);
     }
   }
 
   ngOnInit() {
-    this.onChanges();
+    // this.onChanges();
+
+    this.inviteForm = this._fb.group({
+      customers: new FormArray([]),
+      vendors: new FormArray([]),
+      selectAllCustomers: new FormControl(true),
+      selectAllVendors: new FormControl(true),
+    });
   }
 
   onScrollCustomer() {
@@ -64,12 +73,13 @@ export class InvitationModalComponent {
   }
 
   public getLists(name, offset) {
-    this.businessService.getAllInviteCustomersAndVendors(this.businessId, offset, this.pagelimit).subscribe((res) => {
+    this.businessService.getAllInviteCustomersAndVendors(this.businessId, offset, this.pagelimit).subscribe((res) => { console.log('res: ', res);
+      this.showLoader = false;
       if (name === 'customers') {
         if (res['customers'] && res['customers'].length > 0) {
           this.searchResults['customers'] = [...this.searchResults['customers'], ...res['customers']];
           this.searchResults = this.searchResults;
-        }
+        } console.log('concat:', this.searchResults);
       }
       if (name === 'vendors') {
         if (res['vendors'] && res['vendors'].length > 0) {
@@ -79,15 +89,16 @@ export class InvitationModalComponent {
       }
       if(name === 'allList') {
         if (res['customers'] && res['customers'].length > 0) {
-          this.searchResults['customers'] = [...this.searchResults['customers'], ...res['customers']];
+          this.searchResults['customers'] = res['customers'];
           this.searchResults = this.searchResults;
         } 
         if (res['vendors'] && res['vendors'].length > 0) {
-          this.searchResults['vendors'] = [...this.searchResults['vendors'], ...res['vendors']];
+          this.searchResults['vendors'] = res['vendors'];
           this.searchResults = this.searchResults;
         }
       }
     });
+    console.log('concat all:', this.searchResults);
     if (this.searchResults && ((this.searchResults['customers'] && this.searchResults['customers'].length > 0) || (this.searchResults['vendors'] && this.searchResults['vendors'].length > 0))) {
       this.createInviteForm();
       this.onChanges();
@@ -98,16 +109,9 @@ export class InvitationModalComponent {
     const customerFormControls = this.searchResults['customers'].map(control => new FormControl(true));
     const vendorFormControls = this.searchResults['vendors'].map(control => new FormControl(true));
 
-    // Create a FormControl for the select/unselect all checkbox      
-    const customerSelectAllControl = new FormControl(true);
-    const vendorSelectAllControl = new FormControl(true);
-
-    // Simply add the list of FormControls to the FormGroup as a FormArray, add the selectAllControl separetely
-    this.inviteForm = this._fb.group({
-      customers: new FormArray(customerFormControls),
-      vendors: new FormArray(vendorFormControls),
-      selectAllCustomers: customerSelectAllControl,
-      selectAllVendors: vendorSelectAllControl,
+    this.inviteForm.patchValue({
+      customers: customerFormControls,
+      vendors: vendorFormControls,
     });
   }
 

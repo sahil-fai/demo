@@ -71,6 +71,10 @@ export class BusinessService {
       return this.http.post<any>('/chartofaccountmappings', data);
   }
 
+  deleteCoaMapping(companyId: number, coaMappingId: number): Observable<any> {
+    return this.http.delete<any>(`business/${companyId}/delete-coamapping/${coaMappingId}`);
+  }
+
   getchartofaccountmapping(id): Observable<any> {
     return this.http.get<any>('business/' +id +'/chartofaccountmappings', {
     });

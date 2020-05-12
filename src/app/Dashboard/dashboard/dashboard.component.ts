@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
         if(this._reloadingDialog) {
           this._reloadingDialog.close();
           this._reloadingDialog.afterClosed().subscribe(data=>{
-          this.router.navigate(['/businesslist']);
+            this.router.navigate(['/businesslist']);
           })
         }     
       }
@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit {
       res => { 
         windowObjectReference.location.href = res['url'];
         windowObjectReference.focus();
-        const message = function receiveMessage(event) { console.log('message: ', message);
+        const message = function receiveMessage(event) { 
           let data;
           data = JSON.parse(event["data"]);
           _self.reloadBusiness();
@@ -98,7 +98,7 @@ export class DashboardComponent implements OnInit {
       res => {     console.log('res: ', res);  
         windowObjectReference.location.href = res['url'];
         windowObjectReference.focus();
-        const message = function receiveMessage(event) { console.log('event: ', event);
+        const message = function receiveMessage(event) { 
           let data;
             data = JSON.parse(event["data"]);
             _self.reloadBusiness();

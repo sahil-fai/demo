@@ -1,6 +1,9 @@
 <h2 mat-dialog-title>Invite Customers & Vendors</h2>
+<div class="progressBar" *ngIf="showLoader">
+    <app-loader></app-loader>
+  </div>
 <mat-dialog-content class="invitation-dialog">
-    <section>
+    <section *ngIf="!showLoader">
         <form [formGroup]="inviteForm" (ngSubmit)="sendInvite()">
             <div class="row">
                 <div class="col-half">
