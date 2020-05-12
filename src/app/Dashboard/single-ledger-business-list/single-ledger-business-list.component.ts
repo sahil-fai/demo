@@ -31,9 +31,6 @@ import {
 import {
   DisconnectBusinessModalComponent
 } from '../../modals/disconnect-business-modal/disconnect-business-modal.component';
-import {
-  DialogOverviewExampleDialogComponent
-} from 'src/app/Shared/dialog-overview-example-dialog/dialog-overview-example-dialog.component';
 
 @Component({
   selector: 'app-single-ledger-business-list',
@@ -69,7 +66,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
     totalItems: this.totalRec,
     id: 'companylist'
   };
-  public pageNumber = 1;
+
   public pageSizeOptions: number[] = [5, 15, 25];
   switchCompanySubscription: any;
   submitted: boolean;
@@ -97,8 +94,9 @@ export class SingleLedgerBusinessListComponent implements OnInit {
     });
   }
 
-  public viewBusiness(companyid) {
+  public viewBusiness(companyid,companyName) {
     this.helper.setcompanyId(companyid);
+    this.helper.setcompanyName(companyName);
     this.router.navigate(['/business', 'company-info']);
   }
 
@@ -106,7 +104,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
     if (userid) {
       this.businessService.getListOfbusinesses(userid, offset, filter, limit).subscribe(res => {
         if (res && res[0].length > 0) {
-          this.companylist = res[0];
+          this.companylist = res[0]; 
           this.businessListActual = res;
           this.totalRec = res[1].totalItems;
           this.isBusinessLoaded = true;
@@ -121,6 +119,7 @@ export class SingleLedgerBusinessListComponent implements OnInit {
   }
 
   public OpenDialog(companyid, status) {
+    
     const dialogRef = this.dialog.open(DisconnectBusinessModalComponent, {
       data: {
         currentUserid: this.userid

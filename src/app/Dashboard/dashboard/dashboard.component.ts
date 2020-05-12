@@ -6,6 +6,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { XeroConnectService } from 'src/app/services/xero-connect-service/xero-connect.service';
 import { SocketService } from 'src/app/services/socket.service';
+import { InvitationModalComponent } from 'src/app/modals/invitation-modal/invitation-modal.component';
+import { takeUntil, filter } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,15 +18,23 @@ import { SocketService } from 'src/app/services/socket.service';
 export class DashboardComponent implements OnInit {
   public _reloadingDialog: MatDialogRef<BusinessReloadComponent>;
   public connectedToBusiness:string;
+  public connectedToCompany:string;
+  private unsubscribe$: Subject<void> = new Subject();
   constructor(public socketService: SocketService, public quickbookconnect:QuickBookConnectService,public xeroconnect:XeroConnectService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
     this.socketService.newUser();
-    this.socketService.messages.subscribe((msg)=>{
-      let message = String(msg);      
-      if (message === "start") { console.log('start', message);
+    this.socketService.messages.pipe(
+      filter(val => val !== undefined),
+      takeUntil(this.unsubscribe$),
+    ).subscribe((res)=>{  console.log('data:', res);      
+      if (res.message === "start") {
+          this.connectedToCompany = ''; // wait for dhiraj response
           this.reloadBusiness();
-      } else if(message === "stop") {  console.log('stop:', message); 
+      } else if(res.message === "stop") {         
+        if((res['data'].customer_total != undefined || res['data'].vendor_total != undefined ) && (res['data'].customer_total > 0 || res['data'].vendor_total > 0 )) { 
+           this.OpenInviteDialog(res['data']);
+        }
         if(this._reloadingDialog) {
           this._reloadingDialog.close();
           this._reloadingDialog.afterClosed().subscribe(data=>{
@@ -31,8 +42,15 @@ export class DashboardComponent implements OnInit {
           })
         }     
       }
-    })
-   
+    })   
+  }
+
+  public OpenInviteDialog(data) { console.log('open dialoge', data);
+    const dialogRef = this.dialog.open(InvitationModalComponent, {
+      disableClose: true,
+      data: data
+    });
+    dialogRef.afterClosed().subscribe();
   }
 
   
@@ -104,7 +122,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public reloadBusiness() {
-    console.log('reload popup',  this.connectedToBusiness);
+    const _self = this;
     this._reloadingDialog = this.dialog.open(BusinessReloadComponent, {
       width: '450px',
       disableClose: true,
@@ -112,9 +130,11 @@ export class DashboardComponent implements OnInit {
         top: '80px'
       },
       data: {
-        connectedSource: this.connectedToBusiness
+        connectedSource: this.connectedToBusiness,
+        companyName: this.connectedToCompany
       }
     });
    
   }
+
 }

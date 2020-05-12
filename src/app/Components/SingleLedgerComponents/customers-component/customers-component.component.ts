@@ -157,29 +157,36 @@ export class CustomersComponentComponent implements OnInit, OnDestroy {
    // this.dataSource = new MatTableDataSource<PeriodicElement>(this.customers); console.log('datasource: ', this.dataSource);
   }
 
-  postInvite(item: any) {
+  postInvite(item: any) { console.log('post: ', item);
     if (item.email) {
       const userid = Number(this.helper.getuserId());
       const compid = Number(this.helper.getcompanyId());
       const email = item.email;
       const companyContactId = item.id;
+      const companyName = this.helper.getcompanyName();
       // const data = {
       //   userid: userid,
       //   businessid: compid,
       //   email: email,
       //   ccId: companyContactId
       // };
-      const data = {
-        userId: userid,
-        businessid: compid,
-        requestType: 2,
-        ccId: companyContactId,
-        contactType:1,
-        email: email
+      const data = {        
+        "contacts": [{ 
+            userId: userid,
+            businessid: compid,
+            requestType: 2,
+            ccId: companyContactId,
+            contactType:1,
+            email: email,
+            companyName: companyName,
+            ccName: item.displayname ? item.displayname :  item.companyname
+        }],
+        "isMultiInvite": false,
        }
+       console.log('data:', data);
 
       this.businessService.postInvite(data).subscribe((res) => {
-        // console.log("email sent: ");
+        // console.log("email sent: ", res);
         if(res) {
           if(res.invite_count == 1) {
            this.getAllCustomer(compid);

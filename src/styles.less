@@ -3622,3 +3622,31 @@ h1#mat-dialog-title-0 {
 .message-model{
   font-size: 17px !important;
 }
+
+// Invitation Dialog style include here
+
+mat-dialog-container{
+    app-invitation-modal{
+        mat-dialog-content{
+            &.invitation-dialog{
+                margin: 0px;
+                padding: 0px;
+                max-height: none;
+                
+            }
+        } 
+            mat-dialog-actions {
+                &.invitation-dialog-action{
+                    .blueBtn {
+                        background-color: #00a3b8;
+                        color: #ffffff;
+                        padding: 10px;
+                        box-shadow: none;
+                    }
+                    .btn-m-10 {
+                        margin-right: 10px;
+                    }
+                }
+            }
+    }
+}

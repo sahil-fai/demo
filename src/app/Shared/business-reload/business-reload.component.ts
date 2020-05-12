@@ -29,8 +29,10 @@ export class BusinessReloadComponent implements OnInit {
     isDone: false
   }
   public connectionSource: string;
+  public companyName: string;
   constructor( @Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<BusinessReloadComponent>) {
   this.connectionSource = this.data.connectedSource;
+  this.companyName = this.data.companyName;  
 
    }
 
@@ -39,18 +41,19 @@ export class BusinessReloadComponent implements OnInit {
       this.establishingConnection.isProcessing = false;
       this.establishingConnection.isDone = true;
       this.fetchingTransactions.isProcessing = true;
-    }, 1000);
+    }, 1500);
     setTimeout(() => {
       this.fetchingTransactions.isProcessing = false;
       this.fetchingTransactions.isDone = true;
       this.generatingReports.isProcessing = true;
-    }, 2500);
+    }, 2000);
     setTimeout(() => {
       this.generatingReports.isProcessing = false;
       this.generatingReports.isDone = true;
       this.settingUpProjects.isProcessing = true;    
       this.dialogRef.close();
-    }, 4000);
-    
+    }, 3000);
+
+
   }
 }

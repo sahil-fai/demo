@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>Invite Customers & Vendors</h2>
+<div class="progressBar" *ngIf="showLoader">
+    <app-loader></app-loader>
+  </div>
+<mat-dialog-content class="invitation-dialog">
+    <section *ngIf="!showLoader">
+        <form [formGroup]="inviteForm" (ngSubmit)="sendInvite()">
+            <div class="row">
+                <div class="col-half">
+                    <div class="col-head">
+                        <label>
+                            <input type="checkbox" formControlName="selectAllCustomers">
+                            <span class="custome-checkbox"></span> All Customers
+                        </label>
+                    </div>
+                    <div class="col-body" *ngIf='searchResults && customerTotalPage > 0'>
+                        <div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollCustomer()" [scrollWindow]="false">
+                            <label formArrayName="customers"
+                                *ngFor="let customer of inviteForm.controls.customers.controls; let i = index">
+                                <input type="checkbox" [formControlName]="i"> <span class="custome-checkbox"></span>
+                                {{searchResults.customers[i].companyName || searchResults.customers[i].displayName || 'N/A'}}
+                            </label> 
+                        </div>    
+                    </div>
+                    <div class="col-body" *ngIf='searchResults && customerTotalPage == 0'>
+                        <label>No Record Found!</label>
+                    </div>
+                </div>
+                <div class="col-half">
+                    <div class="col-head">
+                        <label>
+                            <input type="checkbox" formControlName="selectAllVendors">
+                            <span class="custome-checkbox"></span> All Vendors
+                        </label>
+                    </div>
+                    <div class="col-body">
+                    </div>
+                     <div class="col-body" *ngIf='searchResults && vendorTotalPage > 0'>
+                        <div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollVendor()" [scrollWindow]="false">
+                            <label class="list" formArrayName="vendors"
+                                *ngFor="let vendor of inviteForm.controls.vendors.controls; let i = index">
+                                <input type="checkbox" [formControlName]="i"><span class="custome-checkbox"></span> 
+                                {{searchResults.vendors[i].companyName || searchResults.vendors[i].displayName || 'N/A'}}
+                            </label>
+                        </div>
+                    </div> 
+                    <div class="col-body" *ngIf='searchResults && vendorTotalPage == 0'>
+                        <label>No Record Found!</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="invitation-dialog-action">
+    <button mat-button class="btn btn-outline btn-icon uppercase blueBtn btn-m-10" mat-dialog-close
+        cdkFocusInitial>Skip</button>
+    <button mat-button class="btn btn-outline btn-icon uppercase blueBtn" [disabled]="inviteSendStatus" (click)="sendInvite()">Send Invite</button>
+</mat-dialog-actions>

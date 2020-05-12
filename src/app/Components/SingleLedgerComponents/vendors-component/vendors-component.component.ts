@@ -211,21 +211,31 @@ export class VendorsComponentComponent implements OnInit, OnDestroy   {
         const compid = Number(this.helper.getcompanyId());
         const email = item.email;
         const companyContactId = item.id;
-        // const data = {
-        // userid: userid,
-        // businessid: compid,
-        // email: email,
-        // ccId: companyContactId
-        // };
+        const companyName = this.helper.getcompanyName();
+         // const data = {
+        //   userId: userid,
+        //   businessid: compid,
+        //   requestType: 2,
+        //   ccId: companyContactId,
+        //   contactType: 2,
+        //   email: email,
+        //   companyName: companyName,
+        //   ccName: item.displayname ? item.displayname :  item.companyname
+        //   };
 
-        const data = {
-          userId: userid,
-          businessid: compid,
-          requestType: 2,
-          ccId: companyContactId,
-          contactType: 2,
-          email: email
-          };
+        const data = {          
+          "contacts": [{ 
+              userId: userid,
+              businessid: compid,
+              requestType: 2,
+              ccId: companyContactId,
+              contactType: 2,
+              email: email,
+              companyName: companyName,
+              ccName: item.displayname ? item.displayname :  item.companyname
+          }],
+          "isMultiInvite": false
+         }
 
 
         this.businessService.postInvite(data).subscribe((res)=>{
