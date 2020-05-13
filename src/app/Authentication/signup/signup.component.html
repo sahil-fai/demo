@@ -18,7 +18,7 @@
                 <div class="inner-sec">
                   <ng-container *ngIf="showInvalidPage == 'signup'">
                     <h1>Sign Up</h1>
-                    <p>Sign up below and create your account</p>
+                    <!-- <p>Sign up below and create your account</p> -->
                     <form
                       [formGroup]="formRegister"
                       (ngSubmit)="onRegister()"
@@ -32,10 +32,22 @@
                             <mat-form-field class="text">
                               <mat-select formControlName="role">
                                 <mat-option *ngFor="let role of roles" [value]="role.value">
-                                  {{ role.viewValue || "N/A" }}
+                                  {{ role.viewValue || "None" }}
                                 </mat-option>
                               </mat-select>
                             </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="column half-col">
+                          <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" [ngClass]="{error: (f.username.invalid && f.username.dirty) || (submitted && f.username.invalid)}" formControlName="username" />
+                            <div  class="errorMessage" *ngIf="
+                                (!!f.username.invalid && !!f.username.dirty && !!f.username.errors.email) ||
+                                (submitted && !!f.username.invalid && !!f.username.errors.email) ||
+                                (!!f.username.invalid && !!f.username.dirty) || (submitted && !!f.username.invalid)">
+                              Please enter a valid email address.
+                            </div>
                           </div>
                         </div>
                         <div class="column half-col">
@@ -63,18 +75,7 @@
                           </div>
                           </div>
                         </div>
-                        <div class="column half-col">
-                          <div class="form-group">
-                            <label>Email Address</label>
-                            <input type="email" [ngClass]="{error: (f.username.invalid && f.username.dirty) || (submitted && f.username.invalid)}" formControlName="username" />
-                            <div  class="errorMessage" *ngIf="
-                                (!!f.username.invalid && !!f.username.dirty && !!f.username.errors.email) ||
-                                (submitted && !!f.username.invalid && !!f.username.errors.email) ||
-                                (!!f.username.invalid && !!f.username.dirty) || (submitted && !!f.username.invalid)">
-                              Please enter a valid email address.
-                            </div>
-                          </div>
-                        </div>
+                        
                         <div class="column half-col">
                           <div  class="form-group" [ngClass]="{ error: (f.password.invalid && f.password.dirty) || (submitted && f.password.invalid) }">
                             <label>Password</label>
@@ -90,7 +91,7 @@
                               <ul class="conditionList">
                                 <li [ngClass]="{notValidated:f.password.pristine || (f.password.errors && f.password.errors.required) ||
                                       (f.password.dirty && f.password.errors && f.password.errors.minlength)}">
-                                  <mat-icon>radio_button_checked</mat-icon>Contains minimum of 6 characters.
+                                  <mat-icon>radio_button_checked</mat-icon>Contains minimum of 8 characters.
                                 </li>
                                 <li [ngClass]="{notValidated:f.password.pristine || (f.password.errors && f.password.errors.required) ||
                                   (f.password.dirty && f.password.errors && f.password.errors.maxlength)}">

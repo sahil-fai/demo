@@ -1,55 +1,55 @@
-<h2>{{title|| 'N/A' }}</h2>
+<h2>{{title|| 'None' }}</h2>
 <div class="profile-container"  *ngIf="companyinfo">
     <div class="icon-container"><i class="icon-company"></i></div>
     <div class="profile-name">
-        <h1>{{companyinfo.legalname|| 'N/A' }}</h1>
+        <h1>{{companyinfo.legalname|| 'None' }}</h1>
     </div>
     <div class="company-info">
         <table>
             <tr>
                 <td class="alnRight head">Company BlockChain Id:</td>
                 <td>
-                    <div class="ellipsis" [title]="companyinfo.companyblockchainid|| 'N/A' ">{{companyinfo.companyblockchainid|| 'N/A' }}</div>
+                    <div class="ellipsis" [title]="companyinfo.companyblockchainid|| 'None' ">{{companyinfo.companyblockchainid|| 'None' }}</div>
                 </td>
             </tr>
             <tr>
             <td class="alnRight head">Name:</td>
-            <td>{{companyinfo.name|| 'N/A' }}</td>
+            <td>{{companyinfo.name|| 'None' }}</td>
             </tr>
             <tr>
                 <td class="alnRight head">Legal Name:</td>
-                <td>{{companyinfo.legalname|| 'N/A' }}</td>
+                <td>{{companyinfo.legalname|| 'None' }}</td>
             </tr>
             <tr>
                 <td class="alnRight head">Base Currency:</td>
-                <td>{{companyinfo.currency[0].currencyname || 'N/A' }}</td>
+                <td>{{companyinfo.currency[0].currencyname || 'None' }}</td>
             </tr>
             <tr>
                  <td class="alnRight head">Phone:</td>
-                <td>{{companyinfo.PrimaryPhone  || 'N/A'}}</td>
+                <td>{{companyinfo.PrimaryPhone  || 'None'}}</td>
              </tr>
             <tr>
                  <td class="alnRight head">Website:</td>
-                <td>{{companyinfo.website || 'N/A' }}</td>
+                <td>{{companyinfo.website || 'None' }}</td>
             </tr>
             <tr>
               <td class="alnRight head">Email:</td>
-             <td>{{companyinfo.companyemail|| 'N/A' }}</td>
+             <td>{{companyinfo.companyemail|| 'None' }}</td>
          </tr>
         </table>
         <!-- <ul>
             <li></li>
             <li></li>
             <li>Name:</li>
-            <li>{{companyinfo.name|| 'N/A' }}</li>
+            <li>{{companyinfo.name|| 'None' }}</li>
             <li>Legal Name:</li>
-            <li>{{companyinfo.legalname|| 'N/A' }}</li>
+            <li>{{companyinfo.legalname|| 'None' }}</li>
             <li>Base Currency:</li>
-            <li>{{companyinfo.basecurrency.currencyname|| 'N/A' }}</li>
+            <li>{{companyinfo.basecurrency.currencyname|| 'None' }}</li>
             <li>Phone:</li>
-            <li>{{companyinfo.contact.telephone|| 'N/A' }}</li>
+            <li>{{companyinfo.contact.telephone|| 'None' }}</li>
             <li>Email:</li>
-            <li>{{companyinfo.companyemail|| 'N/A' }}</li>
+            <li>{{companyinfo.companyemail|| 'None' }}</li>
             <li>Web Links:</li>
             <li>user.com</li>
         </ul> -->
@@ -61,10 +61,10 @@
                 <div class="address-icon-container"> <mat-icon>location_city</mat-icon></div>
                 <div class="address-content">
                      <h4>{{address.addresstype|addresstype}}</h4>
-                     <p>{{address.addressline1|| 'N/A' }}</p>
-                     <p>{{address.cityname|| 'N/A' }}</p>
-                     <p>{{address.state|| 'N/A' }}</p>
-                     <p>{{address.country|| 'N/A' }}</p>
+                     <p>{{address.addressline1|| 'None' }}</p>
+                     <p>{{address.cityname|| 'None' }}</p>
+                     <p>{{address.state|| 'None' }}</p>
+                     <p>{{address.country|| 'None' }}</p>
                  </div>
                  </div>
              </div>

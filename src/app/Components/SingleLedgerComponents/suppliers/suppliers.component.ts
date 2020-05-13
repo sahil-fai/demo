@@ -223,7 +223,7 @@ export class SuppliersComponent implements OnInit {
         (x.chartofaccountId === formData.COA.chartofaccountid)
       );
       if (vendor && vendor.length > 0) {
-        alert('Chart of account mapping already exists for same Vendor\n Maximum one mapping per Vendor');
+        alert('Chart of accounts mapping already exists for same Vendor\n Maximum one mapping per Vendor');
         return;
       }
 

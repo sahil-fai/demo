@@ -1,5 +1,5 @@
 <div class="title">
-  <h2>{{title|| 'N/A' }}</h2>
+  <h2>{{title|| 'None' }}</h2>
 </div>
 <div class="searchPanel clearfix" >
   <form [formGroup]="formFilter" novalidate (ngSubmit)="filterCustomer()" autocomplete="off">
@@ -26,7 +26,7 @@
         <select class="fields">
           <option disabled value style="display:none"></option>
           <option *ngFor="let status of status" [value]="status.value">
-            {{status.viewValue|| 'N/A' }}
+            {{status.viewValue|| 'None' }}
           </option>
         </select>
       </li> -->
@@ -52,7 +52,7 @@
             <span class="text-label">Select as all<i class="icon-arrow-down" ></i>
                    <mat-form-field>
                       <mat-select [(value)]="selected"  multiple>
-                        <mat-option *ngFor="let status of StatusList" [value]="status">{{status|| 'N/A' }}</mat-option>
+                        <mat-option *ngFor="let status of StatusList" [value]="status">{{status|| 'None' }}</mat-option>
                       </mat-select>
                     </mat-form-field>
                     <div class="status-modal">
@@ -60,7 +60,7 @@
                         class="example-radio-group"
                         >
                         <mat-radio-button class="example-radio-button" *ngFor="let status of StatusList" [value]="status">
-                          {{status|| 'N/A' }}
+                          {{status|| 'None' }}
                         </mat-radio-button>
                       </mat-radio-group>
                     </div>
@@ -100,12 +100,12 @@
           <!-- Block chain Id Column -->
           <ng-container matColumnDef="ContactEmail">
             <th mat-header-cell *matHeaderCellDef class="table-head"> Contact Email</th>
-            <td mat-cell *matCellDef="let element"> {{element?.email|| 'N/A' }} </td>
+            <td mat-cell *matCellDef="let element"> {{element?.email|| 'None' }} </td>
           </ng-container>
           <!-- Date Column -->
           <ng-container matColumnDef="RegisterDate">
             <th mat-header-cell *matHeaderCellDef  class="table-head">  CreatedDate </th>
-            <td mat-cell *matCellDef="let element" > {{element?.createdat|date }} </td>
+            <td mat-cell *matCellDef="let element" > {{element?.createdat|date:'MMM dd yyyy'}} </td>
           </ng-container>
           <ng-container matColumnDef="Organizaton">
               <th mat-header-cell *matHeaderCellDef  class="table-head"> Organizaton </th>
@@ -124,7 +124,7 @@
           <!-- Vendor Column -->
           <ng-container matColumnDef="BlockChainID">
             <th mat-header-cell *matHeaderCellDef  class="table-head"> BlockChain ID </th>
-            <td mat-cell *matCellDef="let element"> <div class="ellipse">{{element?.companyblockchainid|| 'N/A' }}</div> </td>
+            <td mat-cell *matCellDef="let element"> <div class="ellipse">{{element?.companyblockchainid|| 'None' }}</div> </td>
           </ng-container>
           <!-- Total Column -->
           <ng-container matColumnDef="Invite">
