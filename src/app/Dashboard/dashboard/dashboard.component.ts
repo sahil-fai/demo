@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
       takeUntil(this.unsubscribe$),
     ).subscribe((res)=>{  console.log('data:', res);      
       if (res.message === "start") {
-          this.connectedToCompany = ''; // wait for dhiraj response
+          this.connectedToCompany = res['data'].company.name;
           this.reloadBusiness();
       } else if(res.message === "stop") {         
         if((res['data'].customer_total != undefined || res['data'].vendor_total != undefined ) && (res['data'].customer_total > 0 || res['data'].vendor_total > 0 )) { 

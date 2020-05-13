@@ -8,8 +8,8 @@
   <li *ngIf="establishingConnection.isProcessing || establishingConnection.isDone" [ngClass]="{processing: establishingConnection.isProcessing, success: establishingConnection.isDone}">
     <mat-icon *ngIf="establishingConnection.isProcessing">autorenew</mat-icon>
     <mat-icon *ngIf="establishingConnection.isDone">done_all</mat-icon>
-        Establishing Connection with {{connectionSource}}
-        <!-- Connecting {{companyName}} with {{connectionSource}} -->
+        <!-- Establishing Connection with {{connectionSource}} -->
+        Connecting {{companyName}} with {{connectionSource}}
   </li>
   <li *ngIf="fetchingTransactions.isProcessing || fetchingTransactions.isDone" [ngClass]="{processing: fetchingTransactions.isProcessing, success: fetchingTransactions.isDone}">
      <mat-icon *ngIf="fetchingTransactions.isProcessing">autorenew</mat-icon>
