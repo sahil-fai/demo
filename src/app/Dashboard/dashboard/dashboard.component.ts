@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
           this.reloadBusiness();
       } else if(res.message === "stop") {         
         if((res['data'].customer_total != undefined || res['data'].vendor_total != undefined ) && (res['data'].customer_total > 0 || res['data'].vendor_total > 0 )) { 
-           this.OpenInviteDialog(res['data']);
+          setTimeout(() => { this.OpenInviteDialog(res['data']); }, 500);
         }
         if(this._reloadingDialog) {
           this._reloadingDialog.close();
