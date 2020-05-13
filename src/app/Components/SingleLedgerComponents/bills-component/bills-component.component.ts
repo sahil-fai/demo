@@ -75,7 +75,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   expandedElement: PeriodicElement | null;
   selection = new SelectionModel < PeriodicElement > (true, []);
-  displayedColumns: string[] = ['index', 'Number', 'VendorName','Date', 'DueDate','Organization', 'Total', 'Balance','BlockchainTransactionID','Status','Action'
+  displayedColumns: string[] = ['Number', 'VendorName','Date', 'DueDate','Organization', 'Total', 'Balance','BlockchainTransactionID','Status','Action'
 ];
   //selection = new SelectionModel<PeriodicElement>(true, []);
 

@@ -31,7 +31,7 @@ export class ChartOfAccountComponent implements OnInit, OnDestroy {
   switchCompanySubscription: any;
   public COA: any;
   optionsMap: any;
-public title=  'Chart Of Account';
+public title=  'Chart Of Accounts';
   constructor(public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
