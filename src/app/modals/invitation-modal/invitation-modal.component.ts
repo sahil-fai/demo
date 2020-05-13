@@ -26,7 +26,7 @@ export class InvitationModalComponent {
   vendorPageNumber: number = 1;
   vendorOffset: number = 0;
   inviteSendStatus: boolean = false;
-  showLoader: boolean;
+  showLoader: boolean = false;
 
   constructor(private dialogRef: MatDialogRef<InvitationModalComponent>,
     @Inject(MAT_DIALOG_DATA) private data, private _fb: FormBuilder, private helper: HelperService, private businessService: BusinessService, private cd: ChangeDetectorRef, private zone: NgZone, private _toastr: ToastrService) {
@@ -40,7 +40,7 @@ export class InvitationModalComponent {
         this.customerTotalPage = this.data['customer_total'];
         this.vendorTotalPage = this.data['vendor_total'];
       }
-      this.showLoader = true;
+      //this.showLoader = true;
       this.createInviteForm();
     }
   }
@@ -66,6 +66,7 @@ export class InvitationModalComponent {
   }
 
   public getLists(name, offset) {
+    this.showLoader = true;
     this.businessService.getAllInviteCustomersAndVendors(this.businessId, offset, this.pagelimit).subscribe((res) => {
       if (res) {
         this.showLoader = false;
