@@ -17,7 +17,18 @@
               <div class="login-right">
                 <div class="inner-sec">
                   <ng-container *ngIf="showInvalidPage == 'signup'">
-                    <h1>Sign Up</h1>
+                    <div class="help-btn">
+                      <h1>Sign Up</h1>
+                      <div class="icon-hover">
+                        <img src="../../../assets/images/interface.png">
+                        <div class="help">
+                          <div class="arrow"></div>
+                          <span>Click below to learn more about SignIn.</span>
+                            <a href="https://www.singleledger.org/help.html#signin-sec" target="_blank"><span>Learn More</span></a>
+                          </div>
+                       
+                        </div> 
+                    </div>
                     <!-- <p>Sign up below and create your account</p> -->
                     <form
                       [formGroup]="formRegister"
@@ -175,6 +186,7 @@
                         </div>
                         <div class="column full-col">
                           <button type="submit" class="login-btn" matRipple><i class="icon-submit"></i>Submit</button>
+                          
                         </div>
                       </div>
                     </form>
