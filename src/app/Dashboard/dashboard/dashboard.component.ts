@@ -23,6 +23,9 @@ export class DashboardComponent implements OnInit {
   constructor(public socketService: SocketService, public quickbookconnect:QuickBookConnectService,public xeroconnect:XeroConnectService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {  
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
     this.socketService.newUser();
    this.subscription = this.socketService.messages.pipe(
       filter(val => val !== undefined),
