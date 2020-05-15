@@ -1,0 +1,165 @@
+mat-card.example-card {
+  padding: 0px;
+}
+mat-card.example-card .mat-card-content .bill-content .searchPanel {
+  margin-top: 10px;
+}
+mat-card.example-card .mat-card-content .bill-content .searchPanel ul.searchBlock {
+  display: flex;
+  align-items: flex-end;
+}
+mat-card.example-card .mat-card-content .bill-content .searchPanel ul.searchBlock li label {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+mat-card.example-card .mat-card-content .bill-content .searchPanel ul.searchBlock li ul li {
+  padding-bottom: 0px;
+}
+.bill-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.bill-status li {
+  background: aliceblue;
+  height: 80px;
+  padding-left: 15px;
+  font-size: 16px;
+  margin-right: 2px;
+  flex-grow: 1;
+  padding-top: 5px;
+}
+.bill-status .overdue {
+  color: #f44336;
+  border-bottom: 15px solid #f1746a;
+}
+.bill-status .due {
+  color: #ef891c;
+  border-bottom: 15px solid #ecba75;
+}
+.bill-status .paid {
+  color: #9fec28;
+  border-bottom: 15px solid #c8ef8d;
+}
+.bill-status .total {
+  color: #47b4ea;
+  border-bottom: 15px solid #94ddf1;
+}
+.defaultTable .dataTable th.tick-checkbox {
+  text-align: center;
+}
+.defaultTable .dataTable td.duedate {
+  color: #ef7070;
+}
+.filter-for {
+  width: 230px;
+}
+table {
+  width: 100%;
+  font-weight: 500;
+}
+table tr:hover {
+  background: rgba(109, 209, 235, 0.08);
+}
+table th {
+  position: sticky;
+  top: 0;
+  background: #e1f1f5;
+  z-index: 1;
+  height: 35px;
+}
+table th.table-inner-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #dfeaf5;
+}
+table td.mat-cell {
+  position: initial !important;
+}
+td.mat-column-star {
+  width: 20px;
+  padding-right: 8px;
+}
+th.mat-column-position,
+td.mat-column-position {
+  padding-left: 8px;
+}
+.mat-table-sticky:first-child {
+  border-right: 1px solid #e0e0e0;
+}
+.mat-table-sticky:last-child {
+  /* border-left: 1px solid #e0e0e0; */
+  text-align: right;
+  padding-right: 10px;
+}
+td.mat-column-Number {
+  color: #00add8;
+}
+td.mat-column-DueDate {
+  color: #f1746a;
+}
+th.mat-header-cell {
+  font-weight: 500;
+  font-size: 14px;
+}
+.mat-paginator-range-label span {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  border: 1px solid;
+  text-align: center;
+  background: #00add8;
+  border-radius: 5px;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+}
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+.example-element-row {
+  cursor: pointer;
+}
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+.example-element-description {
+  padding: 16px;
+}
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+td.mat-cell.cdk-column-expandedDetail.mat-column-expandedDetail.ng-tns-c12-19.ng-star-inserted {
+  background-color: #00add8;
+}
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  padding: 0;
+  border-bottom-width: 0px;
+  border-bottom-style: none;
+}
+tr.mat-footer-row,
+tr.mat-row {
+  height: 0px !important;
+}
+.defaultTable {
+  overflow: unset;
+  border-top: none;
+}

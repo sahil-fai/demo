@@ -1,5 +1,5 @@
 import {SelectionModel} from '@angular/cdk/collections';
-import {Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import {Component, OnInit, ViewChild, OnDestroy, ElementRef } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import json from './res.json';
 import { MatPaginator } from '@angular/material/paginator';
@@ -7,6 +7,10 @@ import { BusinessService } from 'src/app/services/business-service/business.serv
 import { HelperService } from 'src/app/services/helper-service/helper.service.js';
 import { SwitchCompanyService } from 'src/app/services/switch-company-service/switch-company.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
+import { JsonEditorModalComponent } from 'src/app/modals/json-editor-modal/json-editor-modal.component';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MatDialog } from '@angular/material';
 export interface PeriodicElement {
   Number: string;
   Date: string;
@@ -22,10 +26,39 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-bills-component',
   templateUrl: './bills-component.component.html',
-  styleUrls: ['./bills-component.component.less']
+  styleUrls: ['./bills-component.component.less'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({
+        height: '0px',
+        minHeight: '0'
+      })),
+      state('expanded', style({
+        height: '*'
+      })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class BillsComponentComponent implements OnInit, OnDestroy {
   title = 'Bills';
+  status = [{
+      value: 'Transfered',
+      viewValue: 'transfered'
+    },
+    {
+      value: 'Submitted',
+      viewValue: 'Submitted'
+    },
+    {
+      value: 'Accepted',
+      viewValue: 'Accepted'
+    },
+    {
+      value: 'Declined',
+      viewValue: 'Declined'
+    }
+  ];
   bills: any;
   pagelimit: number = 10;
   public dataSource: MatTableDataSource<PeriodicElement>;
@@ -34,20 +67,27 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   offset : number= 0;
   isFilterSearch : boolean = false;
   isResetSearch: boolean = false;
-
+  public invoiceStatusArray = [{id:1,value:'Submit '},{id:2,value:'Approved '},{id:3,value:'Void by customer'},{id:4,value:'Void by supplier'},{id:5,value:'Deleted by customer '},{id:6,value:'Deleted by supplier '}];
+  @ViewChild("content", null) modal: ElementRef;
+  @ViewChild(JsonEditorComponent, { static: true }) editor: JsonEditorComponent;
+  public editorOptions: JsonEditorOptions;
+  data: any ;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  displayedColumns: string[] = ['index', 'Number', 'VendorName','Date', 'DueDate', 'Total', 'Balance',
- // 'star'
+  expandedElement: PeriodicElement | null;
+  selection = new SelectionModel < PeriodicElement > (true, []);
+  displayedColumns: string[] = ['Number', 'VendorName','Date', 'DueDate','Organization', 'Total', 'Balance','BlockchainTransactionID','Status','Action'
 ];
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  //selection = new SelectionModel<PeriodicElement>(true, []);
 
   switchCompanySubscription: any;
   platformid: number;
   companyCurrency: string;
   formFilter: FormGroup;
   public vendorName : FormControl
+  // dialog: any;
   
-  constructor(private _fb : FormBuilder,public businessService: BusinessService, private helper: HelperService, private switchCompany: SwitchCompanyService) {
+  constructor(private _fb : FormBuilder,public businessService: BusinessService,  private switchCompany: SwitchCompanyService,private helper: HelperService,
+    private dialog: MatDialog,) {
     this.switchCompanySubscription = this.switchCompany.companySwitched.subscribe(
       () => {
         this.ngOnInit();
@@ -77,12 +117,26 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
       this.businessService.getAllBills(companyid, offset, vendorName, this.pagelimit).subscribe(res => {
         this.bills = res[0];
         this.Totalrec = res[1].totalItems;
+        console.log(res)
         // this.handlePage({pageSize: '10', pageIndex: '0'});
         this.dataSource = new MatTableDataSource<PeriodicElement>(this.bills);
       });
     }
 
-
+    public getInvoiceStatus(invoiceId) { 
+      let data = this.invoiceStatusArray.filter(res => res.id == invoiceId);
+      if(data.length>0)
+         return data[0].value;     
+}
+getInvoicePDF(element){
+  var platformidl = localStorage.getItem('PlatformId');    
+  this.businessService.getInvoicePDF(element.companyid,element.invoiceid,platformidl as unknown as number,element.userid,element.platformownerinvoiceid,element.companyid).subscribe((file: Blob) => {
+    // console.log("hello pdf");
+    // console.log(window.URL.createObjectURL(file));
+      window.open(window.URL.createObjectURL(file), '_blank');
+    }
+  );
+}
     filterVendor(){
       this.isFilterSearch = true;
       this.getAllBills(this.offset, this.vendorName.value);
@@ -132,7 +186,7 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
   //   data: paginatedItems
   //   };
   // }
-
+  
   public handlePage(e: any) {
     this.isFilterSearch = false;
     this.isResetSearch = false;
@@ -145,5 +199,17 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
     if (this.switchCompanySubscription) {
       this.switchCompanySubscription.unsubscribe();
     }
+   
+  }
+  OpenDialog(transactionID){
+    const dialogRef = this.dialog.open(JsonEditorModalComponent, {
+      data: {
+        currentUserID : Number(this.helper.getuserId()),
+        transactionID : transactionID
+      },
+      panelClass: 'json-modal'
+    });
+
+    dialogRef.beforeClose().subscribe(() => {});
   }
 }

@@ -13,7 +13,7 @@
   </div>
   <div class="content-wrapper">
     <div class="bussiness-header">
-      <h2>{{title|| 'N/A' }}</h2>
+      <h2>{{title|| 'None' }}</h2>
       <span class="connectBtn">
         <app-addbusiness *ngIf="isBusinessLoaded && totalRec > 0"></app-addbusiness>
       </span>
@@ -43,7 +43,7 @@
                   <li>
                     <div class="company-name">Company Name</div>
                     <div>
-                      <h6>{{company?.legalName|| 'N/A' }}</h6>
+                      <h6>{{company?.legalName|| 'None' }}</h6>
                     </div>
                   </li>
                   <li>
@@ -52,11 +52,11 @@
                   </li>
                   <li>
                     <div class="dataLabel">Register Date</div>
-                    <div class="dataValues">{{company?.registeredOnProviderDate |date }}</div>
+                    <div class="dataValues">{{company?.registeredOnProviderDate |date:'MMM dd yyyy'}}</div>
                   </li>
                   <li>
                     <div class="dataLabel">OnBoard Date</div>
-                    <div class="dataValues">{{company?.onBoardedDate |date }}</div>
+                    <div class="dataValues">{{company?.onBoardedDate |date:'MMM dd yyyy'}}</div>
                   </li>
                 </ul>
                 <ul class="buttonList">

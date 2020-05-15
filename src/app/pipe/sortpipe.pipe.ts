@@ -17,5 +17,6 @@ export class SortpipePipe implements PipeTransform {
     const extract = split.substring(0, 4) + '....' + split.slice(-4);
     //console.log(extract);
     return(extract);
+    console.log(extract)
   }
 }

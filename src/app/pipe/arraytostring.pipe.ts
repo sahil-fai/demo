@@ -13,9 +13,9 @@ export class ArraytostringPipe implements PipeTransform {
       return data.join(',');
     }
     } catch (error) {
-      return 'N/A';  
+      return 'None';  
     }
     
-    return 'N/A';
+    return 'None';
   }
 }

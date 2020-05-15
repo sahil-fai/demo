@@ -2,11 +2,11 @@
 <mat-menu #menu="matMenu" class="user-profile" xPosition="before">
   <button mat-menu-item disabled>
     <mat-icon>account_circle</mat-icon>
-    <span>{{userinfo?.firstname || 'N/A' }} {{userinfo?.lastname|| 'N/A' }}</span>
+    <span>{{userinfo?.firstname || 'None' }} {{userinfo?.lastname|| 'None' }}</span>
   </button>
   <button mat-menu-item disabled>
     <mat-icon>email</mat-icon>
-    <span>{{userinfo.email|| 'N/A' }}</span>
+    <span>{{userinfo.email|| 'None' }}</span>
   </button>
   <!-- <button mat-menu-item>
       <mat-icon>settings</mat-icon>
@@ -23,7 +23,7 @@
 </mat-menu>
 
 <!-- <ul>
-  <li><span>{{userinfo?.firstname || 'N/A' }} {{userinfo?.lastname|| 'N/A' }}</span></li>
-  <li><span>{{userinfo.email|| 'N/A' }}</span></li>
+  <li><span>{{userinfo?.firstname || 'None' }} {{userinfo?.lastname|| 'None' }}</span></li>
+  <li><span>{{userinfo.email|| 'None' }}</span></li>
   <li><span (click)="onLogout()">Logout</span></li>
 </ul> -->

@@ -56,7 +56,7 @@ export class ResetForgetPasswordComponent implements OnInit {
   }
   private createForm() {
     this.formReset = this._fb.group({
-      password: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
+      password: ['', [Validators.required, Validators.minLength(8), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]],
       confirmpassword: ['', [Validators.required, Validators.minLength(6), this.hasNumber, this.hasUppercase, this.hasLowercase, this.hasSpecialCharacter]]
     },
       {

@@ -1,4 +1,4 @@
-<div class="title"><h2>{{title|| 'N/A' }}</h2></div>
+<div class="title"><h2>{{title|| 'None' }}</h2></div>
 <!-- <mat-card class="example-card">
     <mat-card-content>
       <div>
@@ -61,7 +61,7 @@
             <div class="bills-content mat-elevation-z8">
             <div class="example-container">
               <perfect-scrollbar style="max-height:75vh;">
-              <table mat-table [dataSource]="dataSource" class="" *ngIf="bills && bills.length > 0">
+              <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="" *ngIf="bills && bills.length > 0">
 
                 <!-- Checkbox Column -->
                 <ng-container matColumnDef="select" >
@@ -78,42 +78,51 @@
                                   [checked]="selection.isSelected(row)"
                                   [aria-label]="checkboxLabel(row)">
                     </mat-checkbox> -->
-                  </td>
-                </ng-container>
-                <ng-container matColumnDef="index" >
-                  <th mat-header-cell *matHeaderCellDef class="table-head">#</th>
-                  <td mat-cell *matCellDef="let element; let i = index;"> {{i+1 + pageNumber || 'N/A' }} </td>
-                </ng-container>
+                  </td>   </ng-container>
+                <!-- <ng-container matColumnDef="index" >
+                  <th mat-header-cell *matHeaderCellDef class="table-head">Delete </th>
+                  <td mat-cell *matCellDef="let element; let i = index;"> {{i+1 + pageNumber || 'None' }} </td>
+                </ng-container> -->
                 <!-- Number Column -->
-                <ng-container matColumnDef="Number" >
-                  <th mat-header-cell *matHeaderCellDef class="table-head"> Bill ID </th>
-                  <td mat-cell *matCellDef="let element"> {{element.invoiceid|| 'N/A' }} </td>
-                </ng-container>
+                                               <ng-container matColumnDef="Number" >
+                                  <th mat-header-cell *matHeaderCellDef class="table-head"> Bill# </th>
+                                  <td mat-cell *matCellDef="let element" class="table-head-second"> {{element.invoicenumber|| 'None' }} </td>
+                                </ng-container>
                 <!-- Block chain Id Column -->
                 <ng-container matColumnDef="BlockchainTransactionID">
-                  <th mat-header-cell *matHeaderCellDef class="table-head"> Blockchain Transaction ID </th>
-                  <td mat-cell *matCellDef="let element"> {{element.billid|| 'N/A' }} </td>
-                </ng-container>
-                <!-- Date Column -->
+                  <th mat-header-cell *matHeaderCellDef class="table-head"> Transaction ID </th>
+                  <td mat-cell *matCellDef="let element" 
+                      class="example-element-row table-head-second" [class.example-expanded-row]="expandedElement === element"
+                      (click)="expandedElement = expandedElement === element ? null : element"
+                      [title]="element.companyblockchainid || 'None' "> {{ element.companyblockchainid || 'None' }}
+                                    
+                                 </td>          
+                                      </ng-container>
+                                   <!-- Date Column -->
                 <ng-container matColumnDef="Date">
-                  <th mat-header-cell *matHeaderCellDef class="table-head"> Issue Date </th>
-                  <td mat-cell *matCellDef="let element"> {{element.issuedate|date }} </td>
+                  <th mat-header-cell *matHeaderCellDef class="table-head"> Bill Date </th>
+                  <td mat-cell *matCellDef="let element"> {{element.issuedate|date:'MMM dd yyyy'}} </td>
                 </ng-container>
                 <ng-container matColumnDef="VendorName">
-                  <th mat-header-cell *matHeaderCellDef class="table-head"> Vendor </th>
-                  <td mat-cell *matCellDef="let element"> {{element.department|| 'N/A' }} </td>
+                  <th mat-header-cell *matHeaderCellDef class="table-head"> Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.department|| 'None' }} </td>
                 </ng-container>
 
                 <!-- Due Date Column -->
                 <ng-container matColumnDef="DueDate">
                   <th mat-header-cell *matHeaderCellDef class="table-head"> Due Date </th>
-                  <td mat-cell *matCellDef="let element"> {{element.duedate|date }} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.duedate|date:'MMM dd yyyy'}} </td>
+                </ng-container>
+                <!--Organization-->
+                <ng-container matColumnDef="Organization">
+                  <th mat-header-cell *matHeaderCellDef class="table-head"> Organization </th>
+                  <td mat-cell *matCellDef="let element"> {{platformid | organisationpipe}} </td>
                 </ng-container>
 
                 <!-- Vendor Column -->
                 <ng-container matColumnDef="Vendor">
-                  <th mat-header-cell *matHeaderCellDef class="table-head"> Vendor </th>
-                  <td mat-cell *matCellDef="let element"> {{element.vendor|| 'N/A' }} </td>
+                  <th mat-header-cell *matHeaderCellDef class="table-head"> Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.vendor|| 'None' }} </td>
                 </ng-container>
                 <!-- Total Column -->
                 <ng-container matColumnDef="Total">
@@ -125,25 +134,76 @@
                   <th mat-header-cell *matHeaderCellDef class="table-head"> Balance </th>
                   <td mat-cell *matCellDef="let element"> {{element.total-element.deposit  | currency:companyCurrency}} </td>
                 </ng-container>
-                <!-- <ng-container matColumnDef="Status">
-                  <th mat-header-cell *matHeaderCellDef> Status </th>
-                  <td mat-cell *matCellDef="let element" [class.paid]="element.Status=='Paid'" [class.partialy-paid]="element.Status=='Partialy Paid'" [class.open]="element.Status=='Open'" > {{element.Status|| 'N/A' }} </td>
+                <!--Status Column--->
+                <ng-container matColumnDef="Status">
+                  <th mat-header-cell *matHeaderCellDef class="table-head"> Status </th>
+                  <td mat-cell *matCellDef="let element"> {{getInvoiceStatus(element.invoicestatusidl) || 'Submit'}} </td>
                 </ng-container>
+                <!--Action Column--->
                 <ng-container matColumnDef="Action">
-                  <th mat-header-cell *matHeaderCellDef> Action </th>
-                  <td mat-cell *matCellDef="let element" > {{element.Action|| 'N/A' }} </td>
-                </ng-container> -->
-                <!-- <ng-container matColumnDef="star" End>
-                  <th mat-header-cell *matHeaderCellDef></th>
-                  <td mat-cell *matCellDef="let element">
-                    <span><i  class="icon-arrow-right"></i></span>
+                  <th mat-header-cell *matHeaderCellDef class="table-head"> Action </th>
+                  <td mat-cell *matCellDef="let element" class="table-head-second example-element-row" > <a  (click)="getInvoicePDF(element)"data-toggle="tooltip"  title="Invoice PDF"><img src="http://wwwimages.adobe.com/content/dam/acom/en/legal/images/badges/Adobe_PDF_file_icon_32x32.png" alt="InvoicePDF"/></a></td>                
+                </ng-container>
+                <ng-container matColumnDef="star" stickyEnd>
+                  <th mat-header-cell *matHeaderCellDef class="table-head"></th>
+                  <td mat-cell *matCellDef="let element" class="table-head-second">
+                    <!-- <span><i  class="icon-arrow-right"></i></span> -->
                   </td>
-                </ng-container> -->
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-                    (click)="selection.toggle(row)" [class.selected]="selection.isSelected(row)">
-                </tr>
+                </ng-container>
+                <ng-container matColumnDef="expandedDetail">
+                  <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                    <div class="example-element-detail"
+                         [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                      <!-- <div class="example-element-diagram">
 
+                      </div> -->
+                      <div class="example-element-description">
+                          <div class="floatBoxesWrapper clearfix">
+                              <div class="floatBox tabletsOnly">
+                                <perfect-scrollbar style="max-height: 200px">
+                                <div class="defaultTable" *ngIf="element.blockchainhistories && element.blockchainhistories.length>0">
+
+                                <table class="dataTable">
+                                  <thead>
+                                    <tr>
+                                    <th class="table-inner-head">Transaction ID</th>
+                                    <!-- <th>Entity Id</th> -->
+                                    <th class="table-inner-head">Block Number</th>
+                                    <th class="table-inner-head">Transaction Type</th>
+                                    <th class="table-inner-head">Timestamp</th>
+                                    <th class="table-inner-head">Chain Code Name</th>
+                                    <th class="table-inner-head">Channel Name</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr *ngFor="let varriable of element.blockchainhistories">
+                                          <td ><a (click)="OpenDialog(varriable.description)" class= "example-element-row">{{varriable.description|| 'None' }}</a></td>
+                                          <!-- <td class="td-width">{{varriable.entityid|| 'None' }}</td> -->
+                                          <td class="td-width"> {{varriable.blocknumber|| 'None' }}</td>
+                                          <td class="td-width">{{varriable.historyactiontypeidl | transactionTypePipe }}</td>
+                                          <td class="td-width">{{varriable.timestamp| date:'MMM dd yyyy' || 'None' }}</td>
+                                          <td class="td-width">{{varriable.chaincodename|| 'None' }}</td>
+                                          <td class="td-width">{{varriable.channelname|| 'None' }}</td>
+                                        </tr>
+                                  </tbody>
+                                </table>
+
+                                </div>
+                              </perfect-scrollbar>
+                                <div class="no-record" *ngIf="!element.blockchainhistories"> <span class="norecord-text"> No records found</span></div>
+                                </div>
+                              </div>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                     <!-- [class.selected]="selection.isSelected(row)"  class="example-element-row"
+                     [class.example-expanded-row]="expandedElement === row"
+                     (click)="expandedElement = expandedElement === row ? null : row"> -->
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
               </table>
             </perfect-scrollbar>
             </div>

@@ -63,6 +63,7 @@ export class TaxMappingComponent implements OnInit {
       this.taxratesforcompanyMappings = res.taxratesforthecompany;
       this.taxMapping = res.taxmapping;
       this.filterTaxMappingData();
+      console.log(res)
    }
    );
   }
@@ -107,7 +108,7 @@ export class TaxMappingComponent implements OnInit {
     this.taxratesforcompanyMappings.forEach(element => {
       const taxratesforcompanyData = {
         id : element.id,
-        Name: element.Name + '-'+ element.Rate + '%' + ' (' + element.TaxRateName + ')',
+        Name:   element.TaxRateName + ' (' + element.Name + '-'+ element.Rate + '%'+ ')',
         Rate: element.Rate,
         IsCompund: element.IsCompund,
         Isrecoverable: element.Isrecoverable,
@@ -185,6 +186,7 @@ export class TaxMappingComponent implements OnInit {
             this.taxRecord.splice(index, 1);
             this.getTaxes();
             console.log("Record Deleted");
+            console.log(res)
         });
       }
   }
@@ -208,6 +210,7 @@ export class TaxMappingComponent implements OnInit {
      this.businessService.taxRateMapping(saveMappingData).subscribe(res => {
         this.getTaxes();
         console.log("submitted");
+        console.log(res)
       });
   }
 }

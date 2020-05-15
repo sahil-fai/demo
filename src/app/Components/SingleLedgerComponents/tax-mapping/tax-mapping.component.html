@@ -60,8 +60,8 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let record of taxRecord; let i = index">
-                                    <td>{{record.SingleLedgerTaxList[0]?.Name || 'N/A' }}</td>
-                                    <td>{{record.CompanyTaxList[0]?.Name || 'N/A' }}</td>
+                                    <td>{{record.SingleLedgerTaxList[0]?.Name || 'None' }}</td>
+                                    <td>{{record.CompanyTaxList[0]?.Name || 'None' }}</td>
                                     <td>
                                       <button class="btn icon-dots-vertical edit-options" (click) ="deleteTaxMapping(record.id, i)" title="Delete">
                                         <mat-icon>delete</mat-icon>
