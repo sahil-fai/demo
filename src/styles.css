@@ -2693,3 +2693,89 @@ mat-dialog-container app-invitation-modal mat-dialog-actions.invitation-dialog-a
 mat-dialog-container app-invitation-modal mat-dialog-actions.invitation-dialog-action .btn-m-10 {
   margin-right: 10px;
 }
+.icon-hover {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 24px;
+}
+.icon-hover img {
+  width: 15px!important;
+  height: 15px;
+  margin-top: 15px!important;
+  position: relative !important;
+}
+.icon-hover img:hover ~ .help {
+  display: block;
+}
+.icon-hover .help {
+  border: 1px solid #006088;
+  border-radius: 0.3em;
+  background-color: #fff;
+  box-shadow: 0 5px 12px 0 rgba(106, 119, 120, 0.8);
+  width: 20rem;
+  padding: 0.6em;
+  z-index: 1;
+  font-weight: 400;
+  position: absolute;
+  top: 41px;
+  font-size: 11px;
+  display: none;
+  z-index: 9;
+}
+.icon-hover .help:hover {
+  display: block;
+}
+.icon-hover .help .arrow {
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  top: -12px;
+  width: 1px;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 12px solid #006088;
+  position: absolute;
+}
+.icon-hover .help .arrow:after {
+  border-width: 0 13px 13px;
+  top: 6px;
+  left: -13px;
+  position: absolute;
+  display: block;
+  content: "";
+  border-style: solid;
+  border-color: transparent transparent #fff;
+}
+.icon-hover .help .arrow::before {
+  border-width: 0 13px 13px;
+  top: 3px;
+  left: -13px;
+  position: absolute;
+  display: block;
+  content: "";
+  border-style: solid;
+  border-color: transparent transparent #fff;
+}
+.icon-hover .help span {
+  color: black;
+  font-size: 12px;
+  text-align: center;
+  display: block;
+}
+.icon-hover .help a span {
+  z-index: 2;
+  background: #fff;
+  display: inline-block;
+  padding: 0 10px;
+  position: relative;
+  font-size: 13px;
+  display: block;
+  margin: 5px 0 3px;
+  text-align: center;
+  font-weight: 500;
+}
+.icon-hover .help a span:hover {
+  color: #00AEDA;
+}

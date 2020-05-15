@@ -91,3 +91,107 @@ mat-card {
     }
   }
 }
+.help-btn{
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  h2{
+      margin-right: 5px;
+  }
+}
+.icon-hover{
+  display: flex;
+  justify-content: center;
+  position: relative;
+  position: relative;
+  margin-bottom: 24px;
+  
+  img{
+      width: 15px!important;
+      height: 15px;
+      margin-top: 18px!important;
+      position: relative !important;
+      &:hover{
+          & ~.help{
+              display: block;
+          }
+      }
+  }
+
+.help{
+  border: 1px solid #006088;
+    border-radius: 0.3em;
+    background-color: #fff;
+    box-shadow: 0 5px 20px 0 rgba(106, 119, 120, 0.8);
+    width: 18rem;
+    padding: 0.6em;
+    z-index: 1;
+    font-weight: 400;
+    position: absolute;
+    top: 44px;
+    font-size: 11px;
+    display: none;
+    left: -20px;
+  &:hover{
+      display: block;
+  }
+  .arrow{
+    left: 9%;
+transform: translateX(-50%);
+margin: 0;
+top: -12px;
+width: 1px;
+height: 0;
+border-left: 10px solid transparent;
+border-right: 10px solid transparent;
+border-bottom: 12px solid #006088;
+position: absolute;
+&:after{
+    border-width: 0 13px 13px;
+    top: 6px;
+    left: -13px;
+    position: absolute;
+    display: block;
+    content: "";
+    border-style: solid;
+    border-color: transparent transparent #fff;
+}
+&::before{
+    border-width: 0 13px 13px;
+    top: 3px;
+    left: -13px;
+    position: absolute;
+    display: block;
+    content: "";
+    border-style: solid;
+    border-color: transparent transparent #fff;
+}
+}
+  span{
+      color: black;
+      font-size: 12px;
+      text-align: center;
+      display: block;
+  }
+  a{ 
+    // display: block;
+    // float: right;
+        span{
+            z-index: 2;
+            background: #fff;
+            display: inline-block;
+            padding: 0 10px;
+            position: relative;
+            font-size: 13px;
+            display: block;
+            margin: 5px 0 3px;
+            text-align: center;
+            font-weight: 500;
+&:hover{
+    color: #00AEDA;
+}
+        }
+    }
+  }
+
+}

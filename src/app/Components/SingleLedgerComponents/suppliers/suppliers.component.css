@@ -1,0 +1,317 @@
+.floatBoxesWrapper {
+  padding: 0 15px;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 18px;
+  color: #34a3b8;
+}
+.floatBox {
+  position: relative;
+}
+.edit-transaction {
+  margin-bottom: 10px;
+}
+.edit-transaction li {
+  display: inline-block;
+  padding: 0 10px;
+}
+.edit-transaction li.amount-field {
+  float: right;
+  padding: 0;
+}
+.defaultTable {
+  overflow: auto;
+}
+.defaultTable td {
+  font-family: 'Open Sans';
+  font-weight: 600;
+}
+.defaultTable .dataTable {
+  font-size: 0.8rem;
+}
+.defaultTable .dataTable tbody tr:hover {
+  background: #e3f8fd;
+}
+.defaultTable .dataTable tbody tr.hide-row td,
+.defaultTable .dataTable tbody tr.hide-row .contactname {
+  color: rgba(101, 101, 101, 0.5);
+}
+.defaultTable .dataTable th {
+  font-size: 0.8rem;
+  background-color: #eff9fb;
+  color: #40c4d9;
+  border-color: #bde9f1;
+}
+.defaultTable .dataTable td {
+  padding: 0.5rem;
+}
+.defaultTable .dataTable td:hover {
+  background: #e3f8fd;
+}
+.defaultTable .dataTable td .ellipsis {
+  width: 120px;
+}
+.defaultTable .dataTable td .contactname {
+  color: #285656;
+}
+.defaultTable .dataTable thead tr th {
+  top: 0px;
+  position: sticky;
+}
+.defaultTable .dataTable .mat-checkbox-inner-container {
+  height: 1.3rem !important;
+  margin-right: 0 !important;
+  width: 1.3rem !important;
+}
+.defaultTable.sec-drilldown {
+  overflow: auto;
+  clear: both;
+  max-height: 40vh;
+}
+.defaultTable.sec-drilldown tr td {
+  max-width: 120px;
+  overflow: hidden;
+}
+.defaultTable.sec-drilldown tr td.date {
+  min-width: 120px;
+}
+.btn-theme {
+  background-color: #34a3b8;
+  float: right;
+  margin: 10px 0;
+  padding: 5px 10px;
+  margin-left: 11px;
+}
+.btn-theme.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.cross {
+  font-size: 25px;
+  color: #34a3b8;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+}
+.input-edit {
+  padding: 0 0.6em;
+  font-family: inherit;
+  color: #333;
+  cursor: default;
+  display: flex;
+  outline: 0;
+  overflow: hidden;
+  width: 100%;
+  background-color: #ffeb3b14;
+  border-radius: 4px;
+  min-height: 21px;
+  align-items: center;
+  font-size: 10px;
+}
+.input-edit.calendar {
+  background-size: 1em;
+}
+.ng-select.ng-select-single .ng-select-container {
+  height: 21px!important;
+  background-color: #ffeb3b14;
+  border: 1px solid #00bcd452;
+}
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+  top: 0!important;
+}
+.ng-select.ng-select-single .ng-select-container .ng-placeholder {
+  color: #151515;
+  font-size: 10px;
+}
+.ng-select .ng-clear-wrapper {
+  margin-left: 9px!important;
+  color: #f70404 !important;
+}
+.ng-select .ng-select-container {
+  min-height: 21px!important;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding: 4px 4px;
+  font-size: 12px;
+}
+.ng-select.ng-select-opened > .ng-select-container .ng-arrow {
+  border-color: transparent transparent #00a3b8;
+}
+.ng-select .ng-arrow-wrapper .ng-arrow {
+  border-color: #00a3b8 transparent transparent;
+}
+.add-button {
+  display: block;
+  position: absolute;
+  left: -28px;
+  bottom: 0px;
+  border: 1px solid #ddd;
+  background: #00add8;
+  color: #fff;
+  height: 38px;
+  width: 30px;
+  border-radius: 5px 0 0 5px;
+  justify-content: center;
+  padding-left: 0.2em;
+}
+.add-button.disable {
+  display: none;
+}
+.add-button.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+button.edit-options {
+  width: 100%;
+  background: transparent;
+  height: 35px;
+  float: right;
+  border-radius: 0;
+  font-size: 19px;
+  text-align: center;
+  color: #cccccc;
+}
+button.edit-options i {
+  padding: 0px;
+}
+button.edit-options:hover {
+  background: #00add8;
+  color: #fff;
+}
+button.edit-options.editable {
+  background: #00add8;
+  color: #fff;
+  padding: 0.5rem;
+}
+button.edit-options.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.edit {
+  background: #40c4d9;
+  padding: 2px;
+  font-size: 10px;
+  margin: 1px;
+}
+.mat-menu-content {
+  border: 2px solid #00add8;
+}
+.mat-menu-content:not(:empty) {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.mat-menu-content .mat-menu-item {
+  color: #151515;
+  font-weight: 500;
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+}
+.mat-menu-content .mat-menu-item:hover:not([disabled]) {
+  color: #fff;
+  background: rgba(0, 188, 212, 0.6);
+}
+.mat-menu-content .mat-menu-item .icon {
+  margin-right: 10px;
+  font-size: 12px;
+  line-height: 20px;
+}
+.help-btn {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.help-btn h2 {
+  margin-right: 5px;
+}
+.icon-hover {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 24px;
+}
+.icon-hover img {
+  width: 15px!important;
+  height: 15px;
+  margin-top: 18px!important;
+  position: relative !important;
+}
+.icon-hover img:hover ~ .help {
+  display: block;
+}
+.icon-hover .help {
+  border: 2px solid #006088;
+  border-radius: 0.3em;
+  background-color: #fff;
+  box-shadow: 0 5px 20px 0 rgba(106, 119, 120, 0.8);
+  width: 18rem;
+  padding: 0.6em;
+  z-index: 1;
+  font-weight: 400;
+  position: absolute;
+  top: 43px;
+  font-size: 11px;
+  display: none;
+  left: -14px;
+}
+.icon-hover .help:hover {
+  display: block;
+}
+.icon-hover .help .arrow {
+  left: 9%;
+  transform: translateX(-50%);
+  margin: 0;
+  top: -12px;
+  width: 1px;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 12px solid #006088;
+  position: absolute;
+}
+.icon-hover .help .arrow:after {
+  border-width: 0 13px 13px;
+  top: 6px;
+  left: -13px;
+  position: absolute;
+  display: block;
+  content: "";
+  border-style: solid;
+  border-color: transparent transparent #fff;
+}
+.icon-hover .help .arrow::before {
+  border-width: 0 13px 13px;
+  top: 3px;
+  left: -13px;
+  position: absolute;
+  display: block;
+  content: "";
+  border-style: solid;
+  border-color: transparent transparent #fff;
+}
+.icon-hover .help span {
+  color: black;
+  font-size: 12px;
+  text-align: center;
+  display: block;
+}
+.icon-hover .help a span {
+  z-index: 2;
+  background: #fff;
+  display: inline-block;
+  padding: 0 10px;
+  position: relative;
+  font-size: 13px;
+  display: block;
+  margin: 5px 0 3px;
+  text-align: center;
+  font-weight: 500;
+}
+.icon-hover .help a span:hover {
+  color: #00AEDA;
+}
