@@ -309,9 +309,9 @@ button.edit-options.disabled {
   font-size: 13px;
   display: block;
   margin: 5px 0 3px;
-  text-align: right;
+  text-align: center;
   font-weight: 500;
 }
 .icon-hover .help a span:hover {
-  color: blue;
+  color: #00AEDA;
 }

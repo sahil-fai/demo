@@ -2709,7 +2709,7 @@ mat-dialog-container app-invitation-modal mat-dialog-actions.invitation-dialog-a
   display: block;
 }
 .icon-hover .help {
-  border: 2px solid #006088;
+  border: 1px solid #006088;
   border-radius: 0.3em;
   background-color: #fff;
   box-shadow: 0 5px 20px 0 rgba(106, 119, 120, 0.8);
@@ -2718,7 +2718,7 @@ mat-dialog-container app-invitation-modal mat-dialog-actions.invitation-dialog-a
   z-index: 1;
   font-weight: 400;
   position: absolute;
-  top: 46px;
+  top: 41px;
   font-size: 11px;
   display: none;
   z-index: 9;
@@ -2730,17 +2730,17 @@ mat-dialog-container app-invitation-modal mat-dialog-actions.invitation-dialog-a
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
-  top: -16px;
+  top: -12px;
   width: 1px;
   height: 0;
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-bottom: 16px solid #006088;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid #006088;
   position: absolute;
 }
 .icon-hover .help .arrow:after {
   border-width: 0 13px 13px;
-  top: 4px;
+  top: 3px;
   left: -13px;
   position: absolute;
   display: block;
@@ -2750,7 +2750,7 @@ mat-dialog-container app-invitation-modal mat-dialog-actions.invitation-dialog-a
 }
 .icon-hover .help .arrow::before {
   border-width: 0 13px 13px;
-  top: 4px;
+  top: 3px;
   left: -13px;
   position: absolute;
   display: block;
@@ -2773,9 +2773,9 @@ mat-dialog-container app-invitation-modal mat-dialog-actions.invitation-dialog-a
   font-size: 13px;
   display: block;
   margin: 5px 0 3px;
-  text-align: right;
+  text-align: center;
   font-weight: 500;
 }
 .icon-hover .help a span:hover {
-  color: blue;
+  color: #00AEDA;
 }
