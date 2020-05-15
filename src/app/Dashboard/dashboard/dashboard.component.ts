@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 import { XeroConnectService } from 'src/app/services/xero-connect-service/xero-connect.service';
 import { SocketService } from 'src/app/services/socket.service';
 import { InvitationModalComponent } from 'src/app/modals/invitation-modal/invitation-modal.component';
-import { takeUntil, filter } from 'rxjs/operators';
-import { Subject, Observable, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import {  Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
