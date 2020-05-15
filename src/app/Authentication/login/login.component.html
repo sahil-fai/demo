@@ -22,7 +22,19 @@
             <div class="column half-col pl-0">
               <div class="login-right">
                 <div class="inner-sec">
-                  <h1>Sign In</h1>
+                  <div class="help-btn">
+                    <h1>Sign In</h1>
+                    <div class="icon-hover">
+                      <img src="../../../assets/images/interface.png">
+                      <div class="help">
+                        <div class="arrow"></div>
+                        <span>Click below to learn more about SignIn.</span>
+                          <a href="https://www.singleledger.org/help.html#signin-sec" target="_blank"><span>Learn More</span></a>
+                        </div>
+                     
+                      </div> 
+                  </div>
+                  
                   <!-- <p>Login below to get started.</p> -->
                   <form [formGroup]="formLogin" (ngSubmit)="onLogin()"  autocomplete="off" novalidate class="ng-dirty ng-touched ng-invalid">
                     <div class="form-group">
@@ -49,6 +61,7 @@
                     </div>
 
                     <button type="submit" class="login-btn"><i class="icon-user-login"></i>Login</button>
+
                   </form>
                   <div class="link-sec">
                     <a [routerLink]="['/signup']">Create Account</a>

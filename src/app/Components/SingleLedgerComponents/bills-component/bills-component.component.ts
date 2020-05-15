@@ -123,19 +123,21 @@ export class BillsComponentComponent implements OnInit, OnDestroy {
       });
     }
 
-    public getInvoiceStatus(invoiceId) { 
-      let data = this.invoiceStatusArray.filter(res => res.id == invoiceId);
-      if(data.length>0)
-         return data[0].value;     
-}
+
 getInvoicePDF(element){
-  var platformidl = localStorage.getItem('PlatformId');    
+  //var platformidl = localStorage.getItem('PlatformId');
+  let platformidl = Number(element.organization);
   this.businessService.getInvoicePDF(element.companyid,element.invoiceid,platformidl as unknown as number,element.userid,element.platformownerinvoiceid,element.companyid).subscribe((file: Blob) => {
     // console.log("hello pdf");
     // console.log(window.URL.createObjectURL(file));
       window.open(window.URL.createObjectURL(file), '_blank');
     }
   );
+}
+public getInvoiceStatus(invoiceId) { 
+  let data = this.invoiceStatusArray.filter(res => res.id == invoiceId);
+  if(data.length>0)
+     return data[0].value;     
 }
     filterVendor(){
       this.isFilterSearch = true;

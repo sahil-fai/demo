@@ -34,22 +34,6 @@
   flex: 0 0 100%;
   max-width: 100%;
 }
-.full-col.margin {
-  margin-top: 20px;
-}
-.full-col .input-group {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-.full-col .input-group #rc-anchor-container {
-  width: 100% !important;
-}
-.full-col .input-group #rc-anchor-container .rc-anchor-normal {
-  height: 74px;
-  width: 100% !important;
-}
 .half-col {
   -ms-flex: 0 0 50%;
   flex: 0 0 50%;
@@ -166,8 +150,7 @@
   margin-bottom: 11px;
   font-family: 'Roboto';
 }
-.login-sec .login-wrapper .login-right .inner-sec .form-group input,
-.login-sec .login-wrapper .login-right .inner-sec .form-group mat-form-field {
+.login-sec .login-wrapper .login-right .inner-sec .form-group input {
   display: block;
   width: 100%;
   height: 40px;
@@ -206,6 +189,9 @@
   border: none;
   cursor: pointer;
 }
+.login-sec .login-wrapper .login-right .inner-sec .form-group .input-group button i {
+  vertical-align: middle;
+}
 .login-sec .login-wrapper .login-right .inner-sec .form-group .errorMessage {
   display: inline-block;
   position: static;
@@ -224,24 +210,6 @@
   border-bottom: 5px solid #FFFFFF;
   left: 10px;
   bottom: 100%;
-}
-.login-sec .login-wrapper .login-right .inner-sec .form-group .condition {
-  display: none;
-  padding: 5px 5px;
-  background-color: #FFFFFF;
-  border-radius: 0.25rem;
-  margin-top: 5px;
-}
-.login-sec .login-wrapper .login-right .inner-sec .form-group .condition ul li {
-  font-size: 0.75rem;
-  font-weight: 400;
-}
-.login-sec .login-wrapper .login-right .inner-sec .form-group .condition ul li mat-icon {
-  display: flex;
-  align-items: center;
-}
-.login-sec .login-wrapper .login-right .inner-sec .form-group.error .condition {
-  display: block;
 }
 .login-sec .login-wrapper .login-right .inner-sec .login-btn {
   display: -webkit-box;
@@ -279,19 +247,17 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  font-size: 1.05rem;
-  color: #FFFFFF;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 .login-sec .login-wrapper .login-right .inner-sec .link-sec a {
-  color: #b2f0ff;
-  margin-left: 5px;
+  font-size: 1.05rem;
+  color: #FFFFFF;
 }
 form.ng-invalid [type=submit],
 form.ng-invalid.ng-pristine [type=Reset] {
   opacity: 0.5;
   pointer-events: none;
-  cursor: default;
+  cursor: not-allowed;
 }

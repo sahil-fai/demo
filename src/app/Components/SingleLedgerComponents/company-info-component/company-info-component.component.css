@@ -1,0 +1,127 @@
+.profile-container {
+  position: relative;
+  width: 60%;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  margin-top: 65px;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 16px;
+  border-radius: 4px;
+  background: rgba(235, 238, 239, 0.4);
+  margin-bottom: 25px;
+}
+.profile-container .profile-name {
+  text-align: center;
+  padding-top: 60px;
+}
+.profile-container .profile-name h1 {
+  font-family: 'Roboto';
+  color: #34a3b8;
+}
+.profile-container .icon-container {
+  height: 125px;
+  width: 125px;
+  font-size: 80px;
+  text-align: center;
+  padding: 0;
+  background-color: #00bcd4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: calc((100% - 125px) / 2);
+  top: -62.5px;
+  border: 1px solid #ccc;
+}
+.profile-container .icon-container .icon-company {
+  padding: 0;
+}
+.profile-container ul {
+  margin-top: 24px;
+}
+.profile-container ul li {
+  width: 50%;
+  display: inline-block;
+  margin: 7px 0;
+  word-wrap: break-word;
+}
+.profile-container ul li:nth-child(odd) {
+  color: #777;
+  text-align: right;
+  padding-right: 35px;
+}
+.addresses {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0px -15px;
+}
+.addresses h4 {
+  padding: 0;
+  font-family: 'Roboto';
+  font-weight: 500;
+}
+.addresses .address {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  padding: 0px 15px;
+}
+.addresses .address .inner-address-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  padding: 15px;
+  background: rgba(187, 226, 239, 0.4);
+  border-radius: 10px;
+  justify-content: baseline;
+  align-items: center;
+}
+@media screen and (max-width: 979px) {
+  .addresses .address .inner-address-wrapper {
+    justify-content: center;
+  }
+}
+.addresses .address .address-icon-container {
+  display: flex;
+  background: rgba(0, 188, 212, 0.8);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+}
+.addresses .address .address-icon-container mat-icon {
+  font-size: 35px;
+  height: auto;
+  width: auto;
+}
+@media screen and (max-width: 979px) {
+  .addresses .address .address-icon-container {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+}
+.addresses .address .address-content {
+  margin-left: 15px;
+}
+.ellipsis {
+  width: 200px;
+  cursor: pointer;
+  color: rgba(0, 188, 212, 0.8);
+}
+table td {
+  padding: 5px 10px;
+}
+table td.head {
+  color: #777;
+}
+.help-btn {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.help-btn h2 {
+  margin-right: 5px;
+}

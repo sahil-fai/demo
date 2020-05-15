@@ -1,4 +1,15 @@
-<div class="title"><h2>{{title|| 'None' }}</h2></div>
+<div class="help-btn">
+  <h2>{{title|| 'None' }}</h2>
+  <div class="icon-hover">
+      <img src="../../../assets/images/interface1.png">
+      <div class="help">
+        <div class="arrow"></div>
+        <span>Click below to learn more about Bills.</span>
+          <a href="https://www.singleledger.org/help.html#bills" target="_blank"><span>Learn More</span></a>
+        </div>
+     
+      </div> 
+  </div>
 <!-- <mat-card class="example-card">
     <mat-card-content>
       <div>
@@ -116,7 +127,7 @@
                 <!--Organization-->
                 <ng-container matColumnDef="Organization">
                   <th mat-header-cell *matHeaderCellDef class="table-head"> Organization </th>
-                  <td mat-cell *matCellDef="let element"> {{platformid | organisationpipe}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.organization | organisationpipe}} </td>
                 </ng-container>
 
                 <!-- Vendor Column -->
@@ -141,8 +152,8 @@
                 </ng-container>
                 <!--Action Column--->
                 <ng-container matColumnDef="Action">
-                  <th mat-header-cell *matHeaderCellDef class="table-head"> Action </th>
-                  <td mat-cell *matCellDef="let element" class="table-head-second example-element-row" > <a  (click)="getInvoicePDF(element)"data-toggle="tooltip"  title="Invoice PDF"><img src="http://wwwimages.adobe.com/content/dam/acom/en/legal/images/badges/Adobe_PDF_file_icon_32x32.png" alt="InvoicePDF"/></a></td>                
+                  <th mat-header-cell *matHeaderCellDef class="table-head"> Actions </th>
+                  <td mat-cell *matCellDef="let element" class="table-head-second example-element-row" > <a  (click)="getInvoicePDF(element)"data-toggle="tooltip"  title="Invoice PDF"><img src="http://wwwimages.adobe.com/content/dam/acom/en/legal/images/badges/Adobe_PDF_file_icon_32x32.png" alt="InvoicePDF"/></a></td>
                 </ng-container>
                 <ng-container matColumnDef="star" stickyEnd>
                   <th mat-header-cell *matHeaderCellDef class="table-head"></th>

@@ -1,6 +1,15 @@
-<div class="title">
+<div class="help-btn">
   <h2>Tax Mapping</h2>
-</div>
+  <div class="icon-hover">
+      <img src="../../../assets/images/interface1.png">
+      <div class="help">
+        <div class="arrow"></div>
+        <span>Click below to learn more about Tax Mapping.</span>
+          <a href="https://www.singleledger.org/help.html#tax-mapping" target="_blank"><span>Learn More</span></a>
+        </div>
+     
+      </div> 
+  </div>
 <div class="importantNote blink_me" *ngIf = "!isTaxMapped">
   <p>*Important Note: - Please map {{selectedBusinessName || 'your company'}} tax rates with standard tax rates.</p>
 </div>
