@@ -922,7 +922,7 @@ textarea.fields.newFormatting {
   padding: 0;
 }
 .navigation .head {
-  padding: 0.8rem 1.33rem 0 1.3333em;
+  padding: 0.4rem 1.33rem 0 1.3333em;
   background: #ffffff;
   height: 4rem;
 }
@@ -2408,6 +2408,7 @@ mat-accordion mat-expansion-panel.mat-expansion-panel .mat-expansion-panel-heade
   z-index: 1;
   width: 100%;
   display: block;
+  z-index: 0;
 }
 mat-accordion mat-expansion-panel.mat-expansion-panel .mat-expansion-panel-header .mat-content i {
   font-size: 1.2em;
