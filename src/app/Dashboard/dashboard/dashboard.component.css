@@ -99,7 +99,7 @@
 .icon-hover img {
   width: 15px!important;
   height: 15px;
-  margin-top: 57px!important;
+  margin-top: 60px!important;
   position: relative !important;
 }
 .icon-hover img:hover ~ .help {
@@ -110,7 +110,7 @@
   border-radius: 0.3em;
   background-color: #fff;
   box-shadow: 0 5px 20px 0 rgba(106, 119, 120, 0.8);
-  width: 17rem;
+  width: 21rem;
   padding: 0.6em;
   z-index: 1;
   font-weight: 400;
@@ -118,7 +118,7 @@
   top: 85px;
   font-size: 11px;
   display: none;
-  left: -16px;
+  left: -20px;
 }
 .icon-hover .help:hover {
   display: block;
@@ -127,17 +127,17 @@
   left: 9%;
   transform: translateX(-50%);
   margin: 0;
-  top: -16px;
+  top: -12px;
   width: 1px;
   height: 0;
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-bottom: 16px solid #006088;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 12px solid #006088;
   position: absolute;
 }
 .icon-hover .help .arrow:after {
   border-width: 0 13px 13px;
-  top: 4px;
+  top: 6px;
   left: -13px;
   position: absolute;
   display: block;
@@ -147,7 +147,7 @@
 }
 .icon-hover .help .arrow::before {
   border-width: 0 13px 13px;
-  top: 4px;
+  top: 3px;
   left: -13px;
   position: absolute;
   display: block;
@@ -170,9 +170,9 @@
   font-size: 13px;
   display: block;
   margin: 5px 0 3px;
-  text-align: right;
+  text-align: center;
   font-weight: 500;
 }
 .icon-hover .help a span:hover {
-  color: blue;
+  color: #00AEDA;
 }
