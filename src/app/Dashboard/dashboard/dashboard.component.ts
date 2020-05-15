@@ -8,7 +8,7 @@ import { XeroConnectService } from 'src/app/services/xero-connect-service/xero-c
 import { SocketService } from 'src/app/services/socket.service';
 import { InvitationModalComponent } from 'src/app/modals/invitation-modal/invitation-modal.component';
 import { takeUntil, filter } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,14 +19,13 @@ export class DashboardComponent implements OnInit {
   public _reloadingDialog: MatDialogRef<BusinessReloadComponent>;
   public connectedToBusiness:string;
   public connectedToCompany:string;
-  private unsubscribe$: Subject<void> = new Subject();
+  public subscription: Subscription;
   constructor(public socketService: SocketService, public quickbookconnect:QuickBookConnectService,public xeroconnect:XeroConnectService, public dialog: MatDialog, private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit() {  
     this.socketService.newUser();
-    this.socketService.messages.pipe(
+   this.subscription = this.socketService.messages.pipe(
       filter(val => val !== undefined),
-      takeUntil(this.unsubscribe$),
     ).subscribe((res)=>{  console.log('data:', res);      
       if (res.message === "start") {
           this.connectedToCompany = res['data'].company.name;
@@ -37,7 +36,7 @@ export class DashboardComponent implements OnInit {
         }
         if(this._reloadingDialog) {
           this._reloadingDialog.close();
-          this._reloadingDialog.afterClosed().subscribe(data=>{
+          this._reloadingDialog.afterClosed().subscribe(data=>{            
             this.router.navigate(['/businesslist']);
           })
         }     
@@ -50,7 +49,7 @@ export class DashboardComponent implements OnInit {
       disableClose: true,
       data: data
     });
-    dialogRef.afterClosed().subscribe();
+    dialogRef.afterClosed().subscribe(()=> this.subscription.unsubscribe());
   }
 
   
