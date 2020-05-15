@@ -27,10 +27,10 @@ export class DashboardComponent implements OnInit {
    this.subscription = this.socketService.messages.pipe(
       filter(val => val !== undefined),
     ).subscribe((res)=>{  console.log('data:', res);      
-      if (res.message === "start") {
+      if (res && res.message === "start") {
           this.connectedToCompany = res['data'].company.name;
           this.reloadBusiness();
-      } else if(res.message === "stop") {         
+      } else if(res && res.message === "stop") {         
         if((res['data'].customer_total != undefined || res['data'].vendor_total != undefined ) && (res['data'].customer_total > 0 || res['data'].vendor_total > 0 )) { 
           setTimeout(() => { this.OpenInviteDialog(res['data']); }, 500);
         }
