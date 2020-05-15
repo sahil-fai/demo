@@ -3,8 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  //host: 'https://beta.singleledger.org:3000/',
-  host: 'https://aa2902ec.ngrok.io/',
+  host: 'https://beta.singleledger.org:3000/',
+   //githost: 'https://aa2902ec.ngrok.io/',
+  //host: 'https://9ac6c258.ngrok.io/',
   //sockethost: "http://localhost:4444",
   //host: "https://localhost:3000/",
   sockethost:'http://beta.singleledger.org:4444',

@@ -92,21 +92,12 @@ img {
   right: 11px;
   bottom: 9px;
 }
-.logoText {
-  display: flex;
-  align-items: center;
-}
-.icon-hover {
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-  margin-bottom: 24px;
-}
 .icon-hover img {
   width: 15px!important;
   height: 15px;
-  margin-top: 18px!important;
+  margin-top: 4px!important;
   position: relative !important;
+  margin-left: 14px;
 }
 .icon-hover img:hover ~ .help {
   display: block;
@@ -116,21 +107,21 @@ img {
   border-radius: 0.3em;
   background-color: #fff;
   box-shadow: 0 5px 20px 0 rgba(106, 119, 120, 0.8);
-  width: 18rem;
+  width: 17rem;
   padding: 0.6em;
   z-index: 1;
   font-weight: 400;
   position: absolute;
-  top: 36px;
+  top: 19px;
   font-size: 11px;
   display: none;
-  left: 62px;
+  left: 50px;
 }
 .icon-hover .help:hover {
   display: block;
 }
 .icon-hover .help .arrow {
-  left: 50%;
+  left: 12%;
   transform: translateX(-50%);
   margin: 0;
   top: -12px;
