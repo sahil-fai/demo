@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class OrganisationpipePipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    if (value === 120) return 'Quickbooks'
-    else if (value === 126) return 'Xero'
+    if (value === 120 || value == "120") return 'Quickbooks'
+    else if (value === 126 || value == "126") return 'Xero'
     return 'None';
   }
 
