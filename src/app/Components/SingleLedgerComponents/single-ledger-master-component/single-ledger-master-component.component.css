@@ -112,12 +112,8 @@ img {
   z-index: 1;
   font-weight: 400;
   position: absolute;
-  top: 19px;
-  font-size: 11px;
-  display: none;
-  left: 50px;
 }
-.icon-hover .help:hover {
+tx .icon-hover .help:hover {
   display: block;
 }
 .icon-hover .help .arrow {
